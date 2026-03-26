@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5800641836892920843}
   - component: {fileID: 3460782103999049356}
+  - component: {fileID: 6709474183954161642}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -45,3 +46,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   settingsMenu: {fileID: 0}
+--- !u!114 &6709474183954161642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790662015562793008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3aae4caf87a0b643bd2a1ffb035a4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CandleSpawner
+  priceChart: {fileID: 0}
+  candlePrefab: {fileID: 1211205120092844197, guid: 558c5da394c7da74f99d4b0fbe08782a, type: 3}
+  price: 0
+  minPrice: 10
+  maxPrice: 20
+  candleSpawnInterval: 0
+  GreenColor: {r: 0.46666667, g: 1, b: 0.25490198, a: 1}
+  RedColor: {r: 1, g: 0.254902, b: 0.2892387, a: 1}
