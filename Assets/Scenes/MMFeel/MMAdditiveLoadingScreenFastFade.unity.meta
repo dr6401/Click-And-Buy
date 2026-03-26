@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 352c567a76fad9a49b30ffebfbe8fbf1
+timeCreated: 1523970408
+licenseType: Store
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 183370
+  packageName: Feel
+  packageVersion: 5.9.1
+  assetPath: Assets/Feel/MMTools/Core/MMSceneLoading/LoadingScreens/MMAdditiveLoadingScreenFastFade.unity
+  uploadId: 830868
