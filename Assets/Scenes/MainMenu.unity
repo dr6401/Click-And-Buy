@@ -20950,34 +20950,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "<size=175%>Credits</size>\n\n<size=150%>Development</size>\nDeveloper
     - Obys Byte Games  \nDesigner - Obys Byte Games  \nSound & Music - Obys Byte
-    Games & Jaki_Korosec  \n\n<size=150%>Cover Art</size>\nCover Art - Angel F  \n\n<size=150%>Assets</size>\n\n<size=120%>Animals</size>\nAnimals
-    - Quaternius  \n\n<size=120%>User Interface</size>\nHourglass Icon - Icons8 
-    \nLeft Click Icon - Smashicons (Flaticon)  \nPointer Icons - SeyfDesigner  \nFast
-    Forward Icon - WR Graphic Garage (Flaticon)  \nLocked Icon - Pixel perfect (Flaticon) 
-    \nQuestion Mark Icon - redempticon (Flaticon)  \n\n<size=120%>Upgrade Icons</size>\nGravity
-    - berkahicon (Flaticon)  \nMovement Speed - Freepik (Flaticon)  \nSize - Vitaly
-    Gorbachev (Flaticon)  \nFence Breach - Shahid-Mehmood (Flaticon)  \nShepherd
-    - Slamlabs (Flaticon)  \nSingularity - Eucalyp (Flaticon)  \nEndless Appetite
-    - Good Ware (Flaticon)  \nMoney - kornkun (Flaticon)  \nTime - photo3idea_studio
-    (Flaticon)  \nConsumption Chain - Talha Dogar (Flaticon)  \nMetabolism - Freepik
-    (Flaticon)  \nRisky Metabolism - smashingstocks (Flaticon)  \nCosmic Laser -
-    Freepik (Flaticon)  \nOvercharge - ARIF MIFTAHUL ANWAR (Flaticon)  \nBase Spawn
-    - Freepik (Flaticon)  \nMultiply - Freepik (Flaticon)  \nHorizon Expansion -
-    agus raharjo (Flaticon)  \nMutation - Dragon Icons (Flaticon)  \nFarmageddon
-    - Good Ware (Flaticon)  \nMomentum Feast - Freepik (Flaticon)  \n\n<size=120%>Achievements</size>\nFinger
-    Lickin\u2019 Gravity - Iconic Panda (Flaticon)  \nBaconator - justicon (Flaticon) 
-    \nSilence of the Lambs - Konkapp (Flaticon)  \nHoly Cow - Freepik (Flaticon) 
-    \nChick Magnet - Freepik (Flaticon)  \n\nEndless 10 / 25 / 50 / 100 - lakonicon
-    (Flaticon)  \n\nYummy Snack - Freepik (Flaticon)  \nStill Hungry - Konkapp (Flaticon) 
-    \nCosmic Glutton - justicon (Flaticon)  \nStep On Scale - shmai (Flaticon)  \n\nForbidden
-    Protein - Freepik (Flaticon)  \nIs This Even Safe - Freepik (Flaticon)  \n\nBe
-    Right Back - Freepik (Flaticon)  \nYou Even Here - geotatah (Flaticon)  \n\nSpin
-    To Win - Freepik (Flaticon)  \nJust One More Spin - Freepik (Flaticon)  \nCosmic
-    Addiction - Freepik (Flaticon)  \n\nCan\u2019t Stop Me Now - Freepik (Flaticon) 
-    \nHot Wheels - Freepik (Flaticon)  \nI Am Speed - Freepik (Flaticon)  \n\nJust
-    A Little Longer - Khairul24 (Flaticon)  \nTime Thief - The Icon Tree (Flaticon) 
-    \nIt\u2019s Already 2AM - Leremy (Flaticon)  \n\n<size=150%>Special Thanks</size>\nTo
-    all asset creators who make their work available to the community\n< 3"
+    Games\n\n<size=150%>Assets</size>\n\n<size=120%>UI</size>\nRetro Windows GUI
+    - by Comp3 Interactive"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
   m_sharedMaterial: {fileID: -4406428672775297824, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
