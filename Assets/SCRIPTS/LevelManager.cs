@@ -4,12 +4,10 @@ using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
-    public float currentMoney = 100f;
     private bool isGamePaused = false;
     [SerializeField] private GameObject settingsMenu;
 
-    [Header("Canvas stuff")] [SerializeField]
-    private TMP_Text currentMoneyText;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,8 +21,6 @@ public class LevelManager : MonoBehaviour
         {
             PauseGame();
         }
-
-        currentMoneyText.text = $"Money: {currentMoney}$";
     }
     
     public void PauseGame()
@@ -34,26 +30,6 @@ public class LevelManager : MonoBehaviour
         settingsMenu.SetActive(isGamePaused);
         GameEvents.OnGamePaused?.Invoke(isGamePaused);
         Debug.Log($"isGamePaused: {isGamePaused}");
-    }
-
-    public void SpendMoney(float amount)
-    {
-        currentMoney -= amount;
-        currentMoney = Mathf.Clamp(currentMoney, 0f, currentMoney);
-        if (currentMoney <= 0f)
-        {
-            LoseGame();
-        }
-    }
-    
-    public void GainMoney(float amount)
-    {
-        currentMoney += amount;
-    }
-
-    public void LoseGame()
-    {
-        // Lose game or sum
     }
     
 }

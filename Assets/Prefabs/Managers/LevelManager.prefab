@@ -58,11 +58,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3aae4caf87a0b643bd2a1ffb035a4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CandleSpawner
+  Instance: {fileID: 0}
   priceChart: {fileID: 0}
   candlePrefab: {fileID: 1211205120092844197, guid: 558c5da394c7da74f99d4b0fbe08782a, type: 3}
+  tradePanel: {fileID: 0}
+  tradeEntryPrefab: {fileID: 3096791442433741255, guid: 87d7c3f364c266a4e98bac7b6b04540a, type: 3}
+  currentMoney: 100
   price: 0
   minPrice: 10
   maxPrice: 20
   candleSpawnInterval: 0
   GreenColor: {r: 0.46666667, g: 1, b: 0.25490198, a: 1}
   RedColor: {r: 1, g: 0.254902, b: 0.2892387, a: 1}
+  currentMoneyText: {fileID: 0}
