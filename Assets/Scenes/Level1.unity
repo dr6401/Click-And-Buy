@@ -618,6 +618,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2338196717829391824, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349548914739622930, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2800062911224717308, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4372,6 +4380,10 @@ PrefabInstance:
       propertyPath: candleSpawnInterval
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6709474183954161642, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
+      propertyPath: tradeEntryIndicatorPrefab
+      value: 
+      objectReference: {fileID: 1211205120092844197, guid: 7891ca280f63bfc4b8ab2010f3663f76, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

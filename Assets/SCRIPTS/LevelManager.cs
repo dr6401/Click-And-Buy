@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     
     [SerializeField] private RectTransform priceChart;
     [SerializeField] private GameObject candlePrefab;
+    [SerializeField] private GameObject tradeEntryIndicatorPrefab;
     
     [SerializeField] private RectTransform tradePanel;
     [SerializeField] private GameObject tradeEntryPrefab;
@@ -25,12 +26,14 @@ public class LevelManager : MonoBehaviour
 
     public float minPrice = 10;
     public float maxPrice = 20;
-    
+
+    private List<RectTransform> candles = new List<RectTransform>();
+    private List<RectTransform> tradeEntryIndicators = new List<RectTransform>();
     private List<TradeEntryStatsDisplay> activeTrades = new List<TradeEntryStatsDisplay>();
     
     [Header("Candle Spawn Settings")]
     private float xPos = 10;
-    private float xStep = 50; // Distance between candles
+    private float xStep = 100; // Distance between candles
     
     private float candleSpawnTimer;
     public float candleSpawnInterval;
@@ -82,7 +85,7 @@ public class LevelManager : MonoBehaviour
         {
             openProfit += trade.GetUnrealizedProfit();
             invested += trade.entryPrice;
-            Debug.Log($"Open position: {trade.name} with P/L: {trade.GetUnrealizedProfit()}");
+            //Debug.Log($"Open position: {trade.name} with P/L: {trade.GetUnrealizedProfit()}");
         }
         
         
@@ -122,6 +125,36 @@ public class LevelManager : MonoBehaviour
 
     private void SpawnNewCandle()
     {
+        float width = priceChart.rect.width;
+        if (xPos > width) // move everything to left and delete 1st candle
+        {
+            for (int i = 0; i < candles.Count; i++)
+            {
+                candles[i].anchoredPosition -= new Vector2(xStep, 0);
+            }
+
+            if (candles.Count > 0 && candles[0].anchoredPosition.x < 0)
+            {
+                Destroy(candles[0].gameObject);
+                candles.RemoveAt(0);
+            }
+            
+            for (int i = 0; i < tradeEntryIndicators.Count; i++)
+            {
+                tradeEntryIndicators[i].anchoredPosition -= new Vector2(xStep, 0);
+            }
+
+            if (tradeEntryIndicators.Count > 0 && tradeEntryIndicators[0].anchoredPosition.x < 0)
+            {
+                Destroy(tradeEntryIndicators[0].gameObject);
+                tradeEntryIndicators.RemoveAt(0);
+            }
+            
+            
+
+            xPos -= xStep;
+        }
+        
         GameObject candle = Instantiate(candlePrefab, priceChart);
         RectTransform rectTransform = candle.GetComponent<RectTransform>();
         
@@ -142,11 +175,13 @@ public class LevelManager : MonoBehaviour
         {
             candleImage.color = GreenColor;
         }
+        candles.Add(rectTransform);
     }
 
     public void Buy()
     {
         SpendMoney(TradeType.Buy);
+
     }
     
     public void Sell()
@@ -167,6 +202,29 @@ public class LevelManager : MonoBehaviour
         GameObject tradeEntry = Instantiate(tradeEntryPrefab, tradePanel);
         TradeEntryStatsDisplay stats = tradeEntry.GetComponent<TradeEntryStatsDisplay>();
         TradeData data = new TradeData(tradeType, System.DateTime.Now.ToString("HH:mm:ss"), 1, price);
+        
+        GameObject tradeEntryIndicator = Instantiate(tradeEntryIndicatorPrefab, priceChart);
+        RectTransform rectTransform = tradeEntryIndicator.GetComponent<RectTransform>();
+        
+        float normalizedPrice = (price - minPrice) / (maxPrice - minPrice);
+        float y = normalizedPrice * priceChart.rect.height;
+        //Debug.Log($"Normalized price: {normalizedPrice}");
+
+        rectTransform.anchoredPosition = new Vector2(xPos - xStep, y);
+        
+        Image indicatorImage = tradeEntryIndicator.GetComponent<Image>();
+        if (tradeType == TradeType.Buy)
+        {
+            indicatorImage.color = GreenColor;
+        }
+        else if (tradeType == TradeType.Sell)
+        {
+            indicatorImage.color = RedColor;
+        }
+        
+        stats.LinkTradeEntryIndicator(tradeEntryIndicator);
+        tradeEntryIndicators.Add(rectTransform);
+        
         stats.Setup(data);
         activeTrades.Add(stats);
     }
@@ -179,6 +237,10 @@ public class LevelManager : MonoBehaviour
     public void CloseTrade(TradeEntryStatsDisplay trade)
     {
         activeTrades.Remove(trade);
+        if (trade.tradeEntryIndicator != null)
+        {
+            tradeEntryIndicators.Remove(trade.tradeEntryIndicator.GetComponent<RectTransform>());
+        }
     }
 
     public void LoseGame()

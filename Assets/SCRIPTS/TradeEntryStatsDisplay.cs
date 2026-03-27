@@ -11,6 +11,8 @@ public class TradeEntryStatsDisplay : MonoBehaviour
 
     private float profitReal;
 
+    public GameObject tradeEntryIndicator;
+
     public Color greenColor;
     public Color redColor;
     
@@ -79,6 +81,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         float realizedProfit = entryPrice + profitReal;
         LevelManager.Instance.cash += realizedProfit;
         LevelManager.Instance.CloseTrade(this);
+        Destroy(tradeEntryIndicator);
         Destroy(gameObject);
     }
 
@@ -98,5 +101,10 @@ public class TradeEntryStatsDisplay : MonoBehaviour
             return LevelManager.Instance.price < entryPrice;
         }
         return true;
+    }
+    
+    public void LinkTradeEntryIndicator(GameObject indicator)
+    {
+        tradeEntryIndicator = indicator;
     }
 }
