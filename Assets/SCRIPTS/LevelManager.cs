@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     public float equity;
     
     public float price;
+    public float amountToWin = 200F;
     private float previousPrice;
     private float decimals = 0.01f;
 
@@ -33,7 +34,7 @@ public class LevelManager : MonoBehaviour
     
     [Header("Candle Spawn Settings")]
     private float xPos = 10;
-    private float xStep = 100; // Distance between candles
+    private float xStep = 50; // Distance between candles
     
     private float candleSpawnTimer;
     public float candleSpawnInterval;
@@ -111,13 +112,18 @@ public class LevelManager : MonoBehaviour
         {
             LoseGame();
         }
+
+        if (cash >= amountToWin)
+        {
+            WinGame();
+        }
     }
 
     private void GenerateNewPrice()
     {
         previousPrice = price;
         Debug.Log($"Old Price: {previousPrice}");
-        price += Random.Range(-0.5f, 0.5f);
+        price += Random.Range(-0.5f, 0.5f) * 5;
         price = Mathf.Clamp(price, minPrice, maxPrice);
         price = Mathf.Round(price / decimals) * decimals;
         Debug.Log($"New price: {price}");
@@ -149,7 +155,6 @@ public class LevelManager : MonoBehaviour
                 Destroy(tradeEntryIndicators[0].gameObject);
                 tradeEntryIndicators.RemoveAt(0);
             }
-            
             
 
             xPos -= xStep;
@@ -246,5 +251,22 @@ public class LevelManager : MonoBehaviour
     public void LoseGame()
     {
         // Lose game or sum
+    }
+
+    public void WinGame()
+    {
+        // Win game or sum
+    }
+
+    public void DecreaseNewPriceInterval()
+    {
+        candleSpawnInterval -= 0.5f;
+        candleSpawnInterval = Mathf.Clamp(candleSpawnInterval, 0.1f, candleSpawnInterval);
+    }
+    
+    public void IncreaseNewPriceInterval()
+    {
+        candleSpawnInterval += 0.5f;
+        candleSpawnInterval = Mathf.Clamp(candleSpawnInterval, 0.1f, candleSpawnInterval);
     }
 }
