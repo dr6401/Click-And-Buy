@@ -8,6 +8,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
     private float timeOfPurchase;
     private float quantity;
     public float entryPrice;
+    public float leverage = 1f;
 
     private float profitReal;
 
@@ -45,6 +46,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         {
             profitReal = (entryPrice - LevelManager.Instance.price) * quantity;
         }
+        profitReal *= leverage;
         profitRealText.text = profitReal.ToString("0.00", CultureInfo.InvariantCulture) + "$";
         
         
@@ -69,6 +71,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         tradeType = data.tradeType;
         quantity = data.quantity;
         entryPrice = data.entryPrice;
+        leverage = data.leverage;
         
         tradeTypeText.text = data.tradeType.ToString();
         timeOfPurchaseText.text = data.timeOfPurchase.ToString();

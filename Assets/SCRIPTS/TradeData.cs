@@ -8,12 +8,15 @@ public class TradeData
     public float quantity;
     public float entryPrice;
 
-    public TradeData(TradeType tradeType, string timeOfPurchase, float quantity, float entryPrice)
+    public float leverage = 1f;
+
+    public TradeData(TradeType tradeType, string timeOfPurchase, float quantity, float entryPrice, float leverage)
     {
         this.tradeType = tradeType;
         this.timeOfPurchase = timeOfPurchase;
         this.quantity = quantity;
         this.entryPrice = entryPrice;
+        this.leverage = leverage;
     }
 }
 

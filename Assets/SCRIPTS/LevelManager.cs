@@ -17,13 +17,17 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private RectTransform tradePanel;
     [SerializeField] private GameObject tradeEntryPrefab;
 
-    public float cash = 100f;
+    public float cash = 1000f;
     public float equity;
     
     public float price;
-    public float amountToWin = 200F;
+    public float amountToWin = 2000f;
+    public float leverage = 1;
     private float previousPrice;
     private float decimals = 0.01f;
+
+    private float generatePriceTimer;
+    private float genetartePriceInterval = 0.1f;
 
     public float minPrice = 10;
     public float maxPrice = 20;
@@ -41,11 +45,24 @@ public class LevelManager : MonoBehaviour
 
     public Color GreenColor;
     public Color RedColor;
+
+    private RectTransform currentCandle;
+    private float candleOpen;
+    private float candleHigh;
+    private float candleLow;
+    private float candleTimer;
+
+    public bool hasLevelEnded = false;
     
     [Header("Canvas stuff")]
+    [SerializeField] private GameObject victoryCanvas;
+    [SerializeField] private GameObject loseCanvas;
     [SerializeField] private TMP_Text cashText;
     [SerializeField] private TMP_Text equityText;
     [SerializeField] private TMP_Text openProfitLossText;
+    [SerializeField] private TMP_Text amountToWinText;
+    [SerializeField] private TMP_Text leverageText;
+
 
     private void Awake()
     {
@@ -56,7 +73,6 @@ public class LevelManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(Instance);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -66,18 +82,37 @@ public class LevelManager : MonoBehaviour
         price = (minPrice + maxPrice) / 2;
         price = Mathf.Round(price / decimals) * decimals;
         previousPrice = price;
-        SpawnNewCandle();
+        StartNewCandle();
     }
 
     // Update is called once per frame
     void Update()
     {
-        candleSpawnTimer += Time.deltaTime;
+        if (hasLevelEnded) return;
+        /*candleSpawnTimer += Time.deltaTime;
         if (candleSpawnTimer >= candleSpawnInterval)
         {
             GenerateNewPrice();
             SpawnNewCandle();
             candleSpawnTimer = 0;
+        }*/
+
+        candleTimer += Time.deltaTime;
+        generatePriceTimer += Time.deltaTime;
+        if (generatePriceTimer >= genetartePriceInterval)
+        {
+            generatePriceTimer = 0;
+            GenerateNewPrice();    
+        }
+        candleHigh = Mathf.Max(candleHigh, price);
+        candleLow = Mathf.Min(candleLow, price);
+
+        UpdateCurrentCandle();
+
+        if (candleTimer >= candleSpawnInterval)
+        {
+            candleTimer = 0;
+            FinalizeCandle();
         }
 
         float openProfit = 0f;
@@ -96,6 +131,8 @@ public class LevelManager : MonoBehaviour
         cashText.text = $"Cash: " + cash.ToString("0.00", CultureInfo.InvariantCulture) + "$";
         equityText.text = $"Equity: {equity.ToString("0.00", CultureInfo.InvariantCulture)}$";
         openProfitLossText.text = $"Open P/L: {openProfit.ToString("0.00", CultureInfo.InvariantCulture)}$";
+        amountToWinText.text = $"Target: {amountToWin}$";
+        leverageText.text = $"{leverage}X";
         if (openProfit > 0)
         {
             openProfitLossText.color = GreenColor;
@@ -108,28 +145,33 @@ public class LevelManager : MonoBehaviour
         
         
         
-        if (equity <= 0f)
+        if (!hasLevelEnded)
         {
-            LoseGame();
-        }
+            if (equity <= 0f)
+            {
+                LoseGame();
+                hasLevelEnded = true;
+            }
 
-        if (cash >= amountToWin)
-        {
-            WinGame();
+            if (cash >= amountToWin)
+            {
+                WinGame();
+                hasLevelEnded = true;
+            }
         }
     }
 
     private void GenerateNewPrice()
     {
         previousPrice = price;
-        Debug.Log($"Old Price: {previousPrice}");
-        price += Random.Range(-0.5f, 0.5f) * 5;
+        //Debug.Log($"Old Price: {previousPrice}");
+        price += Random.Range(-5f, 5f);
         price = Mathf.Clamp(price, minPrice, maxPrice);
         price = Mathf.Round(price / decimals) * decimals;
-        Debug.Log($"New price: {price}");
+        //Debug.Log($"New price: {price}");
     }
 
-    private void SpawnNewCandle()
+    public void StartNewCandle()
     {
         float width = priceChart.rect.width;
         if (xPos > width) // move everything to left and delete 1st candle
@@ -161,28 +203,45 @@ public class LevelManager : MonoBehaviour
         }
         
         GameObject candle = Instantiate(candlePrefab, priceChart);
-        RectTransform rectTransform = candle.GetComponent<RectTransform>();
-        
-        float normalizedPrice = (price - minPrice) / (maxPrice - minPrice);
-        float y = normalizedPrice * priceChart.rect.height;
-        //Debug.Log($"Normalized price: {normalizedPrice}");
+        currentCandle = candle.GetComponent<RectTransform>();
 
-        rectTransform.anchoredPosition = new Vector2(xPos, y);
-        xPos += xStep;
-        //Debug.Log($"Spawned new candle at {rectTransform.anchoredPosition}");
+        candleOpen = price;
+        candleHigh = price;
+        candleLow = price;
 
-        Image candleImage = candle.GetComponent<Image>();
-        if (price < previousPrice)
-        {
-            candleImage.color = RedColor;
-        }
-        else
-        {
-            candleImage.color = GreenColor;
-        }
-        candles.Add(rectTransform);
+        currentCandle.anchoredPosition = new Vector2(xPos, PriceToY(price));
     }
 
+    private void UpdateCurrentCandle()
+    {
+        float top = PriceToY(candleHigh);
+        float bottom = PriceToY(candleLow);
+
+        float height = top - bottom;
+
+        currentCandle.sizeDelta = new Vector2(currentCandle.sizeDelta.x, height);
+        currentCandle.anchoredPosition = new Vector2(xPos, bottom);
+        Image candleImage = currentCandle.GetComponent<Image>();
+        candleImage.color = price >= candleOpen ? GreenColor : RedColor;
+    }
+
+    private void FinalizeCandle()
+    {
+        
+        Image candleImage = currentCandle.GetComponent<Image>();
+        candleImage.color = price >= candleOpen ? GreenColor : RedColor;
+        candles.Add(currentCandle);
+
+        xPos += xStep;
+        StartNewCandle();
+    }
+
+    private float PriceToY(float p)
+    {
+        float normalizedPrice = (p - minPrice) / (maxPrice - minPrice);
+        return normalizedPrice * priceChart.rect.height;
+    }
+    
     public void Buy()
     {
         SpendMoney(TradeType.Buy);
@@ -206,16 +265,14 @@ public class LevelManager : MonoBehaviour
         cash = Mathf.Clamp(cash, 0f, cash);
         GameObject tradeEntry = Instantiate(tradeEntryPrefab, tradePanel);
         TradeEntryStatsDisplay stats = tradeEntry.GetComponent<TradeEntryStatsDisplay>();
-        TradeData data = new TradeData(tradeType, System.DateTime.Now.ToString("HH:mm:ss"), 1, price);
+        TradeData data = new TradeData(tradeType, System.DateTime.Now.ToString("HH:mm:ss"), 1, price, leverage);
         
         GameObject tradeEntryIndicator = Instantiate(tradeEntryIndicatorPrefab, priceChart);
         RectTransform rectTransform = tradeEntryIndicator.GetComponent<RectTransform>();
-        
-        float normalizedPrice = (price - minPrice) / (maxPrice - minPrice);
-        float y = normalizedPrice * priceChart.rect.height;
+
         //Debug.Log($"Normalized price: {normalizedPrice}");
 
-        rectTransform.anchoredPosition = new Vector2(xPos - xStep, y);
+        rectTransform.anchoredPosition = new Vector2(xPos, PriceToY(price));
         
         Image indicatorImage = tradeEntryIndicator.GetComponent<Image>();
         if (tradeType == TradeType.Buy)
@@ -247,26 +304,45 @@ public class LevelManager : MonoBehaviour
             tradeEntryIndicators.Remove(trade.tradeEntryIndicator.GetComponent<RectTransform>());
         }
     }
-
-    public void LoseGame()
-    {
-        // Lose game or sum
-    }
-
+    
     public void WinGame()
     {
-        // Win game or sum
+        Debug.Log($"Win Game");
+        victoryCanvas.SetActive(true);
+    }
+    public void LoseGame()
+    {
+        Debug.Log($"Lost Game");
+        loseCanvas.SetActive(true);
     }
 
     public void DecreaseNewPriceInterval()
     {
-        candleSpawnInterval -= 0.5f;
-        candleSpawnInterval = Mathf.Clamp(candleSpawnInterval, 0.1f, candleSpawnInterval);
+        /*candleSpawnInterval -= 0.5f;
+        candleSpawnInterval = Mathf.Clamp(candleSpawnInterval, 0.25f, 5f);
+        generatePriceTimer -= 0.05f;
+        generatePriceTimer = Mathf.Clamp(generatePriceTimer, 0.001f, 0.5f);*/
+        Time.timeScale += 0.5f;
     }
     
     public void IncreaseNewPriceInterval()
     {
-        candleSpawnInterval += 0.5f;
-        candleSpawnInterval = Mathf.Clamp(candleSpawnInterval, 0.1f, candleSpawnInterval);
+        /*candleSpawnInterval += 0.5f;
+        candleSpawnInterval = Mathf.Clamp(candleSpawnInterval, 0.25f, 5f);
+        generatePriceTimer += 0.05f;
+        generatePriceTimer = Mathf.Clamp(generatePriceTimer, 0.001f, 0.5f);*/
+        Time.timeScale -= 0.5f;
     }
+
+    public void IncreaseLeverage()
+    {
+        leverage += 0.5f;
+        leverage = Mathf.Clamp(leverage, 0.5f, 5f);
+    }
+    public void DecreaseLeverage()
+    {
+        leverage -= 0.5f;
+        leverage = Mathf.Clamp(leverage, 0.5f, 5f);
+    }
+    
 }

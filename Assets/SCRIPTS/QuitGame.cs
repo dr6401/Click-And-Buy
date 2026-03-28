@@ -2,6 +2,7 @@ using System.Collections;
 using MoreMountains.Feedbacks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuitGame : MonoBehaviour
 {
@@ -21,5 +22,10 @@ public class QuitGame : MonoBehaviour
     public void LoadMainMenu()
     {
         loadMainMenuFeedback?.PlayFeedbacks();
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

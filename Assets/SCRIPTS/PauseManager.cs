@@ -17,6 +17,10 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (LevelManager.Instance != null)
+        {
+            if (LevelManager.Instance.hasLevelEnded) return;
+        }
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             PauseGame();
