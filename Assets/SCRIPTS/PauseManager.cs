@@ -1,12 +1,24 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PauseManager : MonoBehaviour
 {
+    public static PauseManager Instance;
     private bool isGamePaused = false;
     [SerializeField] private GameObject settingsMenu;
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,12 +31,22 @@ public class PauseManager : MonoBehaviour
     {
         if (LevelManager.Instance != null)
         {
-            if (LevelManager.Instance.hasLevelEnded) return;
+            if (LevelManager.Instance.isInputBlocked) return;
         }
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             PauseGame();
         }
+    }
+
+    public void StopTime()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeTime()
+    {
+        Time.timeScale = 1f;
     }
     
     public void PauseGame()
@@ -36,5 +58,16 @@ public class PauseManager : MonoBehaviour
         GameEvents.OnGamePaused?.Invoke(isGamePaused);
         Debug.Log($"isGamePaused: {isGamePaused}");
     }
+
+    private void OnEnable()
+    {
+        GameEvents.OnLevelUp += StopTime;
+        GameEvents.OnUpgradeChosen += ResumeTime;
+    }
     
+    private void OnDisable()
+    {
+        GameEvents.OnLevelUp -= StopTime;
+        GameEvents.OnUpgradeChosen -= ResumeTime;
+    }
 }

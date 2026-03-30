@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-
 public static class GameEvents
 {
+    
     public static Action<bool> OnGamePaused;
 
     public static Action onMoneySpent;
@@ -14,6 +14,8 @@ public static class GameEvents
     public static Action onVictory;
     public static Action onDefeat;
     
-    
-
+    public static Action OnLevelUp;
+    public static Action OnPlayerDeath;
+    public static Action OnUpgradesOffered;
+    public static Action OnUpgradeChosen;
 }

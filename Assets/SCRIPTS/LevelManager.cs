@@ -106,7 +106,7 @@ public class LevelManager : MonoBehaviour
         if (generatePriceTimer >= genetartePriceInterval)
         {
             generatePriceTimer = 0;
-            //GenerateNewPrice();    
+            GenerateNewPrice();    
         }
         candleHigh = Mathf.Max(candleHigh, price);
         candleLow = Mathf.Min(candleLow, price);
@@ -152,9 +152,11 @@ public class LevelManager : MonoBehaviour
 
             if (cash >= amountToWin)
             {
-                WinGame();
-                hasLevelEnded = true;
-                isInputBlocked = true;
+                GameEvents.OnLevelUp?.Invoke();
+                cash = 100; 
+                //WinGame();
+                //hasLevelEnded = true;
+                //isInputBlocked = true;
             }
         }
     }
@@ -352,5 +354,21 @@ public class LevelManager : MonoBehaviour
         leverage -= 0.5f;
         leverage = Mathf.Clamp(leverage, 0.5f, 5f);
     }
+
+    public void ToggleInputBlocked()
+    {
+        isInputBlocked = !isInputBlocked;
+    }
+
+    private void OnEnable()
+    {
+        GameEvents.OnLevelUp += ToggleInputBlocked;
+        GameEvents.OnUpgradeChosen += ToggleInputBlocked;
+    }
     
+    private void OnDisable()
+    {
+        GameEvents.OnLevelUp -= ToggleInputBlocked;
+        GameEvents.OnUpgradeChosen -= ToggleInputBlocked;
+    }
 }

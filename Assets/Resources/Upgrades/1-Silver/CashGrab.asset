@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4b0c7833cc62647af6613ed93227a8, type: 3}
+  m_Name: CashGrab
+  m_EditorClassIdentifier: Assembly-CSharp::MoneyIncrease
+  augmentName: Cash Grab
+  description: Gain +500$
+  icon: {fileID: 21300000, guid: 41a1665d6b9d50147aa1b979b1eb61f3, type: 3}
+  tier: 0
+  category: 0
+  color: {r: 0.12932122, g: 1, b: 0, a: 1}
+  removeFromPoolAfterPicking: 0

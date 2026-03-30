@@ -1,0 +1,25 @@
+using UnityEngine;
+
+public enum AugmentTier
+{
+    Silver,
+    Gold,
+    Prismatic
+};
+public enum AugmentCategory
+{
+    MoneyIncrease,
+};
+
+public abstract class Augment : ScriptableObject
+{
+    public string augmentName;
+    [TextArea] public string description;
+    public Sprite icon;
+    public AugmentTier tier;
+    public AugmentCategory category;
+    public Color color;
+    public bool removeFromPoolAfterPicking;
+    
+    public abstract void Apply(GameObject player);
+}

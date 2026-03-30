@@ -12,6 +12,6 @@ public static class GameConstants
         public static int campaignSheepToConsume = 4000        ;
         public static int campaignCowsToConsume = 10000;
         public static int campaignChicksToConsume = 100000;
-
+        
         public static bool isPlaytestBuild = false; // TODO - SET THIS TO FALSE WHEN RELEASING LIVE VERSIONS
 }
