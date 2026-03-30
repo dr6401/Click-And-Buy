@@ -53,6 +53,7 @@ public class LevelManager : MonoBehaviour
     private float candleTimer;
 
     public bool hasLevelEnded = false;
+    public bool isInputBlocked = false;
     
     [Header("Canvas stuff")]
     [SerializeField] private GameObject victoryCanvas;
@@ -151,12 +152,14 @@ public class LevelManager : MonoBehaviour
             {
                 LoseGame();
                 hasLevelEnded = true;
+                isInputBlocked = true;
             }
 
             if (cash >= amountToWin)
             {
                 WinGame();
                 hasLevelEnded = true;
+                isInputBlocked = true;
             }
         }
     }
@@ -227,7 +230,6 @@ public class LevelManager : MonoBehaviour
 
     private void FinalizeCandle()
     {
-        
         Image candleImage = currentCandle.GetComponent<Image>();
         candleImage.color = price >= candleOpen ? GreenColor : RedColor;
         candles.Add(currentCandle);
@@ -244,11 +246,13 @@ public class LevelManager : MonoBehaviour
     
     public void Buy()
     {
+        if (isInputBlocked) return;
         SpendMoney(TradeType.Buy);
     }
     
     public void Sell()
     {
+        if (isInputBlocked) return;
         SpendMoney(TradeType.Sell);
     }
     
@@ -299,6 +303,7 @@ public class LevelManager : MonoBehaviour
 
     public void CloseTrade(TradeEntryStatsDisplay trade)
     {
+        if (isInputBlocked) return;
         if (trade.GetUnrealizedProfit() > 0) GameEvents.onMoneyEarned?.Invoke();
         else if (trade.GetUnrealizedProfit() < 0) GameEvents.onMoneyLost?.Invoke();
         activeTrades.Remove(trade);
@@ -323,21 +328,25 @@ public class LevelManager : MonoBehaviour
 
     public void DecreaseNewPriceInterval()
     {
+        if (isInputBlocked) return;
         Time.timeScale += 0.5f;
     }
     
     public void IncreaseNewPriceInterval()
     {
+        if (isInputBlocked) return;
         Time.timeScale -= 0.5f;
     }
 
     public void IncreaseLeverage()
     {
+        if (isInputBlocked) return;
         leverage += 0.5f;
         leverage = Mathf.Clamp(leverage, 0.5f, 5f);
     }
     public void DecreaseLeverage()
     {
+        if (isInputBlocked) return;
         leverage -= 0.5f;
         leverage = Mathf.Clamp(leverage, 0.5f, 5f);
     }

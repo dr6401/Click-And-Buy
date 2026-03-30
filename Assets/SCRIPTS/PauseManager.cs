@@ -30,6 +30,7 @@ public class PauseManager : MonoBehaviour
     public void PauseGame()
     {
         isGamePaused = !isGamePaused;
+        LevelManager.Instance.isInputBlocked = isGamePaused;
         Time.timeScale = isGamePaused ? 0f : 1f;
         settingsMenu.SetActive(isGamePaused);
         GameEvents.OnGamePaused?.Invoke(isGamePaused);
