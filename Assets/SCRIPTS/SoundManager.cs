@@ -23,10 +23,13 @@ public class SoundManager : MonoBehaviour
     private AudioClip popSFX;
     [SerializeField] private AudioClip hoverButtonSFX;
     [SerializeField] private AudioClip clickedButtonSFX;
-    [SerializeField] private AudioClip upgradeButtonClickSFX;
+    [SerializeField] private AudioClip moneySpentSFX;
     [SerializeField] private AudioClip notEnoughMoneyButtonClickSFX;
-    [SerializeField] private AudioClip slotMachineGamblingSFX;
-    [SerializeField] private AudioClip gravityPulseSFX;
+    [SerializeField] private AudioClip moneyEarnedSFX;
+    [SerializeField] private AudioClip moneyLostSFX;
+    
+    [SerializeField] private AudioClip victorySFX;
+    [SerializeField] private AudioClip defeatSFX;
 
     private void Awake()
     {
@@ -41,26 +44,7 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    /*private void PlayAnimalPoppedSFX(AnimalType.TypeOfAnimal typeOfAnimal)
-    {
-        if (Time.time - lastPopSfxPlayedTime < popSfxInterval) return;
-        lastPopSfxPlayedTime = Time.time;
-        if (sfxPoolSize > 0)
-        {
-            var source = sfxAudioSourcePool[poolIndex];
-            source.pitch = Random.Range(0.9f, 1.1f);
-            source.PlayOneShot(popSFX);
-            poolIndex = (poolIndex + 1) % sfxPoolSize;
-        }
-        else
-        {
-            sfxAudioSource.pitch = Random.Range(0.9f, 1.1f);
-            sfxAudioSource.PlayOneShot(popSFX);
-            //sfxAudioSource.pitch = 1f;
-        }
-    }*/
-
-    public void PlayHoverButtonSFX()
+public void PlayHoverButtonSFX()
     {
         sfxAudioSource.pitch = 1f;
         sfxAudioSource.PlayOneShot(hoverButtonSFX);
@@ -72,46 +56,58 @@ public class SoundManager : MonoBehaviour
         sfxAudioSource.PlayOneShot(clickedButtonSFX);
     }
 
-    public void PlayUpgradeButtonClickSFX()
+    public void PlayMoneySpentSFX()
     {
         sfxAudioSource.pitch = 1f;
-        sfxAudioSource.PlayOneShot(upgradeButtonClickSFX);
+        sfxAudioSource.PlayOneShot(moneySpentSFX);
     }
 
-    public void PlayNotEnoughMoneyForUpgradeSFX()
+    public void PlayNotEnoughMoneySFX()
     {
         sfxAudioSource.pitch = 1f;
         sfxAudioSource.PlayOneShot(notEnoughMoneyButtonClickSFX);
     }
     
-    public void PlaySlotMachineGamblingSFX()
+    public void PlayMoneyEarnedSFX()
     {
         sfxAudioSource.pitch = 1f;
-        sfxAudioSource.PlayOneShot(slotMachineGamblingSFX);
+        sfxAudioSource.PlayOneShot(moneyEarnedSFX);
     }
 
-    public void PlayGravityPulseSFX()
+    public void PlayMoneyLostSFX()
     {
         sfxAudioSource.pitch = Random.Range(0.9f, 1.1f);
-        sfxAudioSource.PlayOneShot(gravityPulseSFX);
+        sfxAudioSource.PlayOneShot(moneyLostSFX);
     }
     
-    private void PlayGravityPulseSFX(Vector3 blackHole, float force, float duration)
+    public void PlayVictorySFX()
     {
-        sfxAudioSource.pitch = Random.Range(0.9f, 1.1f);
-        sfxAudioSource.PlayOneShot(gravityPulseSFX);
+        sfxAudioSource.pitch = 1f;
+        sfxAudioSource.PlayOneShot(victorySFX);
     }
 
-private void OnEnable()
+    public void PLayDefeatSFX()
     {
-        //GameEvents.OnAnimalPopped += PlayAnimalPoppedSFX;
-        GameEvents.OnGravityPulseTriggered += PlayGravityPulseSFX;
-        GameEvents.OnStartSpinningUpgradeSlots += PlaySlotMachineGamblingSFX;
+        sfxAudioSource.pitch = 1f;
+        sfxAudioSource.PlayOneShot(defeatSFX);
+    }
+
+    private void OnEnable()
+    {
+        GameEvents.onMoneySpent += PlayMoneySpentSFX;
+        GameEvents.onNotEnoughMoney += PlayNotEnoughMoneySFX;
+        GameEvents.onMoneyEarned += PlayMoneyEarnedSFX;
+        GameEvents.onMoneyLost += PlayMoneyLostSFX;
+        GameEvents.onVictory += PlayVictorySFX;
+        GameEvents.onDefeat += PLayDefeatSFX;
     }
     private void OnDisable()
     {
-        //GameEvents.OnAnimalPopped -= PlayAnimalPoppedSFX;
-        GameEvents.OnGravityPulseTriggered -= PlayGravityPulseSFX;
-        GameEvents.OnStartSpinningUpgradeSlots -= PlaySlotMachineGamblingSFX;
+        GameEvents.onMoneySpent -= PlayMoneySpentSFX;
+        GameEvents.onNotEnoughMoney -= PlayNotEnoughMoneySFX;
+        GameEvents.onMoneyEarned -= PlayMoneyEarnedSFX;
+        GameEvents.onMoneyLost -= PlayMoneyLostSFX;
+        GameEvents.onVictory -= PlayVictorySFX;
+        GameEvents.onDefeat -= PLayDefeatSFX;
     }
 }

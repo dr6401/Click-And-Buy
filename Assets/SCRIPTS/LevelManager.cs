@@ -245,7 +245,6 @@ public class LevelManager : MonoBehaviour
     public void Buy()
     {
         SpendMoney(TradeType.Buy);
-
     }
     
     public void Sell()
@@ -257,6 +256,7 @@ public class LevelManager : MonoBehaviour
     {
         if (cash < price)
         {
+            GameEvents.onNotEnoughMoney?.Invoke();
             Debug.Log("Not enough money");
             return;
         }
@@ -289,6 +289,7 @@ public class LevelManager : MonoBehaviour
         
         stats.Setup(data);
         activeTrades.Add(stats);
+        GameEvents.onMoneySpent?.Invoke();
     }
     
     public void GainMoney(float amount)
@@ -298,6 +299,8 @@ public class LevelManager : MonoBehaviour
 
     public void CloseTrade(TradeEntryStatsDisplay trade)
     {
+        if (trade.GetUnrealizedProfit() > 0) GameEvents.onMoneyEarned?.Invoke();
+        else if (trade.GetUnrealizedProfit() < 0) GameEvents.onMoneyLost?.Invoke();
         activeTrades.Remove(trade);
         if (trade.tradeEntryIndicator != null)
         {
@@ -308,29 +311,23 @@ public class LevelManager : MonoBehaviour
     public void WinGame()
     {
         Debug.Log($"Win Game");
+        GameEvents.onVictory?.Invoke();
         victoryCanvas.SetActive(true);
     }
     public void LoseGame()
     {
         Debug.Log($"Lost Game");
+        GameEvents.onDefeat?.Invoke();
         loseCanvas.SetActive(true);
     }
 
     public void DecreaseNewPriceInterval()
     {
-        /*candleSpawnInterval -= 0.5f;
-        candleSpawnInterval = Mathf.Clamp(candleSpawnInterval, 0.25f, 5f);
-        generatePriceTimer -= 0.05f;
-        generatePriceTimer = Mathf.Clamp(generatePriceTimer, 0.001f, 0.5f);*/
         Time.timeScale += 0.5f;
     }
     
     public void IncreaseNewPriceInterval()
     {
-        /*candleSpawnInterval += 0.5f;
-        candleSpawnInterval = Mathf.Clamp(candleSpawnInterval, 0.25f, 5f);
-        generatePriceTimer += 0.05f;
-        generatePriceTimer = Mathf.Clamp(generatePriceTimer, 0.001f, 0.5f);*/
         Time.timeScale -= 0.5f;
     }
 

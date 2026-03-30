@@ -54,11 +54,12 @@ MonoBehaviour:
   popSFX: {fileID: 8300000, guid: 797379304d1785a4e8b846bc51b28ed7, type: 3}
   hoverButtonSFX: {fileID: 8300000, guid: ebb03b2b009894845b81a64051a5c698, type: 3}
   clickedButtonSFX: {fileID: 8300000, guid: ae9ac757ba0b39e4f91369d167331c3e, type: 3}
-  upgradeButtonClickSFX: {fileID: 8300000, guid: 8e746bda97a9f634f9c225c03bd4bfcb, type: 3}
+  moneySpentSFX: {fileID: 8300000, guid: 8e746bda97a9f634f9c225c03bd4bfcb, type: 3}
   notEnoughMoneyButtonClickSFX: {fileID: 8300000, guid: 5aa948679296f2649802b2f562804537, type: 3}
-  slotMachineGamblingSFX: {fileID: 8300000, guid: 7816fabcf91edc34b88bb59abacc2ba5, type: 3}
-  momentumFeastSFX: {fileID: 8300000, guid: 5f4239fbf671ffe428f26c73848c2b15, type: 3}
-  gravityPulseSFX: {fileID: 8300000, guid: dd0e3679f385a164da96a4f34e2075ce, type: 3}
+  moneyEarnedSFX: {fileID: 8300000, guid: afa4e347f94a67548aa6fec5e5f7136c, type: 3}
+  moneyLostSFX: {fileID: 8300000, guid: 8a9ba61fce9e26640950f6490ca62a9b, type: 3}
+  victorySFX: {fileID: 8300000, guid: 8b0746665ac59474fb14ae554b005371, type: 3}
+  defeatSFX: {fileID: 8300000, guid: a278f511fc3db27418d17a1e9344106a, type: 3}
 --- !u!1 &3461053784700121483
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +103,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -4334985689245414108, guid: d62d6fba43e6e0a4d9b97b2b6768a61a, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 7a37a2d35c5c69140a08e795d7b1a727, type: 3}
+  m_Resource: {fileID: 8300000, guid: aa7a80fc7b224f14d950c540e271b202, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

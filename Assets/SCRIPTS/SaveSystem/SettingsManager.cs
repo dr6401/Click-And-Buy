@@ -69,11 +69,9 @@ public class SettingsManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnLastCameraZoomReported += SetLastCameraZoom;
     }
     
     private void OnDisable()
     {
-        GameEvents.OnLastCameraZoomReported -= SetLastCameraZoom;
     }
 }
