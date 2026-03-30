@@ -37,7 +37,7 @@ public class LevelManager : MonoBehaviour
     private List<TradeEntryStatsDisplay> activeTrades = new List<TradeEntryStatsDisplay>();
     
     [Header("Candle Spawn Settings")]
-    private float xPos = 10;
+    private float xPos = 30;
     private float xStep = 50; // Distance between candles
     
     private float candleSpawnTimer;
@@ -83,6 +83,7 @@ public class LevelManager : MonoBehaviour
         price = (minPrice + maxPrice) / 2;
         price = Mathf.Round(price / decimals) * decimals;
         previousPrice = price;
+        GenerateNewPrice();
         StartNewCandle();
     }
 
@@ -90,24 +91,10 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         if (hasLevelEnded) return;
-        /*candleSpawnTimer += Time.deltaTime;
-        if (candleSpawnTimer >= candleSpawnInterval)
-        {
-            GenerateNewPrice();
-            SpawnNewCandle();
-            candleSpawnTimer = 0;
-        }*/
 
         candleTimer += Time.deltaTime;
         generatePriceTimer += Time.deltaTime;
-        if (generatePriceTimer >= genetartePriceInterval)
-        {
-            generatePriceTimer = 0;
-            GenerateNewPrice();    
-        }
-        candleHigh = Mathf.Max(candleHigh, price);
-        candleLow = Mathf.Min(candleLow, price);
-
+        
         UpdateCurrentCandle();
 
         if (candleTimer >= candleSpawnInterval)
@@ -115,6 +102,14 @@ public class LevelManager : MonoBehaviour
             candleTimer = 0;
             FinalizeCandle();
         }
+        
+        if (generatePriceTimer >= genetartePriceInterval)
+        {
+            generatePriceTimer = 0;
+            //GenerateNewPrice();    
+        }
+        candleHigh = Mathf.Max(candleHigh, price);
+        candleLow = Mathf.Min(candleLow, price);
 
         float openProfit = 0f;
         float invested = 0f;
@@ -217,13 +212,20 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateCurrentCandle()
     {
-        float top = PriceToY(candleHigh);
-        float bottom = PriceToY(candleLow);
+        float height = PriceToY(price) - PriceToY(candleOpen);
 
-        float height = top - bottom;
-
-        currentCandle.sizeDelta = new Vector2(currentCandle.sizeDelta.x, height);
-        currentCandle.anchoredPosition = new Vector2(xPos, bottom);
+        if (PriceToY(price) >= PriceToY(candleOpen))
+        {
+            currentCandle.localRotation = Quaternion.Euler(0, 0, 0);
+            currentCandle.sizeDelta = new Vector2(currentCandle.sizeDelta.x, height);   
+        }
+        else
+        {
+            Quaternion inverseRotation = Quaternion.Euler(0f, 0f, 180f);
+            currentCandle.localRotation = inverseRotation;
+            currentCandle.sizeDelta = new Vector2(currentCandle.sizeDelta.x, -height);
+        }
+        currentCandle.anchoredPosition = new Vector2(xPos, PriceToY(candleOpen));
         Image candleImage = currentCandle.GetComponent<Image>();
         candleImage.color = price >= candleOpen ? GreenColor : RedColor;
     }
@@ -334,7 +336,7 @@ public class LevelManager : MonoBehaviour
     
     public void IncreaseNewPriceInterval()
     {
-        if (isInputBlocked) return;
+        if (isInputBlocked || Time.timeScale <= 0.5f) return;
         Time.timeScale -= 0.5f;
     }
 
