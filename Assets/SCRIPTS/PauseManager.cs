@@ -8,6 +8,7 @@ public class PauseManager : MonoBehaviour
     public static PauseManager Instance;
     private bool isGamePaused = false;
     [SerializeField] private GameObject settingsMenu;
+    public bool inputBlocked = false;
 
     private void Awake()
     {
@@ -29,11 +30,7 @@ public class PauseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LevelManager.Instance != null)
-        {
-            if (LevelManager.Instance.isInputBlocked) return;
-        }
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (Keyboard.current.escapeKey.wasPressedThisFrame && !inputBlocked)
         {
             PauseGame();
         }
@@ -42,11 +39,13 @@ public class PauseManager : MonoBehaviour
     public void StopTime()
     {
         Time.timeScale = 0f;
+        inputBlocked = true;
     }
 
     public void ResumeTime()
     {
         Time.timeScale = 1f;
+        inputBlocked = false;
     }
     
     public void PauseGame()

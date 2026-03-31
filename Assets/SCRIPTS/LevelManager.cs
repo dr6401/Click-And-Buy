@@ -16,12 +16,13 @@ public class LevelManager : MonoBehaviour
     
     [SerializeField] private RectTransform tradePanel;
     [SerializeField] private GameObject tradeEntryPrefab;
-
+    
     public float cash = 1000f;
     public float equity;
     
     public float price;
-    public float amountToWin = 2000f;
+    public float upgradeOfferTarget = 500f;
+    private float upgradeThresholdIncrease = 500;
     public float leverage = 1;
     private float previousPrice;
     private float decimals = 0.01f;
@@ -61,7 +62,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text cashText;
     [SerializeField] private TMP_Text equityText;
     [SerializeField] private TMP_Text openProfitLossText;
-    [SerializeField] private TMP_Text amountToWinText;
+    [SerializeField] private TMP_Text upgradeOfferTargetText;
     [SerializeField] private TMP_Text leverageText;
 
 
@@ -80,7 +81,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         equity = cash;
-        price = (minPrice + maxPrice) / 2;
+        price = (minPrice * 0.75f + maxPrice * 0.25f);
         price = Mathf.Round(price / decimals) * decimals;
         previousPrice = price;
         GenerateNewPrice();
@@ -124,11 +125,12 @@ public class LevelManager : MonoBehaviour
         equity = cash + openProfit + invested;
         
         
-        cashText.text = $"Cash: " + cash.ToString("0.00", CultureInfo.InvariantCulture) + "$";
-        equityText.text = $"Equity: {equity.ToString("0.00", CultureInfo.InvariantCulture)}$";
-        openProfitLossText.text = $"Open P/L: {openProfit.ToString("0.00", CultureInfo.InvariantCulture)}$";
-        amountToWinText.text = $"Target: {amountToWin}$";
-        leverageText.text = $"{leverage}X";
+        cashText.text = $"Cash: " + NumberFormatter.FormatDecimalNumber(cash) + "$";
+        equityText.text = $"Equity: {NumberFormatter.FormatDecimalNumber(equity)}$";
+        openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfit)}$";
+        upgradeOfferTargetText.text = $"Target: {NumberFormatter.FormatDecimalNumber(upgradeOfferTarget)}$";
+        leverageText.text = $"Current: {NumberFormatter.FormatDecimalNumber(leverage)}X\n" +
+                            $"Max: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.maxLeverage)}x";
         if (openProfit > 0)
         {
             openProfitLossText.color = GreenColor;
@@ -150,10 +152,19 @@ public class LevelManager : MonoBehaviour
                 isInputBlocked = true;
             }
 
-            if (cash >= amountToWin)
+            if (cash >= upgradeOfferTarget)
             {
+                PlayerStats.Instance.level++;
                 GameEvents.OnLevelUp?.Invoke();
-                cash = 100; 
+                upgradeOfferTarget += upgradeThresholdIncrease;
+                if (PlayerStats.Instance.level >= 5) upgradeThresholdIncrease = 1000;
+                else if (PlayerStats.Instance.level >= 10) upgradeThresholdIncrease = 2500;
+                else if (PlayerStats.Instance.level >= 15) upgradeThresholdIncrease = 5000;
+                else if (PlayerStats.Instance.level >= 20) upgradeThresholdIncrease = 10000;
+                else if (PlayerStats.Instance.level % 10 == 0)
+                {
+                    upgradeThresholdIncrease *= 2;
+                }
                 //WinGame();
                 //hasLevelEnded = true;
                 //isInputBlocked = true;
@@ -346,13 +357,13 @@ public class LevelManager : MonoBehaviour
     {
         if (isInputBlocked) return;
         leverage += 0.5f;
-        leverage = Mathf.Clamp(leverage, 0.5f, 5f);
+        leverage = Mathf.Clamp(leverage, 0.5f, PlayerStats.Instance.maxLeverage);
     }
     public void DecreaseLeverage()
     {
         if (isInputBlocked) return;
         leverage -= 0.5f;
-        leverage = Mathf.Clamp(leverage, 0.5f, 5f);
+        leverage = Mathf.Clamp(leverage, 0.5f, PlayerStats.Instance.maxLeverage);
     }
 
     public void ToggleInputBlocked()

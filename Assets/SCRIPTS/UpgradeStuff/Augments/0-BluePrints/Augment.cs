@@ -9,6 +9,8 @@ public enum AugmentTier
 public enum AugmentCategory
 {
     MoneyIncrease,
+    LeverageIncrease,
+    MoneyGainMultiplier
 };
 
 public abstract class Augment : ScriptableObject

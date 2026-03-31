@@ -47,11 +47,12 @@ public class TradeEntryStatsDisplay : MonoBehaviour
             profitReal = (entryPrice - LevelManager.Instance.price) * quantity;
         }
         profitReal *= leverage;
-        profitRealText.text = profitReal.ToString("0.00", CultureInfo.InvariantCulture) + "$";
+        if (profitReal > 0) profitReal *= PlayerStats.Instance.moneyGainMultiplier;
+        profitRealText.text = NumberFormatter.FormatDecimalNumber(profitReal) + "$";
         
         
         float profitPrcnt= (profitReal / (entryPrice * quantity)) * 100f;
-        profitPercentText.text = profitPrcnt.ToString("0.00",  CultureInfo.InvariantCulture) + "%";
+        profitPercentText.text = NumberFormatter.FormatDecimalNumber(profitPrcnt) + "%";
 
         
         if (IsInProfit())
@@ -81,7 +82,8 @@ public class TradeEntryStatsDisplay : MonoBehaviour
 
     public void Close()
     {
-        float realizedProfit = entryPrice + profitReal;
+        if (LevelManager.Instance.isInputBlocked) return;
+        float realizedProfit = entryPrice * quantity + profitReal;
         LevelManager.Instance.cash += realizedProfit;
         LevelManager.Instance.CloseTrade(this);
         Destroy(tradeEntryIndicator);
