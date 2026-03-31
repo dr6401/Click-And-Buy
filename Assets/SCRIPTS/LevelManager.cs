@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject tradeEntryPrefab;
     
     public float cash = 1000f;
+    public float effectiveCash;
     public float equity;
     
     public float price;
@@ -29,9 +31,14 @@ public class LevelManager : MonoBehaviour
 
     private float generatePriceTimer;
     private float genetartePriceInterval = 0.1f;
+    private float marginCallTimer;
+    private float marginCallInterval = 0.1f;
 
     public float minPrice = 10;
     public float maxPrice = 20;
+
+    [Header("DEBUG")]
+    public bool stopGeneratingPrice;
 
     private List<RectTransform> candles = new List<RectTransform>();
     private List<RectTransform> tradeEntryIndicators = new List<RectTransform>();
@@ -81,7 +88,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         equity = cash;
-        price = (minPrice * 0.75f + maxPrice * 0.25f);
+        price = 50;//(minPrice * 0.75f + maxPrice * 0.25f);
         price = Mathf.Round(price / decimals) * decimals;
         previousPrice = price;
         GenerateNewPrice();
@@ -95,6 +102,7 @@ public class LevelManager : MonoBehaviour
 
         candleTimer += Time.deltaTime;
         generatePriceTimer += Time.deltaTime;
+        marginCallTimer += Time.deltaTime;
         
         UpdateCurrentCandle();
 
@@ -107,25 +115,28 @@ public class LevelManager : MonoBehaviour
         if (generatePriceTimer >= genetartePriceInterval)
         {
             generatePriceTimer = 0;
-            GenerateNewPrice();    
+            if (!stopGeneratingPrice) GenerateNewPrice();
         }
         candleHigh = Mathf.Max(candleHigh, price);
         candleLow = Mathf.Min(candleLow, price);
 
         float openProfit = 0f;
         float invested = 0f;
+        effectiveCash = cash;
         foreach (var trade in activeTrades)
         {
             openProfit += trade.GetUnrealizedProfit();
-            invested += trade.entryPrice;
+            invested += trade.entryPrice * trade.quantity;
+            effectiveCash += trade.GetLossBeyondMargin();
             //Debug.Log($"Open position: {trade.name} with P/L: {trade.GetUnrealizedProfit()}");
         }
         
+        effectiveCash = Mathf.Max(0, effectiveCash);
         
         equity = cash + openProfit + invested;
         
         
-        cashText.text = $"Cash: " + NumberFormatter.FormatDecimalNumber(cash) + "$";
+        cashText.text = $"Cash: " + NumberFormatter.FormatDecimalNumber(effectiveCash) + "$";
         equityText.text = $"Equity: {NumberFormatter.FormatDecimalNumber(equity)}$";
         openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfit)}$";
         upgradeOfferTargetText.text = $"Target: {NumberFormatter.FormatDecimalNumber(upgradeOfferTarget)}$";
@@ -145,11 +156,16 @@ public class LevelManager : MonoBehaviour
         
         if (!hasLevelEnded)
         {
-            if (equity <= 0f)
+            if (effectiveCash <= 0f && activeTrades.Count > 0 && marginCallTimer >= marginCallInterval)
             {
-                LoseGame();
-                hasLevelEnded = true;
-                isInputBlocked = true;
+                marginCallTimer = 0;
+                MarginCall(); // Deletes trade with biggest loss
+                if (effectiveCash < 0 && activeTrades.Count <= 0)
+                {
+                    hasLevelEnded = true;
+                    isInputBlocked = true;
+                    LoseGame();
+                }
             }
 
             if (cash >= upgradeOfferTarget)
@@ -326,6 +342,41 @@ public class LevelManager : MonoBehaviour
         {
             tradeEntryIndicators.Remove(trade.tradeEntryIndicator.GetComponent<RectTransform>());
         }
+    }
+
+    public void MarginCall()
+    {
+        TradeEntryStatsDisplay worstTrade = activeTrades[0];
+        foreach (var trade in activeTrades)
+        {
+            if (trade.GetUnrealizedProfit() < worstTrade.GetUnrealizedProfit())
+            {
+                worstTrade = trade;
+            }
+        }
+        if (worstTrade.GetUnrealizedProfit() > 0) return;
+        Debug.Log($"Gonna close trade in position {activeTrades.IndexOf(worstTrade)}");
+        worstTrade.Close();
+        RecalculateBalances();
+        Debug.Log($"Cash: {cash}, Equity: {equity}");
+    }
+
+    private void RecalculateBalances()
+    {
+        float openProfitAmount = 0;
+        float investedAmount = 0;
+        effectiveCash = cash;
+        foreach (var trade in activeTrades)
+        {
+            openProfitAmount += trade.GetUnrealizedProfit();
+            investedAmount += trade.entryPrice * trade.quantity;
+            effectiveCash += trade.GetLossBeyondMargin();
+            //Debug.Log($"Open position: {trade.name} with P/L: {trade.GetUnrealizedProfit()}");
+        }
+        
+        effectiveCash = Mathf.Max(0, effectiveCash);
+        
+        equity = cash + openProfitAmount + investedAmount;
     }
     
     public void WinGame()

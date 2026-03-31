@@ -6,7 +6,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
 {
     private TradeType tradeType;
     private float timeOfPurchase;
-    private float quantity;
+    public float quantity;
     public float entryPrice;
     public float leverage = 1f;
 
@@ -35,7 +35,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
     void Update()
     {
         if (LevelManager.Instance == null) return;
-        currentPriceText.text = LevelManager.Instance.price.ToString("0.00", CultureInfo.InvariantCulture) + "$";
+        currentPriceText.text = NumberFormatter.FormatDecimalNumber(LevelManager.Instance.price) + "$";
         
         
         if (tradeType == TradeType.Buy)
@@ -111,5 +111,12 @@ public class TradeEntryStatsDisplay : MonoBehaviour
     public void LinkTradeEntryIndicator(GameObject indicator)
     {
         tradeEntryIndicator = indicator;
+    }
+
+    public float GetLossBeyondMargin()
+    {
+        float margin = entryPrice * quantity;
+
+        return Mathf.Min(0, margin + profitReal);
     }
 }
