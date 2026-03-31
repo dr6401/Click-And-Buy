@@ -4,7 +4,7 @@ using System.Globalization;
 
 public class TradeEntryStatsDisplay : MonoBehaviour
 {
-    private TradeType tradeType;
+    public TradeType tradeType;
     private float timeOfPurchase;
     public float quantity;
     public float entryPrice;
@@ -40,7 +40,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         
         if (tradeType == TradeType.Buy)
         {
-            profitReal = (LevelManager.Instance.price - entryPrice) * quantity;   
+            profitReal = (LevelManager.Instance.price - entryPrice) * quantity;
         }
         else if (tradeType == TradeType.Sell)
         {
@@ -65,6 +65,10 @@ public class TradeEntryStatsDisplay : MonoBehaviour
             profitPercentText.color = redColor;
             profitRealText.color = redColor;
         }
+        tradeTypeText.text = tradeType.ToString();
+        timeOfPurchaseText.text = timeOfPurchase.ToString();
+        quantityText.text = quantity.ToString();
+        entryPriceText.text = $"{NumberFormatter.FormatDecimalNumber(entryPrice)}$";
     }
 
     public void Setup(TradeData data)

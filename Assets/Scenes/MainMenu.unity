@@ -4593,7 +4593,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Goal:
 
-    <b>Reach 1000$ Cash!</b>
+    <b>Get filthy Rich!</b>
 
 
 
@@ -5368,7 +5368,7 @@ MonoBehaviour:
 
 
 
-    5. Leverage multiplies profits and
+    5. Multiplier affects profits and
     losses. Bigger risk, bigger reward!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}

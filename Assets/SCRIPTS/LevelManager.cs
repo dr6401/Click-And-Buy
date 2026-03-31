@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour
     public float equity;
     
     public float price;
-    public float upgradeOfferTarget = 500f;
+    public float upgradeOfferTarget = 300;
     private float upgradeThresholdIncrease = 500;
     public float leverage = 1;
     private float previousPrice;
@@ -42,7 +42,7 @@ public class LevelManager : MonoBehaviour
 
     private List<RectTransform> candles = new List<RectTransform>();
     private List<RectTransform> tradeEntryIndicators = new List<RectTransform>();
-    private List<TradeEntryStatsDisplay> activeTrades = new List<TradeEntryStatsDisplay>();
+    public List<TradeEntryStatsDisplay> activeTrades = new List<TradeEntryStatsDisplay>();
     
     [Header("Candle Spawn Settings")]
     private float xPos = 30;
@@ -66,6 +66,7 @@ public class LevelManager : MonoBehaviour
     [Header("Canvas stuff")]
     [SerializeField] private GameObject victoryCanvas;
     [SerializeField] private GameObject loseCanvas;
+    [SerializeField] private TMP_Text priceText;
     [SerializeField] private TMP_Text cashText;
     [SerializeField] private TMP_Text equityText;
     [SerializeField] private TMP_Text openProfitLossText;
@@ -134,12 +135,12 @@ public class LevelManager : MonoBehaviour
         effectiveCash = Mathf.Max(0, effectiveCash);
         
         equity = cash + openProfit + invested;
-        
-        
+
+        priceText.text = $"Price: {NumberFormatter.FormatDecimalNumber(price)}";
         cashText.text = $"Cash: " + NumberFormatter.FormatDecimalNumber(effectiveCash) + "$";
         equityText.text = $"Equity: {NumberFormatter.FormatDecimalNumber(equity)}$";
         openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfit)}$";
-        upgradeOfferTargetText.text = $"Target: {NumberFormatter.FormatDecimalNumber(upgradeOfferTarget)}$";
+        upgradeOfferTargetText.text = $"Cash Target: {NumberFormatter.FormatDecimalNumber(upgradeOfferTarget)}$";
         leverageText.text = $"Current: {NumberFormatter.FormatDecimalNumber(leverage)}X\n" +
                             $"Max: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.maxLeverage)}x";
         if (openProfit > 0)
@@ -407,13 +408,13 @@ public class LevelManager : MonoBehaviour
     public void IncreaseLeverage()
     {
         if (isInputBlocked) return;
-        leverage += 0.5f;
+        leverage += 2f;
         leverage = Mathf.Clamp(leverage, 0.5f, PlayerStats.Instance.maxLeverage);
     }
     public void DecreaseLeverage()
     {
         if (isInputBlocked) return;
-        leverage -= 0.5f;
+        leverage -= 2f;
         leverage = Mathf.Clamp(leverage, 0.5f, PlayerStats.Instance.maxLeverage);
     }
 

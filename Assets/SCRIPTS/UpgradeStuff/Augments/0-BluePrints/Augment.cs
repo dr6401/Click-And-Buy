@@ -10,7 +10,8 @@ public enum AugmentCategory
 {
     MoneyIncrease,
     LeverageIncrease,
-    MoneyGainMultiplier
+    MoneyGainMultiplier,
+    SwitchTradeTypes
 };
 
 public abstract class Augment : ScriptableObject
