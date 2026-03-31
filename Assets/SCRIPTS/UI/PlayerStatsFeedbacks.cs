@@ -2,7 +2,7 @@ using System;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 
-public class PlayerStatsUI : MonoBehaviour
+public class PlayerStatsFeedbacks : MonoBehaviour
 {
     [SerializeField] private MMF_Player notEnoughMoneyFeedback;
 

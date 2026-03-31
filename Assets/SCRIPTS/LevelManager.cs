@@ -136,7 +136,7 @@ public class LevelManager : MonoBehaviour
         
         equity = cash + openProfit + invested;
 
-        priceText.text = $"Price: {NumberFormatter.FormatDecimalNumber(price)}";
+        priceText.text = $"Price: {NumberFormatter.FormatDecimalNumber(price)}$";
         cashText.text = $"Cash: " + NumberFormatter.FormatDecimalNumber(effectiveCash) + "$";
         equityText.text = $"Equity: {NumberFormatter.FormatDecimalNumber(equity)}$";
         openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfit)}$";

@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class UpgradeButton : MonoBehaviour
     private Augment augment;
     private GameObject player;
     private UpgradesSelectionUI upgradesSelectionUI;
+    private Button button;
 
     
     void Start()
@@ -29,6 +31,10 @@ public class UpgradeButton : MonoBehaviour
         {
             iconImage = GetComponent<Image>();
         }
+        button = GetComponent<Button>();
+        button.interactable = false;
+        StartCoroutine(EnableButtonInteraction(0.75f));
+
     }
     public void Setup(Augment aug, GameObject playerRef, UpgradesSelectionUI parentUI)
     {
@@ -78,5 +84,11 @@ public class UpgradeButton : MonoBehaviour
         darker.a = color.a;
         
         return darker;
+    }
+
+    private IEnumerator EnableButtonInteraction(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        button.interactable = true;
     }
 }
