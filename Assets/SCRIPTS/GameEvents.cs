@@ -10,6 +10,7 @@ public static class GameEvents
     public static Action onNotEnoughMoney;
     public static Action onMoneyEarned;
     public static Action onMoneyLost;
+    public static Action onNotEnoughAliveTrades;
     
     public static Action onVictory;
     public static Action onDefeat;

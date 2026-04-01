@@ -8,6 +8,8 @@ public class PlayerStats : MonoBehaviour
 
     public float moneyGainMultiplier = 1f;
     public float maxLeverage = 1;
+
+    public int maxAliveTrades = 5;
     
     private void Awake()
     {

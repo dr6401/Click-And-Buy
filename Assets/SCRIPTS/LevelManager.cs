@@ -65,6 +65,7 @@ public class LevelManager : MonoBehaviour
     [Header("DamageNumbersPro")]
     [SerializeField] private DamageNumber profitDamageNumbersPrefab;
     [SerializeField] private DamageNumber lossDamageNumbersPrefab;
+    [SerializeField] private DamageNumber textDamageNumbersPrefab;
 
     public bool hasLevelEnded = false;
     public bool isInputBlocked = false;
@@ -306,6 +307,15 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
+        if (PlayerStats.Instance != null && activeTrades.Count >= PlayerStats.Instance.maxAliveTrades)
+        {
+            string displayText = $"Max Trades {activeTrades.Count}/{PlayerStats.Instance.maxAliveTrades}!";
+            SpawnTextDamageNumbers(displayText, tradePanel, Anchor01ToScreen(tradePanel, new Vector2(1, 0)));
+            GameEvents.onNotEnoughAliveTrades?.Invoke();
+            Debug.Log($"Max amount of alive trades reached: {PlayerStats.Instance.maxAliveTrades}! ");
+            return;
+        }
+
         if (IsNextTradeFree())
         {
             numberOfFutureFreebieTrades--;
@@ -453,15 +463,24 @@ public class LevelManager : MonoBehaviour
         DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, cashText.rectTransform, Vector2.zero, amount);
     }
     
-    public void SpawnTextAtCashPositionDamageNumbers(string text)
+    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2())
     {
+        if (position == null) position = cashText.rectTransform;
         RectTransform gameCanvas = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
-        DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, cashText.rectTransform, Vector2.zero, text);
+        DamageNumber newDamageNumber = textDamageNumbersPrefab.SpawnGUI(gameCanvas, position, anchor, text);
     }
 
     private bool IsNextTradeFree()
     {
         return numberOfFutureFreebieTrades > 0;
+    }
+
+    private Vector2 Anchor01ToScreen(RectTransform rect, Vector2 anchor01)
+    {
+        return new Vector2(
+            rect.rect.width * anchor01.x,
+            rect.rect.height * anchor01.y
+        );
     }
 
     private void OnEnable()
