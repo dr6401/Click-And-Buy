@@ -598,11 +598,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a947063f69e77ac4a942369a28a905aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TradeEntryStatsDisplay
+  tradeType: 0
+  quantity: 0
   entryPrice: 0
   leverage: 1
   tradeEntryIndicator: {fileID: 0}
   greenColor: {r: 0.46666667, g: 1, b: 0.25490198, a: 1}
   redColor: {r: 1, g: 0.25490198, b: 0.2901961, a: 1}
+  profitDamageNumbersPrefab: {fileID: 2909909947781137645, guid: 6e62c820e7e3968468cd1e7860b139aa, type: 3}
+  lossDamageNumbersPrefab: {fileID: 2909909947781137645, guid: 7c6a20a55ac192342a72146ff28146c0, type: 3}
   tradeTypeText: {fileID: 5032097510267390890}
   timeOfPurchaseText: {fileID: 4955544715767357644}
   quantityText: {fileID: 895131753549026107}
@@ -610,6 +614,7 @@ MonoBehaviour:
   currentPriceText: {fileID: 90288565848419073}
   profitPercentText: {fileID: 259214599539569866}
   profitRealText: {fileID: 1010452742862697241}
+  closeTradeText: {fileID: 1897243842403059734}
 --- !u!1 &3845803192967813375
 GameObject:
   m_ObjectHideFlags: 0

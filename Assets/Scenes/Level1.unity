@@ -2413,7 +2413,7 @@ GameObject:
   - component: {fileID: 691108014}
   m_Layer: 5
   m_Name: GameplayCanvas
-  m_TagString: Untagged
+  m_TagString: GameplayCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5948,6 +5948,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6640843573042741408, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
+      propertyPath: FeedbacksList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6809841483362066120, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -5978,7 +5982,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8472121013579239477, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
       propertyPath: FeedbacksList.Array.size
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472121013579239477, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
+      propertyPath: 'FeedbacksList.Array.data[0]'
+      value: 420057044374257734
       objectReference: {fileID: 0}
     - target: {fileID: 8472121013579239477, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
       propertyPath: 'FeedbacksList.Array.data[1]'

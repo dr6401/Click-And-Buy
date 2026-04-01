@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Globalization;
+using DamageNumbersPro;
 
 public class TradeEntryStatsDisplay : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class TradeEntryStatsDisplay : MonoBehaviour
 
     public Color greenColor;
     public Color redColor;
+
+    [SerializeField] private DamageNumber profitDamageNumbersPrefab;
+    [SerializeField] private DamageNumber lossDamageNumbersPrefab;
     
     [SerializeField] private TMP_Text tradeTypeText;
     [SerializeField] private TMP_Text timeOfPurchaseText;
@@ -24,12 +28,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
     [SerializeField] private TMP_Text currentPriceText;
     [SerializeField] private TMP_Text profitPercentText;
     [SerializeField] private TMP_Text profitRealText;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private TMP_Text closeTradeText;
 
     // Update is called once per frame
     void Update()
@@ -90,6 +89,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         float realizedProfit = entryPrice * quantity + profitReal;
         LevelManager.Instance.cash += realizedProfit;
         LevelManager.Instance.CloseTrade(this);
+        SpawnDamageNumbers();
         Destroy(tradeEntryIndicator);
         Destroy(gameObject);
     }
@@ -122,5 +122,22 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         float margin = entryPrice * quantity;
 
         return Mathf.Min(0, margin + profitReal);
+    }
+
+    private void SpawnDamageNumbers()
+    {
+        RectTransform gameCanvas = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
+        if (GetUnrealizedProfit() > 0)
+        {
+            DamageNumber newDamageNumber = profitDamageNumbersPrefab.SpawnGUI(gameCanvas, closeTradeText.rectTransform, Vector2.zero, GetUnrealizedProfit());
+            //newDamageNumber.SetToMousePosition(gameCanvas, Camera.main);
+            Debug.Log($"Spawned Profit PopUp at {closeTradeText.rectTransform}");
+        }
+        else if (GetUnrealizedProfit() < 0)
+        {
+            DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, closeTradeText.rectTransform, Vector2.zero, GetUnrealizedProfit());
+            //newDamageNumber.SetToMousePosition(gameCanvas, Camera.main);
+            Debug.Log($"Spawned Loss PopUp at {closeTradeText.rectTransform}");
+        }
     }
 }
