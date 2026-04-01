@@ -11,11 +11,11 @@ public class SoundManager : MonoBehaviour
     // Pooling
     [SerializeField] private AudioMixerGroup sfxMixerGroup;
     [SerializeField] private int sfxPoolSize = 15;
-    private int poolIndex = 0;
-    [SerializeField] private AudioSource[] sfxAudioSourcePool;
+    //private int poolIndex = 0;
+    //[SerializeField] private AudioSource[] sfxAudioSourcePool;
 
-    private float lastPopSfxPlayedTime;
-    private float popSfxInterval = 0.02f;
+    //private float lastPopSfxPlayedTime;
+    //private float popSfxInterval = 0.02f;
 
     
     [Header("Audio Clips")]
@@ -35,14 +35,14 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        sfxAudioSourcePool = new AudioSource[sfxPoolSize];
+        /*sfxAudioSourcePool = new AudioSource[sfxPoolSize];
         for (int i = 0; i < sfxPoolSize; i++)
         {
             sfxAudioSourcePool[i] = gameObject.AddComponent<AudioSource>();
             sfxAudioSourcePool[i].playOnAwake = false;
             sfxAudioSourcePool[i].loop = false;
             sfxAudioSourcePool[i].outputAudioMixerGroup = sfxMixerGroup;
-        }
+        }*/
 
 #if UNITY_EDITOR
         if (dontPlayMusic)

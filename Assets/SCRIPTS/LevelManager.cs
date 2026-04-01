@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using DamageNumbersPro;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,8 +22,9 @@ public class LevelManager : MonoBehaviour
     public float cash = 1000f;
     public float effectiveCash;
     public float equity;
-    
+    [Header("-----------------PRICE----------------")]
     public float price;
+    [Header("-----------------PRICE----------------")]
     public float upgradeOfferTarget = 300;
     private float upgradeThresholdIncrease = 500;
     public float leverage = 1;
@@ -59,6 +61,10 @@ public class LevelManager : MonoBehaviour
     private float candleHigh;
     private float candleLow;
     private float candleTimer;
+    
+    [Header("DamageNumbersPro")]
+    [SerializeField] private DamageNumber profitDamageNumbersPrefab;
+    [SerializeField] private DamageNumber lossDamageNumbersPrefab;
 
     public bool hasLevelEnded = false;
     public bool isInputBlocked = false;
@@ -421,6 +427,17 @@ public class LevelManager : MonoBehaviour
     public void ToggleInputBlocked()
     {
         isInputBlocked = !isInputBlocked;
+    }
+
+    public void SpawnReceivedMoneyDamageNumbers(float amount)
+    {
+        RectTransform gameCanvas = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
+        DamageNumber newDamageNumber = profitDamageNumbersPrefab.SpawnGUI(gameCanvas, cashText.rectTransform, Vector2.zero, amount);
+    }
+    public void SpawnLostMoneyDamageNumbers(float amount)
+    {
+        RectTransform gameCanvas = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
+        DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, cashText.rectTransform, Vector2.zero, amount);
     }
 
     private void OnEnable()

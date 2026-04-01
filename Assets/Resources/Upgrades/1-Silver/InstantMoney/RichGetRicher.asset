@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03375b70c93ca89418c7ad7a989a40bf, type: 3}
+  m_Name: RichGetRicher
+  m_EditorClassIdentifier: Assembly-CSharp::PercentMoneyIncrease
+  augmentName: Rich Get Richer
+  description: Gain 5% of current Cash
+  icon: {fileID: 21300000, guid: 4f98ba138575d8c49a75eeb7242c6fd5, type: 3}
+  tier: 0
+  category: 0
+  color: {r: 0.72746587, g: 1, b: 0, a: 1}
+  removeFromPoolAfterPicking: 0
+  percentMoneyIncrease: 5

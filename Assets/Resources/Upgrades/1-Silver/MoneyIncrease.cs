@@ -8,5 +8,6 @@ public class MoneyIncrease : Augment
     {
         if (LevelManager.Instance == null) return;
         LevelManager.Instance.cash += moneyIncrease;
+        LevelManager.Instance.SpawnReceivedMoneyDamageNumbers(moneyIncrease);
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SoundManager
   - GameplayCanvas
+  - PlayerCash
   layers:
   - Default
   - TransparentFX

@@ -51,22 +51,26 @@ MonoBehaviour:
   tradeEntryIndicatorPrefab: {fileID: 0}
   tradePanel: {fileID: 0}
   tradeEntryPrefab: {fileID: 3096791442433741255, guid: 87d7c3f364c266a4e98bac7b6b04540a, type: 3}
-  level: 1
   cash: 1000
+  effectiveCash: 0
   equity: 0
   price: 0
   upgradeOfferTarget: 500
   leverage: 1
-  maxLeverage: 1
   minPrice: 10
   maxPrice: 20
+  stopGeneratingPrice: 0
+  activeTrades: []
   candleSpawnInterval: 0
   GreenColor: {r: 0.46666667, g: 1, b: 0.25490198, a: 1}
   RedColor: {r: 1, g: 0.254902, b: 0.2892387, a: 1}
+  profitDamageNumbersPrefab: {fileID: 2909909947781137645, guid: 6e62c820e7e3968468cd1e7860b139aa, type: 3}
+  lossDamageNumbersPrefab: {fileID: 2909909947781137645, guid: 7c6a20a55ac192342a72146ff28146c0, type: 3}
   hasLevelEnded: 0
   isInputBlocked: 0
   victoryCanvas: {fileID: 0}
   loseCanvas: {fileID: 0}
+  priceText: {fileID: 0}
   cashText: {fileID: 0}
   equityText: {fileID: 0}
   openProfitLossText: {fileID: 0}
@@ -84,6 +88,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894de209a534d874fa531b37894a2850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  level: 1
+  moneyGainMultiplier: 1
+  maxLeverage: 1
 --- !u!114 &3460782103999049356
 MonoBehaviour:
   m_ObjectHideFlags: 0
