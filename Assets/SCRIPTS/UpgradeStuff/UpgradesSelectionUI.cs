@@ -68,7 +68,7 @@ public class UpgradesSelectionUI : MonoBehaviour
     
     public void TriggerAugmentSelection(AugmentTier tier)
     {
-        List<Augment> pool = testing_offerOnlyGoldAugments ? GetPoolByTier(AugmentTier.Gold) : GetPoolByTier(tier);// if we're testing, enable only silver augments
+        List<Augment> pool = testing_offerOnlyGoldAugments ? GetPoolByTier(AugmentTier.Rare) : GetPoolByTier(tier);// if we're testing, enable only silver augments
         pool.RemoveAll(augment => runAugmentData.IsAugmentInChosenAugments(augment) && augment.removeFromPoolAfterPicking);
         Debug.Log(tier + " pool: " + string.Join(", ", pool.Select(a => a.augmentName)));
         List<Augment> choices = GetRandomAugments(pool, numberOfChoices);
@@ -86,9 +86,9 @@ public class UpgradesSelectionUI : MonoBehaviour
             int augmentChance = Random.Range(1, 100);
             AugmentTier augmentTier = augmentChance switch
             {
-                <= 50 => AugmentTier.Silver,
-                <= 80 => AugmentTier.Gold,
-                _ => AugmentTier.Prismatic
+                <= 50 => AugmentTier.Common,
+                <= 80 => AugmentTier.Rare,
+                _ => AugmentTier.Epic
             };
             Debug.Log("Tier: " + tier + " did not have any augments left. Retrying augments with tier: " + augmentTier);
             TriggerAugmentSelection(augmentTier);
@@ -111,9 +111,9 @@ public class UpgradesSelectionUI : MonoBehaviour
     {
         return tier switch
         {
-            AugmentTier.Silver => silverAugments,
-            AugmentTier.Gold => goldAugments,
-            AugmentTier.Prismatic => prismaticAugments,
+            AugmentTier.Common => silverAugments,
+            AugmentTier.Rare => goldAugments,
+            AugmentTier.Epic => prismaticAugments,
             _ => silverAugments,
         };
     }

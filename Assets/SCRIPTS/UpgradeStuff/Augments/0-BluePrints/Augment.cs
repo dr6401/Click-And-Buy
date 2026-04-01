@@ -2,9 +2,10 @@ using UnityEngine;
 
 public enum AugmentTier
 {
-    Silver,
-    Gold,
-    Prismatic
+    Common,
+    Rare,
+    Epic,
+    Legendary
 };
 public enum AugmentCategory
 {

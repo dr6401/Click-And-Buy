@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using DamageNumbersPro;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -38,6 +39,10 @@ public class LevelManager : MonoBehaviour
 
     public float minPrice = 10;
     public float maxPrice = 20;
+
+    [Header("Upgrade System")]
+    public AugmentTier currentCashOutTier = AugmentTier.Common;
+    public float currentCashOutPrice = 300;
 
     [Header("DEBUG")]
     public bool stopGeneratingPrice;
@@ -77,7 +82,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text cashText;
     [SerializeField] private TMP_Text equityText;
     [SerializeField] private TMP_Text openProfitLossText;
-    [SerializeField] private TMP_Text upgradeOfferTargetText;
+    [SerializeField] private TMP_Text cashOutText;
+    [SerializeField] private Button cashOutButton;
     [SerializeField] private TMP_Text leverageText;
 
     [Header("Power Ups")]
@@ -150,7 +156,7 @@ public class LevelManager : MonoBehaviour
         cashText.text = $"Cash: " + NumberFormatter.FormatDecimalNumber(effectiveCash) + "$";
         equityText.text = $"Equity: {NumberFormatter.FormatDecimalNumber(equity)}$";
         openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfit)}$";
-        upgradeOfferTargetText.text = $"Cash Target: {NumberFormatter.FormatDecimalNumber(upgradeOfferTarget)}$";
+        cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.cashOutTierPrices.GetValueOrDefault(currentCashOutTier, 300))}$";
         leverageText.text = $"Current: {NumberFormatter.FormatDecimalNumber(leverage)}X\n" +
                             $"Max: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.maxLeverage)}x";
         if (openProfit > 0)
@@ -162,6 +168,8 @@ public class LevelManager : MonoBehaviour
             openProfitLossText.color = RedColor;
         }
         else openProfitLossText.color = Color.white;
+
+        ToggleCashOutButtonEnabled();
         
         
         
@@ -179,10 +187,10 @@ public class LevelManager : MonoBehaviour
                 }
             }
 
-            if (cash >= upgradeOfferTarget)
+            /*if (cash >= upgradeOfferTarget)
             {
                 PlayerStats.Instance.level++;
-                GameEvents.OnLevelUp?.Invoke();
+                //GameEvents.OnCashOut?.Invoke();
                 upgradeOfferTarget += upgradeThresholdIncrease;
                 if (PlayerStats.Instance.level >= 5) upgradeThresholdIncrease = 1000;
                 else if (PlayerStats.Instance.level >= 10) upgradeThresholdIncrease = 2500;
@@ -195,7 +203,7 @@ public class LevelManager : MonoBehaviour
                 //WinGame();
                 //hasLevelEnded = true;
                 //isInputBlocked = true;
-            }
+            }*/
         }
     }
 
@@ -408,6 +416,26 @@ public class LevelManager : MonoBehaviour
         
         equity = cash + openProfitAmount + investedAmount;
     }
+
+    public void CashOut()
+    {
+        if (cash < currentCashOutPrice)
+        {
+            GameEvents.onNotEnoughMoney?.Invoke();
+            return;
+        }
+        float currentTierCashOutPrice =
+            UpgradesManager.Instance.cashOutTierPrices.GetValueOrDefault(currentCashOutTier, 300);
+        cash -= currentTierCashOutPrice;
+        cash = Mathf.Max(0, cash);
+        GameEvents.OnCashOut?.Invoke(currentCashOutTier);
+        
+    }
+
+    private void ToggleCashOutButtonEnabled()
+    {
+        //cashOutButton.interactable = cash > currentCashOutPrice;
+    }
     
     public void WinGame()
     {
@@ -445,6 +473,18 @@ public class LevelManager : MonoBehaviour
         if (isInputBlocked) return;
         leverage -= 2f;
         leverage = Mathf.Clamp(leverage, 0.5f, PlayerStats.Instance.maxLeverage);
+    }
+
+    public void IncreaseCashOutTier()
+    {
+        currentCashOutTier++;
+        currentCashOutTier = (AugmentTier) Mathf.Min((int) currentCashOutTier, Enum.GetValues(typeof(AugmentTier)).Length - 1);
+    }
+    
+    public void DecreaseCashOutTier()
+    {
+        currentCashOutTier--;
+        currentCashOutTier = (AugmentTier) Mathf.Max((int) currentCashOutTier, 0);
     }
 
     public void ToggleInputBlocked()
