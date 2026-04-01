@@ -130,13 +130,11 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         if (GetUnrealizedProfit() > 0)
         {
             DamageNumber newDamageNumber = profitDamageNumbersPrefab.SpawnGUI(gameCanvas, closeTradeText.rectTransform, Vector2.zero, GetUnrealizedProfit());
-            //newDamageNumber.SetToMousePosition(gameCanvas, Camera.main);
             Debug.Log($"Spawned Profit PopUp at {closeTradeText.rectTransform}");
         }
         else if (GetUnrealizedProfit() < 0)
         {
             DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, closeTradeText.rectTransform, Vector2.zero, GetUnrealizedProfit());
-            //newDamageNumber.SetToMousePosition(gameCanvas, Camera.main);
             Debug.Log($"Spawned Loss PopUp at {closeTradeText.rectTransform}");
         }
     }

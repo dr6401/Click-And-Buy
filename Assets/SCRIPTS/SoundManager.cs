@@ -30,6 +30,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip defeatSFX;
     
     [SerializeField] private AudioClip wheelSpinSFX;
+    [Header("DEBUG")]
+    [SerializeField] private bool dontPlayMusic = true;
 
     private void Awake()
     {
@@ -41,10 +43,17 @@ public class SoundManager : MonoBehaviour
             sfxAudioSourcePool[i].loop = false;
             sfxAudioSourcePool[i].outputAudioMixerGroup = sfxMixerGroup;
         }
+
+#if UNITY_EDITOR
+        if (dontPlayMusic)
+        {
+            musicAudioSource.volume = 0;
+        }
+#endif
     }
 
 
-public void PlayHoverButtonSFX()
+    public void PlayHoverButtonSFX()
     {
         sfxAudioSource.pitch = 1f;
         sfxAudioSource.PlayOneShot(hoverButtonSFX);
