@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5681797546576290480}
   - component: {fileID: 3190592381308640281}
   - component: {fileID: 5100168047709326747}
+  - component: {fileID: 7226550998425360696}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -27,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 3444201953996250690}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2818810832457257769}
@@ -76,6 +77,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 4.8
+--- !u!114 &7226550998425360696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3444201953996250690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3356400c837b82f489cac68b0cf50629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UiRescaler
+  uiElement: {fileID: 5681797546576290480}
+  targetScale: 1
 --- !u!1 &4303655022807786418
 GameObject:
   m_ObjectHideFlags: 0

@@ -60,13 +60,13 @@ public class PauseManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnLevelUp += StopTime;
+        GameEvents.OnUpgradesOffered += StopTime;
         GameEvents.OnUpgradeChosen += ResumeTime;
     }
     
     private void OnDisable()
     {
-        GameEvents.OnLevelUp -= StopTime;
+        GameEvents.OnUpgradesOffered -= StopTime;
         GameEvents.OnUpgradeChosen -= ResumeTime;
     }
 }

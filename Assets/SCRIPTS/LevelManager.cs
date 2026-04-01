@@ -79,6 +79,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text upgradeOfferTargetText;
     [SerializeField] private TMP_Text leverageText;
 
+    [Header("Power Ups")]
+    public int numberOfFutureFreebieTrades;
+
 
     private void Awake()
     {
@@ -296,15 +299,25 @@ public class LevelManager : MonoBehaviour
     
     public void SpendMoney(TradeType tradeType)
     {
-        if (cash < price)
+        if (cash < price && !IsNextTradeFree())
         {
             GameEvents.onNotEnoughMoney?.Invoke();
             Debug.Log("Not enough money");
             return;
         }
-        Debug.Log($"Money: {cash} - Price: {price} = Current Money: {cash - price}");
-        cash -= price;
-        cash = Mathf.Clamp(cash, 0f, cash);
+
+        if (IsNextTradeFree())
+        {
+            numberOfFutureFreebieTrades--;
+            Debug.Log($"Used freebie, cash stays the same");
+        }
+        else
+        {
+            Debug.Log($"Money: {cash} - Price: {price} = Current Money: {cash - price}");
+            cash -= price;
+            cash = Mathf.Clamp(cash, 0f, cash);
+            SpawnLostMoneyDamageNumbers(price);
+        }
         GameObject tradeEntry = Instantiate(tradeEntryPrefab, tradePanel);
         TradeEntryStatsDisplay stats = tradeEntry.GetComponent<TradeEntryStatsDisplay>();
         TradeData data = new TradeData(tradeType, System.DateTime.Now.ToString("HH:mm:ss"), 1, price, leverage);
@@ -439,16 +452,27 @@ public class LevelManager : MonoBehaviour
         RectTransform gameCanvas = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
         DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, cashText.rectTransform, Vector2.zero, amount);
     }
+    
+    public void SpawnTextAtCashPositionDamageNumbers(string text)
+    {
+        RectTransform gameCanvas = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
+        DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, cashText.rectTransform, Vector2.zero, text);
+    }
+
+    private bool IsNextTradeFree()
+    {
+        return numberOfFutureFreebieTrades > 0;
+    }
 
     private void OnEnable()
     {
-        GameEvents.OnLevelUp += ToggleInputBlocked;
+        GameEvents.OnUpgradesOffered += ToggleInputBlocked;
         GameEvents.OnUpgradeChosen += ToggleInputBlocked;
     }
     
     private void OnDisable()
     {
-        GameEvents.OnLevelUp -= ToggleInputBlocked;
+        GameEvents.OnUpgradesOffered -= ToggleInputBlocked;
         GameEvents.OnUpgradeChosen -= ToggleInputBlocked;
     }
 }

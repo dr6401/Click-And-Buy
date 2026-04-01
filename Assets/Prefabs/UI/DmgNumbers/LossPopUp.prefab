@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +123<voffset=0.1em><space=0.15em><size=-1.5>$</size><space=0.15em></voffset>
+  m_text: -123<voffset=0.1em><space=0.15em><size=-1.5>$</size><space=0.15em></voffset>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
   m_sharedMaterial: {fileID: -4406428672775297824, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
@@ -241,7 +241,7 @@ MonoBehaviour:
     suffixDecimalChar: .
     suffixHideZeros: 0
   enableLeftText: 1
-  leftText: +
+  leftText: '-'
   leftTextSettings:
     bold: 0
     italic: 0
@@ -695,7 +695,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +123<voffset=0.1em><space=0.15em><size=-1.5>$</size><space=0.15em></voffset>
+  m_text: -123<voffset=0.1em><space=0.15em><size=-1.5>$</size><space=0.15em></voffset>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
   m_sharedMaterial: {fileID: -4406428672775297824, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
