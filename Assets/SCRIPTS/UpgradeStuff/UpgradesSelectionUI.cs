@@ -102,8 +102,8 @@ public class UpgradesSelectionUI : MonoBehaviour
             var btnObjScript = btnObj.GetComponent<UpgradeButton>();
             btnObjScript.Setup(choice, player, this);
         }
-        GameEvents.OnUpgradesOffered?.Invoke();
         gameObject.SetActive(true);
+        GameEvents.OnUpgradesOffered?.Invoke();
         canvasGroup.alpha = 1f;
     }
     
@@ -157,11 +157,5 @@ public class UpgradesSelectionUI : MonoBehaviour
             if (upgradeCard == buttonParent.gameObject.transform) continue;
             Destroy(upgradeCard.gameObject);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

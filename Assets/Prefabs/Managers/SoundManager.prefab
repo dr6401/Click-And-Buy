@@ -51,7 +51,6 @@ MonoBehaviour:
   sfxMixerGroup: {fileID: -7844930818774318870, guid: d62d6fba43e6e0a4d9b97b2b6768a61a, type: 2}
   sfxPoolSize: 15
   sfxAudioSourcePool: []
-  popSFX: {fileID: 8300000, guid: 797379304d1785a4e8b846bc51b28ed7, type: 3}
   hoverButtonSFX: {fileID: 8300000, guid: ebb03b2b009894845b81a64051a5c698, type: 3}
   clickedButtonSFX: {fileID: 8300000, guid: ae9ac757ba0b39e4f91369d167331c3e, type: 3}
   moneySpentSFX: {fileID: 8300000, guid: 8e746bda97a9f634f9c225c03bd4bfcb, type: 3}
@@ -60,6 +59,7 @@ MonoBehaviour:
   moneyLostSFX: {fileID: 8300000, guid: 8a9ba61fce9e26640950f6490ca62a9b, type: 3}
   victorySFX: {fileID: 8300000, guid: 8b0746665ac59474fb14ae554b005371, type: 3}
   defeatSFX: {fileID: 8300000, guid: a278f511fc3db27418d17a1e9344106a, type: 3}
+  wheelSpinSFX: {fileID: 8300000, guid: cd89abec555a228449bbebcbeac89f09, type: 3}
 --- !u!1 &3461053784700121483
 GameObject:
   m_ObjectHideFlags: 0

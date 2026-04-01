@@ -2654,7 +2654,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -3191,7 +3191,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2091455328}
   m_HandleRect: {fileID: 2091455327}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5965,7 +5965,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8472121013579239477, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472121013579239477, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
       propertyPath: InitializationMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8472121013579239477, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
+      propertyPath: PlayerTimescaleMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8472121013579239477, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
@@ -5996,6 +6004,10 @@ PrefabInstance:
       propertyPath: managedReferences[420057044374257734].Owner
       value: 
       objectReference: {fileID: 1424656019}
+    - target: {fileID: 8472121013579239477, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
+      propertyPath: managedReferences[420057042502025290].Active
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8472121013579239477, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
       propertyPath: managedReferences[420057044374257734].Active
       value: 1

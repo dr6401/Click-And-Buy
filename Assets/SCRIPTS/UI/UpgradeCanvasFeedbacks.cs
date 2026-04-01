@@ -9,19 +9,20 @@ public class UpgradeCanvasFeedbacks : MonoBehaviour
     private void PlayFadeInUpgradeCanvasFeedback()
     {
         fadeInUpgradeCanvasFeedback?.PlayFeedbacks();
+        Debug.Log($"Playing FadeIn Upgrade Canvas");
     }
     private void PlayFadeOutUpgradeCanvasFeedback()
     {
         fadeOutUpgradeCanvasFeedback?.PlayFeedbacks();
     }
 
-    private void Awake()
+    private void OnEnable()
     {
-        GameEvents.OnLevelUp += PlayFadeInUpgradeCanvasFeedback;
+        GameEvents.OnUpgradesOffered += PlayFadeInUpgradeCanvasFeedback;
     }
     
-    private void OnDestroy()
+    private void OnDisable()
     {
-        GameEvents.OnLevelUp -= PlayFadeInUpgradeCanvasFeedback;
+        GameEvents.OnUpgradesOffered -= PlayFadeInUpgradeCanvasFeedback;
     }
 }

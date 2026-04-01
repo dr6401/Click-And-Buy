@@ -16,11 +16,9 @@ public class SoundManager : MonoBehaviour
 
     private float lastPopSfxPlayedTime;
     private float popSfxInterval = 0.02f;
-    private float lastMomentumFeastSfxPlayedTime;
-    private float momentumFeastSfxInterval = 0.05f;
+
     
-    [Header("Audio Clips")] [SerializeField]
-    private AudioClip popSFX;
+    [Header("Audio Clips")]
     [SerializeField] private AudioClip hoverButtonSFX;
     [SerializeField] private AudioClip clickedButtonSFX;
     [SerializeField] private AudioClip moneySpentSFX;
@@ -30,6 +28,8 @@ public class SoundManager : MonoBehaviour
     
     [SerializeField] private AudioClip victorySFX;
     [SerializeField] private AudioClip defeatSFX;
+    
+    [SerializeField] private AudioClip wheelSpinSFX;
 
     private void Awake()
     {
@@ -91,7 +91,12 @@ public void PlayHoverButtonSFX()
         sfxAudioSource.pitch = 1f;
         sfxAudioSource.PlayOneShot(defeatSFX);
     }
-
+    
+    public void PlayWheelSpinSFX()
+    {
+        sfxAudioSource.pitch = 1f;
+        sfxAudioSource.PlayOneShot(wheelSpinSFX);
+    }
     private void OnEnable()
     {
         GameEvents.onMoneySpent += PlayMoneySpentSFX;
@@ -100,6 +105,7 @@ public void PlayHoverButtonSFX()
         GameEvents.onMoneyLost += PlayMoneyLostSFX;
         GameEvents.onVictory += PlayVictorySFX;
         GameEvents.onDefeat += PLayDefeatSFX;
+        GameEvents.OnUpgradesOffered += PlayWheelSpinSFX;
     }
     private void OnDisable()
     {
@@ -109,5 +115,6 @@ public void PlayHoverButtonSFX()
         GameEvents.onMoneyLost -= PlayMoneyLostSFX;
         GameEvents.onVictory -= PlayVictorySFX;
         GameEvents.onDefeat -= PLayDefeatSFX;
+        GameEvents.OnUpgradesOffered -= PlayWheelSpinSFX;
     }
 }
