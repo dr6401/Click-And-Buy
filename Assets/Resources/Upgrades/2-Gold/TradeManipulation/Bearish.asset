@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Bearish
   m_EditorClassIdentifier: Assembly-CSharp::ChangePrice
   augmentName: Bearish
-  description: Decrease price by -20$
+  description: Decrease price by -50$
   icon: {fileID: 21300000, guid: 27fbc5c71a07b8d4f9bec88271114e31, type: 3}
   tier: 1
   category: 5
   color: {r: 1, g: 0.05890681, b: 0, a: 1}
   removeFromPoolAfterPicking: 0
-  priceIncrease: -20
+  priceIncrease: -50
