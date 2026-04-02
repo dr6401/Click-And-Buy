@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
     public float leverage = 1;
     private float previousPrice;
     private float decimals = 0.01f;
+    private float currentOrderQuantity = 1f;
 
     private float generatePriceTimer;
     private float genetartePriceInterval = 0.1f;
@@ -85,6 +86,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text cashOutText;
     [SerializeField] private Button cashOutButton;
     [SerializeField] private TMP_Text leverageText;
+    [SerializeField] private TMP_Text quantityOrderText;
 
     [Header("Power Ups")]
     public int numberOfFutureFreebieTrades;
@@ -159,6 +161,7 @@ public class LevelManager : MonoBehaviour
         cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.cashOutTierPrices.GetValueOrDefault(currentCashOutTier, 300))}$";
         leverageText.text = $"Current: {NumberFormatter.FormatDecimalNumber(leverage)}X\n" +
                             $"Max: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.maxLeverage)}x";
+        quantityOrderText.text = $"{currentOrderQuantity}";
         if (openProfit > 0)
         {
             openProfitLossText.color = GreenColor;
@@ -308,7 +311,8 @@ public class LevelManager : MonoBehaviour
     
     public void SpendMoney(TradeType tradeType)
     {
-        if (cash < price && !IsNextTradeFree())
+        float cost = price * currentOrderQuantity;
+        if (cash < cost && !IsNextTradeFree())
         {
             GameEvents.onNotEnoughMoney?.Invoke();
             Debug.Log("Not enough money");
@@ -331,14 +335,14 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Debug.Log($"Money: {cash} - Price: {price} = Current Money: {cash - price}");
-            cash -= price;
+            Debug.Log($"Money: {cash} - Cost: {cost} (Price: {price} * Quantity: {currentOrderQuantity}) = Current Money: {cash - price}");
+            cash -= cost;
             cash = Mathf.Clamp(cash, 0f, cash);
-            SpawnLostMoneyDamageNumbers(price);
+            SpawnLostMoneyDamageNumbers(cost);
         }
         GameObject tradeEntry = Instantiate(tradeEntryPrefab, tradePanel);
         TradeEntryStatsDisplay stats = tradeEntry.GetComponent<TradeEntryStatsDisplay>();
-        TradeData data = new TradeData(tradeType, System.DateTime.Now.ToString("HH:mm:ss"), 1, price, leverage);
+        TradeData data = new TradeData(tradeType, System.DateTime.Now.ToString("HH:mm:ss"), currentOrderQuantity, price, leverage);
         
         GameObject tradeEntryIndicator = Instantiate(tradeEntryIndicatorPrefab, priceChart);
         RectTransform rectTransform = tradeEntryIndicator.GetComponent<RectTransform>();
@@ -485,6 +489,30 @@ public class LevelManager : MonoBehaviour
     {
         currentCashOutTier--;
         currentCashOutTier = (AugmentTier) Mathf.Max((int) currentCashOutTier, 0);
+    }
+
+    public void ChangeOrderQuantity(bool increase)
+    {
+        float step;
+        if (increase)
+        {
+            if (currentOrderQuantity < 0.25f) step = 0.05f;
+            else if (currentOrderQuantity < 1) step = 0.25f;
+            else if (currentOrderQuantity < 10) step = 1f;
+            else if (currentOrderQuantity < 50f) step = 5;
+            else step = 10f;
+            currentOrderQuantity += step;
+        }
+        else
+        {
+            if (currentOrderQuantity <= 0.25f) step = 0.05f;
+            else if (currentOrderQuantity <= 1) step = 0.25f;
+            else if (currentOrderQuantity <= 10) step = 1f;
+            else if (currentOrderQuantity <= 50f) step = 5;
+            else step = 10f;
+            currentOrderQuantity -= step;
+        }
+        currentOrderQuantity = Mathf.Max(0.1f, currentOrderQuantity);
     }
 
     public void ToggleInputBlocked()
