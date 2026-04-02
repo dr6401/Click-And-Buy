@@ -72,9 +72,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int lastNPrices = 50;
     [SerializeField] private float yChartPadding = 0.1f;
 
-    private float chartMinVisible;
-    private float chartMaxVisible;
-    private float gridStep = 10f;
+    private float chartMinVisible = 10;
+    private float chartMaxVisible = 300;
+    public float gridStep = 25f;
     
     private List<float> recentPrices = new List<float>();
     
@@ -309,8 +309,8 @@ public class LevelManager : MonoBehaviour
         if (range <= 0) range = 1f; // Fallback
 
         float padding = range * yChartPadding;
-        chartMinVisible = Mathf.Lerp(chartMinVisible, minPriceInWindow - padding, 0.1f);
-        chartMaxVisible = Mathf.Lerp(chartMaxVisible, maxPriceInWindow + padding, 0.1f);
+        //chartMinVisible = Mathf.Lerp(chartMinVisible, minPriceInWindow - padding, 0.1f);
+        //chartMaxVisible = Mathf.Lerp(chartMaxVisible, maxPriceInWindow + padding, 0.1f);
     }
 
     private void DrawGridLines()
@@ -324,6 +324,7 @@ public class LevelManager : MonoBehaviour
 
         for (float priceLine = minLine; priceLine <= maxLine; priceLine += gridStep)
         {
+            if (priceLine == 0) continue;
             float y = PriceToY(priceLine);
             DrawHorizontalGridLine(y, priceLine);
         }
@@ -334,8 +335,7 @@ public class LevelManager : MonoBehaviour
         GameObject line = Instantiate(gridLinePrefab, gridLinesParent);
         RectTransform rect = line.GetComponent<RectTransform>();
 
-        rect.anchoredPosition = new Vector2(0, y);
-        rect.sizeDelta = new Vector2(priceChart.rect.width, rect.sizeDelta.y);
+        rect.anchoredPosition = new Vector2(0, y - gridLinesParent.rect.height / 2);
         
         TMP_Text text = line.GetComponentInChildren<TMP_Text>();
         if (text != null)
