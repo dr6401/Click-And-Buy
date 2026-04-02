@@ -33,6 +33,9 @@ public class LevelManager : MonoBehaviour
     private float decimals = 0.01f;
     private float currentOrderQuantity = 1f;
 
+    public float minPrice = 10f;
+    public float maxPrice = 200f;
+
     private float generatePriceTimer;
     private float genetartePriceInterval = 0.1f;
     private float marginCallTimer;
@@ -125,7 +128,7 @@ public class LevelManager : MonoBehaviour
         chartMaxVisible = 200;
         recentPrices.Add(price);
         GenerateNewPrice();
-        StartNewCandle();
+        SpawnNewCandle();
     }
 
     // Update is called once per frame
@@ -189,8 +192,6 @@ public class LevelManager : MonoBehaviour
         ToggleCashOutButtonEnabled();
         DrawGridLines();
         
-        
-        
         if (!hasLevelEnded)
         {
             if (effectiveCash <= 0f && activeTrades.Count > 0 && marginCallTimer >= marginCallInterval)
@@ -213,7 +214,7 @@ public class LevelManager : MonoBehaviour
         //Debug.Log($"Old Price: {previousPrice}");
         price += Random.Range(-5f, 5f);
         price = Mathf.Round(price / decimals) * decimals;
-        price = Mathf.Max(price, 0);
+        price = Mathf.Clamp(price, minPrice, maxPrice);
         //Debug.Log($"New price: {price}");
         
         recentPrices.Add(price);
@@ -225,7 +226,7 @@ public class LevelManager : MonoBehaviour
         UpdateChartRange();
     }
 
-    public void StartNewCandle()
+    public void SpawnNewCandle()
     {
         float width = priceChart.rect.width;
         if (xPos > width) // move everything to left and delete 1st candle
@@ -258,10 +259,12 @@ public class LevelManager : MonoBehaviour
         
         GameObject candle = Instantiate(candlePrefab, priceChart);
         currentCandle = candle.GetComponent<RectTransform>();
+        CandleData data = candle.GetComponent<CandleData>();
 
         candleOpen = price;
         candleHigh = price;
         candleLow = price;
+        data.open = price;
 
         currentCandle.anchoredPosition = new Vector2(xPos, PriceToY(price));
     }
@@ -287,12 +290,49 @@ public class LevelManager : MonoBehaviour
 
     private void FinalizeCandle()
     {
+        CandleData data = currentCandle.gameObject.GetComponent<CandleData>();
+        data.close = price;
         Image candleImage = currentCandle.GetComponent<Image>();
         candleImage.color = price >= candleOpen ? GreenColor : RedColor;
         candles.Add(currentCandle);
 
         xPos += xStep;
-        StartNewCandle();
+        SpawnNewCandle();
+    }
+
+    private void UpdateOlderCandles()
+    {
+        foreach (RectTransform candle in candles)
+        {
+            if (candle ==  currentCandle) continue;
+            CandleData candleData = candle.gameObject.GetComponent<CandleData>();
+            if (candleData != null)
+            {
+                UpdateCandleVisual(candleData);
+            }
+        }
+    }
+
+    private void UpdateCandleVisual(CandleData candle)
+    {
+        float openY = PriceToY(candle.open);
+        float closeY = PriceToY(candle.close);
+            
+        float height = closeY - openY;
+
+        if (height >= 0)
+        {
+            candle.rectTransform.localRotation = Quaternion.identity;
+            candle.rectTransform.sizeDelta = new Vector2(candle.rectTransform.sizeDelta.x, height);   
+        }
+        else
+        {
+            candle.rectTransform.localRotation = Quaternion.Euler(0f, 0f, 180f);
+            candle.rectTransform.sizeDelta = new Vector2(candle.rectTransform.sizeDelta.x, -height);
+        }
+        candle.rectTransform.anchoredPosition = new Vector2(candle.rectTransform.anchoredPosition.x, openY);
+        //Image candleImage = currentCandle.GetComponent<Image>();
+        //candleImage.color = candle.close >= candle.open ? GreenColor : RedColor;
     }
 
     private float PriceToY(float p)
@@ -312,6 +352,8 @@ public class LevelManager : MonoBehaviour
         float padding = range * yChartPadding;
         chartMinVisible = Mathf.Lerp(chartMinVisible, minPriceInWindow - padding, 0.1f);
         chartMaxVisible = Mathf.Lerp(chartMaxVisible, maxPriceInWindow + padding, 0.1f);
+        
+        UpdateOlderCandles();
     }
 
     private void DrawGridLines()

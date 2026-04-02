@@ -5507,7 +5507,7 @@ MonoBehaviour:
 
 
     2.
-    Longif you think price will go up
+    Long if you think price will go up
 
 
 
@@ -9152,7 +9152,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1652013943}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.19737536
+  m_Size: 0.19737534
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4635389754965065757}
   - component: {fileID: 6093305644845008543}
   - component: {fileID: 2690970314839785184}
+  - component: {fileID: 4296127782290659615}
   m_Layer: 5
   m_Name: Candle
   m_TagString: Untagged
@@ -75,3 +76,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4296127782290659615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211205120092844197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d308e927fa7c34dbfe15470baefa4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CandleData
+  open: 0
+  close: 0
+  low: 0
+  high: 0
+  rectTransform: {fileID: 4635389754965065757}
