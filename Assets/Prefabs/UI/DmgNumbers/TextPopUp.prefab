@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   permanent: 0
   lifetime: 2
-  unscaledTime: 0
+  unscaledTime: 1
   enable3DGame: 0
   faceCameraView: 1
   lookAtCamera: 0
@@ -333,7 +333,7 @@ MonoBehaviour:
   defaultOrthographicSize: 5
   maxOrthographicSize: 1.5
   orthographicCamera: {fileID: 0}
-  spamGroup: 
+  spamGroup: TextPopUp
   enableCombination: 0
   combinationSettings:
     method: 0
@@ -394,7 +394,7 @@ MonoBehaviour:
     absorberScaleFade: 15
     instantGain: 0
     bonusLifetime: 1
-  enableDestruction: 0
+  enableDestruction: 1
   destructionSettings:
     maxDistance: 2
     spawnDelay: 0.2
