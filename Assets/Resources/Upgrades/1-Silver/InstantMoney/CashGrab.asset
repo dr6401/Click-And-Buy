@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: CashGrab
   m_EditorClassIdentifier: Assembly-CSharp::MoneyIncrease
   augmentName: Cash Grab
-  description: Gain +400$
+  description: Gain +150$
   icon: {fileID: 21300000, guid: 41a1665d6b9d50147aa1b979b1eb61f3, type: 3}
   tier: 0
   category: 0
   color: {r: 0.12932122, g: 1, b: 0, a: 1}
   removeFromPoolAfterPicking: 0
-  moneyIncrease: 400
+  moneyIncrease: 150

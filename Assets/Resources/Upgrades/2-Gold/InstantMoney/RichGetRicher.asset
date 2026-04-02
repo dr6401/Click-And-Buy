@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: RichGetRicher
   m_EditorClassIdentifier: Assembly-CSharp::PercentMoneyIncrease
   augmentName: Rich Get Richer
-  description: Gain 15% of current Cash
+  description: 'Gain 15% of current Cash
+
+    (max 1K$)'
   icon: {fileID: 21300000, guid: 4f98ba138575d8c49a75eeb7242c6fd5, type: 3}
   tier: 0
   category: 0
   color: {r: 0.72746587, g: 1, b: 0, a: 1}
   removeFromPoolAfterPicking: 0
   percentMoneyIncrease: 15
+  maxIncrease: 1000

@@ -36,21 +36,6 @@ public class UpgradesManager : MonoBehaviour
     
     private void StartUpgradeSelection(AugmentTier tier)
     {
-        /*?int augmentChance = Random.Range(1, 101);
-        AugmentTier augmentTier;
-        if (augmentChance <= silverAugmentChance * 100) augmentTier = AugmentTier.Common;
-        else if (augmentChance <= (silverAugmentChance + goldAugmentChance) * 100) augmentTier = AugmentTier.Rare;
-        else augmentTier = AugmentTier.Epic;
-        if (useTestingEqualAugmentOdds)
-        {
-            augmentTier = augmentChance switch
-            {
-                <= 33 => AugmentTier.Common,
-                <= 67 => AugmentTier.Rare,
-                _ => AugmentTier.Epic
-            };
-        }
-        Debug.Log($"AugmentChance: {augmentChance}, Augment Tier: {augmentTier}");*/
         UpgradesSelectionUI.Instance.TriggerAugmentSelection(tier);
     }
 

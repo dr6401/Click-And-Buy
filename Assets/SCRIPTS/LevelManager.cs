@@ -533,7 +533,7 @@ public class LevelManager : MonoBehaviour
             return;
         }
         float currentTierCashOutPrice =
-            UpgradesManager.Instance.cashOutTierPrices.GetValueOrDefault(currentCashOutTier, 300);
+            UpgradesManager.Instance.cashOutTierPrices.GetValueOrDefault(currentCashOutTier, 3000);
         cash -= currentTierCashOutPrice;
         cash = Mathf.Max(0, cash);
         GameEvents.OnCashOut?.Invoke(currentCashOutTier);
@@ -614,12 +614,14 @@ public class LevelManager : MonoBehaviour
     {
         currentCashOutTier++;
         currentCashOutTier = (AugmentTier) Mathf.Min((int) currentCashOutTier, Enum.GetValues(typeof(AugmentTier)).Length - 1);
+        currentCashOutPrice = UpgradesManager.Instance.cashOutTierPrices.GetValueOrDefault(currentCashOutTier, 3000);
     }
     
     public void DecreaseCashOutTier()
     {
         currentCashOutTier--;
         currentCashOutTier = (AugmentTier) Mathf.Max((int) currentCashOutTier, 0);
+        currentCashOutPrice = UpgradesManager.Instance.cashOutTierPrices.GetValueOrDefault(currentCashOutTier, 3000);
     }
 
     public void ChangeOrderQuantity(bool increase)
