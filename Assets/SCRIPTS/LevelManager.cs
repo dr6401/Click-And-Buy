@@ -70,10 +70,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private RectTransform gridLinesParent;
     
     [SerializeField] private int lastNPrices = 50;
-    [SerializeField] private float yChartPadding = 0.1f;
+    [SerializeField] private float yChartPadding = 0.2f;
 
-    private float chartMinVisible = 10;
-    private float chartMaxVisible = 300;
+    private float chartMinVisible;
+    private float chartMaxVisible;
     public float gridStep = 25f;
     
     private List<float> recentPrices = new List<float>();
@@ -213,6 +213,7 @@ public class LevelManager : MonoBehaviour
         //Debug.Log($"Old Price: {previousPrice}");
         price += Random.Range(-5f, 5f);
         price = Mathf.Round(price / decimals) * decimals;
+        price = Mathf.Max(price, 0);
         //Debug.Log($"New price: {price}");
         
         recentPrices.Add(price);
@@ -309,8 +310,8 @@ public class LevelManager : MonoBehaviour
         if (range <= 0) range = 1f; // Fallback
 
         float padding = range * yChartPadding;
-        //chartMinVisible = Mathf.Lerp(chartMinVisible, minPriceInWindow - padding, 0.1f);
-        //chartMaxVisible = Mathf.Lerp(chartMaxVisible, maxPriceInWindow + padding, 0.1f);
+        chartMinVisible = Mathf.Lerp(chartMinVisible, minPriceInWindow - padding, 0.1f);
+        chartMaxVisible = Mathf.Lerp(chartMaxVisible, maxPriceInWindow + padding, 0.1f);
     }
 
     private void DrawGridLines()
@@ -324,7 +325,7 @@ public class LevelManager : MonoBehaviour
 
         for (float priceLine = minLine; priceLine <= maxLine; priceLine += gridStep)
         {
-            if (priceLine == 0) continue;
+            if (priceLine <= 0) continue;
             float y = PriceToY(priceLine);
             DrawHorizontalGridLine(y, priceLine);
         }
