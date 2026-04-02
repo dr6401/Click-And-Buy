@@ -126,6 +126,7 @@ public class LevelManager : MonoBehaviour
         previousPrice = price;
         chartMinVisible = 10;
         chartMaxVisible = 200;
+        currentCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier);
         recentPrices.Add(price);
         GenerateNewPrice();
         SpawnNewCandle();
@@ -175,7 +176,7 @@ public class LevelManager : MonoBehaviour
         cashText.text = $"Cash: " + NumberFormatter.FormatDecimalNumber(effectiveCash) + "$";
         equityText.text = $"Equity: {NumberFormatter.FormatDecimalNumber(equity)}$";
         openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfit)}$";
-        cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.cashOutTierPrices.GetValueOrDefault(currentCashOutTier, 300))}$";
+        cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier))}$";
         leverageText.text = $"Current: {NumberFormatter.FormatDecimalNumber(leverage)}X\n" +
                             $"Max: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.maxLeverage)}x";
         quantityOrderText.text = $"{NumberFormatter.FormatDecimalNumber(currentOrderQuantity)}";
@@ -428,7 +429,7 @@ public class LevelManager : MonoBehaviour
             string displayText = $"Max Trades {activeTrades.Count}/{PlayerStats.Instance.maxAliveTrades}!";
             SpawnTextDamageNumbers(displayText, tradePanel, Anchor01ToScreen(tradePanel, new Vector2(1, 0)));
             GameEvents.onNotEnoughAliveTrades?.Invoke();
-            Debug.Log($"Max amount of alive trades reached: {PlayerStats.Instance.maxAliveTrades}! ");
+            //Debug.Log($"Max amount of alive trades reached: {PlayerStats.Instance.maxAliveTrades}! ");
             return;
         }
 
@@ -533,11 +534,10 @@ public class LevelManager : MonoBehaviour
             return;
         }
         float currentTierCashOutPrice =
-            UpgradesManager.Instance.cashOutTierPrices.GetValueOrDefault(currentCashOutTier, 3000);
+            UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier);
         cash -= currentTierCashOutPrice;
         cash = Mathf.Max(0, cash);
         GameEvents.OnCashOut?.Invoke(currentCashOutTier);
-        
     }
 
     private void ToggleCashOutButtonEnabled()
@@ -614,14 +614,14 @@ public class LevelManager : MonoBehaviour
     {
         currentCashOutTier++;
         currentCashOutTier = (AugmentTier) Mathf.Min((int) currentCashOutTier, Enum.GetValues(typeof(AugmentTier)).Length - 1);
-        currentCashOutPrice = UpgradesManager.Instance.cashOutTierPrices.GetValueOrDefault(currentCashOutTier, 3000);
+        currentCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier);
     }
     
     public void DecreaseCashOutTier()
     {
         currentCashOutTier--;
         currentCashOutTier = (AugmentTier) Mathf.Max((int) currentCashOutTier, 0);
-        currentCashOutPrice = UpgradesManager.Instance.cashOutTierPrices.GetValueOrDefault(currentCashOutTier, 3000);
+        currentCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier);
     }
 
     public void ChangeOrderQuantity(bool increase)

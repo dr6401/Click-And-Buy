@@ -33,19 +33,31 @@ public class UpgradesManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
+    public float PriceOfCashOutTier(AugmentTier tier)
+    {
+        return cashOutTierPrices.GetValueOrDefault(tier, 500);
+    }
     
     private void StartUpgradeSelection(AugmentTier tier)
     {
         UpgradesSelectionUI.Instance.TriggerAugmentSelection(tier);
     }
 
+    private void IncreaseCashOutTierPrice(AugmentTier tier)
+    {
+        cashOutTierPrices[tier] = Mathf.RoundToInt(cashOutTierPrices[tier] * 1.05f);
+    }
+
     private void OnEnable()
     {
         GameEvents.OnCashOut += StartUpgradeSelection;
+        GameEvents.OnCashOut += IncreaseCashOutTierPrice;
     }
     
     private void OnDisable()
     {
         GameEvents.OnCashOut -= StartUpgradeSelection;
+        GameEvents.OnCashOut -= IncreaseCashOutTierPrice;
     }
 }

@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: RichGetRicher
   m_EditorClassIdentifier: Assembly-CSharp::PercentMoneyIncrease
   augmentName: Rich Get Richer
-  description: 'Gain 5% of current Cash
-
-    (max 300$)'
+  description: Gain 5% of current Cash
   icon: {fileID: 21300000, guid: 4f98ba138575d8c49a75eeb7242c6fd5, type: 3}
   tier: 0
   category: 0
