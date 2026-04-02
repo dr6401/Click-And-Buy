@@ -38,9 +38,6 @@ public class LevelManager : MonoBehaviour
     private float marginCallTimer;
     private float marginCallInterval = 0.1f;
 
-    public float minPrice = 10;
-    public float maxPrice = 20;
-
     [Header("Upgrade System")]
     public AugmentTier currentCashOutTier = AugmentTier.Common;
     public float currentCashOutPrice = 300;
@@ -67,6 +64,19 @@ public class LevelManager : MonoBehaviour
     private float candleHigh;
     private float candleLow;
     private float candleTimer;
+    
+    [Header("Chart Settings")]
+    [SerializeField] private GameObject gridLinePrefab;
+    [SerializeField] private RectTransform gridLinesParent;
+    
+    [SerializeField] private int lastNPrices = 50;
+    [SerializeField] private float yChartPadding = 0.1f;
+
+    private float chartMinVisible;
+    private float chartMaxVisible;
+    private float gridStep = 10f;
+    
+    private List<float> recentPrices = new List<float>();
     
     [Header("DamageNumbersPro")]
     [SerializeField] private DamageNumber profitDamageNumbersPrefab;
@@ -111,6 +121,9 @@ public class LevelManager : MonoBehaviour
         price = 50;//(minPrice * 0.75f + maxPrice * 0.25f);
         price = Mathf.Round(price / decimals) * decimals;
         previousPrice = price;
+        chartMinVisible = 10;
+        chartMaxVisible = 200;
+        recentPrices.Add(price);
         GenerateNewPrice();
         StartNewCandle();
     }
@@ -174,6 +187,7 @@ public class LevelManager : MonoBehaviour
         else openProfitLossText.color = Color.white;
 
         ToggleCashOutButtonEnabled();
+        DrawGridLines();
         
         
         
@@ -190,24 +204,6 @@ public class LevelManager : MonoBehaviour
                     LoseGame();
                 }
             }
-
-            /*if (cash >= upgradeOfferTarget)
-            {
-                PlayerStats.Instance.level++;
-                //GameEvents.OnCashOut?.Invoke();
-                upgradeOfferTarget += upgradeThresholdIncrease;
-                if (PlayerStats.Instance.level >= 5) upgradeThresholdIncrease = 1000;
-                else if (PlayerStats.Instance.level >= 10) upgradeThresholdIncrease = 2500;
-                else if (PlayerStats.Instance.level >= 15) upgradeThresholdIncrease = 5000;
-                else if (PlayerStats.Instance.level >= 20) upgradeThresholdIncrease = 10000;
-                else if (PlayerStats.Instance.level % 10 == 0)
-                {
-                    upgradeThresholdIncrease *= 2;
-                }
-                //WinGame();
-                //hasLevelEnded = true;
-                //isInputBlocked = true;
-            }*/
         }
     }
 
@@ -216,9 +212,16 @@ public class LevelManager : MonoBehaviour
         previousPrice = price;
         //Debug.Log($"Old Price: {previousPrice}");
         price += Random.Range(-5f, 5f);
-        price = Mathf.Clamp(price, minPrice, maxPrice);
         price = Mathf.Round(price / decimals) * decimals;
         //Debug.Log($"New price: {price}");
+        
+        recentPrices.Add(price);
+        if (recentPrices.Count > lastNPrices)
+        {
+            recentPrices.RemoveAt(0);
+        }
+
+        UpdateChartRange();
     }
 
     public void StartNewCandle()
@@ -266,15 +269,14 @@ public class LevelManager : MonoBehaviour
     {
         float height = PriceToY(price) - PriceToY(candleOpen);
 
-        if (PriceToY(price) >= PriceToY(candleOpen))
+        if (height >= 0)
         {
-            currentCandle.localRotation = Quaternion.Euler(0, 0, 0);
+            currentCandle.localRotation = Quaternion.identity;
             currentCandle.sizeDelta = new Vector2(currentCandle.sizeDelta.x, height);   
         }
         else
         {
-            Quaternion inverseRotation = Quaternion.Euler(0f, 0f, 180f);
-            currentCandle.localRotation = inverseRotation;
+            currentCandle.localRotation = Quaternion.Euler(0f, 0f, 180f);
             currentCandle.sizeDelta = new Vector2(currentCandle.sizeDelta.x, -height);
         }
         currentCandle.anchoredPosition = new Vector2(xPos, PriceToY(candleOpen));
@@ -294,8 +296,52 @@ public class LevelManager : MonoBehaviour
 
     private float PriceToY(float p)
     {
-        float normalizedPrice = (p - minPrice) / (maxPrice - minPrice);
+        float normalizedPrice = (p - chartMinVisible) / (chartMaxVisible - chartMinVisible);
         return normalizedPrice * priceChart.rect.height;
+    }
+
+    private void UpdateChartRange()
+    {
+        float minPriceInWindow = Mathf.Min(recentPrices.ToArray());
+        float maxPriceInWindow = Mathf.Max(recentPrices.ToArray());
+        
+        float range = maxPriceInWindow - minPriceInWindow;
+        if (range <= 0) range = 1f; // Fallback
+
+        float padding = range * yChartPadding;
+        chartMinVisible = Mathf.Lerp(chartMinVisible, minPriceInWindow - padding, 0.1f);
+        chartMaxVisible = Mathf.Lerp(chartMaxVisible, maxPriceInWindow + padding, 0.1f);
+    }
+
+    private void DrawGridLines()
+    {
+        foreach (Transform line in gridLinesParent)
+        {
+            Destroy(line.gameObject);
+        }
+        float minLine = Mathf.Floor(chartMinVisible / gridStep) * gridStep;
+        float maxLine = Mathf.Ceil(chartMaxVisible / gridStep) * gridStep;
+
+        for (float priceLine = minLine; priceLine <= maxLine; priceLine += gridStep)
+        {
+            float y = PriceToY(priceLine);
+            DrawHorizontalGridLine(y, priceLine);
+        }
+    }
+
+    private void DrawHorizontalGridLine(float y, float priceLine)
+    {
+        GameObject line = Instantiate(gridLinePrefab, gridLinesParent);
+        RectTransform rect = line.GetComponent<RectTransform>();
+
+        rect.anchoredPosition = new Vector2(0, y);
+        rect.sizeDelta = new Vector2(priceChart.rect.width, rect.sizeDelta.y);
+        
+        TMP_Text text = line.GetComponentInChildren<TMP_Text>();
+        if (text != null)
+        {
+            text.text = $"{NumberFormatter.FormatDecimalNumber(priceLine)}$";
+        }
     }
     
     public void Buy()

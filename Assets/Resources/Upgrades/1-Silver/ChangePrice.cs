@@ -8,6 +8,6 @@ public class ChangePrice : Augment
     {
         if (LevelManager.Instance == null) return;
         LevelManager.Instance.price += priceIncrease;
-        LevelManager.Instance.price = Mathf.Min(LevelManager.Instance.price, LevelManager.Instance.maxPrice);
+        //LevelManager.Instance.price = Mathf.Min(LevelManager.Instance.price, LevelManager.Instance.maxPrice);
     }
 }
