@@ -15,8 +15,8 @@ MonoBehaviour:
   augmentName: Switcheroo
   description: 'Flip all current trades!
 
-    (buy positions -> sell positions and
-    vice versa)'
+    (long positions -> short positions
+    and vice versa)'
   icon: {fileID: 21300000, guid: 39accf33da0ccca47aaa46e940b7c86e, type: 3}
   tier: 0
   category: 3
