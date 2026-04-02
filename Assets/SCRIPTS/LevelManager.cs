@@ -87,6 +87,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Button cashOutButton;
     [SerializeField] private TMP_Text leverageText;
     [SerializeField] private TMP_Text quantityOrderText;
+    [SerializeField] private Slider timeScaleSlider;
 
     [Header("Power Ups")]
     public int numberOfFutureFreebieTrades;
@@ -161,7 +162,7 @@ public class LevelManager : MonoBehaviour
         cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.cashOutTierPrices.GetValueOrDefault(currentCashOutTier, 300))}$";
         leverageText.text = $"Current: {NumberFormatter.FormatDecimalNumber(leverage)}X\n" +
                             $"Max: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.maxLeverage)}x";
-        quantityOrderText.text = $"{currentOrderQuantity}";
+        quantityOrderText.text = $"{NumberFormatter.FormatDecimalNumber(currentOrderQuantity)}";
         if (openProfit > 0)
         {
             openProfitLossText.color = GreenColor;
@@ -454,7 +455,7 @@ public class LevelManager : MonoBehaviour
         loseCanvas.SetActive(true);
     }
 
-    public void DecreaseNewPriceInterval()
+    /*public void DecreaseNewPriceInterval()
     {
         if (isInputBlocked) return;
         Time.timeScale += 0.5f;
@@ -464,6 +465,33 @@ public class LevelManager : MonoBehaviour
     {
         if (isInputBlocked || Time.timeScale <= 0.5f) return;
         Time.timeScale -= 0.5f;
+    }*/
+
+    public void ChangeTimeScale()
+    {
+        float scale = timeScaleSlider.value;
+        if (scale <= 0.25f)
+        {
+            Time.timeScale = Mathf.Lerp(0.25f, 1, scale / 0.25f);
+        }
+        else if (scale <= 0.5f)
+        {
+            Time.timeScale = Mathf.Lerp(1, 20, (scale - 0.25f) / 0.25f);
+        }
+        else if (scale <= 0.75f)
+        {
+            Time.timeScale = Mathf.Lerp(20, 50, (scale - 0.5f) / 0.25f);
+        }
+        else
+        {
+            Time.timeScale = Mathf.Lerp(50, 100, (scale - 0.75f) / 0.25f);
+        }
+    }
+
+    public void ResetTimeScale()
+    {
+        Time.timeScale = 1f;
+        timeScaleSlider.value = 0.25f;
     }
 
     public void IncreaseLeverage()

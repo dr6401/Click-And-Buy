@@ -9,6 +9,7 @@ public class PauseManager : MonoBehaviour
     private bool isGamePaused = false;
     [SerializeField] private GameObject settingsMenu;
     public bool inputBlocked = false;
+    public float currentTimeScale = 1f;
 
     private void Awake()
     {
@@ -38,21 +39,23 @@ public class PauseManager : MonoBehaviour
 
     public void StopTime()
     {
+        currentTimeScale = Time.timeScale;
         Time.timeScale = 0f;
         inputBlocked = true;
     }
 
     public void ResumeTime()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = currentTimeScale;
         inputBlocked = false;
     }
     
     public void PauseGame()
     {
+        if (!isGamePaused) currentTimeScale = Time.timeScale;
         isGamePaused = !isGamePaused;
         LevelManager.Instance.isInputBlocked = isGamePaused;
-        Time.timeScale = isGamePaused ? 0f : 1f;
+        Time.timeScale = isGamePaused ? 0f : currentTimeScale;
         settingsMenu.SetActive(isGamePaused);
         GameEvents.OnGamePaused?.Invoke(isGamePaused);
         Debug.Log($"isGamePaused: {isGamePaused}");
