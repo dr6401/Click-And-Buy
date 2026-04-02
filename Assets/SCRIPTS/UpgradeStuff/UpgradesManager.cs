@@ -6,7 +6,7 @@ public class UpgradesManager : MonoBehaviour
     private float silverAugmentChance = 0.5f;
     private float goldAugmentChance = 0.3f;
     
-    public static float commonCashOutPrice = 300f;
+    public static float commonCashOutPrice = 100f;
     public static float rareCashOutPrice = 750f;
     public static float epicCashOutPrice = 2000f;
     public static float legendaryCashOutPrice = 10000f;

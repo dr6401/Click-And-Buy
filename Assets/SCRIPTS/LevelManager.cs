@@ -331,8 +331,21 @@ public class LevelManager : MonoBehaviour
             candle.rectTransform.sizeDelta = new Vector2(candle.rectTransform.sizeDelta.x, -height);
         }
         candle.rectTransform.anchoredPosition = new Vector2(candle.rectTransform.anchoredPosition.x, openY);
-        //Image candleImage = currentCandle.GetComponent<Image>();
-        //candleImage.color = candle.close >= candle.open ? GreenColor : RedColor;
+    }
+
+    private void UpdateOlderTradeEntryIndicators()
+    {
+        foreach (RectTransform tradeIndicatory in tradeEntryIndicators)
+        {
+            CandleData candleData = tradeIndicatory.GetComponent<CandleData>();
+            UpdateTradeIndicatorVisual(candleData);
+        }
+    }
+
+    private void UpdateTradeIndicatorVisual(CandleData tradeEntryIndicator)
+    {
+        float openY = PriceToY(tradeEntryIndicator.open);
+        tradeEntryIndicator.rectTransform.anchoredPosition = new Vector2(tradeEntryIndicator.rectTransform.anchoredPosition.x, openY);
     }
 
     private float PriceToY(float p)
@@ -354,6 +367,7 @@ public class LevelManager : MonoBehaviour
         chartMaxVisible = Mathf.Lerp(chartMaxVisible, maxPriceInWindow + padding, 0.1f);
         
         UpdateOlderCandles();
+        UpdateOlderTradeEntryIndicators();
     }
 
     private void DrawGridLines()
@@ -436,8 +450,8 @@ public class LevelManager : MonoBehaviour
         
         GameObject tradeEntryIndicator = Instantiate(tradeEntryIndicatorPrefab, priceChart);
         RectTransform rectTransform = tradeEntryIndicator.GetComponent<RectTransform>();
-
-        //Debug.Log($"Normalized price: {normalizedPrice}");
+        CandleData tradeEntryIndicatorData = tradeEntryIndicator.GetComponent<CandleData>();
+        tradeEntryIndicatorData.open = price;
 
         rectTransform.anchoredPosition = new Vector2(xPos, PriceToY(price));
         

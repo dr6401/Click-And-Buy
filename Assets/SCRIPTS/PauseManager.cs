@@ -60,6 +60,12 @@ public class PauseManager : MonoBehaviour
         GameEvents.OnGamePaused?.Invoke(isGamePaused);
         Debug.Log($"isGamePaused: {isGamePaused}");
     }
+    
+    public void ResetTimeScale()
+    {
+        Time.timeScale = 1f;
+        currentTimeScale = Time.timeScale;
+    }
 
     private void OnEnable()
     {
