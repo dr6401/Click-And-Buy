@@ -10473,6 +10473,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 121119317}
     - target: {fileID: 6709474183954161642, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
+      propertyPath: tutorialDump
+      value: 
+      objectReference: {fileID: 11400000, guid: b4aec8e804c197d41901da44dbffe1c0, type: 2}
+    - target: {fileID: 6709474183954161642, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
+      propertyPath: tutorialPump
+      value: 
+      objectReference: {fileID: 11400000, guid: b4aec8e804c197d41901da44dbffe1c0, type: 2}
+    - target: {fileID: 6709474183954161642, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
       propertyPath: cashOutButton
       value: 
       objectReference: {fileID: 415373639}

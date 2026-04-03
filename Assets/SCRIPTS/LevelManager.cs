@@ -36,6 +36,10 @@ public class LevelManager : MonoBehaviour
     public float minPrice = 10f;
     public float maxPrice = 200f;
 
+    private float maxPriceIncreaseTimer;
+    public float maxPriceIncreaseInterval = 1f;
+    public float maxPriceIncreaseAmount = 1f;
+
     private float generatePriceTimer;
     private float genetartePriceInterval = 0.1f;
     private float marginCallTimer;
@@ -80,6 +84,12 @@ public class LevelManager : MonoBehaviour
     public float gridStep = 25f;
     
     private List<float> recentPrices = new List<float>();
+    
+    [Header("Price Move Events")]
+    private ActivePriceEvent activeEvent = new ActivePriceEvent();
+    
+    [SerializeField] private PriceMoveEvent tutorialPump;
+    [SerializeField] private PriceMoveEvent tutorialDump;
     
     [Header("DamageNumbersPro")]
     [SerializeField] private DamageNumber profitDamageNumbersPrefab;
@@ -128,7 +138,8 @@ public class LevelManager : MonoBehaviour
         chartMaxVisible = 200;
         currentCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier);
         recentPrices.Add(price);
-        GenerateNewPrice();
+        //GenerateNewPrice();
+        PlayPriceMoveEvent(tutorialPump);
         SpawnNewCandle();
     }
 
@@ -140,6 +151,7 @@ public class LevelManager : MonoBehaviour
         candleTimer += Time.deltaTime;
         generatePriceTimer += Time.deltaTime;
         marginCallTimer += Time.deltaTime;
+        maxPriceIncreaseTimer += Time.deltaTime;
         
         UpdateCurrentCandle();
 
@@ -156,6 +168,12 @@ public class LevelManager : MonoBehaviour
         }
         candleHigh = Mathf.Max(candleHigh, price);
         candleLow = Mathf.Min(candleLow, price);
+
+        if (maxPriceIncreaseTimer >= maxPriceIncreaseInterval)
+        {
+            maxPriceIncreaseTimer = 0;
+            maxPrice += maxPriceIncreaseAmount;
+        }
 
         float openProfit = 0f;
         float invested = 0f;
@@ -212,8 +230,37 @@ public class LevelManager : MonoBehaviour
     private void GenerateNewPrice()
     {
         previousPrice = price;
-        //Debug.Log($"Old Price: {previousPrice}");
-        price += Random.Range(-5f, 5f);
+        
+        // Price Move Event
+        if (activeEvent.active && activeEvent != null)
+        {
+            PriceMoveEvent priceEvent = activeEvent.data;
+
+            activeEvent.elapsed += genetartePriceInterval;
+
+            float t = Mathf.Clamp01(activeEvent.elapsed / priceEvent.duration);
+            float curveT = priceEvent.animationCurve.Evaluate(t);
+
+            float desiredPrice = Mathf.Lerp(activeEvent.startPrice, priceEvent.targetPrice, curveT);
+
+            float move = desiredPrice - price;
+            move = Mathf.Clamp(move, -priceEvent.maxStep, priceEvent.maxStep);
+            
+            float noise = Random.Range(-priceEvent.maxNoise,  priceEvent.maxNoise);
+            price += move + noise;
+
+            if (t >= 1) // If elapsedTime >= priceEvent.duration
+            {
+                price = priceEvent.targetPrice;
+                activeEvent.active = false;
+                Debug.Log($"Event: {priceEvent.name} finished at price: {priceEvent.targetPrice}!");
+            }
+        }
+        else
+        {
+            price += Random.Range(-5f, 5f);    
+        }
+        
         price = Mathf.Round(price / decimals) * decimals;
         price = Mathf.Clamp(price, minPrice, maxPrice);
         //Debug.Log($"New price: {price}");
@@ -646,6 +693,16 @@ public class LevelManager : MonoBehaviour
             currentOrderQuantity -= step;
         }
         currentOrderQuantity = Mathf.Max(0.1f, currentOrderQuantity);
+    }
+
+    public void PlayPriceMoveEvent(PriceMoveEvent priceMoveEvent)
+    {
+        activeEvent.data = priceMoveEvent;
+
+        activeEvent.startPrice = price;
+        activeEvent.elapsed = 0;
+
+        activeEvent.active = true;
     }
 
     public void ToggleInputBlocked()
