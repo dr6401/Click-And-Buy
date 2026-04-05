@@ -407,7 +407,7 @@ public class LevelManager : MonoBehaviour
         float minPriceInWindow = Mathf.Min(recentPrices.ToArray());
         float maxPriceInWindow = Mathf.Max(recentPrices.ToArray());
         
-        float range = maxPriceInWindow - minPriceInWindow;
+        float range = Mathf.Max(maxPriceInWindow - minPriceInWindow, 100f);
         if (range <= 0) range = 1f; // Fallback
 
         float padding = range * yChartPadding;
@@ -416,6 +416,7 @@ public class LevelManager : MonoBehaviour
         
         UpdateOlderCandles();
         UpdateOlderTradeEntryIndicators();
+        Debug.Log($"Range: {range}");
     }
 
     private void DrawGridLines()

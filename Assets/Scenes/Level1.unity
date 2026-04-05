@@ -10489,6 +10489,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 429329092}
     - target: {fileID: 6709474183954161642, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
+      propertyPath: yChartPadding
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6709474183954161642, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
       propertyPath: gridLinePrefab
       value: 
       objectReference: {fileID: 697876995076955486, guid: 7a5718b184b57c64a81789049aea7b62, type: 3}
