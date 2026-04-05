@@ -37,7 +37,7 @@ public class LevelManager : MonoBehaviour
     public float maxPrice = 200f;
 
     private float maxPriceIncreaseTimer;
-    public float maxPriceIncreaseInterval = 1f;
+    public float maxPriceIncreaseInterval = 10f;
     public float maxPriceIncreaseAmount = 1f;
 
     private float generatePriceTimer;
@@ -151,7 +151,7 @@ public class LevelManager : MonoBehaviour
         candleTimer += Time.deltaTime;
         generatePriceTimer += Time.deltaTime;
         marginCallTimer += Time.deltaTime;
-        maxPriceIncreaseTimer += Time.deltaTime;
+        if (Time.timeScale > 0) maxPriceIncreaseTimer += Time.unscaledDeltaTime; // If game isn't paused/powerups picking: increase this slowly, independently of time scale
         
         UpdateCurrentCandle();
 
@@ -620,6 +620,7 @@ public class LevelManager : MonoBehaviour
 
     public void ChangeTimeScale()
     {
+        if (Time.timeScale <= 0) return;
         float scale = timeScaleSlider.value;
         if (scale <= 0.25f)
         {

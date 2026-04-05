@@ -291,10 +291,17 @@ MonoBehaviour:
   tutorialText: {fileID: 622096000}
   nextButtonText: {fileID: 2074258300}
   tutorialTexts:
-  - This is tutorial text1
-  - This is tutorial text1 This is tutorial text1 This is tutorial text1 This is
-    tutorial text1 This is tutorial text1 This is tutorial text1 This is tutorial
-    text1This is tutorial text1This is tutorial text1
+  - Welcome to\n <size=200%>Click and Buy</size>
+  - The stock market has been so unpredictable and the experts don't know what to
+    do...
+  - So they sent YOU!\nYes, someone without an ioda of an idea how to navigate the
+    market.\n\nSince nobody knew what's going on, taking a shot on a random guy coudln't
+    hurt.
+  - Little did they know the holy Stock Market Gods were on your side, making you
+    able to alter the market given enough offeings ($money$).
+  - Are you ready to show them you're not just an average trader Joe?\nGet filthy
+    reach and prove them they shouldn't go around giving chances to money hungry
+    lunatics with power of God and the Stock Market on their side!
   fadeInTextFeedback: {fileID: 0}
   currentTextIndex: 0
 --- !u!4 &118760062
@@ -3364,9 +3371,9 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 22
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -4327,7 +4334,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Long
+  m_text: Buy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
   m_sharedMaterial: {fileID: -4406428672775297824, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
@@ -4464,7 +4471,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Short
+  m_text: Sell
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
   m_sharedMaterial: {fileID: -4406428672775297824, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
@@ -4701,7 +4708,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2091455328}
   m_HandleRect: {fileID: 2091455327}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -9172,7 +9179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5778216329051529219, guid: ffc798a696153cd40acf36edb648d317, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 24.908081
+      value: 24.907959
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11452,6 +11459,10 @@ PrefabInstance:
       propertyPath: upgradeOfferTargetText
       value: 
       objectReference: {fileID: 600322801}
+    - target: {fileID: 6709474183954161642, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
+      propertyPath: maxPriceIncreaseInterval
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6709474183954161642, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
       propertyPath: tradeEntryIndicatorPrefab
       value: 

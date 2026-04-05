@@ -5502,26 +5502,26 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '1. Spend money to open Long/Short positions at current price
+  m_text: '1. Spend money to open Buy/Sellpositions at current price
 
 
 
-    2.
-    Long if you think price will go up
+    2. Buy
+    if you think price will go up
 
 
 
-    3. Short if you think price will go
-    down
+    3. Sell if you think price will go down
 
 
 
-    4. Close position to lock in profit/loss
+    4.
+    Close position to lock in profit/loss
 
 
 
-    5. Multiplier affects
-    profits and losses. Bigger risk, bigger reward!'
+    5. Multiplier affects profits and
+    losses. Bigger risk, bigger reward!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
   m_sharedMaterial: {fileID: -4406428672775297824, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
@@ -14383,7 +14383,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Short
+  m_text: Sell
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
   m_sharedMaterial: {fileID: -4406428672775297824, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
@@ -15214,7 +15214,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Long
+  m_text: Buy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
   m_sharedMaterial: {fileID: -4406428672775297824, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
