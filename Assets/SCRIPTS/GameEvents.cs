@@ -14,6 +14,9 @@ public static class GameEvents
     
     public static Action onVictory;
     public static Action onDefeat;
+
+    public static Action OnFTUETriggered;
+    public static Action OnFTUEEnded;
     
     public static Action<AugmentTier> OnCashOut;
     public static Action OnPlayerDeath;

@@ -416,7 +416,7 @@ public class LevelManager : MonoBehaviour
         
         UpdateOlderCandles();
         UpdateOlderTradeEntryIndicators();
-        Debug.Log($"Range: {range}");
+        //Debug.Log($"Range: {range}");
     }
 
     private void DrawGridLines()
