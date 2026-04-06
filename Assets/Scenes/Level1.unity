@@ -258,67 +258,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5808951037114739877, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
   m_PrefabInstance: {fileID: 337311311}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &118760060
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 118760062}
-  - component: {fileID: 118760061}
-  m_Layer: 0
-  m_Name: FTUEManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &118760061
+--- !u!114 &118760061 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6314589959589970837, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+  m_PrefabInstance: {fileID: 2977656659803899151}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118760060}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80b306fe83df66f4382938dc082cb661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FTUEManager
-  fTUECanvas: {fileID: 2095992785}
-  tutorialText: {fileID: 622096000}
-  nextButtonText: {fileID: 2074258300}
-  tutorialTexts:
-  - Welcome to\n <size=200%>Click and Buy</size>
-  - The stock market has been so unpredictable and the experts don't know what to
-    do...
-  - So they sent YOU!\nYes, someone without an ioda of an idea how to navigate the
-    market.\n\nSince nobody knew what's going on, taking a shot on a random guy coudln't
-    hurt.
-  - Little did they know the holy Stock Market Gods were on your side, making you
-    able to alter the market given enough offeings ($money$).
-  - Are you ready to show them you're not just an average trader Joe?\nGet filthy
-    reach and prove them they shouldn't go around giving chances to money hungry
-    lunatics with power of God and the Stock Market on their side!
-  fadeInTextFeedback: {fileID: 0}
-  currentTextIndex: 0
---- !u!4 &118760062
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118760060}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &121119315
 GameObject:
   m_ObjectHideFlags: 0
@@ -11275,6 +11225,75 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1827386439}
   m_SourcePrefab: {fileID: 100100000, guid: ffc798a696153cd40acf36edb648d317, type: 3}
+--- !u!1001 &2977656659803899151
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1405402281613379860, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: m_Name
+      value: FTUEManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314589959589970837, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: fTUECanvas
+      value: 
+      objectReference: {fileID: 2095992785}
+    - target: {fileID: 6314589959589970837, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: tutorialText
+      value: 
+      objectReference: {fileID: 622096000}
+    - target: {fileID: 6314589959589970837, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: nextButtonText
+      value: 
+      objectReference: {fileID: 2074258300}
+    - target: {fileID: 7920974951238736911, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920974951238736911, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920974951238736911, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920974951238736911, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920974951238736911, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920974951238736911, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920974951238736911, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920974951238736911, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920974951238736911, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920974951238736911, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
 --- !u!1001 &4620101829528869732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11502,7 +11521,7 @@ SceneRoots:
   - {fileID: 1576828398}
   - {fileID: 4620101829528869732}
   - {fileID: 2095992789}
-  - {fileID: 118760062}
+  - {fileID: 2977656659803899151}
   - {fileID: 1994878021}
   - {fileID: 1356130694}
   - {fileID: 702451967}

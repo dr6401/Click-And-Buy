@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373f968279f0fa84ab2449ecb0033007, type: 3}
+  m_Name: Intro
+  m_EditorClassIdentifier: Assembly-CSharp::CutsceneSO
+  id: 0
+  text:
+  - The stock market has been so unpredictable and the experts don't know what to
+    do...
+  - So they sent YOU!\nYes, someone without an ioda of an idea how to navigate the
+    market.\n\nSince nobody knows what's going on, taking a shot on a random guy
+    couldn't hurt right?
+  - Little did they know the Holy Stock Market Gods were on your side, making you
+    able to alter the market given enough offeings ($money$).
+  - Are you ready to show them you're not just an average trader Joe?\nGet filthy
+    reach and prove them they shouldn't go around giving chances to money hungry
+    lunatics with power of God and the Stock Market on their side!
+  - Welcome to\n\n <size=200%>Click and Buy</size>
+  nextScene: MainMenu
+  music: {fileID: 8300000, guid: 901c26f0b59571a4c92a024f22091ce5, type: 3}

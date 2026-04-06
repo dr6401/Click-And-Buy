@@ -51,15 +51,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private MMFeedbacks closeCreditsPanelFeedback;
 
     [Header("Scene Loading")]
-    [SerializeField] private MMFeedbacks loadCutscenesSceneFeedback;
     [SerializeField] private MMFeedbacks loadLvl1Feedback;
-    [SerializeField] private MMFeedbacks loadPigLevelFeedback;
-    [SerializeField] private MMFeedbacks loadSheepLevelFeedback;
-    [SerializeField] private MMFeedbacks loadCowLevelFeedback;
-    [SerializeField] private MMFeedbacks loadChickLevelFeedback;
-    [SerializeField] private MMFeedbacks loadRealEndlessLevelFeedback;
-    [SerializeField] private MMFeedbacks loadEndlessLevelFeedback;
-    [SerializeField] private MMFeedbacks loadIdlerLevelFeedback;
+    [SerializeField] private MMFeedbacks loadCutscenesSceneFeedback;
+
     void Start()
     {
         if (!GameConstants.isPlaytestBuild)
@@ -229,33 +223,6 @@ public class MainMenuManager : MonoBehaviour
     private void PlayLevel1()
     {
         loadLvl1Feedback.PlayFeedbacks();
-    }
-    private void PlayPigLevel()
-    {
-        loadPigLevelFeedback.PlayFeedbacks();
-    }
-    private void PlaySheepLevel()
-    {
-        loadSheepLevelFeedback.PlayFeedbacks();
-    }
-    private void PlayCowLevel()
-    {
-        loadCowLevelFeedback.PlayFeedbacks();
-    }
-    private void PlayChickLevel()
-    {
-        loadChickLevelFeedback.PlayFeedbacks();
-    }
-
-    public void PlayRealEndlessLevel()
-    {
-        loadRealEndlessLevelFeedback?.PlayFeedbacks();
-    }
-    
-    
-    public void PlayIdlerLevel()
-    {
-        loadIdlerLevelFeedback.PlayFeedbacks();
     }
 
     public void Wishlist()

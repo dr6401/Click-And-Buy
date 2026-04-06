@@ -5,6 +5,7 @@ using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class CutscenesManager : MonoBehaviour
@@ -15,15 +16,12 @@ public class CutscenesManager : MonoBehaviour
     [SerializeField] private CutsceneSO[] allCutscenes;
     [SerializeField] private TMP_Text text;
     [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private float canvasFadeDuration = 5f;
+    [SerializeField] private float canvasFadeDuration = 1f;
     [SerializeField] private GameObject warningText;
     [SerializeField] private AudioSource musicAudioSource;
+    [Header("Scene Loading")]
     [SerializeField] private MMFeedbacks loadMainMenuFeedback;
-    [SerializeField] private MMFeedbacks loadPigLevelFeedback;
-    [SerializeField] private MMFeedbacks loadSheepLevelFeedback;
-    [SerializeField] private MMFeedbacks loadCowLevelFeedback;
-    [SerializeField] private MMFeedbacks loadChickLevelFeedback;
-    [SerializeField] private MMFeedbacks loadEndlessLevelFeedback;
+    [SerializeField] private MMFeedbacks loadLevel1Feedback;
     private Coroutine canvasFadeCoroutine;
 
     private void Awake()
@@ -61,7 +59,7 @@ public class CutscenesManager : MonoBehaviour
         int levelProgression = saveData.campaignData.campaignProgressLevel;
         var id = (CutsceneSO.CutsceneID)levelProgression; // If no next scene exists just play the intro
         current = lookup[id];
-        if (id == 0) warningText.SetActive(true);
+        if (id == 0) warningText?.SetActive(true);
         //Debug.Log($"PlayerPrefs.NextCutscene: {(CutsceneSO.CutsceneID)PlayerPrefs.GetInt("NextCutscene")}");
     }
 
@@ -78,7 +76,7 @@ public class CutscenesManager : MonoBehaviour
             canvasFadeCoroutine = StartCoroutine(FadeCanvas(1f));
             //yield return new WaitForSeconds(canvasFadeDuration);
             text.text = line;
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space));
+            yield return new WaitUntil(() => Mouse.current.leftButton.wasPressedThisFrame || Keyboard.current.spaceKey.wasPressedThisFrame);
             if (canvasFadeCoroutine != null) StopCoroutine(canvasFadeCoroutine);
             canvasFadeCoroutine = StartCoroutine(FadeCanvas(0));
             yield return new WaitForSeconds(canvasFadeDuration);
@@ -92,22 +90,10 @@ public class CutscenesManager : MonoBehaviour
                 loadMainMenuFeedback.PlayFeedbacks();
                 break;
             case CutsceneSO.CutsceneID.ChickenToPig: 
-                loadPigLevelFeedback.PlayFeedbacks();
-                break;
-            case CutsceneSO.CutsceneID.PigToSheep: 
-                loadSheepLevelFeedback.PlayFeedbacks();
-                break;
-            case CutsceneSO.CutsceneID.SheepToCow: 
-                loadCowLevelFeedback.PlayFeedbacks();
-                break;
-            case CutsceneSO.CutsceneID.CowToChick: 
-                loadChickLevelFeedback.PlayFeedbacks();
-                break;
-            case CutsceneSO.CutsceneID.ChickToEndless: 
-                loadMainMenuFeedback.PlayFeedbacks();
+                loadLevel1Feedback.PlayFeedbacks();
                 break;
             default:
-                Debug.LogWarning($"current.id was {(CutsceneSO.CutsceneID)current.id}, loading main menu as backup");
+                Debug.LogWarning($"current.id was {current.id}, loading main menu as backup");
                 loadMainMenuFeedback.PlayFeedbacks();
                 break;
         }
