@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour
     private float generatePriceTimer;
     private float genetartePriceInterval = 0.1f;
     private float marginCallTimer;
-    private float marginCallInterval = 0.1f;
+    private float marginCallInterval = 0.001f;
 
     [Header("Upgrade System")]
     public AugmentTier currentCashOutTier = AugmentTier.Common;
@@ -213,11 +213,18 @@ public class LevelManager : MonoBehaviour
         
         if (!hasLevelEnded)
         {
-            if (effectiveCash <= 0f && activeTrades.Count > 0 && marginCallTimer >= marginCallInterval)
+            /*if (effectiveCash <= 0f)
+            {
+                hasLevelEnded = true;
+                isInputBlocked = true;
+                //MarginCall();
+                LoseGame();
+            }*/
+            if (effectiveCash <= 0f && activeTrades.Count > 0)// && marginCallTimer >= marginCallInterval)
             {
                 marginCallTimer = 0;
                 MarginCall(); // Deletes trade with biggest loss
-                if (effectiveCash < 0 && activeTrades.Count <= 0)
+                if (effectiveCash <= 0 && activeTrades.Count <= 0 && equity <= 0)
                 {
                     hasLevelEnded = true;
                     isInputBlocked = true;
@@ -550,7 +557,10 @@ public class LevelManager : MonoBehaviour
             }
         }
         if (worstTrade.GetUnrealizedProfit() > 0) return;
+        Debug.Log($"Current Cash: {cash}, current effectiveCash: {effectiveCash}, equity: {equity}");
         Debug.Log($"Gonna close trade in position {activeTrades.IndexOf(worstTrade)}");
+        Debug.Log($"Investment returned from closing position: {worstTrade.entryPrice * worstTrade.quantity} ({worstTrade.entryPrice} * {worstTrade.quantity})\n" +
+                  $"Loss from trade: {worstTrade.GetUnrealizedProfit()}");
         worstTrade.Close();
         RecalculateBalances();
         Debug.Log($"Cash: {cash}, Equity: {equity}");
@@ -649,13 +659,13 @@ public class LevelManager : MonoBehaviour
     public void IncreaseLeverage()
     {
         if (isInputBlocked) return;
-        leverage += 2f;
+        leverage += 1f;
         leverage = Mathf.Clamp(leverage, 0.5f, PlayerStats.Instance.maxLeverage);
     }
     public void DecreaseLeverage()
     {
         if (isInputBlocked) return;
-        leverage -= 2f;
+        leverage -= 1f;
         leverage = Mathf.Clamp(leverage, 0.5f, PlayerStats.Instance.maxLeverage);
     }
 

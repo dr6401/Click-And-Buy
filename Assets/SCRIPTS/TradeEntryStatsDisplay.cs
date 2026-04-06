@@ -87,7 +87,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
     {
         if (LevelManager.Instance.isInputBlocked) return;
         float realizedProfit = entryPrice * quantity + profitReal;
-        LevelManager.Instance.cash += realizedProfit;
+        LevelManager.Instance.cash = Mathf.Max(0, LevelManager.Instance.cash + realizedProfit);
         LevelManager.Instance.CloseTrade(this);
         SpawnDamageNumbers();
         Destroy(tradeEntryIndicator);
@@ -130,12 +130,12 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         if (GetUnrealizedProfit() > 0)
         {
             DamageNumber newDamageNumber = profitDamageNumbersPrefab.SpawnGUI(gameCanvas, closeTradeText.rectTransform, Vector2.zero, GetUnrealizedProfit());
-            Debug.Log($"Spawned Profit PopUp at {closeTradeText.rectTransform}");
+            //Debug.Log($"Spawned Profit PopUp at {closeTradeText.rectTransform}");
         }
         else if (GetUnrealizedProfit() < 0)
         {
             DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, closeTradeText.rectTransform, Vector2.zero, GetUnrealizedProfit());
-            Debug.Log($"Spawned Loss PopUp at {closeTradeText.rectTransform}");
+            //Debug.Log($"Spawned Loss PopUp at {closeTradeText.rectTransform}");
         }
     }
 }
