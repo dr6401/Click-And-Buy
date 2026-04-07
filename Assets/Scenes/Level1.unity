@@ -11924,6 +11924,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8776301748097169142, guid: 003be03ff77e4094589ffbdfcd91c1b4, type: 3}
+      propertyPath: managedReferences[9136442615324737606].TargetTMPText
+      value: 
+      objectReference: {fileID: 622096000}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12025,6 +12029,10 @@ PrefabInstance:
       propertyPath: priceChart
       value: 
       objectReference: {fileID: 1900506502}
+    - target: {fileID: 6709474183954161642, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
+      propertyPath: targetText
+      value: 
+      objectReference: {fileID: 1756368226}
     - target: {fileID: 6709474183954161642, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
       propertyPath: tradePanel
       value: 

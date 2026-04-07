@@ -51,11 +51,12 @@ public class FTUEManager : MonoBehaviour
             //Time.timeScale = 1f;
             return;
         }
+        fadeInTextFeedback?.PlayFeedbacks();
         currentTextIndex++;
         tutorialText.text = tutorialTexts[currentTextIndex];
         if (currentTextIndex == tutorialTexts.Count - 1)
         {
-            nextButtonText.text = "GO!";
+            nextButtonText.text = "TRADE!";
         }
 
         currentTextIndex = Mathf.Clamp(currentTextIndex, 0, tutorialTexts.Count - 1);

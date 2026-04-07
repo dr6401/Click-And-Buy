@@ -26,7 +26,7 @@ public class RiskMeter : MonoBehaviour
         if (LevelManager.Instance == null) return;
         rawTargetSliderValue = LevelManager.Instance.unrealizedLoss / (LevelManager.Instance.effectiveCash + LevelManager.Instance.unrealizedLoss + 0.0001f); // Add this small value so the variable doesnt become NaN
         riskSlider.value = Mathf.Lerp(riskSlider.value, rawTargetSliderValue, Time.unscaledDeltaTime * lerpSpeed);
-        Debug.Log($"rawTargetSliderValue: {rawTargetSliderValue}, riskSlider.value: {riskSlider.value}");
+        //Debug.Log($"rawTargetSliderValue: {rawTargetSliderValue}, riskSlider.value: {riskSlider.value}");
     }
 
     private void LateUpdate()

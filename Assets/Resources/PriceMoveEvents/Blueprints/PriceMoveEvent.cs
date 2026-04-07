@@ -4,8 +4,10 @@ using UnityEngine;
 public class PriceMoveEvent : ScriptableObject
 {
     public string eventName;
-    
+    [Header("Target Price")]
     public float targetPrice;
+    public float targetPricePercentIncrease;
+    [Header("Duration")]
     public float duration;
     
     [Header("Movement")]

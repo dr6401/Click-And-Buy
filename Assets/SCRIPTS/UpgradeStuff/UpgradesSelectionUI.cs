@@ -12,7 +12,7 @@ public class UpgradesSelectionUI : MonoBehaviour
     public GameObject player;
     public Transform buttonParent;
     public GameObject augmentButtonPrefab;
-    public List<Augment> silverAugments, goldAugments, prismaticAugments;
+    public List<Augment> commonAugments, rareAugments, epicAugments, legendaryAugments;
     [SerializeField] private int numberOfChoices = 3;
     private int availableAugmentsAtStart;
     [SerializeField] private CanvasGroup canvasGroup;
@@ -37,9 +37,10 @@ public class UpgradesSelectionUI : MonoBehaviour
             Instance = this;
         }
 
-        silverAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/1-Silver"));
-        goldAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/2-Gold"));
-        prismaticAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/3-Prismatic"));
+        commonAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/1-Common"));
+        rareAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/2-Rare"));
+        epicAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/3-Epic"));
+        legendaryAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/4-Legendary"));
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -52,15 +53,15 @@ public class UpgradesSelectionUI : MonoBehaviour
         canvasGroup.alpha = 0f;
         gameObject.SetActive(false);
 
-        foreach (var silverAugment in silverAugments)
+        foreach (var silverAugment in commonAugments)
         {
             availableAugmentsAtStart++;
         }
-        foreach (var goldAugment in goldAugments)
+        foreach (var goldAugment in rareAugments)
         {
             availableAugmentsAtStart++;
         }
-        foreach (var prismaticAugment in prismaticAugments)
+        foreach (var prismaticAugment in epicAugments)
         {
             availableAugmentsAtStart++;
         }
@@ -111,10 +112,10 @@ public class UpgradesSelectionUI : MonoBehaviour
     {
         return tier switch
         {
-            AugmentTier.Common => silverAugments,
-            AugmentTier.Rare => goldAugments,
-            AugmentTier.Epic => prismaticAugments,
-            _ => silverAugments,
+            AugmentTier.Common => commonAugments,
+            AugmentTier.Rare => rareAugments,
+            AugmentTier.Epic => epicAugments,
+            _ => commonAugments,
         };
     }
     

@@ -267,7 +267,7 @@ public class LevelManager : MonoBehaviour
             {
                 price = priceEvent.targetPrice;
                 activeEvent.active = false;
-                Debug.Log($"Event: {priceEvent.name} finished at price: {priceEvent.targetPrice}!");
+                Debug.Log($"Event: {priceEvent.name} finished at price: {price} (priceEvent.targetPrice was: {priceEvent.targetPrice})!");
             }
         }
         else
@@ -716,6 +716,11 @@ public class LevelManager : MonoBehaviour
 
     public void PlayPriceMoveEvent(PriceMoveEvent priceMoveEvent)
     {
+        if (priceMoveEvent.targetPricePercentIncrease != 0)
+        {
+            priceMoveEvent.targetPrice = Mathf.Max(minPrice, (1 + priceMoveEvent.targetPricePercentIncrease) * price);
+        }
+        Debug.Log($"{priceMoveEvent.name} event targetPrice: {priceMoveEvent.targetPrice}");
         activeEvent.data = priceMoveEvent;
 
         activeEvent.startPrice = price;
