@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
     private float decimals = 0.01f;
     private float currentOrderQuantity = 1f;
 
+    public float amountToWin = 1000000f;
     public float minPrice = 10f;
     public float maxPrice = 200f;
 
@@ -106,7 +107,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject loseCanvas;
     [SerializeField] private TMP_Text priceText;
     [SerializeField] private TMP_Text cashText;
-    [SerializeField] private TMP_Text equityText;
+    [SerializeField] private TMP_Text targetText;
     [SerializeField] private TMP_Text openProfitLossText;
     [SerializeField] private TMP_Text cashOutText;
     [SerializeField] private Button cashOutButton;
@@ -199,7 +200,7 @@ public class LevelManager : MonoBehaviour
 
         priceText.text = $"Price: {NumberFormatter.FormatDecimalNumber(price)}$";
         cashText.text = $"Cash: " + NumberFormatter.FormatDecimalNumber(effectiveCash) + "$";
-        equityText.text = $"Equity: {NumberFormatter.FormatDecimalNumber(equity)}$";
+        targetText.text = $"Target: {NumberFormatter.FormatDecimalNumber(amountToWin)}$";
         openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfit)}$";
         cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier))}$";
         leverageText.text = $"Current: {NumberFormatter.FormatDecimalNumber(leverage)}X\n" +
@@ -220,13 +221,12 @@ public class LevelManager : MonoBehaviour
         
         if (!hasLevelEnded)
         {
-            /*if (effectiveCash <= 0f)
+            if (cash >= amountToWin)
             {
                 hasLevelEnded = true;
                 isInputBlocked = true;
-                //MarginCall();
-                LoseGame();
-            }*/
+                WinGame();
+            }
             if (effectiveCash <= 0f && activeTrades.Count > 0)// && marginCallTimer >= marginCallInterval)
             {
                 marginCallTimer = 0;

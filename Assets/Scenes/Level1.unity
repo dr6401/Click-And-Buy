@@ -1574,6 +1574,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3063110378973740455, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
+      propertyPath: m_text
+      value: 'Congratulations!
+
+        You hit the target goal.
+
+
+        More content
+        comming in the full game!'
+      objectReference: {fileID: 0}
     - target: {fileID: 3234385200761649382, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 244.2002
@@ -8743,7 +8753,7 @@ GameObject:
   - component: {fileID: 1756368227}
   - component: {fileID: 1756368226}
   m_Layer: 5
-  m_Name: Equity
+  m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8788,7 +8798,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Equity: 48$'
+  m_text: 'Target: 1M$'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
   m_sharedMaterial: {fileID: -4406428672775297824, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
@@ -12021,7 +12031,7 @@ PrefabInstance:
       objectReference: {fileID: 1993328542}
     - target: {fileID: 6709474183954161642, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
       propertyPath: amountToWin
-      value: 1000
+      value: 1000000
       objectReference: {fileID: 0}
     - target: {fileID: 6709474183954161642, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
       propertyPath: cashOutText
