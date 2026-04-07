@@ -22,6 +22,14 @@ public class UpgradesSelectionUI : MonoBehaviour
     [Header("-----TESTING-----")]
     [SerializeField] private bool testing_offerOnlyGoldAugments = false;
 
+    public Dictionary<AugmentTier, List<Augment>> augmentTierAugmentPools => new Dictionary<AugmentTier, List<Augment>>()
+    {
+        { AugmentTier.Common, commonAugments },
+        { AugmentTier.Rare, rareAugments },
+        { AugmentTier.Epic, epicAugments },
+        { AugmentTier.Legendary, legendaryAugments }
+    };
+
     private bool hasSettingsCoveredUpAugmentUI;
     
     private static UpgradesSelectionUI instance;
