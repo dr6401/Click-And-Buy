@@ -4,7 +4,7 @@ using UnityEngine;
 public class NextTradeFree : Augment
 {
     public int freebieTrades;
-    public override void Apply(GameObject player)
+    public override void Apply()
     {
         if (LevelManager.Instance == null) return;
         LevelManager.Instance.numberOfFutureFreebieTrades += freebieTrades;

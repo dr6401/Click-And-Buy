@@ -4,7 +4,7 @@ using UnityEngine;
 public class EventSchedule : Augment
 {
     public PriceMoveEvent priceMoveEvent;
-    public override void Apply(GameObject player)
+    public override void Apply()
     {
         if (LevelManager.Instance == null) return;
         LevelManager.Instance.PlayPriceMoveEvent(priceMoveEvent);

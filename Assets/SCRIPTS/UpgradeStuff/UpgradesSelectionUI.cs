@@ -9,7 +9,6 @@ public class UpgradesSelectionUI : MonoBehaviour
 {
     public static UpgradesSelectionUI Instance;
     
-    public GameObject player;
     public Transform buttonParent;
     public GameObject augmentButtonPrefab;
     public List<Augment> commonAugments, rareAugments, epicAugments, legendaryAugments;
@@ -109,7 +108,7 @@ public class UpgradesSelectionUI : MonoBehaviour
             Debug.Log("Given you the choice: " + choice.augmentName);
             var btnObj = Instantiate(augmentButtonPrefab, buttonParent);
             var btnObjScript = btnObj.GetComponent<UpgradeButton>();
-            btnObjScript.Setup(choice, player, this);
+            btnObjScript.Setup(choice, this);
         }
         gameObject.SetActive(true);
         GameEvents.OnUpgradesOffered?.Invoke();

@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class LuckyStrike : Augment
 {
     public AugmentTier currentTier;
-    public override void Apply(GameObject player)
+    public override void Apply()
     {
         AugmentTier higherTier = (AugmentTier) Mathf.Min((int) currentTier + 1, Enum.GetValues(typeof(AugmentTier)).Length - 1);
         /*switch (higherTier)
@@ -38,7 +38,7 @@ public class LuckyStrike : Augment
             
         }
         Augment randomAugment = higherTierAugmentsPool[Random.Range(0, higherTierAugmentsPool.Count)];
-        randomAugment.Apply(player);
+        randomAugment.Apply();
         Debug.Log($"Applied power-up {randomAugment.name} of tier {higherTier}.");
     }
 }

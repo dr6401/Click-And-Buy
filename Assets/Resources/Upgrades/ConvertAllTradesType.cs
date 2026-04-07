@@ -6,7 +6,7 @@ public class ConvertAllTradesType : Augment
 {
     
     public TradeType tradeType;
-    public override void Apply(GameObject player)
+    public override void Apply()
     {
         if (LevelManager.Instance == null) return;
         SwitchTrades(LevelManager.Instance.activeTrades);

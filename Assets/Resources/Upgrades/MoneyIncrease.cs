@@ -4,7 +4,7 @@ using UnityEngine;
 public class MoneyIncrease : Augment
 {
     public float moneyIncrease;
-    public override void Apply(GameObject player)
+    public override void Apply()
     {
         if (LevelManager.Instance == null) return;
         LevelManager.Instance.cash += moneyIncrease;

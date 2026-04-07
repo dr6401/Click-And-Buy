@@ -5,7 +5,7 @@ public class PercentMoneyIncrease : Augment
 {
     public float percentMoneyIncrease;
     //public float maxIncrease;
-    public override void Apply(GameObject player)
+    public override void Apply()
     {
         if (LevelManager.Instance == null) return;
         //float increase = Mathf.Min(LevelManager.Instance.cash * (percentMoneyIncrease * 0.01f),  maxIncrease);

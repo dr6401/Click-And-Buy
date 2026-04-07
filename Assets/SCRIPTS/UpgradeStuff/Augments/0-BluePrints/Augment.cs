@@ -33,5 +33,5 @@ public abstract class Augment : ScriptableObject
     public Color color;
     public bool removeFromPoolAfterPicking;
     
-    public abstract void Apply(GameObject player);
+    public abstract void Apply();
 }

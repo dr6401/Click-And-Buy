@@ -4,7 +4,7 @@ using UnityEngine;
 public class ChangePrice : Augment
 {
     public float priceIncrease;
-    public override void Apply(GameObject player)
+    public override void Apply()
     {
         if (LevelManager.Instance == null) return;
         LevelManager.Instance.price += priceIncrease;

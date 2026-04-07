@@ -4,7 +4,7 @@ using UnityEngine;
 public class MoneyGainMultiplier : Augment
 {
     public float multiplier;
-    public override void Apply(GameObject player)
+    public override void Apply()
     {
         if (PlayerStats.Instance == null) return;
         PlayerStats.Instance.moneyGainMultiplier += multiplier;

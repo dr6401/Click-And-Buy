@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Augment", menuName = "Augments/DuplicateBestTrade")]
 public class DuplicateBestTrade : Augment
 {
-    public override void Apply(GameObject player)
+    public override void Apply()
     {
         if (LevelManager.Instance == null || LevelManager.Instance.activeTrades.Count <= 0) return;
         List<TradeEntryStatsDisplay> activeTrades = LevelManager.Instance.activeTrades;

@@ -16,7 +16,6 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private Image top;
 
     private Augment augment;
-    private GameObject player;
     private UpgradesSelectionUI upgradesSelectionUI;
     private Button button;
 
@@ -36,10 +35,9 @@ public class UpgradeButton : MonoBehaviour
         StartCoroutine(EnableButtonInteraction(0.75f));
 
     }
-    public void Setup(Augment aug, GameObject playerRef, UpgradesSelectionUI parentUI)
+    public void Setup(Augment aug, UpgradesSelectionUI parentUI)
     {
         augment = aug;
-        player = playerRef;
         upgradesSelectionUI = parentUI;
 
         augmentName.text = augment.augmentName;
@@ -52,10 +50,9 @@ public class UpgradeButton : MonoBehaviour
         top.color = transparentColor;//DarkenColor(augment.color, 0.7f);
     }
     
-    public void Setup(Augment aug, GameObject playerRef)
+    public void Setup(Augment aug)
     {
         augment = aug;
-        player = playerRef;
 
         augmentName.text = augment.augmentName;
         augmentDescription.text = augment.description;
@@ -66,7 +63,7 @@ public class UpgradeButton : MonoBehaviour
     public void SelectAugment()
     {
         upgradesSelectionUI.StoreChosenAugment(augment);
-        augment.Apply(player);
+        augment.Apply();
         upgradesSelectionUI.CloseUI();
         Debug.Log("Selected " + augment.augmentName + "!");
         GameEvents.OnUpgradeChosen?.Invoke();

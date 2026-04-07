@@ -11,7 +11,7 @@ public class MaxTradesIncrease : Augment
         description = $"Increase number of trades by {maxTradesIncrease}";
     }
 
-    public override void Apply(GameObject player)
+    public override void Apply()
     {
         if (PlayerStats.Instance == null) return;
         PlayerStats.Instance.maxAliveTrades += maxTradesIncrease;

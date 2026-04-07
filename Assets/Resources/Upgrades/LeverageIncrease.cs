@@ -4,7 +4,7 @@ using UnityEngine;
 public class LeverageIncrease : Augment
 {
     public float leverageIncrease;
-    public override void Apply(GameObject player)
+    public override void Apply()
     {
         if (PlayerStats.Instance == null) return;
         PlayerStats.Instance.maxLeverage += leverageIncrease;

@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Augment", menuName = "Augments/SwitchTradeTypes")]
 public class SwitchTradeTypes : Augment
 {
-    public override void Apply(GameObject player)
+    public override void Apply()
     {
         if (LevelManager.Instance == null) return;
         SwitchTrades(LevelManager.Instance.activeTrades);
