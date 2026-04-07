@@ -18,5 +18,6 @@ MonoBehaviour:
   tier: 0
   category: 2
   color: {r: 1, g: 0.9877418, b: 0, a: 1}
+  autoApply: 1
   removeFromPoolAfterPicking: 0
   multiplier: 0.05

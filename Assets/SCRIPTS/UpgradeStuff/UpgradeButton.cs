@@ -63,7 +63,14 @@ public class UpgradeButton : MonoBehaviour
     public void SelectAugment()
     {
         upgradesSelectionUI.StoreChosenAugment(augment);
-        augment.Apply();
+        if (augment.autoApply)
+        {
+            augment.Apply();
+        }
+        else
+        {
+            PowerUpInventoryManager.Instance.AddPowerUp(augment);
+        }
         upgradesSelectionUI.CloseUI();
         Debug.Log("Selected " + augment.augmentName + "!");
         GameEvents.OnUpgradeChosen?.Invoke();

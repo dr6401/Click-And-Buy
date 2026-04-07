@@ -31,6 +31,7 @@ public abstract class Augment : ScriptableObject
     public AugmentTier tier;
     public AugmentCategory category;
     public Color color;
+    public bool autoApply = false;
     public bool removeFromPoolAfterPicking;
     
     public abstract void Apply();

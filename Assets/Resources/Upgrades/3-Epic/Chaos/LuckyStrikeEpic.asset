@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebff74b0867ec9f4ea6e1574328ca0b8, type: 3}
-  m_Name: LuckyStrikeRare
+  m_Name: LuckyStrikeEpic
   m_EditorClassIdentifier: Assembly-CSharp::LuckyStrike
   augmentName: Lucky Strike
   description: Gain a random power-up from a higher tier.
@@ -18,5 +18,6 @@ MonoBehaviour:
   tier: 0
   category: 0
   color: {r: 0.9741714, g: 1, b: 0, a: 1}
+  autoApply: 1
   removeFromPoolAfterPicking: 0
   currentTier: 2

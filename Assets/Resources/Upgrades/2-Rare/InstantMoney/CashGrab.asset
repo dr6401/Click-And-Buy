@@ -18,5 +18,6 @@ MonoBehaviour:
   tier: 1
   category: 0
   color: {r: 0.12932122, g: 1, b: 0, a: 1}
+  autoApply: 1
   removeFromPoolAfterPicking: 0
   moneyIncrease: 1500

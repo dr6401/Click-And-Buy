@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PowerUpInventory : MonoBehaviour
+public class PowerUpInventoryManager : MonoBehaviour
 {
     public GameObject hotbarItemPrefab;
     public RectTransform hotbarParentTransform;
@@ -12,13 +12,19 @@ public class PowerUpInventory : MonoBehaviour
     public List<HotbarItem> hotbarItems = new List<HotbarItem>();
     
     private int selectedSlot = 0;
-    
-    private PlayerInput playerInput;
+
+    public static PowerUpInventoryManager Instance;
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
     }
+
 
     private void Start()
     {
@@ -40,6 +46,7 @@ public class PowerUpInventory : MonoBehaviour
         for (int i = 0; i < 9; i++)
         {
             GameObject hotbarSlot = Instantiate(hotbarItemPrefab, hotbarParentTransform);
+            hotbarItems.Add(hotbarSlot.GetComponent<HotbarItem>());
             //RectTransform rectTransform = hotbarSlot.GetComponent<RectTransform>();
             //rectTransform.anchoredPosition = new Vector2(50f * i, rectTransform.anchoredPosition.y);
         }
@@ -49,20 +56,24 @@ public class PowerUpInventory : MonoBehaviour
     {
         UsablePowerUp powerUp = new UsablePowerUp { data = augment };
 
-        foreach (var hotbarItem in hotbarItems)
+        foreach (HotbarItem hotbarItem in hotbarItems)
         {
-            if (hotbarItem.usablePowerUp.data == augment)
-            {
-                hotbarItem.usablePowerUp.charges++;
-                return;
-            }
             if (hotbarItem.usablePowerUp == null)
             {
                 hotbarItem.Setup(powerUp);
+                Debug.Log($"Setup at index {hotbarItems.IndexOf(hotbarItem)} with powerUp: {powerUp.data.name}");
+                return;
+            }
+            if (hotbarItem.usablePowerUp.data == augment)
+            {
+                hotbarItem.usablePowerUp.charges++;
+                hotbarItem.Setup(powerUp);
+                Debug.Log($"Increased charges at index {hotbarItems.IndexOf(hotbarItem)} with powerUp: {powerUp.data.name}");
                 return;
             }
         }
         inventory.Add(powerUp);
+        Debug.Log($"Added PowerUp {augment.name} to inventory");
 
     }
 
