@@ -5,17 +5,29 @@ using UnityEngine.InputSystem;
 
 public class PowerUpInventory : MonoBehaviour
 {
+    public GameObject hotbarItemPrefab;
+    public RectTransform hotbarParentTransform;
+    
     private List<UsablePowerUp> inventory = new();
-    public UsablePowerUp[] hotbar = new UsablePowerUp[9];
+    public List<HotbarItem> hotbarItems = new List<HotbarItem>();
     
     private int selectedSlot = 0;
+    
+    private PlayerInput playerInput;
+
+    private void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+    }
+
+    private void Start()
+    {
+        PopulateHotbar();
+    }
 
     private void Update()
     {
-        for (int i = 0; i < 9; i++)
-        {
-            if (Keyboard.current.Num)
-        }
+        HandleHotbarInput();
         
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
@@ -23,30 +35,59 @@ public class PowerUpInventory : MonoBehaviour
         }
     }
 
+    public void PopulateHotbar()
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            GameObject hotbarSlot = Instantiate(hotbarItemPrefab, hotbarParentTransform);
+            //RectTransform rectTransform = hotbarSlot.GetComponent<RectTransform>();
+            //rectTransform.anchoredPosition = new Vector2(50f * i, rectTransform.anchoredPosition.y);
+        }
+    }
+
     public void AddPowerUp(Augment augment)
     {
         UsablePowerUp powerUp = new UsablePowerUp { data = augment };
 
-        for (int i = 0; i < hotbar.Length; i++)
+        foreach (var hotbarItem in hotbarItems)
         {
-            if (hotbar[i] == null)
+            if (hotbarItem.usablePowerUp.data == augment)
             {
-                hotbar[i] = powerUp;
+                hotbarItem.usablePowerUp.charges++;
+                return;
+            }
+            if (hotbarItem.usablePowerUp == null)
+            {
+                hotbarItem.Setup(powerUp);
                 return;
             }
         }
-        
-        // If no space in hotbar
         inventory.Add(powerUp);
+
     }
 
     public void UsePowerUp()
     {
-        hotbar[selectedSlot]?.Use();
-        hotbar[selectedSlot].charges--;
-        if (hotbar[selectedSlot].charges <= 0)
+        if (hotbarItems[selectedSlot].usablePowerUp == null) return;
+        hotbarItems[selectedSlot].usablePowerUp.Use();
+        hotbarItems[selectedSlot].usablePowerUp.charges--;
+        if (hotbarItems[selectedSlot].usablePowerUp.charges <= 0)
         {
-            hotbar[selectedSlot] = null;
+            hotbarItems[selectedSlot].usablePowerUp = null;
+            hotbarItems[selectedSlot].CleanUp();
         }
+    }
+
+    private void HandleHotbarInput()
+    {
+        if (Keyboard.current.digit1Key.wasPressedThisFrame) selectedSlot = 0;
+        else if (Keyboard.current.digit2Key.wasPressedThisFrame) selectedSlot = 1;
+        else if (Keyboard.current.digit3Key.wasPressedThisFrame) selectedSlot = 2;
+        else if (Keyboard.current.digit4Key.wasPressedThisFrame) selectedSlot = 3;
+        else if (Keyboard.current.digit5Key.wasPressedThisFrame) selectedSlot = 4;
+        else if (Keyboard.current.digit6Key.wasPressedThisFrame) selectedSlot = 5;
+        else if (Keyboard.current.digit7Key.wasPressedThisFrame) selectedSlot = 6;
+        else if (Keyboard.current.digit8Key.wasPressedThisFrame) selectedSlot = 7;
+        else if (Keyboard.current.digit9Key.wasPressedThisFrame) selectedSlot = 8;
     }
 }
