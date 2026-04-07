@@ -6,7 +6,7 @@ using DamageNumbersPro;
 public class TradeEntryStatsDisplay : MonoBehaviour
 {
     public TradeType tradeType;
-    private float timeOfPurchase;
+    public float timeOfPurchase;
     public float quantity;
     public float entryPrice;
     public float leverage = 1f;

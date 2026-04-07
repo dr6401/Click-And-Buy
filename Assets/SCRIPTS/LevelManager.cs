@@ -535,11 +535,6 @@ public class LevelManager : MonoBehaviour
         activeTrades.Add(stats);
         GameEvents.onMoneySpent?.Invoke();
     }
-    
-    public void GainMoney(float amount)
-    {
-        cash += amount;
-    }
 
     public void CloseTrade(TradeEntryStatsDisplay trade)
     {
@@ -551,6 +546,37 @@ public class LevelManager : MonoBehaviour
         {
             tradeEntryIndicators.Remove(trade.tradeEntryIndicator.GetComponent<RectTransform>());
         }
+    }
+
+    public void DuplicateTrade(TradeEntryStatsDisplay trade)
+    {
+        GameObject tradeEntry = Instantiate(tradeEntryPrefab, tradePanel);
+        TradeEntryStatsDisplay stats = tradeEntry.GetComponent<TradeEntryStatsDisplay>();
+        TradeData data = new TradeData(trade.tradeType, System.DateTime.Now.ToString("HH:mm:ss"), trade.quantity, trade.entryPrice, trade.leverage);
+        
+        GameObject tradeEntryIndicator = Instantiate(tradeEntryIndicatorPrefab, priceChart);
+        RectTransform rectTransform = tradeEntryIndicator.GetComponent<RectTransform>();
+        CandleData tradeEntryIndicatorData = tradeEntryIndicator.GetComponent<CandleData>();
+        tradeEntryIndicatorData.open = trade.entryPrice;
+
+        rectTransform.anchoredPosition = new Vector2(xPos, PriceToY(trade.entryPrice));
+        
+        Image indicatorImage = tradeEntryIndicator.GetComponent<Image>();
+        if (trade.tradeType == TradeType.Buy)
+        {
+            indicatorImage.color = GreenColor;
+        }
+        else if (trade.tradeType == TradeType.Sell)
+        {
+            indicatorImage.color = RedColor;
+        }
+        
+        stats.LinkTradeEntryIndicator(tradeEntryIndicator);
+        tradeEntryIndicators.Add(rectTransform);
+        
+        stats.Setup(data);
+        activeTrades.Add(stats);
+        Debug.Log($"Duplicated trade from {trade.timeOfPurchase}");
     }
 
     public void MarginCall()
@@ -622,18 +648,6 @@ public class LevelManager : MonoBehaviour
         GameEvents.onDefeat?.Invoke();
         loseCanvas.SetActive(true);
     }
-
-    /*public void DecreaseNewPriceInterval()
-    {
-        if (isInputBlocked) return;
-        Time.timeScale += 0.5f;
-    }
-    
-    public void IncreaseNewPriceInterval()
-    {
-        if (isInputBlocked || Time.timeScale <= 0.5f) return;
-        Time.timeScale -= 0.5f;
-    }*/
 
     public void ChangeTimeScale()
     {

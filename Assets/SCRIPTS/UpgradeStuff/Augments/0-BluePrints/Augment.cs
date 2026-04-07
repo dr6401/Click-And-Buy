@@ -16,7 +16,11 @@ public enum AugmentCategory
     NextTradeFree,
     PriceChange,
     MaxTradesIncrease,
-    EventSchedule
+    EventSchedule,
+    ConvertAllToBuy,
+    ConvertAllToSell,
+    DuplicateBestTrade
+    
 };
 
 public abstract class Augment : ScriptableObject
