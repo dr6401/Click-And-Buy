@@ -23,6 +23,8 @@ public class LevelManager : MonoBehaviour
     public float cash = 1000f;
     public float effectiveCash;
     public float equity;
+    public float unrealizedProfit;
+    public float unrealizedLoss;
     [Header("-----------------PRICE----------------")]
     public float price;
     [Header("-----------------PRICE----------------")]
@@ -177,13 +179,18 @@ public class LevelManager : MonoBehaviour
 
         float openProfit = 0f;
         float invested = 0f;
+        unrealizedProfit = 0;
+        unrealizedLoss = 0;
         effectiveCash = cash;
+        
         foreach (var trade in activeTrades)
         {
             openProfit += trade.GetUnrealizedProfit();
             invested += trade.entryPrice * trade.quantity;
             effectiveCash += trade.GetLossBeyondMargin();
             //Debug.Log($"Open position: {trade.name} with P/L: {trade.GetUnrealizedProfit()}");
+            if (trade.GetUnrealizedProfit() > 0) unrealizedProfit += trade.GetUnrealizedProfit();
+            else if (trade.GetUnrealizedProfit() < 0) unrealizedLoss -= trade.GetUnrealizedProfit();
         }
         
         effectiveCash = Mathf.Max(0, effectiveCash);
