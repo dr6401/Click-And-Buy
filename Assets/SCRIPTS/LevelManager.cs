@@ -14,6 +14,8 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
     
     [SerializeField] private RectTransform priceChart;
+    [SerializeField] private RectTransform candleArea;
+    [SerializeField] private RectTransform tradeIndicatorArea;
     [SerializeField] private GameObject candlePrefab;
     [SerializeField] private GameObject tradeEntryIndicatorPrefab;
     
@@ -290,7 +292,7 @@ public class LevelManager : MonoBehaviour
 
     public void SpawnNewCandle()
     {
-        float width = priceChart.rect.width;
+        float width = priceChart.rect.width * 0.8f; // So we don't spawn candles at utmost left position of the chart but a bit more in the middle
         if (xPos > width) // move everything to left and delete 1st candle
         {
             for (int i = 0; i < candles.Count; i++)
@@ -319,7 +321,7 @@ public class LevelManager : MonoBehaviour
             xPos -= xStep;
         }
         
-        GameObject candle = Instantiate(candlePrefab, priceChart);
+        GameObject candle = Instantiate(candlePrefab, candleArea);
         currentCandle = candle.GetComponent<RectTransform>();
         CandleData data = candle.GetComponent<CandleData>();
 
@@ -511,7 +513,7 @@ public class LevelManager : MonoBehaviour
         TradeEntryStatsDisplay stats = tradeEntry.GetComponent<TradeEntryStatsDisplay>();
         TradeData data = new TradeData(tradeType, System.DateTime.Now.ToString("HH:mm:ss"), currentOrderQuantity, price, leverage);
         
-        GameObject tradeEntryIndicator = Instantiate(tradeEntryIndicatorPrefab, priceChart);
+        GameObject tradeEntryIndicator = Instantiate(tradeEntryIndicatorPrefab, tradeIndicatorArea);
         RectTransform rectTransform = tradeEntryIndicator.GetComponent<RectTransform>();
         CandleData tradeEntryIndicatorData = tradeEntryIndicator.GetComponent<CandleData>();
         tradeEntryIndicatorData.open = price;
