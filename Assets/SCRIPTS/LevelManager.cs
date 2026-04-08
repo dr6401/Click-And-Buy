@@ -53,6 +53,8 @@ public class LevelManager : MonoBehaviour
     [Header("Upgrade System")]
     public AugmentTier currentCashOutTier = AugmentTier.Common;
     public float currentCashOutPrice = 300;
+    
+    public float currentRespinPrice = 50;
 
     [Header("DEBUG")]
     public bool stopGeneratingPrice;
@@ -631,6 +633,7 @@ public class LevelManager : MonoBehaviour
             UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier);
         cash -= currentTierCashOutPrice;
         cash = Mathf.Max(0, cash);
+        currentRespinPrice = UpgradesSelectionUI.Instance.baseAugmentRespinPrices[currentCashOutTier];
         GameEvents.OnCashOut?.Invoke(currentCashOutTier);
     }
 
@@ -762,11 +765,11 @@ public class LevelManager : MonoBehaviour
         DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, cashText.rectTransform, Vector2.zero, amount);
     }
     
-    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2())
+    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null)
     {
         if (position == null) position = cashText.rectTransform;
-        RectTransform gameCanvas = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
-        DamageNumber newDamageNumber = textDamageNumbersPrefab.SpawnGUI(gameCanvas, position, anchor, text);
+        if (canvasParent == null) canvasParent = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
+        DamageNumber newDamageNumber = textDamageNumbersPrefab.SpawnGUI(canvasParent, position, anchor, text);
     }
 
     private bool IsNextTradeFree()

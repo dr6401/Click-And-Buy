@@ -1973,7 +1973,7 @@ GameObject:
   - component: {fileID: 415373640}
   - component: {fileID: 415373639}
   m_Layer: 5
-  m_Name: CashOutButton
+  m_Name: OfferingsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6047,17 +6047,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1424656019 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8472121013579239477, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
-  m_PrefabInstance: {fileID: 1576828398}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: MoreMountains.Tools::MoreMountains.Feedbacks.MMF_Player
 --- !u!1 &1447777168
 GameObject:
   m_ObjectHideFlags: 0
@@ -7629,7 +7618,7 @@ PrefabInstance:
     - target: {fileID: 8472121013579239477, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
       propertyPath: managedReferences[420057044374257734].Owner
       value: 
-      objectReference: {fileID: 1424656019}
+      objectReference: {fileID: 0}
     - target: {fileID: 8472121013579239477, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
       propertyPath: managedReferences[420057042502025290].Active
       value: 0
@@ -8319,7 +8308,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cash Out
+  m_text: Offerings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
   m_sharedMaterial: {fileID: -4406428672775297824, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}

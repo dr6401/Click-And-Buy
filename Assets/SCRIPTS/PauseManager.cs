@@ -36,18 +36,28 @@ public class PauseManager : MonoBehaviour
             PauseGame();
         }
     }
-
+    
     public void StopTime()
     {
         currentTimeScale = Time.timeScale;
         Time.timeScale = 0f;
         inputBlocked = true;
+        Debug.Log($"Stopping Time, previous timeScale: {currentTimeScale}");
+    }
+
+    public void StopTime(AugmentTier tier = AugmentTier.Common)
+    {
+        currentTimeScale = Time.timeScale;
+        Time.timeScale = 0f;
+        inputBlocked = true;
+        Debug.Log($"Stopping Time, previous timeScale: {currentTimeScale}");
     }
 
     public void ResumeTime()
     {
         Time.timeScale = currentTimeScale;
         inputBlocked = false;
+        Debug.Log($"resuming Time at previous timeScale: {currentTimeScale}");
     }
     
     public void PauseGame()
@@ -58,7 +68,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = isGamePaused ? 0f : currentTimeScale;
         settingsMenu.SetActive(isGamePaused);
         GameEvents.OnGamePaused?.Invoke(isGamePaused);
-        Debug.Log($"isGamePaused: {isGamePaused}");
+        Debug.Log($"isGamePaused: {isGamePaused}, TimeScale: {Time.timeScale}");
     }
     
     public void ResetTimeScale()
@@ -69,7 +79,7 @@ public class PauseManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnUpgradesOffered += StopTime;
+        GameEvents.OnCashOut += StopTime;
         GameEvents.OnUpgradeChosen += ResumeTime;
         GameEvents.OnFTUETriggered += StopTime;
         GameEvents.OnFTUEEnded += ResumeTime;
@@ -77,7 +87,7 @@ public class PauseManager : MonoBehaviour
     
     private void OnDisable()
     {
-        GameEvents.OnUpgradesOffered -= StopTime;
+        GameEvents.OnCashOut -= StopTime;
         GameEvents.OnUpgradeChosen -= ResumeTime;
         GameEvents.OnFTUETriggered -= StopTime;
         GameEvents.OnFTUEEnded -= ResumeTime;

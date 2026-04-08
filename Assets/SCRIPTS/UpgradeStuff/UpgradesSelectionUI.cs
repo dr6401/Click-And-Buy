@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -21,12 +22,22 @@ public class UpgradesSelectionUI : MonoBehaviour
     [Header("-----TESTING-----")]
     [SerializeField] private bool testing_offerOnlyGoldAugments = false;
 
+    private bool hasRespinedYet = false;
+
     public Dictionary<AugmentTier, List<Augment>> augmentTierAugmentPools => new Dictionary<AugmentTier, List<Augment>>()
     {
         { AugmentTier.Common, commonAugments },
         { AugmentTier.Rare, rareAugments },
         { AugmentTier.Epic, epicAugments },
         { AugmentTier.Legendary, legendaryAugments }
+    };
+
+    public Dictionary<AugmentTier, float> baseAugmentRespinPrices => new Dictionary<AugmentTier, float>()
+    {
+        { AugmentTier.Common, 10 },
+        { AugmentTier.Rare, 50 },
+        { AugmentTier.Epic, 200 },
+        { AugmentTier.Legendary, 1000 }
     };
 
     private bool hasSettingsCoveredUpAugmentUI;
@@ -167,9 +178,20 @@ public class UpgradesSelectionUI : MonoBehaviour
         }
     }
 
-    public void Respin()
+    public void Respin(RectTransform rectTransform)
     {
-        RemoveUpgradeCardsFromUpgradePanel();
-        TriggerAugmentSelection(LevelManager.Instance.currentCashOutTier);
+        if (LevelManager.Instance.effectiveCash < LevelManager.Instance.currentRespinPrice)
+        {
+            LevelManager.Instance.SpawnTextDamageNumbers("Not enough Money!", position: rectTransform, canvasParent: GetComponent<RectTransform>());
+            Debug.Log("Not enough Money for Respin!");
+        }
+        else
+        {
+            LevelManager.Instance.cash -= LevelManager.Instance.currentRespinPrice;
+            Debug.Log($"Respinning!");
+            LevelManager.Instance.currentRespinPrice *= 2;
+            RemoveUpgradeCardsFromUpgradePanel();
+            TriggerAugmentSelection(LevelManager.Instance.currentCashOutTier);   
+        }
     }
 }
