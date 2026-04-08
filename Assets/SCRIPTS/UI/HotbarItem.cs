@@ -41,6 +41,11 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         hasPowerUp = true;
         
         tooltip.Setup(powerUp);
+
+        if (PowerUpInventoryManager.Instance.IsThisHotbarSlotSelected(this))
+        {
+            tooltip.gameObject.SetActive(true);
+        }
     }
 
     public void OnPointerEnter(PointerEventData data)
@@ -75,6 +80,8 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         coloredBackground.color = backgroundColor;
         
         hasPowerUp = false;
+        
+        tooltip.gameObject.SetActive(false);
         Debug.Log($"Shit cleaned up");
     }
 
@@ -95,10 +102,12 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (current == this)
         {
             PlayHotbarItemSelectedFeedback();
+            if (hasPowerUp) tooltip.gameObject.SetActive(true);
         }
         else if (iconParent.localScale.x > 1)
         {
             PlayHotbarItemDeselectedFeedback();
+            tooltip.gameObject.SetActive(false);
         }
     }
 

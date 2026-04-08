@@ -68,7 +68,7 @@ public class PowerUpInventoryManager : MonoBehaviour
             if (hotbarItem.usablePowerUp.data == augment)
             {
                 hotbarItem.usablePowerUp.charges++;
-                hotbarItem.Setup(powerUp);
+                hotbarItem.Setup(hotbarItem.usablePowerUp);
                 Debug.Log($"Increased charges at index {hotbarItems.IndexOf(hotbarItem)} with powerUp: {powerUp.data.name}");
                 return;
             }
@@ -83,6 +83,7 @@ public class PowerUpInventoryManager : MonoBehaviour
         if (hotbarItems[selectedSlot].usablePowerUp == null) return;
         hotbarItems[selectedSlot].usablePowerUp.Use();
         hotbarItems[selectedSlot].usablePowerUp.charges--;
+        hotbarItems[selectedSlot].Setup(hotbarItems[selectedSlot].usablePowerUp);
         if (hotbarItems[selectedSlot].usablePowerUp.charges <= 0)
         {
             hotbarItems[selectedSlot].usablePowerUp = null;
@@ -104,8 +105,8 @@ public class PowerUpInventoryManager : MonoBehaviour
         else if (Keyboard.current.digit7Key.wasPressedThisFrame) selectedSlot = 6;
         else if (Keyboard.current.digit8Key.wasPressedThisFrame) selectedSlot = 7;
         else if (Keyboard.current.digit9Key.wasPressedThisFrame) selectedSlot = 8;
-        else if (Keyboard.current.dKey.wasPressedThisFrame || scroll > 0) selectedSlot = (selectedSlot + 1) % 9;
-        else if (Keyboard.current.aKey.wasPressedThisFrame || scroll < 0) selectedSlot = (selectedSlot - 1 + 9) % 9;
+        else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasReleasedThisFrame || scroll > 0) selectedSlot = (selectedSlot + 1) % 9;
+        else if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasReleasedThisFrame || scroll < 0) selectedSlot = (selectedSlot - 1 + 9) % 9;
         else
         {
             wasInputGiven = false;
@@ -116,6 +117,10 @@ public class PowerUpInventoryManager : MonoBehaviour
         }
 
         Debug.Log($"Current Selected Slot: {selectedSlot}");
+    }
 
+    public bool IsThisHotbarSlotSelected(HotbarItem hotbarItem)
+    {
+        return hotbarItems[selectedSlot] == hotbarItem;
     }
 }

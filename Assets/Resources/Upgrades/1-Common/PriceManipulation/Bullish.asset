@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Bullish
   m_EditorClassIdentifier: Assembly-CSharp::ChangePrice
   augmentName: Bullish
-  description: 'Increase price by +20$
-
-    (max 200$)'
+  description: Increase price by +20$
   icon: {fileID: 21300000, guid: e8e12a33a3d657a4a92805c9e4ba64ae, type: 3}
   tier: 1
   category: 5
   color: {r: 0, g: 1, b: 0.02644682, a: 1}
+  autoApply: 0
   removeFromPoolAfterPicking: 0
   priceIncrease: 20

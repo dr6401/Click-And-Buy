@@ -500,6 +500,7 @@ public class LevelManager : MonoBehaviour
         if (IsNextTradeFree())
         {
             numberOfFutureFreebieTrades--;
+            SpawnLostMoneyDamageNumbers(0);
             Debug.Log($"Used freebie, cash stays the same");
         }
         else

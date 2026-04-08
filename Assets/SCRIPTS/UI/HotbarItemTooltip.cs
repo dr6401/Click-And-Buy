@@ -6,6 +6,7 @@ public class HotbarItemTooltip : MonoBehaviour
 {
     [SerializeField] private TMP_Text name;
     [SerializeField] private TMP_Text description;
+    [SerializeField] private TMP_Text chargesLeft;
 
     [SerializeField] private MMF_Player openTooltipFeedback;
 
@@ -15,6 +16,7 @@ public class HotbarItemTooltip : MonoBehaviour
         name.text = data.name;
         name.color = powerUp.data.color;
         description.text = data.description;
+        chargesLeft.text = NumberFormatter.FormatNumber(powerUp.charges) + " left";
     }
 
     private void OnEnable()
