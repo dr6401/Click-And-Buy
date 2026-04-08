@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     public TMP_Text chargesLeftText;
     public UsablePowerUp usablePowerUp;
@@ -71,7 +71,15 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         //Debug.Log($"Tooltip Time!");
         if (!hasPowerUp) return;
         tooltip.gameObject.SetActive(true);
+        GameEvents.OnHotbarItemTooltipShowed(this);
+        PowerUpInventoryManager.Instance.SetCurrentSlot(this);
         //Debug.Log($"Showed Tooltip");
+    }
+    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!hasPowerUp) return;
+        PowerUpInventoryManager.Instance.UsePowerUp();
     }
 
     public void OnPointerExit(PointerEventData data)
@@ -127,16 +135,22 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             PlayHotbarItemDeselectedFeedback();
             tooltip.gameObject.SetActive(false);
         }
+        else
+        {
+            tooltip.gameObject.SetActive(false);
+        }
     }
 
     private void OnEnable()
     {
         GameEvents.OnCurrentHotbarSlotChanged += RespondToHotbarSelectedItemChanged;
+        GameEvents.OnHotbarItemTooltipShowed += RespondToHotbarSelectedItemChanged;
     }
     
     private void OnDisable()
     {
         GameEvents.OnCurrentHotbarSlotChanged -= RespondToHotbarSelectedItemChanged;
+        GameEvents.OnHotbarItemTooltipShowed -= RespondToHotbarSelectedItemChanged;
     }
 
     public void OnBeginDrag(PointerEventData eventData)

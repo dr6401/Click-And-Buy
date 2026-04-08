@@ -24,4 +24,5 @@ public static class GameEvents
     public static Action OnUpgradeChosen;
 
     public static Action<HotbarItem> OnCurrentHotbarSlotChanged;
+    public static Action<HotbarItem> OnHotbarItemTooltipShowed;
 }

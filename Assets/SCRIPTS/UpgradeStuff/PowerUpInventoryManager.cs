@@ -11,7 +11,7 @@ public class PowerUpInventoryManager : MonoBehaviour
     private List<UsablePowerUp> inventory = new();
     public List<HotbarItem> hotbarItems = new List<HotbarItem>();
     
-    private int selectedSlot = 0;
+    public int selectedSlot = 0;
 
     public static PowerUpInventoryManager Instance;
 
@@ -124,9 +124,15 @@ public class PowerUpInventoryManager : MonoBehaviour
         return hotbarItems[selectedSlot] == hotbarItem;
     }
 
+    public void SetCurrentSlot(HotbarItem hotbarItem)
+    {
+        int index = hotbarItems.IndexOf(hotbarItem);
+        selectedSlot = index;
+        GameEvents.OnCurrentHotbarSlotChanged(hotbarItems[selectedSlot]);
+    }
+
     public void Swap(HotbarItem startHotbarItem, HotbarItem targetHotbarItem)
     {
-        
         UsablePowerUp temp = startHotbarItem.usablePowerUp;
         
         startHotbarItem.Setup(targetHotbarItem.usablePowerUp);
