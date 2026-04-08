@@ -166,4 +166,10 @@ public class UpgradesSelectionUI : MonoBehaviour
             Destroy(upgradeCard.gameObject);
         }
     }
+
+    public void Respin()
+    {
+        RemoveUpgradeCardsFromUpgradePanel();
+        TriggerAugmentSelection(LevelManager.Instance.currentCashOutTier);
+    }
 }
