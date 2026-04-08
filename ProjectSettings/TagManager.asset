@@ -7,6 +7,7 @@ TagManager:
   - SoundManager
   - GameplayCanvas
   - PlayerCash
+  - HotbarRoot
   layers:
   - Default
   - TransparentFX

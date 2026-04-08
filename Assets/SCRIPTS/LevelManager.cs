@@ -622,7 +622,7 @@ public class LevelManager : MonoBehaviour
 
     public void CashOut()
     {
-        if (cash < currentCashOutPrice)
+        if (effectiveCash < currentCashOutPrice)
         {
             GameEvents.onNotEnoughMoney?.Invoke();
             return;

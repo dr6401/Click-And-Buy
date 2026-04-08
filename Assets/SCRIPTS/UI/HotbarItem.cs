@@ -16,6 +16,7 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public bool hasPowerUp = false;
 
+    public RectTransform hotbarRoot;
     private GameObject ghost;
     private RectTransform ghostRect;
 
@@ -24,11 +25,21 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField] private MMF_Player hotbarItemDeselectedFeedback;
     private void Start()
     {
+        RectTransform tempTransform = GetComponent<RectTransform>();
+        Transform temp = tempTransform.transform;
+        while (temp != null && !temp.CompareTag("HotbarRoot"))
+        {
+            temp = temp.parent;
+        }
+
+        hotbarRoot = temp.GetComponent<RectTransform>();
+        
         CleanUp();
     }
 
     public void Setup(UsablePowerUp powerUp)
     {
+        if (powerUp == null) return;
         usablePowerUp = powerUp;
         chargesLeftText.text = NumberFormatter.FormatNumber(powerUp.charges);
         icon.sprite = usablePowerUp.data.icon;
@@ -53,18 +64,18 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData data)
     {
-        Debug.Log($"Tooltip Time!");
+        //Debug.Log($"Tooltip Time!");
         if (!hasPowerUp) return;
         tooltip.gameObject.SetActive(true);
-        Debug.Log($"Showed Tooltip");
+        //Debug.Log($"Showed Tooltip");
     }
 
     public void OnPointerExit(PointerEventData data)
     {
-        Debug.Log($"Tooltip Time!");
+        //Debug.Log($"Tooltip Time!");
         if (!hasPowerUp) return;
         tooltip.gameObject.SetActive(false);
-        Debug.Log($"Hidden Tooltip");
+        //Debug.Log($"Hidden Tooltip");
     }
 
     public void CleanUp()
@@ -129,22 +140,29 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         Debug.Log($"Began Dragging");
         
         ghost = new GameObject("Ghost");
+        ghost.transform.SetParent(hotbarRoot, false);
         
         Image img = ghost.AddComponent<Image>();
         img.sprite = icon.sprite;
         img.raycastTarget = false;
 
         ghostRect = ghost.GetComponent<RectTransform>();
-        ghostRect.sizeDelta = icon.rectTransform.sizeDelta;
+        ghostRect.anchorMin = new Vector2(0.5f, 0.5f);
+        ghostRect.anchorMax = new Vector2(0.5f, 0.5f);
+        ghostRect.pivot = new Vector2(0.5f, 0.5f);
+        
+        ghostRect.sizeDelta = new Vector2(100f, 100f);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         ghostRect.position = eventData.position;
+        Debug.Log($"Dragging");
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log($"Stopped dragging");
         Destroy(ghost);
     }
 
