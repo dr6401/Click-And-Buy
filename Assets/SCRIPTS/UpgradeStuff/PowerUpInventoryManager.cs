@@ -91,6 +91,8 @@ public class PowerUpInventoryManager : MonoBehaviour
 
     private void HandleHotbarInput()
     {
+        bool wasInputGiven = true;
+        int previouslySelectedSlot = selectedSlot;
         if (Keyboard.current.digit1Key.wasPressedThisFrame) selectedSlot = 0;
         else if (Keyboard.current.digit2Key.wasPressedThisFrame) selectedSlot = 1;
         else if (Keyboard.current.digit3Key.wasPressedThisFrame) selectedSlot = 2;
@@ -100,5 +102,14 @@ public class PowerUpInventoryManager : MonoBehaviour
         else if (Keyboard.current.digit7Key.wasPressedThisFrame) selectedSlot = 6;
         else if (Keyboard.current.digit8Key.wasPressedThisFrame) selectedSlot = 7;
         else if (Keyboard.current.digit9Key.wasPressedThisFrame) selectedSlot = 8;
+        else
+        {
+            wasInputGiven = false;
+        }
+        if (wasInputGiven)
+        {
+            GameEvents.OnCurrentHotbarSlotChanged(hotbarItems[previouslySelectedSlot], hotbarItems[selectedSlot]);
+        }
+        
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,12 +9,16 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
     public TMP_Text chargesLeftText;
     public UsablePowerUp usablePowerUp;
+    public RectTransform iconParent;
     public Image icon;
     public Image coloredBackground;
     public HotbarItemTooltip tooltip;
 
     public bool hasPowerUp = false;
 
+    [Header("Feedbacks")]
+    [SerializeField] private MMF_Player hotbarItemSelectedFeedback;
+    [SerializeField] private MMF_Player hotbarItemDeselectedFeedback;
     private void Start()
     {
         CleanUp();
@@ -71,5 +76,37 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         
         hasPowerUp = false;
         Debug.Log($"Shit cleaned up");
+    }
+
+    private void PlayHotbarItemSelectedFeedback()
+    {
+        hotbarItemSelectedFeedback?.PlayFeedbacks();
+    }
+    
+    private void PlayHotbarItemDeselectedFeedback()
+    {
+        hotbarItemDeselectedFeedback?.PlayFeedbacks();
+    }
+
+    private void RespondToHotbarSelectedItemChanged(HotbarItem previous, HotbarItem current)
+    {
+        if (current == this)
+        {
+            PlayHotbarItemSelectedFeedback();
+        }
+        else if (iconParent.localScale.x > 1)
+        {
+            PlayHotbarItemDeselectedFeedback();
+        }
+    }
+
+    private void OnEnable()
+    {
+        GameEvents.OnCurrentHotbarSlotChanged += RespondToHotbarSelectedItemChanged;
+    }
+    
+    private void OnDisable()
+    {
+        GameEvents.OnCurrentHotbarSlotChanged -= RespondToHotbarSelectedItemChanged;
     }
 }

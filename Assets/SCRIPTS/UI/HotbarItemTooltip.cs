@@ -13,6 +13,7 @@ public class HotbarItemTooltip : MonoBehaviour
     {
         Augment data = powerUp.data;
         name.text = data.name;
+        name.color = powerUp.data.color;
         description.text = data.description;
     }
 
