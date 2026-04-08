@@ -196,6 +196,11 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         
         ghostRect.sizeDelta = new Vector2(75f, 75f);
         
+        Canvas ghostCanvas = ghost.AddComponent<Canvas>();
+        ghostCanvas.overrideSorting = true;
+        ghostCanvas.sortingOrder = 10;
+        ghostCanvas.vertexColorAlwaysGammaSpace = true;
+        
         // Background
         GameObject backgroundGO = new GameObject("Icon");
         backgroundGO.transform.SetParent(ghost.transform, false);
