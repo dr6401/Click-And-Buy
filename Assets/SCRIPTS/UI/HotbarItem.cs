@@ -39,7 +39,11 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void Setup(UsablePowerUp powerUp)
     {
-        if (powerUp == null) return;
+        if (powerUp == null)
+        {
+            CleanUp();
+            return;
+        }
         usablePowerUp = powerUp;
         chargesLeftText.text = NumberFormatter.FormatNumber(powerUp.charges);
         icon.sprite = usablePowerUp.data.icon;
@@ -137,6 +141,8 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!hasPowerUp) return;
+        
         Debug.Log($"Began Dragging");
         
         ghost = new GameObject("Ghost");
@@ -156,6 +162,8 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!hasPowerUp) return;
+        
         ghostRect.position = eventData.position;
         Debug.Log($"Dragging");
     }
@@ -169,7 +177,7 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnDrop(PointerEventData eventData)
     {
         HotbarItem dragged = eventData.pointerDrag.GetComponent<HotbarItem>();
-        if (dragged == null) return;
+        if (dragged.usablePowerUp == null) return;
         
         PowerUpInventoryManager.Instance.Swap(this, dragged);
     }

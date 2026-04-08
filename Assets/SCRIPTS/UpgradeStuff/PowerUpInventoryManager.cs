@@ -126,16 +126,12 @@ public class PowerUpInventoryManager : MonoBehaviour
 
     public void Swap(HotbarItem startHotbarItem, HotbarItem targetHotbarItem)
     {
-        int startIndex = hotbarItems.IndexOf(startHotbarItem);
-        int targetIndex = hotbarItems.IndexOf(targetHotbarItem);
-        HotbarItem temp = hotbarItems[startIndex];
         
-        hotbarItems[startIndex] = targetHotbarItem;
-        hotbarItems[targetIndex] = temp;
+        UsablePowerUp temp = startHotbarItem.usablePowerUp;
         
-        hotbarItems[startIndex].Setup(hotbarItems[startIndex].usablePowerUp);
-        hotbarItems[targetIndex].Setup(hotbarItems[targetIndex].usablePowerUp);
-        
-        Debug.Log($"Swapped items from startIndex: {startIndex} to endIndex: {targetIndex}");
+        startHotbarItem.Setup(targetHotbarItem.usablePowerUp);
+        targetHotbarItem.Setup(temp);
+                
+        Debug.Log($"Swapped items from startIndex: {hotbarItems.IndexOf(targetHotbarItem)} to endIndex: {hotbarItems.IndexOf(startHotbarItem)}");
     }
 }
