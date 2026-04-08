@@ -144,20 +144,8 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (!hasPowerUp) return;
         
         Debug.Log($"Began Dragging");
-        
-        ghost = new GameObject("Ghost");
-        ghost.transform.SetParent(hotbarRoot, false);
-        
-        Image img = ghost.AddComponent<Image>();
-        img.sprite = icon.sprite;
-        img.raycastTarget = false;
 
-        ghostRect = ghost.GetComponent<RectTransform>();
-        ghostRect.anchorMin = new Vector2(0.5f, 0.5f);
-        ghostRect.anchorMax = new Vector2(0.5f, 0.5f);
-        ghostRect.pivot = new Vector2(0.5f, 0.5f);
-        
-        ghostRect.sizeDelta = new Vector2(100f, 100f);
+        CreateGhostDragImage();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -180,5 +168,49 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (dragged.usablePowerUp == null) return;
         
         PowerUpInventoryManager.Instance.Swap(this, dragged);
+    }
+
+    private void CreateGhostDragImage()
+    {
+        ghost = new GameObject("Ghost");
+        ghost.transform.SetParent(hotbarRoot, false);
+        
+        ghostRect = ghost.AddComponent<RectTransform>();
+        ghostRect.anchorMin = new Vector2(0.5f, 0.5f);
+        ghostRect.anchorMax = new Vector2(0.5f, 0.5f);
+        ghostRect.pivot = new Vector2(0.5f, 0.5f);
+        
+        ghostRect.sizeDelta = new Vector2(75f, 75f);
+        
+        // Background
+        GameObject backgroundGO = new GameObject("Icon");
+        backgroundGO.transform.SetParent(ghost.transform, false);
+        
+        Image imgBg = backgroundGO.AddComponent<Image>();
+        imgBg.color = coloredBackground.color;
+        imgBg.raycastTarget = false;
+        imgBg.preserveAspect = true;
+        
+        RectTransform backgroundRect = backgroundGO.GetComponent<RectTransform>();
+        backgroundRect.anchorMin = new Vector2(0f, 0f);
+        backgroundRect.anchorMax = new Vector2(1f, 1f);
+        backgroundRect.offsetMin = new Vector2(0f, 0f);
+        backgroundRect.offsetMax = new Vector2(0f, 0f);
+        
+        // Icon
+        GameObject iconGO = new GameObject("Icon");
+        iconGO.transform.SetParent(ghost.transform, false);
+        
+        Image imgIcon = iconGO.AddComponent<Image>();
+        imgIcon.sprite = icon.sprite;
+        imgIcon.raycastTarget = false;
+        imgIcon.preserveAspect = true;
+        
+        RectTransform iconRect = iconGO.GetComponent<RectTransform>();
+        iconRect.anchorMin = new Vector2(0f, 0f);
+        iconRect.anchorMax = new Vector2(1f, 1f);
+        iconRect.offsetMin = new Vector2(0f, 0f);
+        iconRect.offsetMax = new Vector2(0f, 0f);
+        
     }
 }
