@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     public TMP_Text chargesLeftText;
     public UsablePowerUp usablePowerUp;
@@ -15,6 +15,9 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public HotbarItemTooltip tooltip;
 
     public bool hasPowerUp = false;
+
+    private GameObject ghost;
+    private RectTransform ghostRect;
 
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player hotbarItemSelectedFeedback;
@@ -119,5 +122,37 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private void OnDisable()
     {
         GameEvents.OnCurrentHotbarSlotChanged -= RespondToHotbarSelectedItemChanged;
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        Debug.Log($"Began Dragging");
+        
+        ghost = new GameObject("Ghost");
+        
+        Image img = ghost.AddComponent<Image>();
+        img.sprite = icon.sprite;
+        img.raycastTarget = false;
+
+        ghostRect = ghost.GetComponent<RectTransform>();
+        ghostRect.sizeDelta = icon.rectTransform.sizeDelta;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        ghostRect.position = eventData.position;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        Destroy(ghost);
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        HotbarItem dragged = eventData.pointerDrag.GetComponent<HotbarItem>();
+        if (dragged == null) return;
+        
+        PowerUpInventoryManager.Instance.Swap(this, dragged);
     }
 }

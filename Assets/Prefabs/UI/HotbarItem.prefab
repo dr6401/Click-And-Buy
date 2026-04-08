@@ -2824,8 +2824,8 @@ GameObject:
   - component: {fileID: 8971600898559385702}
   - component: {fileID: 2232973634009022264}
   - component: {fileID: 687345072486845637}
-  - component: {fileID: 3331188242635702736}
   - component: {fileID: 7820553818381242035}
+  - component: {fileID: 5186396072044872971}
   m_Layer: 5
   m_Name: HotbarItem
   m_TagString: Untagged
@@ -2883,21 +2883,6 @@ MonoBehaviour:
   hasPowerUp: 0
   hotbarItemSelectedFeedback: {fileID: 7596076204882988186}
   hotbarItemDeselectedFeedback: {fileID: 1747827965218974152}
---- !u!114 &3331188242635702736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7387346294254044697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e7bc9c39042e54992ab707474c8c2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isUpgradeButton: 1
-  isEndlessUpgradeButton: 0
-  hoverFeedback: {fileID: 513138160564292181}
 --- !u!225 &7820553818381242035
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2908,8 +2893,38 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1
-  m_BlocksRaycasts: 0
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &5186396072044872971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7387346294254044697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7518534778610290184
 GameObject:
   m_ObjectHideFlags: 0
@@ -3802,7 +3817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4259799157152786277}
   m_Layer: 0
-  m_Name: MMFeedbacks-Button
+  m_Name: MMFeedbacks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

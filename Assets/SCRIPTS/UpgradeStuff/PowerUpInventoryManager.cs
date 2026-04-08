@@ -116,11 +116,26 @@ public class PowerUpInventoryManager : MonoBehaviour
             GameEvents.OnCurrentHotbarSlotChanged(hotbarItems[selectedSlot]);
         }
 
-        Debug.Log($"Current Selected Slot: {selectedSlot}");
+        //Debug.Log($"Current Selected Slot: {selectedSlot}");
     }
 
     public bool IsThisHotbarSlotSelected(HotbarItem hotbarItem)
     {
         return hotbarItems[selectedSlot] == hotbarItem;
+    }
+
+    public void Swap(HotbarItem startHotbarItem, HotbarItem targetHotbarItem)
+    {
+        int startIndex = hotbarItems.IndexOf(startHotbarItem);
+        int targetIndex = hotbarItems.IndexOf(targetHotbarItem);
+        HotbarItem temp = hotbarItems[startIndex];
+        
+        hotbarItems[startIndex] = targetHotbarItem;
+        hotbarItems[targetIndex] = temp;
+        
+        hotbarItems[startIndex].Setup(hotbarItems[startIndex].usablePowerUp);
+        hotbarItems[targetIndex].Setup(hotbarItems[targetIndex].usablePowerUp);
+        
+        Debug.Log($"Swapped items from startIndex: {startIndex} to endIndex: {targetIndex}");
     }
 }
