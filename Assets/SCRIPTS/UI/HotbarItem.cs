@@ -80,15 +80,17 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     private void PlayHotbarItemSelectedFeedback()
     {
+        hotbarItemDeselectedFeedback?.StopFeedbacks();
         hotbarItemSelectedFeedback?.PlayFeedbacks();
     }
     
     private void PlayHotbarItemDeselectedFeedback()
     {
+        hotbarItemSelectedFeedback?.StopFeedbacks();
         hotbarItemDeselectedFeedback?.PlayFeedbacks();
     }
 
-    private void RespondToHotbarSelectedItemChanged(HotbarItem previous, HotbarItem current)
+    private void RespondToHotbarSelectedItemChanged(HotbarItem current)
     {
         if (current == this)
         {
