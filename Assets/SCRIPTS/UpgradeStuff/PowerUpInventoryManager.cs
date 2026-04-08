@@ -105,8 +105,8 @@ public class PowerUpInventoryManager : MonoBehaviour
         else if (Keyboard.current.digit7Key.wasPressedThisFrame) selectedSlot = 6;
         else if (Keyboard.current.digit8Key.wasPressedThisFrame) selectedSlot = 7;
         else if (Keyboard.current.digit9Key.wasPressedThisFrame) selectedSlot = 8;
-        else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasReleasedThisFrame || scroll > 0) selectedSlot = (selectedSlot + 1) % 9;
-        else if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasReleasedThisFrame || scroll < 0) selectedSlot = (selectedSlot - 1 + 9) % 9;
+        else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasReleasedThisFrame || (!ScrollBlocker.IsScrollingUI() && scroll > 0)) selectedSlot = (selectedSlot + 1) % 9;
+        else if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasReleasedThisFrame || (!ScrollBlocker.IsScrollingUI() && scroll < 0)) selectedSlot = (selectedSlot - 1 + 9) % 9;
         else
         {
             wasInputGiven = false;

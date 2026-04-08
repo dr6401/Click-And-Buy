@@ -4968,7 +4968,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2091455328}
   m_HandleRect: {fileID: 2091455327}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5024,6 +5024,7 @@ GameObject:
   - component: {fileID: 1091505972}
   - component: {fileID: 1091505971}
   - component: {fileID: 1091505970}
+  - component: {fileID: 1091505974}
   - component: {fileID: 1091505973}
   m_Layer: 5
   m_Name: Scroll View
@@ -5135,6 +5136,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RectMask2D
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
   m_Softness: {x: 0, y: 30}
+--- !u!114 &1091505974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091505968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dda2e1e557be43419f17127cfb4c9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScrollBlocker
 --- !u!1001 &1095134883
 PrefabInstance:
   m_ObjectHideFlags: 0
