@@ -207,6 +207,7 @@ public class LevelManager : MonoBehaviour
         targetText.text = $"Target: {NumberFormatter.FormatDecimalNumber(amountToWin)}$";
         openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfit)}$";
         cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier))}$";
+        cashOutText.color = GetColorForCurrentTier();
         leverageText.text = $"Multiplier: {NumberFormatter.FormatDecimalNumber(leverage)}X\n(max: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.maxLeverage)}x)";
         quantityOrderText.text = $"{NumberFormatter.FormatDecimalNumber(currentOrderQuantity)}";
         if (openProfit > 0)
@@ -797,6 +798,30 @@ public class LevelManager : MonoBehaviour
             rect.rect.width * anchor01.x,
             rect.rect.height * anchor01.y
         );
+    }
+
+    private Color GetColorForCurrentTier()
+    {
+        switch (currentCashOutTier)
+        {
+            case AugmentTier.Common:
+                Debug.Log($"Returning Common Tier Color ({GameConstants.commonTierColor.ToString()})");
+                return GameConstants.commonTierColor;
+                break;
+            case AugmentTier.Rare:
+                Debug.Log($"Returning Rare Tier Color ({GameConstants.rareTierColor.ToString()})");
+                return GameConstants.rareTierColor;
+                break;
+            case AugmentTier.Epic:
+                return GameConstants.epicTierColor;
+                break;
+            case AugmentTier.Legendary:
+                return GameConstants.legendaryTierColor;
+                break;
+            default:
+                Debug.Log($"Error! Color does not exist for tier: {currentCashOutTier}");
+                return GameConstants.whiteColor;
+        }
     }
 
     private void OnEnable()

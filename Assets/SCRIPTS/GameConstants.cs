@@ -12,6 +12,14 @@ public static class GameConstants
         public static int campaignSheepToConsume = 4000        ;
         public static int campaignCowsToConsume = 10000;
         public static int campaignChicksToConsume = 100000;
+
+        // Colors
+        public static Color whiteColor = Color.white;
+        
+        public static Color commonTierColor = new Color32(23, 121, 8, 255);
+        public static Color rareTierColor = new Color32(6, 182, 219, 255);
+        public static Color epicTierColor = new Color32(163, 0, 255, 255);
+        public static Color legendaryTierColor = new Color32(255, 219, 0, 255);
         
         public static bool isPlaytestBuild = false; // TODO - SET THIS TO FALSE WHEN RELEASING LIVE VERSIONS
 }
