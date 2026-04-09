@@ -11,7 +11,7 @@ public class PowerUpInventoryManager : MonoBehaviour
 
     private List<UsablePowerUp> inventory = new();
     public List<HotbarItem> hotbarItems = new List<HotbarItem>();
-    private int inventoryAmount = 10;
+    private int inventoryAmount = 1;
 
     public int selectedSlot = 0;
 
@@ -73,23 +73,31 @@ public class PowerUpInventoryManager : MonoBehaviour
     {
         UsablePowerUp powerUp = new UsablePowerUp { data = augment };
 
-        foreach (HotbarItem hotbarItem in hotbarItems)
+        bool isPowerUpInInventory = IsUsablePowerUpInInventory(augment);
+        if (isPowerUpInInventory)
         {
-            if (hotbarItem.usablePowerUp == null)
-            {
-                hotbarItem.Setup(powerUp);
-                Debug.Log($"Setup at index {hotbarItems.IndexOf(hotbarItem)} with powerUp: {powerUp.data.name}");
-                return;
-            }
+            IncreaseChargesOfHotbarItemWithAugment(augment);
+        }
 
-            if (hotbarItem.usablePowerUp.data == augment)
+        if (!isPowerUpInInventory)
+        {
+            foreach (HotbarItem hotbarItem in hotbarItems)
             {
-                hotbarItem.usablePowerUp.charges++;
-                hotbarItem.Setup(hotbarItem.usablePowerUp);
-                Debug.Log(
-                    $"Increased charges at index {hotbarItems.IndexOf(hotbarItem)} with powerUp: {powerUp.data.name}");
-                return;
-            }
+                if (hotbarItem.usablePowerUp == null)
+                {
+                    hotbarItem.Setup(powerUp);
+                    Debug.Log($"Setup at index {hotbarItems.IndexOf(hotbarItem)} with powerUp: {powerUp.data.name}");
+                    return;
+                }
+                /*if (hotbarItem.usablePowerUp.data == augment)
+                {
+                    hotbarItem.usablePowerUp.charges++;
+                    hotbarItem.Setup(hotbarItem.usablePowerUp);
+                    Debug.Log(
+                        $"Increased charges at index {hotbarItems.IndexOf(hotbarItem)} with powerUp: {powerUp.data.name}");
+                    return;
+                }*/
+            } 
         }
 
         //AddToInventory(powerUp);
@@ -125,8 +133,8 @@ private void HandleHotbarInput()
         else if (Keyboard.current.digit7Key.wasPressedThisFrame) selectedSlot = 6;
         else if (Keyboard.current.digit8Key.wasPressedThisFrame) selectedSlot = 7;
         else if (Keyboard.current.digit9Key.wasPressedThisFrame) selectedSlot = 8;
-        else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasReleasedThisFrame || (!ScrollBlocker.IsScrollingUI() && scroll > 0)) selectedSlot = (selectedSlot + 1) % 9;
-        else if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasReleasedThisFrame || (!ScrollBlocker.IsScrollingUI() && scroll < 0)) selectedSlot = (selectedSlot - 1 + 9) % 9;
+        else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasPressedThisFrame || (!ScrollBlocker.IsScrollingUI() && scroll > 0)) selectedSlot = (selectedSlot + 1) % 9;
+        else if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame || (!ScrollBlocker.IsScrollingUI() && scroll < 0)) selectedSlot = (selectedSlot - 1 + 9) % 9;
         else
         {
             wasInputGiven = false;
@@ -149,6 +157,28 @@ private void HandleHotbarInput()
         int index = hotbarItems.IndexOf(hotbarItem);
         selectedSlot = index;
         GameEvents.OnCurrentHotbarSlotChanged(hotbarItems[selectedSlot]);
+    }
+
+    public bool IsUsablePowerUpInInventory(Augment augment)
+    {
+        foreach (HotbarItem hotbarItem in hotbarItems)
+        {
+            if (hotbarItem.usablePowerUp != null && hotbarItem.usablePowerUp.data == augment) return true;
+        }
+        return false;
+    }
+
+    public void IncreaseChargesOfHotbarItemWithAugment(Augment augment)
+    {
+        foreach (HotbarItem hotbarItem in hotbarItems)
+        {
+            if (hotbarItem.usablePowerUp != null && hotbarItem.usablePowerUp.data == augment)
+            {
+                hotbarItem.usablePowerUp.charges++;
+                hotbarItem.Setup(hotbarItem.usablePowerUp);
+                return;
+            }
+        }
     }
 
     public void Swap(HotbarItem startHotbarItem, HotbarItem targetHotbarItem)
