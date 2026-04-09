@@ -7,10 +7,13 @@ public class PowerUpInventoryManager : MonoBehaviour
 {
     public GameObject hotbarItemPrefab;
     public RectTransform hotbarParentTransform;
-    
+    public RectTransform inventoryParentTransform;
+
     private List<UsablePowerUp> inventory = new();
     public List<HotbarItem> hotbarItems = new List<HotbarItem>();
-    
+    public List<HotbarItem> inventoryItems = new List<HotbarItem>();
+    private int inventoryAmount = 10;
+
     public int selectedSlot = 0;
 
     public static PowerUpInventoryManager Instance;
@@ -22,6 +25,7 @@ public class PowerUpInventoryManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
     }
 
@@ -29,13 +33,14 @@ public class PowerUpInventoryManager : MonoBehaviour
     private void Start()
     {
         PopulateHotbar();
+        PopulateInventory();
         GameEvents.OnCurrentHotbarSlotChanged(hotbarItems[0]);
     }
 
     private void Update()
     {
         HandleHotbarInput();
-        
+
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             UsePowerUp();
@@ -48,6 +53,18 @@ public class PowerUpInventoryManager : MonoBehaviour
         {
             GameObject hotbarSlot = Instantiate(hotbarItemPrefab, hotbarParentTransform);
             hotbarItems.Add(hotbarSlot.GetComponent<HotbarItem>());
+            //RectTransform rectTransform = hotbarSlot.GetComponent<RectTransform>();
+            //rectTransform.anchoredPosition = new Vector2(50f * i, rectTransform.anchoredPosition.y);
+        }
+    }
+    
+    public void PopulateInventory()
+    {
+        for (int i = 0; i < inventoryAmount; i++)
+        {
+            GameObject hotbarSlot = Instantiate(hotbarItemPrefab, inventoryParentTransform);
+            hotbarItems.Add(hotbarSlot.GetComponent<HotbarItem>());
+            //inventoryItems.Add(hotbarSlot.GetComponent<HotbarItem>());
             //RectTransform rectTransform = hotbarSlot.GetComponent<RectTransform>();
             //rectTransform.anchoredPosition = new Vector2(50f * i, rectTransform.anchoredPosition.y);
         }
@@ -65,15 +82,19 @@ public class PowerUpInventoryManager : MonoBehaviour
                 Debug.Log($"Setup at index {hotbarItems.IndexOf(hotbarItem)} with powerUp: {powerUp.data.name}");
                 return;
             }
+
             if (hotbarItem.usablePowerUp.data == augment)
             {
                 hotbarItem.usablePowerUp.charges++;
                 hotbarItem.Setup(hotbarItem.usablePowerUp);
-                Debug.Log($"Increased charges at index {hotbarItems.IndexOf(hotbarItem)} with powerUp: {powerUp.data.name}");
+                Debug.Log(
+                    $"Increased charges at index {hotbarItems.IndexOf(hotbarItem)} with powerUp: {powerUp.data.name}");
                 return;
             }
         }
-        inventory.Add(powerUp);
+
+        //AddToInventory(powerUp);
+        //inventory.Add(powerUp);
         Debug.Log($"Added PowerUp {augment.name} to inventory");
 
     }
@@ -91,7 +112,29 @@ public class PowerUpInventoryManager : MonoBehaviour
         }
     }
 
-    private void HandleHotbarInput()
+    private void AddToInventory(UsablePowerUp powerUp)
+    {
+        foreach (HotbarItem inventoryItem in inventoryItems)
+        {
+            if (inventoryItem.usablePowerUp == null)
+            {
+                inventoryItem.Setup(powerUp);
+                Debug.Log($"Setup at index {hotbarItems.IndexOf(inventoryItem)} with powerUp: {powerUp.data.name}");
+                return;
+            }
+
+            if (inventoryItem.usablePowerUp.data == powerUp.data)
+            {
+                inventoryItem.usablePowerUp.charges++;
+                inventoryItem.Setup(inventoryItem.usablePowerUp);
+                Debug.Log(
+                    $"Increased charges at index {hotbarItems.IndexOf(inventoryItem)} with powerUp: {powerUp.data.name}");
+                return;
+            }
+        }
+    }
+
+private void HandleHotbarInput()
     {
         bool wasInputGiven = true;
         float scroll = Mouse.current.scroll.ReadValue().y;

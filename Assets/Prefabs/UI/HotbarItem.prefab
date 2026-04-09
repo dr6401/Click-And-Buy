@@ -503,7 +503,7 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 1
+  m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
@@ -602,7 +602,7 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 1
+  m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
@@ -2446,8 +2446,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 4260661474956162437}
   - {fileID: 6705375316026357284}
+  - {fileID: 4260661474956162437}
   - {fileID: 442431608780837117}
   m_Father: {fileID: 8971600898559385702}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2508,7 +2508,7 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 1
+  m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
@@ -2881,6 +2881,7 @@ MonoBehaviour:
   coloredBackground: {fileID: 8595810943994294553}
   tooltip: {fileID: 1894928068089447311}
   hasPowerUp: 0
+  hotbarRoot: {fileID: 0}
   hotbarItemSelectedFeedback: {fileID: 7596076204882988186}
   hotbarItemDeselectedFeedback: {fileID: 1747827965218974152}
 --- !u!225 &7820553818381242035

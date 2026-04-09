@@ -8,6 +8,7 @@ TagManager:
   - GameplayCanvas
   - PlayerCash
   - HotbarRoot
+  - InventoryRoot
   layers:
   - Default
   - TransparentFX

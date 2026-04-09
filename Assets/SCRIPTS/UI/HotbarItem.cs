@@ -27,7 +27,7 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         RectTransform tempTransform = GetComponent<RectTransform>();
         Transform temp = tempTransform.transform;
-        while (temp != null && !temp.CompareTag("HotbarRoot"))
+        while (temp != null && !(temp.CompareTag("HotbarRoot") || temp.CompareTag("InventoryRoot")))
         {
             temp = temp.parent;
         }
