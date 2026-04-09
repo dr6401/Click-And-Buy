@@ -1,5 +1,7 @@
+
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,9 +11,11 @@ public class PowerUpInventoryManager : MonoBehaviour
     public RectTransform hotbarParentTransform;
     public RectTransform inventoryParentTransform;
 
+    public GameObject inventoryParentGameObject;
+
     private List<UsablePowerUp> inventory = new();
     public List<HotbarItem> hotbarItems = new List<HotbarItem>();
-    private int inventoryAmount = 1;
+    private int inventoryAmount = 10;
 
     public int selectedSlot = 0;
 
@@ -31,14 +35,17 @@ public class PowerUpInventoryManager : MonoBehaviour
 
     private void Start()
     {
+        FindInventoryParentGameObject();
         PopulateHotbar();
         PopulateInventory();
         GameEvents.OnCurrentHotbarSlotChanged(hotbarItems[0]);
+        CloseInventory();
     }
 
     private void Update()
     {
         HandleHotbarInput();
+        HandleInventoryInput();
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
@@ -198,5 +205,44 @@ private void HandleHotbarInput()
             if (hotbarItem.usablePowerUp == null) return false;
         }
         return true;
+    }
+
+    private void HandleInventoryInput()
+    {
+        if (Keyboard.current.tabKey.wasPressedThisFrame && !PauseManager.Instance.ShouldInputBeBlocked())
+        {
+            ToggleInventoryVisibility();
+        }
+    }
+
+    private void OpenInventory()
+    {
+        inventoryParentGameObject?.SetActive(true);
+    }
+    private void CloseInventory()
+    {
+        inventoryParentGameObject?.SetActive(false);
+    }
+
+    private void ToggleInventoryVisibility()
+    {
+        if (inventoryParentGameObject.activeSelf)
+        {
+            CloseInventory();
+        }
+        else if (!inventoryParentGameObject.activeSelf)
+        {
+            OpenInventory();
+        }
+    }
+
+    private void FindInventoryParentGameObject()
+    {
+        Transform temp = inventoryParentTransform.transform;
+        while (temp != null && !(temp.CompareTag("InventoryRoot")))
+        {
+            temp = temp.parent;
+        }
+        inventoryParentGameObject = temp.gameObject;
     }
 }

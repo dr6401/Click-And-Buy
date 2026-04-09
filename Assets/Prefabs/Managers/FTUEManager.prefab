@@ -52,13 +52,15 @@ MonoBehaviour:
   - Welcome to\n <size=200%>Click and Buy</size>
   - Issue a "Buy" trade when price is low and you think it will go up.
   - Issue a "Sell" trade when price is high and you think it will go down.
-  - Active trades are displayed in the panel below.
-  - Click "Close Trade" (right most button in active trades) to lock in profits and
-    return your initial investment.
+  - Active trades are displayed in the panel below.\n\nClick "Close Trade" (right
+    most button in active trades) to lock in profits and return your initial investment.
   - If a trade performs badly and loses more than your initial investment, your cash
     reserves will cover the loss.\n\nIf a loss is big enough and there's no more
     cash on hand, the losing trade will auto-close and you will lose all invested
     money from that trade (Risk Meter).
+  - Offer $ to The Stock Market Gods to get powerful rewards. Be careful not to spend
+    all $ on them!\n\n(Space / Click - activate powerup\nTab - open inventory\nDrag
+    - reorder hotbar)
   - Reach 1M$ to Win!\n\nGood Luck.
   fadeInTextFeedback: {fileID: 8776301748097169142}
   currentTextIndex: 0
