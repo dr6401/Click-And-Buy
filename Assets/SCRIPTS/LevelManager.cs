@@ -629,6 +629,12 @@ public class LevelManager : MonoBehaviour
             GameEvents.onNotEnoughMoney?.Invoke();
             return;
         }
+
+        if (PowerUpInventoryManager.Instance.AreAllSlotsFull())
+        {
+            SpawnTextDamageNumbers("Offering inventory full!", position: cashOutButton.gameObject.GetComponent<RectTransform>(), color: Color.white);
+            return;
+        }
         float currentTierCashOutPrice =
             UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier);
         cash -= currentTierCashOutPrice;
@@ -765,11 +771,15 @@ public class LevelManager : MonoBehaviour
         DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, cashText.rectTransform, Vector2.zero, amount);
     }
     
-    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null)
+    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null, Color? color = null)
     {
         if (position == null) position = cashText.rectTransform;
         if (canvasParent == null) canvasParent = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
         DamageNumber newDamageNumber = textDamageNumbersPrefab.SpawnGUI(canvasParent, position, anchor, text);
+        if (color.HasValue)
+        {
+            newDamageNumber.SetColor(color.Value);
+        }
     }
 
     private bool IsNextTradeFree()

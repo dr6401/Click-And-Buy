@@ -69,7 +69,7 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerEnter(PointerEventData data)
     {
         //Debug.Log($"Tooltip Time!");
-        if (!hasPowerUp) return;
+        if (!hasPowerUp || (!PauseManager.Instance.inputBlocked && LevelManager.Instance.isInputBlocked)) return;
         tooltip.gameObject.SetActive(true);
         GameEvents.OnHotbarItemTooltipShowed(this);
         PowerUpInventoryManager.Instance.SetCurrentSlot(this);
@@ -128,7 +128,7 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (current == this)
         {
             PlayHotbarItemSelectedFeedback();
-            if (hasPowerUp) tooltip.gameObject.SetActive(true);
+            if (hasPowerUp && !(!PauseManager.Instance.inputBlocked && LevelManager.Instance.isInputBlocked)) tooltip.gameObject.SetActive(true);
         }
         else if (iconParent.localScale.x > 1)
         {

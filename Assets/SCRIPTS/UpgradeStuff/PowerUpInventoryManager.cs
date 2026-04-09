@@ -11,7 +11,6 @@ public class PowerUpInventoryManager : MonoBehaviour
 
     private List<UsablePowerUp> inventory = new();
     public List<HotbarItem> hotbarItems = new List<HotbarItem>();
-    public List<HotbarItem> inventoryItems = new List<HotbarItem>();
     private int inventoryAmount = 10;
 
     public int selectedSlot = 0;
@@ -111,29 +110,7 @@ public class PowerUpInventoryManager : MonoBehaviour
             hotbarItems[selectedSlot].CleanUp();
         }
     }
-
-    private void AddToInventory(UsablePowerUp powerUp)
-    {
-        foreach (HotbarItem inventoryItem in inventoryItems)
-        {
-            if (inventoryItem.usablePowerUp == null)
-            {
-                inventoryItem.Setup(powerUp);
-                Debug.Log($"Setup at index {hotbarItems.IndexOf(inventoryItem)} with powerUp: {powerUp.data.name}");
-                return;
-            }
-
-            if (inventoryItem.usablePowerUp.data == powerUp.data)
-            {
-                inventoryItem.usablePowerUp.charges++;
-                inventoryItem.Setup(inventoryItem.usablePowerUp);
-                Debug.Log(
-                    $"Increased charges at index {hotbarItems.IndexOf(inventoryItem)} with powerUp: {powerUp.data.name}");
-                return;
-            }
-        }
-    }
-
+    
 private void HandleHotbarInput()
     {
         bool wasInputGiven = true;
@@ -182,5 +159,14 @@ private void HandleHotbarInput()
         targetHotbarItem.Setup(temp);
                 
         Debug.Log($"Swapped items from startIndex: {hotbarItems.IndexOf(targetHotbarItem)} to endIndex: {hotbarItems.IndexOf(startHotbarItem)}");
+    }
+
+    public bool AreAllSlotsFull()
+    {
+        foreach (HotbarItem hotbarItem in hotbarItems)
+        {
+            if (hotbarItem.usablePowerUp == null) return false;
+        }
+        return true;
     }
 }
