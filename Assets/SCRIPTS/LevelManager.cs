@@ -116,6 +116,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text cashOutText;
     [SerializeField] private Button cashOutButton;
     [SerializeField] private TMP_Text leverageText;
+    [SerializeField] private TMP_Text profitMultText;
+    [SerializeField] private TMP_Text freebieTradesText;
     [SerializeField] private TMP_Text quantityOrderText;
     [SerializeField] private Slider timeScaleSlider;
 
@@ -209,6 +211,8 @@ public class LevelManager : MonoBehaviour
         cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier))}$";
         cashOutText.color = GetColorForCurrentTier();
         leverageText.text = $"Multiplier: {NumberFormatter.FormatDecimalNumber(leverage)}X\n(max: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.maxLeverage)}x)";
+        profitMultText.text = "Profit Mult: "+ NumberFormatter.FormatNumber((PlayerStats.Instance.moneyGainMultiplier - 1) * 100f) + "%";
+        freebieTradesText.text = "Freebie trades: " + NumberFormatter.FormatNumber(numberOfFutureFreebieTrades);
         quantityOrderText.text = $"{NumberFormatter.FormatDecimalNumber(currentOrderQuantity)}";
         if (openProfit > 0)
         {
@@ -692,7 +696,8 @@ public class LevelManager : MonoBehaviour
     public void IncreaseLeverage()
     {
         if (isInputBlocked) return;
-        leverage += 1f;
+        if (leverage < 1) leverage += 0.5f;
+        else leverage += 1f;
         leverage = Mathf.Clamp(leverage, 0.5f, PlayerStats.Instance.maxLeverage);
     }
     public void DecreaseLeverage()
@@ -805,11 +810,9 @@ public class LevelManager : MonoBehaviour
         switch (currentCashOutTier)
         {
             case AugmentTier.Common:
-                Debug.Log($"Returning Common Tier Color ({GameConstants.commonTierColor.ToString()})");
                 return GameConstants.commonTierColor;
                 break;
             case AugmentTier.Rare:
-                Debug.Log($"Returning Rare Tier Color ({GameConstants.rareTierColor.ToString()})");
                 return GameConstants.rareTierColor;
                 break;
             case AugmentTier.Epic:
@@ -819,7 +822,6 @@ public class LevelManager : MonoBehaviour
                 return GameConstants.legendaryTierColor;
                 break;
             default:
-                Debug.Log($"Error! Color does not exist for tier: {currentCashOutTier}");
                 return GameConstants.whiteColor;
         }
     }
