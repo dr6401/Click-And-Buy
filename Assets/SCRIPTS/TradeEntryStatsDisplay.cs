@@ -66,7 +66,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         }
         tradeTypeText.text = tradeType.ToString();
         timeOfPurchaseText.text = timeOfPurchase.ToString();
-        quantityText.text = quantity.ToString();
+        quantityText.text = NumberFormatter.FormatDecimalNumber(quantity);
         entryPriceText.text = $"{NumberFormatter.FormatDecimalNumber(entryPrice)}$";
     }
 
@@ -79,7 +79,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         
         tradeTypeText.text = data.tradeType.ToString();
         timeOfPurchaseText.text = data.timeOfPurchase.ToString();
-        quantityText.text = data.quantity.ToString();
+        quantityText.text = NumberFormatter.FormatDecimalNumber(data.quantity);
         entryPriceText.text = $"{data.entryPrice}$";
     }
 

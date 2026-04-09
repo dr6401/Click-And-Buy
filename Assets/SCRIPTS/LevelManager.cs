@@ -207,8 +207,7 @@ public class LevelManager : MonoBehaviour
         targetText.text = $"Target: {NumberFormatter.FormatDecimalNumber(amountToWin)}$";
         openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfit)}$";
         cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier))}$";
-        leverageText.text = $"Current: {NumberFormatter.FormatDecimalNumber(leverage)}X\n" +
-                            $"Max: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.maxLeverage)}x";
+        leverageText.text = $"Multiplier: {NumberFormatter.FormatDecimalNumber(leverage)}X\n(max: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.maxLeverage)}x)";
         quantityOrderText.text = $"{NumberFormatter.FormatDecimalNumber(currentOrderQuantity)}";
         if (openProfit > 0)
         {
