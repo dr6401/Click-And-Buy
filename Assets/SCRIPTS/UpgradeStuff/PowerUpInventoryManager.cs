@@ -100,7 +100,7 @@ public class PowerUpInventoryManager : MonoBehaviour
 
     public void UsePowerUp()
     {
-        if (hotbarItems[selectedSlot].usablePowerUp == null) return;
+        if (hotbarItems[selectedSlot].usablePowerUp == null || PauseManager.Instance.ShouldInputBeBlocked()) return;
         hotbarItems[selectedSlot].usablePowerUp.Use();
         hotbarItems[selectedSlot].usablePowerUp.charges--;
         hotbarItems[selectedSlot].Setup(hotbarItems[selectedSlot].usablePowerUp);

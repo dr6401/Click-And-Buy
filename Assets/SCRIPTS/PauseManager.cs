@@ -36,6 +36,11 @@ public class PauseManager : MonoBehaviour
             PauseGame();
         }
     }
+
+    public bool ShouldInputBeBlocked()
+    {
+        return !PauseManager.Instance.inputBlocked && LevelManager.Instance.isInputBlocked;
+    }
     
     public void StopTime()
     {
