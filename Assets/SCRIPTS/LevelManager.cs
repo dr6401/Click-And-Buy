@@ -755,9 +755,14 @@ public class LevelManager : MonoBehaviour
         activeEvent.active = true;
     }
 
-    public void ToggleInputBlocked()
+    public void SetInputUnblocked()
     {
-        isInputBlocked = !isInputBlocked;
+        isInputBlocked = false;
+    }
+    
+    public void SetInputBlocked()
+    {
+        isInputBlocked = true;
     }
 
     public void SpawnReceivedMoneyDamageNumbers(float amount)
@@ -797,13 +802,13 @@ public class LevelManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnUpgradesOffered += ToggleInputBlocked;
-        GameEvents.OnUpgradeChosen += ToggleInputBlocked;
+        GameEvents.OnUpgradesOffered += SetInputBlocked;
+        GameEvents.OnUpgradeChosen += SetInputUnblocked;
     }
     
     private void OnDisable()
     {
-        GameEvents.OnUpgradesOffered -= ToggleInputBlocked;
-        GameEvents.OnUpgradeChosen -= ToggleInputBlocked;
+        GameEvents.OnUpgradesOffered -= SetInputBlocked;
+        GameEvents.OnUpgradeChosen -= SetInputUnblocked;
     }
 }
