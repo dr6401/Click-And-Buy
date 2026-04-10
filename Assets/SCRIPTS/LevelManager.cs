@@ -36,6 +36,7 @@ public class LevelManager : MonoBehaviour
     private float previousPrice;
     private float decimals = 0.01f;
     private float currentOrderQuantity = 1f;
+    private float maxOrderQuantity = 10f;
 
     public float amountToWin = 1000000f;
     public float minPrice = 10f;
@@ -755,7 +756,7 @@ public class LevelManager : MonoBehaviour
             else step = 10f;
             currentOrderQuantity -= step;
         }
-        currentOrderQuantity = Mathf.Max(0.1f, currentOrderQuantity);
+        currentOrderQuantity = Mathf.Clamp(currentOrderQuantity, 0.1f, maxOrderQuantity);
     }
 
     public void PlayPriceMoveEvent(PriceMoveEvent priceMoveEvent)

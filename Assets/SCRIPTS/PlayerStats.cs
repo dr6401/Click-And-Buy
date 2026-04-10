@@ -11,9 +11,9 @@ public class PlayerStats : MonoBehaviour
 
     public int maxAliveTrades = 5;
     
-    public float volatility = 1f;
-    public float passiveIncome = 1f;
-    public float lossShield = 10f;
+    public float volatility = 1.25f;
+    public float passiveIncome = 16f;
+    public float lossShield = 20f;
     public float divineLuck = 1f;
     
     private void Awake()

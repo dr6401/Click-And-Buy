@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,10 +17,15 @@ public class PowerUpInventoryManager : MonoBehaviour
     private List<UsablePowerUp> inventory = new();
     public List<HotbarItem> hotbarItems = new List<HotbarItem>();
     private int inventoryAmount = 10;
+    private bool isInventoryOpen = false;
 
     public int selectedSlot = 0;
 
     public static PowerUpInventoryManager Instance;
+
+    [Header("MMFeedbacks")]
+    [SerializeField] private MMF_Player showInventoryFeedback;
+    [SerializeField] private MMF_Player closeInventoryFeedback;
 
     private void Awake()
     {
@@ -217,20 +223,26 @@ private void HandleHotbarInput()
 
     private void OpenInventory()
     {
-        inventoryParentGameObject?.SetActive(true);
+        //inventoryParentGameObject?.SetActive(true);
+        showInventoryFeedback?.PlayFeedbacks();
+        isInventoryOpen = true;
+        Debug.Log("Opening inventory");
     }
     private void CloseInventory()
     {
-        inventoryParentGameObject?.SetActive(false);
+        //inventoryParentGameObject?.SetActive(false);
+        closeInventoryFeedback?.PlayFeedbacks();
+        isInventoryOpen = false;
+        Debug.Log("Closing inventory");
     }
 
     private void ToggleInventoryVisibility()
     {
-        if (inventoryParentGameObject.activeSelf)
+        if (isInventoryOpen)
         {
             CloseInventory();
         }
-        else if (!inventoryParentGameObject.activeSelf)
+        else if (!isInventoryOpen)
         {
             OpenInventory();
         }
