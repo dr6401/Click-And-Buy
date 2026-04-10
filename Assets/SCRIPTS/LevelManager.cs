@@ -45,6 +45,8 @@ public class LevelManager : MonoBehaviour
     public float maxPriceIncreaseInterval = 10f;
     public float maxPriceIncreaseAmount = 1f;
 
+    public float streakBonus = 1f;
+
     private float generatePriceTimer;
     private float genetartePriceInterval = 0.1f;
     private float marginCallTimer;
@@ -116,8 +118,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text cashOutText;
     [SerializeField] private Button cashOutButton;
     [SerializeField] private TMP_Text leverageText;
+    [SerializeField] private TMP_Text streakBonusText;
     [SerializeField] private TMP_Text profitMultText;
     [SerializeField] private TMP_Text freebieTradesText;
+    [SerializeField] private TMP_Text volatilityText;
+    [SerializeField] private TMP_Text passiveIncomeText;
+    [SerializeField] private TMP_Text divineLuckText;
+    [SerializeField] private TMP_Text lossShieldText;
     [SerializeField] private TMP_Text quantityOrderText;
     [SerializeField] private Slider timeScaleSlider;
 
@@ -211,8 +218,14 @@ public class LevelManager : MonoBehaviour
         cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier))}$";
         cashOutText.color = GetColorForCurrentTier();
         leverageText.text = $"Multiplier: {NumberFormatter.FormatDecimalNumber(leverage)}X\n(max: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.maxLeverage)}x)";
+        streakBonusText.text = $"Streak: x{NumberFormatter.FormatDecimalNumber(streakBonus)}";
         profitMultText.text = "Profit Mult: "+ NumberFormatter.FormatNumber((PlayerStats.Instance.moneyGainMultiplier - 1) * 100f) + "%";
         freebieTradesText.text = "Freebie trades: " + NumberFormatter.FormatNumber(numberOfFutureFreebieTrades);
+        volatilityText.text = $"Volatility: {NumberFormatter.FormatDecimalNumber((PlayerStats.Instance.volatility - 1) * 100f)}%";
+        passiveIncomeText.text = $"Passive: +{NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.passiveIncome)}/s";
+        divineLuckText.text = $"Divine Luck: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.divineLuck)}%";
+        lossShieldText.text =  $"Loss Shield: -{NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.lossShield)}%";
+        
         quantityOrderText.text = $"{NumberFormatter.FormatDecimalNumber(currentOrderQuantity)}";
         if (openProfit > 0)
         {
