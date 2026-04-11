@@ -45,7 +45,7 @@ public class PowerUpInventoryManager : MonoBehaviour
         PopulateHotbar();
         PopulateInventory();
         GameEvents.OnCurrentHotbarSlotChanged(hotbarItems[0]);
-        CloseInventory();
+        //CloseInventory();
     }
 
     private void Update()
