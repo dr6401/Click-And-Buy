@@ -15,6 +15,7 @@ public static class GameConstants
 
         // Colors
         public static Color whiteColor = Color.white;
+        public static Color lightGreyColor = new Color32(197, 197, 197, 255);
         
         public static Color commonTierColor = new Color32(23, 121, 8, 255);
         public static Color rareTierColor = new Color32(6, 182, 219, 255);

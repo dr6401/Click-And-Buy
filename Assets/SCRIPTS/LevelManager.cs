@@ -236,7 +236,7 @@ public class LevelManager : MonoBehaviour
         {
             openProfitLossText.color = RedColor;
         }
-        else openProfitLossText.color = Color.white;
+        else openProfitLossText.color = GameConstants.lightGreyColor;
 
         ToggleCashOutButtonEnabled();
         DrawGridLines();
