@@ -65,6 +65,14 @@ public class TradeEntryStatsDisplay : MonoBehaviour
             profitRealText.color = redColor;
         }
         tradeTypeText.text = tradeType.ToString();
+        if (tradeType == TradeType.Buy)
+        {
+            tradeTypeText.color = greenColor;
+        }
+        else if (tradeType == TradeType.Sell)
+        {
+            tradeTypeText.color = redColor;
+        }
         timeOfPurchaseText.text = timeOfPurchase.ToString();
         quantityText.text = NumberFormatter.FormatDecimalNumber(quantity);
         entryPriceText.text = $"{NumberFormatter.FormatDecimalNumber(entryPrice)}$";
