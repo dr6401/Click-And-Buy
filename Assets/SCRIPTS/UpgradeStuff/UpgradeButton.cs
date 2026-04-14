@@ -47,7 +47,7 @@ public class UpgradeButton : MonoBehaviour
         gradient.color = augment.color;
         Color transparentColor = gradient.color;
         transparentColor.a = gradient.color.a / 2f;
-        top.color = transparentColor;//DarkenColor(augment.color, 0.7f);
+        top.color = transparentColor;//ColorAdjuster.DarkenColor(augment.color, 0.7f);
     }
     
     public void Setup(Augment aug)
@@ -76,19 +76,7 @@ public class UpgradeButton : MonoBehaviour
         GameEvents.OnUpgradeChosen?.Invoke();
         //GameEvents.OnHasSettingsUICoveredUpAugmentUI?.Invoke(false);
     }
-
-    public Color DarkenColor(Color color, float percentage)
-    {
-        Color.RGBToHSV(color, out float h, out float s, out float v);
-
-        v *= percentage;
-        v = Mathf.Clamp01(v);
-        
-        Color darker = Color.HSVToRGB(h, s, v);
-        darker.a = color.a;
-        
-        return darker;
-    }
+    
 
     private IEnumerator EnableButtonInteraction(float time)
     {

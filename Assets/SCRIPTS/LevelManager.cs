@@ -72,9 +72,7 @@ public class LevelManager : MonoBehaviour
     
     private float candleSpawnTimer;
     public float candleSpawnInterval;
-
-    public Color GreenColor;
-    public Color RedColor;
+    
 
     private RectTransform currentCandle;
     private float candleOpen;
@@ -105,6 +103,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private DamageNumber profitDamageNumbersPrefab;
     [SerializeField] private DamageNumber lossDamageNumbersPrefab;
     [SerializeField] private DamageNumber textDamageNumbersPrefab;
+    [SerializeField] private DamageNumber textDamageNumbersScatterPrefab;
 
     public bool hasLevelEnded = false;
     public bool isInputBlocked = false;
@@ -230,11 +229,11 @@ public class LevelManager : MonoBehaviour
         quantityOrderText.text = $"{NumberFormatter.FormatDecimalNumber(currentOrderQuantity)}";
         if (openProfit > 0)
         {
-            openProfitLossText.color = GreenColor;
+            openProfitLossText.color = GameConstants.greenColor;
         }
         else if (openProfit < 0)
         {
-            openProfitLossText.color = RedColor;
+            openProfitLossText.color = GameConstants.redColor;
         }
         else openProfitLossText.color = GameConstants.lightGreyColor;
 
@@ -369,7 +368,7 @@ public class LevelManager : MonoBehaviour
         }
         currentCandle.anchoredPosition = new Vector2(xPos, PriceToY(candleOpen));
         Image candleImage = currentCandle.GetComponent<Image>();
-        candleImage.color = price >= candleOpen ? GreenColor : RedColor;
+        candleImage.color = price >= candleOpen ? GameConstants.greenColor : GameConstants.redColor;
     }
 
     private void FinalizeCandle()
@@ -377,7 +376,7 @@ public class LevelManager : MonoBehaviour
         CandleData data = currentCandle.gameObject.GetComponent<CandleData>();
         data.close = price;
         Image candleImage = currentCandle.GetComponent<Image>();
-        candleImage.color = price >= candleOpen ? GreenColor : RedColor;
+        candleImage.color = price >= candleOpen ? GameConstants.greenColor : GameConstants.redColor;
         candles.Add(currentCandle);
 
         xPos += xStep;
@@ -544,11 +543,11 @@ public class LevelManager : MonoBehaviour
         Image indicatorImage = tradeEntryIndicator.GetComponent<Image>();
         if (tradeType == TradeType.Buy)
         {
-            indicatorImage.color = GreenColor;
+            indicatorImage.color = GameConstants.greenColor;
         }
         else if (tradeType == TradeType.Sell)
         {
-            indicatorImage.color = RedColor;
+            indicatorImage.color = GameConstants.redColor;
         }
         
         stats.LinkTradeEntryIndicator(tradeEntryIndicator);
@@ -587,11 +586,11 @@ public class LevelManager : MonoBehaviour
         Image indicatorImage = tradeEntryIndicator.GetComponent<Image>();
         if (trade.tradeType == TradeType.Buy)
         {
-            indicatorImage.color = GreenColor;
+            indicatorImage.color = GameConstants.greenColor;
         }
         else if (trade.tradeType == TradeType.Sell)
         {
-            indicatorImage.color = RedColor;
+            indicatorImage.color = GameConstants.redColor;
         }
         
         stats.LinkTradeEntryIndicator(tradeEntryIndicator);
@@ -795,11 +794,20 @@ public class LevelManager : MonoBehaviour
         DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, cashText.rectTransform, Vector2.zero, amount);
     }
     
-    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null, Color? color = null)
+    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null, Color? color = null, bool spawnAtLatestCandle = false, bool scatterTextOnSpawn = false)
     {
         if (position == null) position = cashText.rectTransform;
+        if (spawnAtLatestCandle) position = currentCandle;
         if (canvasParent == null) canvasParent = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
-        DamageNumber newDamageNumber = textDamageNumbersPrefab.SpawnGUI(canvasParent, position, anchor, text);
+        DamageNumber newDamageNumber;
+        if (!scatterTextOnSpawn)
+        {
+            newDamageNumber = textDamageNumbersPrefab.SpawnGUI(canvasParent, position, anchor, text);   
+        }
+        else
+        {
+            newDamageNumber = textDamageNumbersScatterPrefab.SpawnGUI(canvasParent, position, anchor, text);
+        }
         if (color.HasValue)
         {
             newDamageNumber.SetColor(color.Value);

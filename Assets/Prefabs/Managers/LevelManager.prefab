@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CandleSpawner
   priceChart: {fileID: 0}
+  candleArea: {fileID: 0}
+  tradeIndicatorArea: {fileID: 0}
   candlePrefab: {fileID: 1211205120092844197, guid: 558c5da394c7da74f99d4b0fbe08782a, type: 3}
   tradeEntryIndicatorPrefab: {fileID: 0}
   tradePanel: {fileID: 0}
@@ -54,29 +56,54 @@ MonoBehaviour:
   cash: 1000
   effectiveCash: 0
   equity: 0
+  unrealizedProfit: 0
+  unrealizedLoss: 0
   price: 0
   upgradeOfferTarget: 500
   leverage: 1
+  amountToWin: 1000000
   minPrice: 10
   maxPrice: 20
+  maxPriceIncreaseInterval: 10
+  maxPriceIncreaseAmount: 1
+  streakBonus: 1
+  currentCashOutTier: 0
+  currentCashOutPrice: 300
+  currentRespinPrice: 50
   stopGeneratingPrice: 0
   activeTrades: []
   candleSpawnInterval: 0
-  GreenColor: {r: 0.46666667, g: 1, b: 0.25490198, a: 1}
-  RedColor: {r: 1, g: 0.254902, b: 0.2892387, a: 1}
+  gridLinePrefab: {fileID: 0}
+  gridLinesParent: {fileID: 0}
+  lastNPrices: 50
+  yChartPadding: 0.2
+  gridStep: 25
+  tutorialPump: {fileID: 0}
+  tutorialDump: {fileID: 0}
   profitDamageNumbersPrefab: {fileID: 2909909947781137645, guid: 6e62c820e7e3968468cd1e7860b139aa, type: 3}
   lossDamageNumbersPrefab: {fileID: 2909909947781137645, guid: 7c6a20a55ac192342a72146ff28146c0, type: 3}
   textDamageNumbersPrefab: {fileID: 8690564695306702212, guid: fcc912bd9b5b7694687577248372ab90, type: 3}
+  textDamageNumbersScatterPrefab: {fileID: 8690564695306702212, guid: fe3ca7e15a0aa324b83c9285834bd7ed, type: 3}
   hasLevelEnded: 0
   isInputBlocked: 0
   victoryCanvas: {fileID: 0}
   loseCanvas: {fileID: 0}
   priceText: {fileID: 0}
   cashText: {fileID: 0}
-  equityText: {fileID: 0}
+  targetText: {fileID: 0}
   openProfitLossText: {fileID: 0}
-  upgradeOfferTargetText: {fileID: 0}
+  cashOutText: {fileID: 0}
+  cashOutButton: {fileID: 0}
   leverageText: {fileID: 0}
+  streakBonusText: {fileID: 0}
+  profitMultText: {fileID: 0}
+  freebieTradesText: {fileID: 0}
+  volatilityText: {fileID: 0}
+  passiveIncomeText: {fileID: 0}
+  divineLuckText: {fileID: 0}
+  lossShieldText: {fileID: 0}
+  quantityOrderText: {fileID: 0}
+  timeScaleSlider: {fileID: 0}
   numberOfFutureFreebieTrades: 0
 --- !u!114 &1035150477860320884
 MonoBehaviour:
@@ -94,6 +121,10 @@ MonoBehaviour:
   moneyGainMultiplier: 1
   maxLeverage: 1
   maxAliveTrades: 5
+  volatility: 1.25
+  passiveIncome: 16
+  lossShield: 20
+  divineLuck: 1
 --- !u!114 &3460782103999049356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,3 +139,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   settingsMenu: {fileID: 0}
   inputBlocked: 0
+  currentTimeScale: 1
