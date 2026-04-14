@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
 
     public int maxAliveTrades = 5;
     
-    public float volatility = 1.25f;
+    public float volatility = 0f;
     
     public float passiveIncome = 0;
     public float passiveIncomeTriggerInterval = 1f;

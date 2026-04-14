@@ -24,10 +24,12 @@ public class LuckyStrike : Augment
         if (randomAugment.autoApply)
         {
             randomAugment.Apply();
+            UpgradesSelectionUI.Instance.StoreChosenAugment(randomAugment);
         }
         else
         {
             PowerUpInventoryManager.Instance.AddPowerUp(randomAugment);
+            UpgradesSelectionUI.Instance.StoreChosenAugment(randomAugment);
         }
         Debug.Log($"Applied power-up {randomAugment.name} of tier {higherTier}.");
     }

@@ -162,6 +162,47 @@ public class UpgradesSelectionUI : MonoBehaviour
     {
         runAugmentData.AddToChosenAugments(augment);
     }
+
+    public void MarkAsRemovedFromPool(AugmentCategory category)
+    {
+        // Store all powerups of this type as chosen (so they get in the runAugmentData.ChosenAugments
+        foreach (Augment augment in commonAugments)
+        {
+            if (augment.category == category)
+            {
+                StoreChosenAugment(augment);
+            }
+        }
+        foreach (Augment augment in rareAugments)
+        {
+            if (augment.category == category)
+            {
+                StoreChosenAugment(augment);
+            }
+        }
+        foreach (Augment augment in epicAugments)
+        {
+            if (augment.category == category)
+            {
+                StoreChosenAugment(augment);
+            }
+        }
+        foreach (Augment augment in legendaryAugments)
+        {
+            if (augment.category == category)
+            {
+                StoreChosenAugment(augment);
+            }
+        }
+        // Mark those down as chosen (not actual powerup SOs in folders)
+        foreach (Augment augment in runAugmentData.chosenAugments)
+        {
+            if (augment.category == category)
+            {
+                augment.removeFromPoolAfterPicking = true;
+            }
+        }
+    }
     
     public void CloseUI()
     {

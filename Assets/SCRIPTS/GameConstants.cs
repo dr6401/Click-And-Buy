@@ -13,6 +13,8 @@ public static class GameConstants
         public static int campaignCowsToConsume = 10000;
         public static int campaignChicksToConsume = 100000;
 
+        public static int maxVolatility = 50;
+
         // Colors
         public static Color whiteColor = Color.white;
         public static Color lightGreyColor = new Color32(197, 197, 197, 255);

@@ -234,7 +234,7 @@ public class LevelManager : MonoBehaviour
         streakBonusText.text = $"Streak: x{NumberFormatter.FormatDecimalNumber(streakBonus)}";
         profitMultText.text = "Profit Mult: "+ NumberFormatter.FormatNumber((PlayerStats.Instance.moneyGainMultiplier - 1) * 100f) + "%";
         freebieTradesText.text = "Freebie trades: " + NumberFormatter.FormatNumber(numberOfFutureFreebieTrades);
-        volatilityText.text = $"Volatility: {NumberFormatter.FormatDecimalNumber((PlayerStats.Instance.volatility - 1) * 100f)}%";
+        volatilityText.text = $"Volatility: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.volatility)}%";
         passiveIncomeText.text = $"Passive: +{NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.passiveIncome)}/s";
         divineLuckText.text = $"Divine Luck: {NumberFormatter.FormatNumber(PlayerStats.Instance.divineLuck * 100f)}%";
         lossShieldText.text =  $"Loss Shield: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.lossReduction)}%";

@@ -121,10 +121,10 @@ MonoBehaviour:
   moneyGainMultiplier: 1
   maxLeverage: 1
   maxAliveTrades: 5
-  volatility: 1.25
+  volatility: 0
   passiveIncome: 0
   passiveIncomeTriggerInterval: 1
-  lossShield: 0
+  lossReduction: 0
   divineLuck: 0
 --- !u!114 &3460782103999049356
 MonoBehaviour:
