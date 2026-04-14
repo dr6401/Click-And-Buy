@@ -32,7 +32,7 @@ public class UpgradeButton : MonoBehaviour
         }
         button = GetComponent<Button>();
         button.interactable = false;
-        StartCoroutine(EnableButtonInteraction(0.75f));
+        StartCoroutine(EnableButtonInteraction(0.4f));
 
     }
     public void Setup(Augment aug, UpgradesSelectionUI parentUI)

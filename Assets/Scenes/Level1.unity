@@ -15941,8 +15941,16 @@ PrefabInstance:
       value: LevelManager
       objectReference: {fileID: 0}
     - target: {fileID: 1035150477860320884, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
+      propertyPath: divineLuck
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1035150477860320884, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
       propertyPath: maxLeverage
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1035150477860320884, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
+      propertyPath: passiveIncome
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3460782103999049356, guid: f225faa9ba3ded344a155d3ee7c4bfcf, type: 3}
       propertyPath: settingsMenu

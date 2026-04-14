@@ -133,6 +133,7 @@ public class UpgradesSelectionUI : MonoBehaviour
             AugmentTier.Common => commonAugments,
             AugmentTier.Rare => rareAugments,
             AugmentTier.Epic => epicAugments,
+            AugmentTier.Legendary => legendaryAugments,
             _ => commonAugments,
         };
     }

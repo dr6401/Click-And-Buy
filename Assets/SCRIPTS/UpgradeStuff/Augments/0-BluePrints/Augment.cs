@@ -19,8 +19,9 @@ public enum AugmentCategory
     EventSchedule,
     ConvertAllToBuy,
     ConvertAllToSell,
-    DuplicateBestTrade
-    
+    DuplicateBestTrade,
+    DivineLuckIncrease,
+    PassiveIncomeIncrease
 };
 
 public abstract class Augment : ScriptableObject

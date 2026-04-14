@@ -122,9 +122,10 @@ MonoBehaviour:
   maxLeverage: 1
   maxAliveTrades: 5
   volatility: 1.25
-  passiveIncome: 16
-  lossShield: 20
-  divineLuck: 1
+  passiveIncome: 0
+  passiveIncomeTriggerInterval: 1
+  lossShield: 0
+  divineLuck: 0
 --- !u!114 &3460782103999049356
 MonoBehaviour:
   m_ObjectHideFlags: 0

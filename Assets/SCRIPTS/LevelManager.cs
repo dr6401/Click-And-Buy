@@ -48,6 +48,8 @@ public class LevelManager : MonoBehaviour
 
     public float streakBonus = 1f;
 
+    private float passiveIncomeTimer;
+
     private float generatePriceTimer;
     private float genetartePriceInterval = 0.1f;
     private float marginCallTimer;
@@ -167,6 +169,7 @@ public class LevelManager : MonoBehaviour
         candleTimer += Time.deltaTime;
         generatePriceTimer += Time.deltaTime;
         marginCallTimer += Time.deltaTime;
+        passiveIncomeTimer += Time.deltaTime;
         if (Time.timeScale > 0) maxPriceIncreaseTimer += Time.unscaledDeltaTime; // If game isn't paused/powerups picking: increase this slowly, independently of time scale
         
         UpdateCurrentCandle();
@@ -189,6 +192,16 @@ public class LevelManager : MonoBehaviour
         {
             maxPriceIncreaseTimer = 0;
             maxPrice += maxPriceIncreaseAmount;
+        }
+
+        if (passiveIncomeTimer >= PlayerStats.Instance.passiveIncomeTriggerInterval)
+        {
+            passiveIncomeTimer = 0;
+            if (PlayerStats.Instance.passiveIncome > 0)
+            {
+                cash += PlayerStats.Instance.passiveIncome;
+                SpawnReceivedMoneyDamageNumbers(PlayerStats.Instance.passiveIncome);
+            }
         }
 
         float openProfit = 0f;
@@ -223,7 +236,7 @@ public class LevelManager : MonoBehaviour
         freebieTradesText.text = "Freebie trades: " + NumberFormatter.FormatNumber(numberOfFutureFreebieTrades);
         volatilityText.text = $"Volatility: {NumberFormatter.FormatDecimalNumber((PlayerStats.Instance.volatility - 1) * 100f)}%";
         passiveIncomeText.text = $"Passive: +{NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.passiveIncome)}/s";
-        divineLuckText.text = $"Divine Luck: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.divineLuck)}%";
+        divineLuckText.text = $"Divine Luck: {NumberFormatter.FormatNumber(PlayerStats.Instance.divineLuck * 100f)}%";
         lossShieldText.text =  $"Loss Shield: -{NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.lossShield)}%";
         
         quantityOrderText.text = $"{NumberFormatter.FormatDecimalNumber(currentOrderQuantity)}";
