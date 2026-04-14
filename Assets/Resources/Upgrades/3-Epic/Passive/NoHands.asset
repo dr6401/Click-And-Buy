@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: NoHands
   m_EditorClassIdentifier: Assembly-CSharp::PassiveIncomeIncrease
   augmentName: No Hands
-  description: Increase Divine Luck by 5$/sec
+  description: Increase Passive Income by 10$/sec
   icon: {fileID: 21300000, guid: e7213fecbc91d3d48aaa6bda2e09d68e, type: 3}
   tier: 2
   category: 12
-  color: {r: 0.5267981, g: 1, b: 0, a: 1}
+  color: {r: 0.10980392, g: 1, b: 0, a: 1}
   autoApply: 1
   removeFromPoolAfterPicking: 0
   increaseAmount: 10

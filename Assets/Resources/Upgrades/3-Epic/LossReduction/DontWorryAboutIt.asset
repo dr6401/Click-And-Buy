@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1d373e8ba5c5e4fb010a1f9fa42553, type: 3}
+  m_Name: DontWorryAboutIt
+  m_EditorClassIdentifier: Assembly-CSharp::LossReductionIncrease
+  augmentName: Don't Worry About It
+  description: Reduce losses from Losing Trades by 3%
+  icon: {fileID: 21300000, guid: 9dbd07655a8bba94088abd398b479ee8, type: 3}
+  tier: 2
+  category: 13
+  color: {r: 1, g: 0, b: 0.26042747, a: 1}
+  autoApply: 1
+  removeFromPoolAfterPicking: 1
+  increaseAmount: 5

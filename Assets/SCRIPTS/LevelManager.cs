@@ -237,7 +237,7 @@ public class LevelManager : MonoBehaviour
         volatilityText.text = $"Volatility: {NumberFormatter.FormatDecimalNumber((PlayerStats.Instance.volatility - 1) * 100f)}%";
         passiveIncomeText.text = $"Passive: +{NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.passiveIncome)}/s";
         divineLuckText.text = $"Divine Luck: {NumberFormatter.FormatNumber(PlayerStats.Instance.divineLuck * 100f)}%";
-        lossShieldText.text =  $"Loss Shield: -{NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.lossShield)}%";
+        lossShieldText.text =  $"Loss Shield: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.lossReduction)}%";
         
         quantityOrderText.text = $"{NumberFormatter.FormatDecimalNumber(currentOrderQuantity)}";
         if (openProfit > 0)

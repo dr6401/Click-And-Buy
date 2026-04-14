@@ -21,7 +21,8 @@ public enum AugmentCategory
     ConvertAllToSell,
     DuplicateBestTrade,
     DivineLuckIncrease,
-    PassiveIncomeIncrease
+    PassiveIncomeIncrease,
+    LossReductionIncrease
 };
 
 public abstract class Augment : ScriptableObject

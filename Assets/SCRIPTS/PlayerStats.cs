@@ -16,7 +16,7 @@ public class PlayerStats : MonoBehaviour
     public float passiveIncome = 0;
     public float passiveIncomeTriggerInterval = 1f;
     
-    public float lossShield = 20f;
+    public float lossReduction = 0f;
     public float divineLuck = 0f;
     
     private void Awake()

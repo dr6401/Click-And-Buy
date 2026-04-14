@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Dividends
   m_EditorClassIdentifier: Assembly-CSharp::PassiveIncomeIncrease
   augmentName: Dividends
-  description: Increase Divine Luck by 1$/sec
+  description: Increase Passive Income by 5$/sec
   icon: {fileID: 21300000, guid: e7213fecbc91d3d48aaa6bda2e09d68e, type: 3}
   tier: 1
   category: 12
-  color: {r: 0.34283018, g: 1, b: 0, a: 1}
+  color: {r: 0.10980392, g: 1, b: 0, a: 1}
   autoApply: 1
   removeFromPoolAfterPicking: 0
   increaseAmount: 5
