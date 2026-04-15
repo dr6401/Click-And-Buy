@@ -10,6 +10,8 @@ public class PlayerStats : MonoBehaviour
     public float maxLeverage = 1;
 
     public int maxAliveTrades = 5;
+
+    public float maxComboDuration = 2f;
     
     public float volatility = 0f;
     

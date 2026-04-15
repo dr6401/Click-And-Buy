@@ -7,6 +7,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
@@ -46,7 +47,7 @@ public class LevelManager : MonoBehaviour
     public float maxPriceIncreaseInterval = 10f;
     public float maxPriceIncreaseAmount = 1f;
 
-    public float streakBonus = 1f;
+    public float comboBonus = 0f;
 
     private float passiveIncomeTimer;
 
@@ -54,7 +55,11 @@ public class LevelManager : MonoBehaviour
     private float genetartePriceInterval = 0.1f;
     private float marginCallTimer;
     private float marginCallInterval = 0.001f;
-
+    
+    // Combo System
+    private float comboTimer;
+    private int comboAmount = 0;
+    
     [Header("Upgrade System")]
     public AugmentTier currentCashOutTier = AugmentTier.Common;
     public float currentCashOutPrice = 300;
@@ -106,6 +111,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private DamageNumber lossDamageNumbersPrefab;
     [SerializeField] private DamageNumber textDamageNumbersPrefab;
     [SerializeField] private DamageNumber textDamageNumbersScatterPrefab;
+    [SerializeField] private DamageNumber textDamageNumbersComboPrefab;
 
     public bool hasLevelEnded = false;
     public bool isInputBlocked = false;
@@ -119,7 +125,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text openProfitLossText;
     [SerializeField] private TMP_Text cashOutText;
     [SerializeField] private Button cashOutButton;
-    [SerializeField] private TMP_Text leverageText;
+    [SerializeField] private TMP_Text multiplierText;
     [SerializeField] private TMP_Text streakBonusText;
     [SerializeField] private TMP_Text profitMultText;
     [SerializeField] private TMP_Text freebieTradesText;
@@ -170,6 +176,7 @@ public class LevelManager : MonoBehaviour
         generatePriceTimer += Time.deltaTime;
         marginCallTimer += Time.deltaTime;
         passiveIncomeTimer += Time.deltaTime;
+        comboTimer += Time.unscaledDeltaTime;
         if (Time.timeScale > 0) maxPriceIncreaseTimer += Time.unscaledDeltaTime; // If game isn't paused/powerups picking: increase this slowly, independently of time scale
         
         UpdateCurrentCandle();
@@ -204,6 +211,13 @@ public class LevelManager : MonoBehaviour
             }
         }
 
+        if (comboTimer > PlayerStats.Instance.maxComboDuration)
+        {
+            comboAmount = 0;
+        }
+
+        comboBonus = Mathf.Max(0, (comboAmount - 1) * 5f); // "-1" because we start actually comboing at 2x combo
+
         float openProfit = 0f;
         float invested = 0f;
         unrealizedProfit = 0;
@@ -230,8 +244,8 @@ public class LevelManager : MonoBehaviour
         openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfit)}$";
         cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier))}$";
         cashOutText.color = GetColorForCurrentTier();
-        leverageText.text = $"Multiplier: {NumberFormatter.FormatDecimalNumber(leverage)}X\n(max: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.maxLeverage)}x)";
-        streakBonusText.text = $"Streak: x{NumberFormatter.FormatDecimalNumber(streakBonus)}";
+        multiplierText.text = $"Multiplier: {NumberFormatter.FormatDecimalNumber(leverage)}X";
+        streakBonusText.text = $"Combo Bonus: +{NumberFormatter.FormatDecimalNumber(comboBonus)}%";
         profitMultText.text = "Profit Mult: "+ NumberFormatter.FormatNumber((PlayerStats.Instance.moneyGainMultiplier - 1) * 100f) + "%";
         freebieTradesText.text = "Freebie trades: " + NumberFormatter.FormatNumber(numberOfFutureFreebieTrades);
         volatilityText.text = $"Volatility: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.volatility)}%";
@@ -654,6 +668,7 @@ public class LevelManager : MonoBehaviour
 
     public void CashOut()
     {
+        if (PauseManager.Instance.ShouldInputBeBlocked()) return;
         if (effectiveCash < currentCashOutPrice)
         {
             GameEvents.onNotEnoughMoney?.Invoke();
@@ -722,6 +737,11 @@ public class LevelManager : MonoBehaviour
     public void IncreaseLeverage()
     {
         if (isInputBlocked) return;
+
+        if (leverage >= PlayerStats.Instance.maxLeverage)
+        {
+            SpawnTextDamageNumbers($"Max Multiplier!", position: multiplierText.gameObject.GetComponent<RectTransform>(), anchor: new Vector2(50, 0));
+        }
         if (leverage < 1) leverage += 0.5f;
         else leverage += 1f;
         leverage = Mathf.Clamp(leverage, 0.5f, PlayerStats.Instance.maxLeverage);
@@ -786,6 +806,29 @@ public class LevelManager : MonoBehaviour
         activeEvent.active = true;
     }
 
+    private void HandleCombo()
+    {
+        if (comboTimer > PlayerStats.Instance.maxComboDuration)
+        {
+            comboAmount = 0;
+        }
+        comboAmount++;
+        comboTimer = 0;
+        if (comboAmount > 1)
+        {
+            SpawnComboTextDamageNumbers("Combo: " + comboAmount +"X");
+        }
+    }
+
+    private void BreakCombo()
+    {
+        if (comboAmount > 1)
+        {
+            SpawnComboTextDamageNumbers(""); // TODO Add combo broken textDamageNumbers
+        }
+        comboAmount = 0;
+    }
+
     public void SetInputUnblocked()
     {
         isInputBlocked = false;
@@ -807,24 +850,35 @@ public class LevelManager : MonoBehaviour
         DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, cashText.rectTransform, Vector2.zero, amount);
     }
     
-    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null, Color? color = null, bool spawnAtLatestCandle = false, bool scatterTextOnSpawn = false)
+    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null, Color? color = null, bool spawnAtLatestCandle = false, bool scatterTextOnSpawn = false, bool spawnComboText = false)
     {
         if (position == null) position = cashText.rectTransform;
         if (spawnAtLatestCandle) position = currentCandle;
         if (canvasParent == null) canvasParent = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
         DamageNumber newDamageNumber;
-        if (!scatterTextOnSpawn)
+        if (scatterTextOnSpawn)
         {
-            newDamageNumber = textDamageNumbersPrefab.SpawnGUI(canvasParent, position, anchor, text);   
+            newDamageNumber = textDamageNumbersScatterPrefab.SpawnGUI(canvasParent, position, anchor, text);
+        }
+        else if (spawnComboText)
+        {
+            anchor = new Vector2(-300f, 25f);
+            newDamageNumber = textDamageNumbersComboPrefab.SpawnGUI(canvasParent, position, anchor, text);
+            newDamageNumber.lifetime = PlayerStats.Instance.maxComboDuration;
         }
         else
         {
-            newDamageNumber = textDamageNumbersScatterPrefab.SpawnGUI(canvasParent, position, anchor, text);
+            newDamageNumber = textDamageNumbersPrefab.SpawnGUI(canvasParent, position, anchor, text);
         }
         if (color.HasValue)
         {
             newDamageNumber.SetColor(color.Value);
         }
+    }
+
+    public void SpawnComboTextDamageNumbers(string text)
+    {
+        SpawnTextDamageNumbers(text, spawnComboText: true);
     }
 
     private bool IsNextTradeFree()
@@ -865,11 +919,15 @@ public class LevelManager : MonoBehaviour
     {
         GameEvents.OnUpgradesOffered += SetInputBlocked;
         GameEvents.OnUpgradeChosen += SetInputUnblocked;
+        GameEvents.onMoneyEarned += HandleCombo;
+        GameEvents.onMoneyLost += BreakCombo;
     }
     
     private void OnDisable()
     {
         GameEvents.OnUpgradesOffered -= SetInputBlocked;
         GameEvents.OnUpgradeChosen -= SetInputUnblocked;
+        GameEvents.onMoneyEarned -= HandleCombo;
+        GameEvents.onMoneyLost -= BreakCombo;
     }
 }

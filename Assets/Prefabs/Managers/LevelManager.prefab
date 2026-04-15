@@ -84,6 +84,7 @@ MonoBehaviour:
   lossDamageNumbersPrefab: {fileID: 2909909947781137645, guid: 7c6a20a55ac192342a72146ff28146c0, type: 3}
   textDamageNumbersPrefab: {fileID: 8690564695306702212, guid: fcc912bd9b5b7694687577248372ab90, type: 3}
   textDamageNumbersScatterPrefab: {fileID: 8690564695306702212, guid: fe3ca7e15a0aa324b83c9285834bd7ed, type: 3}
+  textDamageNumbersComboPrefab: {fileID: 8690564695306702212, guid: 01be585720800d94f95af9ba1ea2e38d, type: 3}
   hasLevelEnded: 0
   isInputBlocked: 0
   victoryCanvas: {fileID: 0}
@@ -121,6 +122,7 @@ MonoBehaviour:
   moneyGainMultiplier: 1
   maxLeverage: 1
   maxAliveTrades: 5
+  maxComboDuration: 2
   volatility: 0
   passiveIncome: 0
   passiveIncomeTriggerInterval: 1
