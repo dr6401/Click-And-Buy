@@ -139,6 +139,8 @@ public class LevelManager : MonoBehaviour
     [Header("Power Ups")]
     public int numberOfFutureFreebieTrades;
 
+    [Header("Random Shit")]
+    private BadTradeTextsSO badTradesSO;
 
     private void Awake()
     {
@@ -165,6 +167,7 @@ public class LevelManager : MonoBehaviour
         //GenerateNewPrice();
         PlayPriceMoveEvent(tutorialPump);
         SpawnNewCandle();
+        badTradesSO = Resources.Load<BadTradeTextsSO>("BadTradesText/BadTradesTexts");
     }
 
     // Update is called once per frame
@@ -824,7 +827,7 @@ public class LevelManager : MonoBehaviour
     {
         if (comboAmount > 1)
         {
-            SpawnComboTextDamageNumbers(""); // TODO Add combo broken textDamageNumbers
+            SpawnComboTextDamageNumbers(badTradesSO.GetRandomBadTradesText(), color: GameConstants.redColor);
         }
         comboAmount = 0;
     }
@@ -876,9 +879,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void SpawnComboTextDamageNumbers(string text)
+    public void SpawnComboTextDamageNumbers(string text, Color? color = null)
     {
-        SpawnTextDamageNumbers(text, spawnComboText: true);
+        SpawnTextDamageNumbers(text, spawnComboText: true, color: color);
     }
 
     private bool IsNextTradeFree()

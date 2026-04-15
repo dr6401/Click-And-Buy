@@ -6,5 +6,10 @@ using UnityEngine;
 
 public class BadTradeTextsSO : ScriptableObject
 {
-    public static List<string> badTradeTexts;
+    public List<string> badTradeTexts;
+
+    public string GetRandomBadTradesText()
+    {
+        return badTradeTexts[Random.Range(0, badTradeTexts.Count)];
+    }
 }
