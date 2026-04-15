@@ -457,7 +457,7 @@ MonoBehaviour:
     radius: 4
     pushOffset: 0.5
   updateDelay: 0.0125
-  enablePooling: 0
+  enablePooling: 1
   poolSize: 50
   disableOnSceneLoad: 1
   editorLastFont: 
