@@ -591,7 +591,24 @@ public class LevelManager : MonoBehaviour
     public void CloseTrade(TradeEntryStatsDisplay trade)
     {
         if (isInputBlocked) return;
-        if (trade.GetUnrealizedProfit() > 0) GameEvents.onMoneyEarned?.Invoke();
+        if (trade.GetUnrealizedProfit() > 0)
+        {
+            GameEvents.onMoneyEarned?.Invoke();
+            comboAmount++;
+            if (comboAmount > 1) // If combo is at least 2
+            {
+                float comboBonusMoney = comboBonus * 0.01f * trade.GetUnrealizedProfit();
+                if (comboBonusMoney >= 1) // and we would get at least 1$ from bonus
+                {
+                    Debug.Log($"trade.GetUnrealizedProfit: {trade.GetUnrealizedProfit()},  comboBonus: {comboBonus}, comboBonusMoney: {comboBonusMoney}");
+                    SpawnReceivedMoneyDamageNumbers(comboBonusMoney, anchor: new Vector2(-300f, 25f));   
+                }
+                else
+                {
+                    Debug.Log($"Combo Amount: {comboAmount},  comboBonus: {comboBonus}, comboBonusMoney: {comboBonusMoney}");
+                }
+            }
+        }
         else if (trade.GetUnrealizedProfit() < 0) GameEvents.onMoneyLost?.Invoke();
         activeTrades.Remove(trade);
         if (trade.tradeEntryIndicator != null)
@@ -813,9 +830,8 @@ public class LevelManager : MonoBehaviour
     {
         if (comboTimer > PlayerStats.Instance.maxComboDuration)
         {
-            comboAmount = 0;
+            comboAmount = 1;
         }
-        comboAmount++;
         comboTimer = 0;
         if (comboAmount > 1)
         {
@@ -842,15 +858,17 @@ public class LevelManager : MonoBehaviour
         isInputBlocked = true;
     }
 
-    public void SpawnReceivedMoneyDamageNumbers(float amount)
+    public void SpawnReceivedMoneyDamageNumbers(float amount, RectTransform position = null, Vector2 anchor = new Vector2())
     {
+        if (position == null) position = cashText.rectTransform;
         RectTransform gameCanvas = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
-        DamageNumber newDamageNumber = profitDamageNumbersPrefab.SpawnGUI(gameCanvas, cashText.rectTransform, Vector2.zero, amount);
+        DamageNumber newDamageNumber = profitDamageNumbersPrefab.SpawnGUI(gameCanvas, position, anchor, amount);
     }
-    public void SpawnLostMoneyDamageNumbers(float amount)
+    public void SpawnLostMoneyDamageNumbers(float amount, RectTransform position = null, Vector2 anchor = new Vector2())
     {
+        if (position == null) position = cashText.rectTransform;
         RectTransform gameCanvas = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
-        DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, cashText.rectTransform, Vector2.zero, amount);
+        DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, position, anchor, amount);
     }
     
     public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null, Color? color = null, bool spawnAtLatestCandle = false, bool scatterTextOnSpawn = false, bool spawnComboText = false)
