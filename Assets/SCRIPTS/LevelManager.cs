@@ -886,7 +886,7 @@ public class LevelManager : MonoBehaviour
         }
         else if (spawnComboText)
         {
-            anchor = new Vector2(-300f, 25f);
+            anchor = new Vector2(-300f, -125f);
             if (number <= 0) // If it's a combo breaker text
             {
                 newDamageNumber = damageNumberPrefab.SpawnGUI(canvasParent, position, anchor, text);   
