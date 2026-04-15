@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WallstreetMadness
   m_EditorClassIdentifier: Assembly-CSharp::VolatilityIncrease
   augmentName: Wallstreet Madness
-  description: Increase Volatility (bigger price swings) by 3%
-  icon: {fileID: 0}
+  description: Increase Volatility (bigger price swings) by 5%
+  icon: {fileID: 21300000, guid: de381fa98a20a2346aea8d48d8d7fbc9, type: 3}
   tier: 3
   category: 14
   color: {r: 0.9081116, g: 0, b: 1, a: 1}

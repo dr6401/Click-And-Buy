@@ -622,7 +622,7 @@ public class LevelManager : MonoBehaviour
     {
         GameObject tradeEntry = Instantiate(tradeEntryPrefab, tradePanel);
         TradeEntryStatsDisplay stats = tradeEntry.GetComponent<TradeEntryStatsDisplay>();
-        TradeData data = new TradeData(trade.tradeType, System.DateTime.Now.ToString("HH:mm:ss"), trade.quantity, trade.entryPrice, trade.leverage);
+        TradeData data = new TradeData(trade.tradeType, System.DateTime.Now.ToString("HH:mm:ss"), trade.quantity, trade.entryPrice, trade.multiplier);
         
         GameObject tradeEntryIndicator = Instantiate(tradeEntryIndicatorPrefab, priceChart);
         RectTransform rectTransform = tradeEntryIndicator.GetComponent<RectTransform>();

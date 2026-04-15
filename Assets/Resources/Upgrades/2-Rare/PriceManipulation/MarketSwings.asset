@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VolatilityIncrease
   augmentName: Market Swings
   description: Increase Volatility (bigger price swings) by 2%
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: cc080f0b972a09f41b5ef09c4c16d5c7, type: 3}
   tier: 1
   category: 14
   color: {r: 0.9098039, g: 0, b: 1, a: 1}

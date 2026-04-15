@@ -9,7 +9,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
     public float timeOfPurchase;
     public float quantity;
     public float entryPrice;
-    public float leverage = 1f;
+    public float multiplier = 1f;
 
     private float profitReal;
 
@@ -22,7 +22,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
     [SerializeField] private DamageNumber lossDamageNumbersPrefab;
     
     [SerializeField] private TMP_Text tradeTypeText;
-    [SerializeField] private TMP_Text timeOfPurchaseText;
+    [SerializeField] private TMP_Text multiplierText;
     [SerializeField] private TMP_Text quantityText;
     [SerializeField] private TMP_Text entryPriceText;
     [SerializeField] private TMP_Text currentPriceText;
@@ -45,7 +45,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         {
             profitReal = (entryPrice - LevelManager.Instance.price) * quantity;
         }
-        profitReal *= leverage;
+        profitReal *= multiplier;
         if (profitReal > 0) profitReal *= PlayerStats.Instance.moneyGainMultiplier;
         profitRealText.text = NumberFormatter.FormatDecimalNumber(profitReal) + "$";
         
@@ -73,7 +73,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         {
             tradeTypeText.color = redColor;
         }
-        timeOfPurchaseText.text = timeOfPurchase.ToString();
+        multiplierText.text = $"{multiplier}x";
         quantityText.text = NumberFormatter.FormatDecimalNumber(quantity);
         entryPriceText.text = $"{NumberFormatter.FormatDecimalNumber(entryPrice)}$";
     }
@@ -83,10 +83,10 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         tradeType = data.tradeType;
         quantity = data.quantity;
         entryPrice = data.entryPrice;
-        leverage = data.leverage;
+        multiplier = data.leverage;
         
         tradeTypeText.text = data.tradeType.ToString();
-        timeOfPurchaseText.text = data.timeOfPurchase.ToString();
+        multiplierText.text = data.timeOfPurchase.ToString();
         quantityText.text = NumberFormatter.FormatDecimalNumber(data.quantity);
         entryPriceText.text = $"{data.entryPrice}$";
     }

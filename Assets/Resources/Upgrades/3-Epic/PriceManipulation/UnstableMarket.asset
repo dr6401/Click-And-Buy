@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VolatilityIncrease
   augmentName: Unstable Market
   description: Increase Volatility (bigger price swings) by 3%
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b3bf885ee5690724dafb0edc46b293a0, type: 3}
   tier: 2
   category: 14
   color: {r: 0.9081116, g: 0, b: 1, a: 1}

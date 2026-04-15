@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72930db1299a4394ba2a8f15b20f987e, type: 3}
-  m_Name: NotEnoughMovement
+  m_Name: VolatileMarket
   m_EditorClassIdentifier: Assembly-CSharp::VolatilityIncrease
-  augmentName: Not Enough Movement
+  augmentName: Volatile Market
   description: Increase Volatility (bigger price swings) by 1%
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 26f5438ff82592b4d86dd54c0b385d49, type: 3}
   tier: 0
   category: 14
   color: {r: 0.9098039, g: 0, b: 1, a: 1}
