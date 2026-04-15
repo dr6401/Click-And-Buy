@@ -112,6 +112,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private DamageNumber textDamageNumbersPrefab;
     [SerializeField] private DamageNumber textDamageNumbersScatterPrefab;
     [SerializeField] private DamageNumber textDamageNumbersComboPrefab;
+    [SerializeField] private DamageNumber textDamageNumbersComboBreakerPrefab;
 
     public bool hasLevelEnded = false;
     public bool isInputBlocked = false;
@@ -835,7 +836,7 @@ public class LevelManager : MonoBehaviour
         comboTimer = 0;
         if (comboAmount > 1)
         {
-            SpawnComboTextDamageNumbers("Combo: " + comboAmount +"X");
+            SpawnComboTextDamageNumbers(number: comboAmount, dmgNumberPrefab: textDamageNumbersComboPrefab);
         }
     }
 
@@ -843,7 +844,7 @@ public class LevelManager : MonoBehaviour
     {
         if (comboAmount > 1)
         {
-            SpawnComboTextDamageNumbers(badTradesSO.GetRandomBadTradesText(), color: GameConstants.redColor);
+            SpawnComboTextDamageNumbers(badTradesSO.GetRandomBadTradesText(), color: GameConstants.redColor, dmgNumberPrefab: textDamageNumbersComboBreakerPrefab);
         }
         comboAmount = 0;
     }
@@ -871,11 +872,12 @@ public class LevelManager : MonoBehaviour
         DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, position, anchor, amount);
     }
     
-    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null, Color? color = null, bool spawnAtLatestCandle = false, bool scatterTextOnSpawn = false, bool spawnComboText = false)
+    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null, DamageNumber damageNumberPrefab = null, Color? color = null, bool spawnAtLatestCandle = false, bool scatterTextOnSpawn = false, bool spawnComboText = false, float number = 0)
     {
         if (position == null) position = cashText.rectTransform;
         if (spawnAtLatestCandle) position = currentCandle;
         if (canvasParent == null) canvasParent = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
+        if (damageNumberPrefab == null) damageNumberPrefab = textDamageNumbersPrefab; 
         DamageNumber newDamageNumber;
         if (scatterTextOnSpawn)
         {
@@ -884,12 +886,19 @@ public class LevelManager : MonoBehaviour
         else if (spawnComboText)
         {
             anchor = new Vector2(-300f, 25f);
-            newDamageNumber = textDamageNumbersComboPrefab.SpawnGUI(canvasParent, position, anchor, text);
+            if (number <= 0) // If it's a combo breaker text
+            {
+                newDamageNumber = damageNumberPrefab.SpawnGUI(canvasParent, position, anchor, text);   
+            }
+            else // Else it's a normal combo text
+            {
+                newDamageNumber = damageNumberPrefab.SpawnGUI(canvasParent, position, anchor, number);
+            }
             newDamageNumber.lifetime = PlayerStats.Instance.maxComboDuration;
         }
         else
         {
-            newDamageNumber = textDamageNumbersPrefab.SpawnGUI(canvasParent, position, anchor, text);
+            newDamageNumber = damageNumberPrefab.SpawnGUI(canvasParent, position, anchor, text);
         }
         if (color.HasValue)
         {
@@ -897,9 +906,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void SpawnComboTextDamageNumbers(string text, Color? color = null)
+    public void SpawnComboTextDamageNumbers(string text = "", Color? color = null, DamageNumber dmgNumberPrefab = null, float number = 0)
     {
-        SpawnTextDamageNumbers(text, spawnComboText: true, color: color);
+        SpawnTextDamageNumbers(text, spawnComboText: true, color: color, damageNumberPrefab: dmgNumberPrefab, number: number);
     }
 
     private bool IsNextTradeFree()

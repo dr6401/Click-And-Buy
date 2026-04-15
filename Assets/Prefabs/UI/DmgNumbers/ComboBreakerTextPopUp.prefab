@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8690564695306702212}
   - component: {fileID: 8855033471495337643}
   m_Layer: 0
-  m_Name: ComboTextPopUp
+  m_Name: ComboBreakerTextPopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,8 +69,8 @@ MonoBehaviour:
   defaultFov: 60
   fovCamera: {fileID: 0}
   cameraOverride: {fileID: 0}
-  enableNumber: 1
-  number: 69
+  enableNumber: 0
+  number: 123
   numberSettings:
     bold: 0
     italic: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
     suffixDecimalChar: .
     suffixHideZeros: 0
   enableLeftText: 1
-  leftText: 'Combo: '
+  leftText: Boom
   leftTextSettings:
     bold: 0
     italic: 0
@@ -119,8 +119,8 @@ MonoBehaviour:
     vertical: 0
     characterSpacing: 0
     size: 3
-  enableRightText: 1
-  rightText: X
+  enableRightText: 0
+  rightText: ' XP'
   rightTextSettings:
     bold: 0
     italic: 0
@@ -249,8 +249,8 @@ MonoBehaviour:
     speed: 10
     drag: 0
   enableStartRotation: 1
-  minRotation: -25
-  maxRotation: 25
+  minRotation: -20
+  maxRotation: -25
   rotationRandomFlip: 0
   enableRotateOverTime: 0
   minRotationSpeed: -15
@@ -298,12 +298,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  enableScaleByNumber: 1
+  enableScaleByNumber: 0
   scaleByNumberSettings:
     fromNumber: 0
-    toNumber: 10
+    toNumber: 1000
     fromScale: 1
-    toScale: 2
+    toScale: 10
   enableScaleOverTime: 1
   scaleOverTime:
     serializedVersion: 2
@@ -558,7 +558,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<size=+3>Combo: </size>69<size=-1.5>X</size>'
+  m_text: <size=+3>Boom</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 192c5db66286b16489caae9bef17ed41, type: 2}
   m_sharedMaterial: {fileID: 882574637698120323, guid: 192c5db66286b16489caae9bef17ed41, type: 2}
@@ -567,8 +567,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4283056639
+  m_fontColor: {r: 1, g: 0.25490198, b: 0.2901961, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
@@ -695,7 +695,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<size=+3>Combo: </size>69<size=-1.5>X</size>'
+  m_text: <size=+3>Boom</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 192c5db66286b16489caae9bef17ed41, type: 2}
   m_sharedMaterial: {fileID: 882574637698120323, guid: 192c5db66286b16489caae9bef17ed41, type: 2}
@@ -704,8 +704,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4283056639
+  m_fontColor: {r: 1, g: 0.25490198, b: 0.2901961, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:

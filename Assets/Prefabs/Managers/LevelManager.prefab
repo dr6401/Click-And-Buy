@@ -66,7 +66,7 @@ MonoBehaviour:
   maxPrice: 20
   maxPriceIncreaseInterval: 10
   maxPriceIncreaseAmount: 1
-  streakBonus: 1
+  comboBonus: 0
   currentCashOutTier: 0
   currentCashOutPrice: 300
   currentRespinPrice: 50
@@ -85,6 +85,7 @@ MonoBehaviour:
   textDamageNumbersPrefab: {fileID: 8690564695306702212, guid: fcc912bd9b5b7694687577248372ab90, type: 3}
   textDamageNumbersScatterPrefab: {fileID: 8690564695306702212, guid: fe3ca7e15a0aa324b83c9285834bd7ed, type: 3}
   textDamageNumbersComboPrefab: {fileID: 8690564695306702212, guid: 01be585720800d94f95af9ba1ea2e38d, type: 3}
+  textDamageNumbersComboBreakerPrefab: {fileID: 8690564695306702212, guid: 30dd7737dfe4c5a4690b93a8ffa949de, type: 3}
   hasLevelEnded: 0
   isInputBlocked: 0
   victoryCanvas: {fileID: 0}
@@ -95,7 +96,7 @@ MonoBehaviour:
   openProfitLossText: {fileID: 0}
   cashOutText: {fileID: 0}
   cashOutButton: {fileID: 0}
-  leverageText: {fileID: 0}
+  multiplierText: {fileID: 0}
   streakBonusText: {fileID: 0}
   profitMultText: {fileID: 0}
   freebieTradesText: {fileID: 0}
