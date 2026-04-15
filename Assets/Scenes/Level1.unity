@@ -2951,7 +2951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2393755337418527119, guid: ffc798a696153cd40acf36edb648d317, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -238
+      value: -237.99997
       objectReference: {fileID: 0}
     - target: {fileID: 2393755337418527119, guid: ffc798a696153cd40acf36edb648d317, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7981,6 +7981,7 @@ GameObject:
   - component: {fileID: 1231563825}
   - component: {fileID: 1231563827}
   - component: {fileID: 1231563826}
+  - component: {fileID: 1231563828}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -8045,6 +8046,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231563824}
   m_CullTransparentMesh: 1
+--- !u!114 &1231563828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231563824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c71e892e17f5e5419934c03d8ecb6c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BackgroundColorAdjustor
+  riskLevelPercent: 0
+  baseColor: {r: 0, g: 0, b: 0, a: 0}
+  greenColor: {r: 0.78431374, g: 1, b: 0.78431374, a: 1}
+  redColor: {r: 1, g: 0.49019608, b: 0.48235294, a: 1}
 --- !u!1 &1237739948
 GameObject:
   m_ObjectHideFlags: 0

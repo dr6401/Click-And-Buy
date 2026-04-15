@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
     public float cash = 1000f;
     public float effectiveCash;
     public float equity;
+    public float openProfitAndLoss;
     public float unrealizedProfit;
     public float unrealizedLoss;
     [Header("-----------------PRICE----------------")]
@@ -222,7 +223,7 @@ public class LevelManager : MonoBehaviour
 
         comboBonus = Mathf.Max(0, (comboAmount - 1) * 5f); // "-1" because we start actually comboing at 2x combo
 
-        float openProfit = 0f;
+        openProfitAndLoss = 0f;
         float invested = 0f;
         unrealizedProfit = 0;
         unrealizedLoss = 0;
@@ -230,7 +231,7 @@ public class LevelManager : MonoBehaviour
         
         foreach (var trade in activeTrades)
         {
-            openProfit += trade.GetUnrealizedProfit();
+            openProfitAndLoss += trade.GetUnrealizedProfit();
             invested += trade.entryPrice * trade.quantity;
             effectiveCash += trade.GetLossBeyondMargin();
             //Debug.Log($"Open position: {trade.name} with P/L: {trade.GetUnrealizedProfit()}");
@@ -240,12 +241,12 @@ public class LevelManager : MonoBehaviour
         
         effectiveCash = Mathf.Max(0, effectiveCash);
         
-        equity = cash + openProfit + invested;
+        equity = cash + openProfitAndLoss + invested;
 
         priceText.text = $"Price: {NumberFormatter.FormatDecimalNumber(price)}$";
         cashText.text = $"Cash: " + NumberFormatter.FormatDecimalNumber(effectiveCash) + "$";
         targetText.text = $"Target: {NumberFormatter.FormatDecimalNumber(amountToWin)}$";
-        openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfit)}$";
+        openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfitAndLoss)}$";
         cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier))}$";
         cashOutText.color = GetColorForCurrentTier();
         multiplierText.text = $"Multiplier: {NumberFormatter.FormatDecimalNumber(leverage)}X";
@@ -258,11 +259,11 @@ public class LevelManager : MonoBehaviour
         lossShieldText.text =  $"Loss Shield: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.lossReduction)}%";
         
         quantityOrderText.text = $"{NumberFormatter.FormatDecimalNumber(currentOrderQuantity)}";
-        if (openProfit > 0)
+        if (openProfitAndLoss > 0)
         {
             openProfitLossText.color = GameConstants.greenColor;
         }
-        else if (openProfit < 0)
+        else if (openProfitAndLoss < 0)
         {
             openProfitLossText.color = GameConstants.redColor;
         }
