@@ -27,5 +27,5 @@ public static class GameConstants
         public static Color epicTierColor = new Color32(163, 0, 255, 255);
         public static Color legendaryTierColor = new Color32(255, 219, 0, 255);
         
-        public static bool isPlaytestBuild = false; // TODO - SET THIS TO FALSE WHEN RELEASING LIVE VERSIONS
+        public static bool isPlaytestBuild = true; // TODO - SET THIS TO FALSE WHEN RELEASING LIVE VERSIONS
 }

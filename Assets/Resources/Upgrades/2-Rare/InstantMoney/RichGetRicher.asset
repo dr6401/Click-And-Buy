@@ -21,3 +21,4 @@ MonoBehaviour:
   autoApply: 1
   removeFromPoolAfterPicking: 0
   percentMoneyIncrease: 15
+  maxIncreaseAmount: 2500

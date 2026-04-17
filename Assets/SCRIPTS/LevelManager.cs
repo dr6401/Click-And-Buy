@@ -6,6 +6,7 @@ using DamageNumbersPro;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR;
 using Random = UnityEngine.Random;
@@ -291,6 +292,14 @@ public class LevelManager : MonoBehaviour
                     LoseGame();
                 }
             }
+        }
+
+        if (GameConstants.isPlaytestBuild) // Dev hacks
+        {
+            if (Keyboard.current.mKey.wasPressedThisFrame)
+            {
+                cash += 1000;
+            }  
         }
     }
 
