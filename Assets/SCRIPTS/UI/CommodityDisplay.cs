@@ -19,11 +19,11 @@ public class CommodityDisplay : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.kKey.wasPressedThisFrame && GameConstants.isPlaytestBuild)
+        if (Keyboard.current.kKey.wasPressedThisFrame && GameConstants.isDevHacksEnabled)
         {
             CycleRight();
         }
-        else if (Keyboard.current.jKey.wasPressedThisFrame && GameConstants.isPlaytestBuild)
+        else if (Keyboard.current.jKey.wasPressedThisFrame && GameConstants.isDevHacksEnabled)
         {
             CycleLeft();
         }

@@ -294,12 +294,17 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        if (GameConstants.isPlaytestBuild) // Dev hacks
+        if (GameConstants.isDevHacksEnabled) // Dev hacks
         {
             if (Keyboard.current.mKey.wasPressedThisFrame)
             {
                 cash += 1000;
-            }  
+            }
+
+            if (Keyboard.current.lKey.wasPressedThisFrame)
+            {
+                maxPrice += 50f;
+            }
         }
     }
 

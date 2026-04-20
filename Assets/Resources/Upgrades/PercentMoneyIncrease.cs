@@ -9,7 +9,7 @@ public class PercentMoneyIncrease : Augment
 
     private void OnEnable()
     {
-        description = $"Gain {percentMoneyIncrease}% of current Cash\n(max {maxIncreaseAmount}$)";
+        description = $"Gain {percentMoneyIncrease}% of current Cash\n";//(max {maxIncreaseAmount}$)";
     }
 
     //public float maxIncrease;
