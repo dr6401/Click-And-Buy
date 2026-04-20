@@ -130,6 +130,7 @@ public class PowerUpInventoryManager : MonoBehaviour
             hotbarItems[selectedSlot].usablePowerUp = null;
             hotbarItems[selectedSlot].CleanUp();
         }
+        SoundManager.Instance.PlayClickedButtonSFX();
     }
     
 private void HandleHotbarInput()

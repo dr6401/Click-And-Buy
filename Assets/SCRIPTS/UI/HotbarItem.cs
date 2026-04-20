@@ -19,10 +19,11 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public RectTransform hotbarRoot;
     private GameObject ghost;
     private RectTransform ghostRect;
-
+    
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player hotbarItemSelectedFeedback;
     [SerializeField] private MMF_Player hotbarItemDeselectedFeedback;
+
     private void Start()
     {
         RectTransform tempTransform = GetComponent<RectTransform>();
@@ -80,6 +81,7 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         if (!hasPowerUp) return;
         PowerUpInventoryManager.Instance.UsePowerUp();
+        SoundManager.Instance?.PlayClickedButtonSFX();
     }
 
     public void OnPointerExit(PointerEventData data)
@@ -115,6 +117,7 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         hotbarItemDeselectedFeedback?.StopFeedbacks();
         hotbarItemSelectedFeedback?.PlayFeedbacks();
+        SoundManager.Instance?.PlayHoverButtonSFX();
     }
     
     private void PlayHotbarItemDeselectedFeedback()

@@ -32,9 +32,20 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip wheelSpinSFX;
     [Header("DEBUG")]
     [SerializeField] private bool dontPlayMusic = true;
+    
+    public static SoundManager Instance;
 
     private void Awake()
     {
+        
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        
         /*sfxAudioSourcePool = new AudioSource[sfxPoolSize];
         for (int i = 0; i < sfxPoolSize; i++)
         {
