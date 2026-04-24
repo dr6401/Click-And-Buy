@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6709474183954161642}
   - component: {fileID: 1035150477860320884}
   - component: {fileID: 3460782103999049356}
+  - component: {fileID: 786343984294951573}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -56,6 +57,7 @@ MonoBehaviour:
   cash: 1000
   effectiveCash: 0
   equity: 0
+  openProfitAndLoss: 0
   unrealizedProfit: 0
   unrealizedLoss: 0
   price: 0
@@ -144,3 +146,15 @@ MonoBehaviour:
   settingsMenu: {fileID: 0}
   inputBlocked: 0
   currentTimeScale: 1
+--- !u!114 &786343984294951573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790662015562793008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b22f162fd2d65438283c2452849cbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCurrencies

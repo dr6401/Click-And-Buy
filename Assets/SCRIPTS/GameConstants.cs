@@ -28,5 +28,5 @@ public static class GameConstants
         public static Color legendaryTierColor = new Color32(255, 219, 0, 255);
         
         public static bool isPlaytestBuild = true; // TODO - SET THIS TO FALSE WHEN RELEASING LIVE VERSIONS
-        public static bool isDevHacksEnabled = false; // TODO - SET THIS TO FALSE WHEN RELEASING LIVE/PLAYTEST VERSIONS
+        public static bool isDevHacksEnabled = true; // TODO - SET THIS TO FALSE WHEN RELEASING LIVE/PLAYTEST VERSIONS
 }

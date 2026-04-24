@@ -31,18 +31,20 @@ public class CommodityDisplay : MonoBehaviour
 
     private void CycleRight()
     {
-        index++;
-        index = (index + commodityDisplays.Count) % commodityDisplays.Count;
+        int currencyCount = Enum.GetValues(typeof(PlayerCurrencies.Currency)).Length;
+        int next = ((int)LevelManager.Instance.currentCurrency + 1 + currencyCount) % currencyCount;
+        LevelManager.Instance.currentCurrency = (PlayerCurrencies.Currency)next;
         ClearDisplay();
-        ShowDisplayOnIndex(index);
+        ShowDisplayOnIndex(next);
     }
     
     private void CycleLeft()
     {
-        index--;
-        index = (index + commodityDisplays.Count) % commodityDisplays.Count;
+        int currencyCount = Enum.GetValues(typeof(PlayerCurrencies.Currency)).Length;
+        int prev = ((int)LevelManager.Instance.currentCurrency - 1 + currencyCount) % currencyCount;
+        LevelManager.Instance.currentCurrency = (PlayerCurrencies.Currency)prev;
         ClearDisplay();
-        ShowDisplayOnIndex(index);
+        ShowDisplayOnIndex(prev);
     }
 
     private void ShowDisplayOnIndex(int displayIndex)

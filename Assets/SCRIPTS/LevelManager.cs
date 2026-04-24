@@ -41,6 +41,8 @@ public class LevelManager : MonoBehaviour
     private float currentOrderQuantity = 1f;
     private float maxOrderQuantity = 10f;
 
+    public PlayerCurrencies.Currency currentCurrency;
+
     public float amountToWin = 1000000f;
     public float minPrice = 10f;
     public float maxPrice = 200f;
@@ -171,6 +173,7 @@ public class LevelManager : MonoBehaviour
         PlayPriceMoveEvent(tutorialPump);
         SpawnNewCandle();
         badTradesSO = Resources.Load<BadTradeTextsSO>("BadTradesText/BadTradesTexts");
+        currentCurrency = PlayerCurrencies.Currency.forex;
     }
 
     // Update is called once per frame
