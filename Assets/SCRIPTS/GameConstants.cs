@@ -3,7 +3,7 @@ using UnityEngine;
 public static class GameConstants 
 {
         public static string SteamWishlistUrl = "https://store.steampowered.com/app/4197270/Black_Hole_Farmageddon/"; 
-        public static string FeedbackUrl = "https://forms.gle/wMvuht9Uigvaeabm9";
+        public static string FeedbackUrl = "https://forms.gle/WGR6EoDaMo4JoMmH9";
 
         public static uint steamworksAppId = 4197270;
 
@@ -28,5 +28,5 @@ public static class GameConstants
         public static Color legendaryTierColor = new Color32(255, 219, 0, 255);
         
         public static bool isPlaytestBuild = true; // TODO - SET THIS TO FALSE WHEN RELEASING LIVE VERSIONS
-        public static bool isDevHacksEnabled = true; // TODO - SET THIS TO FALSE WHEN RELEASING LIVE/PLAYTEST VERSIONS
+        public static bool isDevHacksEnabled = false; // TODO - SET THIS TO FALSE WHEN RELEASING LIVE/PLAYTEST VERSIONS
 }
