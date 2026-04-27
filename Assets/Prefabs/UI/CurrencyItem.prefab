@@ -2956,6 +2956,7 @@ MonoBehaviour:
   isUnlocked: 0
   unlockCostText: {fileID: 2351348213604585422}
   icon: {fileID: 8319415667901586318}
+  tooltip: {fileID: 2402014687647813112}
 --- !u!225 &7820553818381242035
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4018,6 +4019,7 @@ GameObject:
   - component: {fileID: 1016765066362547893}
   - component: {fileID: 9128159718906049436}
   - component: {fileID: 6210267518252479569}
+  - component: {fileID: 2402014687647813112}
   - component: {fileID: 7605359524510886957}
   m_Layer: 5
   m_Name: Toolltip
@@ -4047,7 +4049,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 303, y: 0}
   m_SizeDelta: {x: 250, y: 131.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9128159718906049436
@@ -4088,6 +4090,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2402014687647813112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8668244091406665018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef9c8d1113f7304da2b7b8549f5b095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrencyItemTooltip
+  name: {fileID: 234277778315467566}
+  description: {fileID: 4705202939877424161}
+  unlockStatus: {fileID: 2351348213604585422}
+  openTooltipFeedback: {fileID: 3567461889156618186}
 --- !u!223 &7605359524510886957
 Canvas:
   m_ObjectHideFlags: 0
