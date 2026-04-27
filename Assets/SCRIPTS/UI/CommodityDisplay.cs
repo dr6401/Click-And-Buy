@@ -8,6 +8,19 @@ public class CommodityDisplay : MonoBehaviour
     public List<GameObject> commodityDisplays;
     public int index;
 
+    public static CommodityDisplay Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
     private void Start()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -43,7 +56,6 @@ public class CommodityDisplay : MonoBehaviour
         int currencyCount = Enum.GetValues(typeof(PlayerCurrencies.Currency)).Length;
         int prev = ((int)LevelManager.Instance.currentCurrency - 1 + currencyCount) % currencyCount;
         LevelManager.Instance.currentCurrency = (PlayerCurrencies.Currency)prev;
-        ClearDisplay();
         ShowDisplayOnIndex(prev);
     }
 
@@ -51,6 +63,14 @@ public class CommodityDisplay : MonoBehaviour
     {
         commodityDisplays[displayIndex].SetActive(true);
     }
+
+    public void ShowDisplay(PlayerCurrencies.Currency currency)
+    {
+        ClearDisplay();
+        int indx = (int)currency;
+        ShowDisplayOnIndex(indx);
+    }
+    
 
     private void ClearDisplay()
     {

@@ -27,12 +27,23 @@ public class CurrencyItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     void Start()
     {
         icon.sprite = currencyStats.GetIconOfCurrency(currency);
+        if (PlayerCurrencies.Instance != null)
+        {
+            isUnlocked = PlayerCurrencies.Instance.currencyUnlocks[currency];   
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!isUnlocked)
+        {
+            // Make Unclickable/Locked
+        }
+        else
+        {
+            // Make Clickable/Unlocked
+        }
     }
     
     public void OnPointerEnter(PointerEventData data)
@@ -45,12 +56,17 @@ public class CurrencyItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        // TODO Switch currency chart
+        SwitchDisplayToThisCurrency();
         //SoundManager.Instance?.PlayClickedButtonSFX();
     }
 
     public void OnPointerExit(PointerEventData data)
     {
         tooltip.gameObject.SetActive(false);
+    }
+
+    public void SwitchDisplayToThisCurrency()
+    {
+        CommodityDisplay.Instance?.ShowDisplay(currency);
     }
 }
