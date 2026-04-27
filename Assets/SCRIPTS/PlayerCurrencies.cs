@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCurrencies : MonoBehaviour
@@ -28,7 +30,16 @@ public class PlayerCurrencies : MonoBehaviour
         infinityCoin,
         godCoin
     }
+    
+    
+    public Dictionary<Currency, bool> currencyUnlocks = new Dictionary<Currency, bool>();
 
+
+    private void Awake()
+    {
+        LockAllCurrencies();
+    }
+    
     public void AddCurrency(float amount, Currency currency)
     {
         switch (currency)
@@ -64,5 +75,14 @@ public class PlayerCurrencies : MonoBehaviour
                 godCoinTokens += amount;
                 break;
         }
+    }
+
+    public void LockAllCurrencies()
+    {
+        foreach (Currency currency in System.Enum.GetValues(typeof(Currency)))
+        {
+            currencyUnlocks[currency] = false;
+        }
+        currencyUnlocks[0] = true; // Unlock base currency
     }
 }
