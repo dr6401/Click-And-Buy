@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class CurrencyItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private PlayerCurrencies.Currency currency;
+    public PlayerCurrencies.Currency currency;
     [SerializeField] private float unlockCost;
-    [SerializeField] private CurrencyStats currencyStats;
+    [SerializeField] public CurrencyStats currencyStats;
     
     [SerializeField] private bool isUnlocked;
     

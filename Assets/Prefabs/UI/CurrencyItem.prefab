@@ -2689,7 +2689,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 63.0859, y: -12.25}
-  m_SizeDelta: {x: 52.02, y: 24.21}
+  m_SizeDelta: {x: 60, y: 24.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3608467475593061682
 CanvasRenderer:
@@ -2869,7 +2869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100.0959, y: -12.25}
+  m_AnchoredPosition: {x: 104.0859, y: -12.25}
   m_SizeDelta: {x: 22, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3951023841445769443
@@ -4205,9 +4205,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef9c8d1113f7304da2b7b8549f5b095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyItemTooltip
+  currency: 0
   name: {fileID: 234277778315467566}
   description: {fileID: 4705202939877424161}
-  unlockStatus: {fileID: 2351348213604585422}
+  unlockCost: {fileID: 2351348213604585422}
+  unlockCurrencyImage: {fileID: 7079151500987065740}
   openTooltipFeedback: {fileID: 3567461889156618186}
 --- !u!223 &7605359524510886957
 Canvas:

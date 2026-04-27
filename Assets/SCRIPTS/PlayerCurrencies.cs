@@ -45,6 +45,10 @@ public class PlayerCurrencies : MonoBehaviour
 
         Instance = this;
         LockAllCurrencies();
+        foreach (var currency in currencyUnlocks)
+        {
+            Debug.Log($"Currency: {currency.Key}, unlock Status:  {currency.Value}");
+        }
     }
     
     public void AddCurrency(float amount, Currency currency)
@@ -91,5 +95,10 @@ public class PlayerCurrencies : MonoBehaviour
             currencyUnlocks[currency] = false;
         }
         currencyUnlocks[0] = true; // Unlock base currency
+    }
+
+    public bool IsCurrencyUnlocked(Currency currency)
+    {
+        return currencyUnlocks[currency];
     }
 }

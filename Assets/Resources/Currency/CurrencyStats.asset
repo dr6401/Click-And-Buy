@@ -12,24 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 210b799ecebad4c4c80701961e36995b, type: 3}
   m_Name: CurrencyStats
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyStats
-  currencyIcons:
+  currencyEntries:
   - currency: 0
+    unlockAmount: 0
     icon: {fileID: 21300000, guid: 6ecabe3628ba6744bba37a70cad35009, type: 3}
   - currency: 1
+    unlockAmount: 10
     icon: {fileID: 21300000, guid: 5d2d36aca89920b4896da44395321ca3, type: 3}
   - currency: 2
+    unlockAmount: 50
     icon: {fileID: 21300000, guid: 232fff5eef27837499bb53abca6a779f, type: 3}
   - currency: 3
+    unlockAmount: 100
     icon: {fileID: 21300000, guid: 2e0428cca5b225e4b99334809ed0f54c, type: 3}
   - currency: 4
+    unlockAmount: 250
     icon: {fileID: 21300000, guid: 51dab48e05ce12144bb4f43096516083, type: 3}
   - currency: 5
+    unlockAmount: 500
     icon: {fileID: 21300000, guid: 4ee5346c12a6f3a4b99cb3651b0bcaef, type: 3}
   - currency: 6
+    unlockAmount: 1000
     icon: {fileID: 21300000, guid: 90a8d4dea47e0884fb602cf3ae6dd217, type: 3}
   - currency: 7
+    unlockAmount: 1500
     icon: {fileID: 21300000, guid: 1eb3933941cfd58418de522ccb216ddb, type: 3}
   - currency: 8
+    unlockAmount: 2500
     icon: {fileID: 21300000, guid: 0b06fa0586ab75c47984c4da9ea16017, type: 3}
   - currency: 9
+    unlockAmount: 3000
     icon: {fileID: 21300000, guid: db2ada8053a319c47bcae68f8ac4ce38, type: 3}

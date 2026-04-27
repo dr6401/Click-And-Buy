@@ -94,7 +94,7 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void CleanUp()
     {
         chargesLeftText.text = "";
-        Debug.Log($"chargesLeftText.text: {chargesLeftText.text}");
+        //Debug.Log($"chargesLeftText.text: {chargesLeftText.text}");
         usablePowerUp = null;
         icon.sprite = null;
         
@@ -109,7 +109,7 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         hasPowerUp = false;
         
         tooltip.gameObject.SetActive(false);
-        Debug.Log($"Shit cleaned up");
+        //Debug.Log($"Shit cleaned up");
     }
 
     private void PlayHotbarItemSelectedFeedback()
