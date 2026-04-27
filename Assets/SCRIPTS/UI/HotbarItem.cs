@@ -81,7 +81,6 @@ public class HotbarItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         if (!hasPowerUp) return;
         PowerUpInventoryManager.Instance.UsePowerUp();
-        SoundManager.Instance?.PlayClickedButtonSFX();
     }
 
     public void OnPointerExit(PointerEventData data)

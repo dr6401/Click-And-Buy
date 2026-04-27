@@ -2901,6 +2901,7 @@ GameObject:
   - component: {fileID: 1484551928266187108}
   - component: {fileID: 7820553818381242035}
   - component: {fileID: 5186396072044872971}
+  - component: {fileID: 1851554436482430802}
   m_Layer: 5
   m_Name: CurrencyItem
   m_TagString: Untagged
@@ -2957,6 +2958,7 @@ MonoBehaviour:
   unlockCostText: {fileID: 2351348213604585422}
   icon: {fileID: 8319415667901586318}
   tooltip: {fileID: 2402014687647813112}
+  hoverFeedback: {fileID: 513138160564292181}
 --- !u!225 &7820553818381242035
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2999,6 +3001,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1851554436482430802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7387346294254044697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e7bc9c39042e54992ab707474c8c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonUI
+  isUpgradeButton: 0
+  isEndlessUpgradeButton: 0
+  hoverFeedback: {fileID: 513138160564292181}
 --- !u!1 &7516261881029969406
 GameObject:
   m_ObjectHideFlags: 0
@@ -3822,7 +3839,7 @@ MonoBehaviour:
         AnimateScaleDuration: 0.2
         AnimatePositionSpeed: 1
         RemapCurveZero: 0
-        RemapCurveOne: 2
+        RemapCurveOne: 2.67
         Offset: 0
         AnimateX: 1
         AnimateScaleTweenX:
@@ -4037,7 +4054,7 @@ RectTransform:
   m_GameObject: {fileID: 8668244091406665018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6484547873779145081}
@@ -4049,7 +4066,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 303, y: 0}
+  m_AnchoredPosition: {x: 392, y: 15}
   m_SizeDelta: {x: 250, y: 131.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9128159718906049436

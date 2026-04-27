@@ -170,7 +170,7 @@ private void HandleHotbarInput()
     {
         int index = hotbarItems.IndexOf(hotbarItem);
         selectedSlot = index;
-        GameEvents.OnCurrentHotbarSlotChanged(hotbarItems[selectedSlot]);
+        //GameEvents.OnCurrentHotbarSlotChanged(hotbarItems[selectedSlot]);
     }
 
     public bool IsUsablePowerUpInInventory(Augment augment)

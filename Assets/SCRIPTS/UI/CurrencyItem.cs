@@ -1,4 +1,5 @@
 using System;
+using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,7 +17,7 @@ public class CurrencyItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     [SerializeField] private Image icon;
     
     [SerializeField] public CurrencyItemTooltip tooltip;
-
+    //[SerializeField] private MMF_Player hoverFeedback;
 
     private void Awake()
     {
@@ -37,14 +38,15 @@ public class CurrencyItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     public void OnPointerEnter(PointerEventData data)
     {
         //Debug.Log($"Tooltip Time!");
-        //if (PauseManager.Instance.ShouldInputBeBlocked()) return;
+        if (PauseManager.Instance.ShouldInputBeBlocked()) return;
         tooltip.gameObject.SetActive(true);
+        //hoverFeedback?.PlayFeedbacks();
     }
     
     public void OnPointerClick(PointerEventData eventData)
     {
         // TODO Switch currency chart
-        SoundManager.Instance?.PlayClickedButtonSFX();
+        //SoundManager.Instance?.PlayClickedButtonSFX();
     }
 
     public void OnPointerExit(PointerEventData data)
