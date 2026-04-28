@@ -29,7 +29,7 @@ public class CurrencyItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         icon.sprite = currencyStats.GetIconOfCurrency(currency);
         if (PlayerCurrencies.Instance != null)
         {
-            isUnlocked = PlayerCurrencies.Instance.currencyUnlocks[currency];   
+            isUnlocked = PlayerCurrencies.Instance.IsCurrencyUnlocked(currency);   
         }
     }
 

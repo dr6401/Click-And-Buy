@@ -42,3 +42,19 @@ public class CurrencyEntry
     public float unlockAmount;
     public Sprite icon;
 }
+
+[System.Serializable]
+public class CurrencyRuntimeEntry
+{
+    public PlayerCurrencies.Currency currency;
+    public float currentAmount;
+    public float unlockAmount;
+    public bool isUnlocked;
+    
+    public CurrencyRuntimeEntry(PlayerCurrencies.Currency currency)
+    {
+        this.currency = currency;
+        this.currentAmount = 0;
+        this.isUnlocked = false;
+    }
+}

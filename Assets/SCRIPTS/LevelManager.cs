@@ -60,6 +60,8 @@ public class LevelManager : MonoBehaviour
     private float marginCallTimer;
     private float marginCallInterval = 0.001f;
     
+    private CurrencyStats currencyStats;
+    
     // Combo System
     private float comboTimer;
     private int comboAmount = 0;
@@ -126,7 +128,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject loseCanvas;
     [SerializeField] private TMP_Text priceText;
     [SerializeField] private TMP_Text cashText;
-    [SerializeField] private TMP_Text targetText;
+    [SerializeField] private TMP_Text currentTokensText;
+    [SerializeField] private Image currentTokensImage;
     [SerializeField] private TMP_Text openProfitLossText;
     [SerializeField] private TMP_Text cashOutText;
     [SerializeField] private Button cashOutButton;
@@ -156,6 +159,8 @@ public class LevelManager : MonoBehaviour
         }
 
         Instance = this;
+        
+        currencyStats = Resources.Load<CurrencyStats>("Currency/CurrencyStats");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -249,7 +254,8 @@ public class LevelManager : MonoBehaviour
 
         priceText.text = $"Price: {NumberFormatter.FormatDecimalNumber(price)}$";
         cashText.text = $"Cash: " + NumberFormatter.FormatDecimalNumber(effectiveCash) + "$";
-        targetText.text = $"Target: {NumberFormatter.FormatDecimalNumber(amountToWin)}$";
+        currentTokensText.text = $"Tokens: {NumberFormatter.FormatDecimalNumber(PlayerCurrencies.Instance.GetTokensAmount(currentCurrency))}";
+        currentTokensImage.sprite = currencyStats.GetIconOfCurrency(currentCurrency);
         openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfitAndLoss)}$";
         cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier))}$";
         cashOutText.color = GetColorForCurrentTier();

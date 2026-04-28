@@ -31,8 +31,7 @@ public class PlayerCurrencies : MonoBehaviour
         godCoin
     }
     
-    
-    public Dictionary<Currency, bool> currencyUnlocks = new Dictionary<Currency, bool>();
+    public List<CurrencyRuntimeEntry> currencyRuntimeData = new List<CurrencyRuntimeEntry>();
 
 
     private void Awake()
@@ -44,10 +43,12 @@ public class PlayerCurrencies : MonoBehaviour
         }
 
         Instance = this;
+
+        InitializeCurrencyRuntimeData();
         LockAllCurrencies();
-        foreach (var currency in currencyUnlocks)
+        foreach (var currency in currencyRuntimeData)
         {
-            Debug.Log($"Currency: {currency.Key}, unlock Status:  {currency.Value}");
+            Debug.Log($"Currency: {currency.currency}, unlock Status:  {currency.isUnlocked}");
         }
     }
     
@@ -88,17 +89,44 @@ public class PlayerCurrencies : MonoBehaviour
         }
     }
 
+    public void InitializeCurrencyRuntimeData()
+    {
+        foreach (Currency cur in System.Enum.GetValues(typeof(Currency)))
+        {
+            currencyRuntimeData.Add(
+                new CurrencyRuntimeEntry(cur));
+        }
+    }
+
+    public float GetTokensAmount(Currency currency)
+    {
+        return GetCurrencyRuntimeEntry(currency).currentAmount;
+    }
+
     public void LockAllCurrencies()
     {
-        foreach (Currency currency in System.Enum.GetValues(typeof(Currency)))
+        foreach (CurrencyRuntimeEntry currency in currencyRuntimeData)
         {
-            currencyUnlocks[currency] = false;
+            currency.isUnlocked = false;
         }
-        currencyUnlocks[0] = true; // Unlock base currency
+        currencyRuntimeData[0].isUnlocked = true; // Unlock base currency
     }
 
     public bool IsCurrencyUnlocked(Currency currency)
     {
-        return currencyUnlocks[currency];
+        return GetCurrencyRuntimeEntry(currency).isUnlocked;
+    }
+
+    public CurrencyRuntimeEntry GetCurrencyRuntimeEntry(Currency currency)
+    {
+        foreach (var curRuntimeEntry in currencyRuntimeData)
+        {
+            if (curRuntimeEntry.currency == currency)
+            {
+                return curRuntimeEntry;
+            }
+        }
+        Debug.LogWarning($"There is NO CURRENCY ENTRY for currency: {currency}");
+        return null;
     }
 }
