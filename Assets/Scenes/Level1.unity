@@ -705,6 +705,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2033577181}
     m_Modifications:
+    - target: {fileID: 234277778315467566, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: m_text
+      value: Fivex
+      objectReference: {fileID: 0}
     - target: {fileID: 567379165572606330, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1883,6 +1887,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2033577181}
     m_Modifications:
+    - target: {fileID: 234277778315467566, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: m_text
+      value: Poop Coin
+      objectReference: {fileID: 0}
     - target: {fileID: 567379165572606330, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3756,7 +3764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2393755337418527119, guid: ffc798a696153cd40acf36edb648d317, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -238.00006
+      value: -238.00003
       objectReference: {fileID: 0}
     - target: {fileID: 2393755337418527119, guid: ffc798a696153cd40acf36edb648d317, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5938,6 +5946,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2033577181}
     m_Modifications:
+    - target: {fileID: 234277778315467566, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: m_text
+      value: Moon Coin
+      objectReference: {fileID: 0}
     - target: {fileID: 567379165572606330, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -8160,6 +8172,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2033577181}
     m_Modifications:
+    - target: {fileID: 234277778315467566, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: m_text
+      value: Time Coin
+      objectReference: {fileID: 0}
     - target: {fileID: 567379165572606330, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -9450,6 +9466,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2033577181}
     m_Modifications:
+    - target: {fileID: 234277778315467566, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: m_text
+      value: GOD Coin
+      objectReference: {fileID: 0}
     - target: {fileID: 567379165572606330, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -11001,6 +11021,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2033577181}
     m_Modifications:
+    - target: {fileID: 234277778315467566, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: m_text
+      value: Amazoom
+      objectReference: {fileID: 0}
     - target: {fileID: 567379165572606330, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -12147,6 +12171,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2033577181}
     m_Modifications:
+    - target: {fileID: 234277778315467566, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: m_text
+      value: Tesluck
+      objectReference: {fileID: 0}
     - target: {fileID: 567379165572606330, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -15541,6 +15569,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2033577181}
     m_Modifications:
+    - target: {fileID: 234277778315467566, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: m_text
+      value: Forex
+      objectReference: {fileID: 0}
     - target: {fileID: 567379165572606330, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -15707,6 +15739,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2033577181}
     m_Modifications:
+    - target: {fileID: 234277778315467566, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: m_text
+      value: Toy-Yoda
+      objectReference: {fileID: 0}
     - target: {fileID: 567379165572606330, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -18153,6 +18189,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2033577181}
     m_Modifications:
+    - target: {fileID: 234277778315467566, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: m_text
+      value: Infinity Coin
+      objectReference: {fileID: 0}
     - target: {fileID: 567379165572606330, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
