@@ -51,6 +51,7 @@ public class LevelManager : MonoBehaviour
     public float maxPriceIncreaseInterval = 10f;
     public float maxPriceIncreaseAmount = 1f;
 
+    public float baseComboMultiplier = 0.01f;
     public float comboBonus = 0f;
 
     private float passiveIncomeTimer;
@@ -119,6 +120,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private DamageNumber textDamageNumbersScatterPrefab;
     [SerializeField] private DamageNumber textDamageNumbersComboPrefab;
     [SerializeField] private DamageNumber textDamageNumbersComboBreakerPrefab;
+    [SerializeField] private DamageNumber iconDamageNumbersTokensPrefab;
 
     public bool hasLevelEnded = false;
     public bool isInputBlocked = false;
@@ -622,11 +624,18 @@ public class LevelManager : MonoBehaviour
             comboAmount++;
             if (comboAmount > 1) // If combo is at least 2
             {
-                float comboBonusMoney = comboBonus * 0.01f * trade.GetUnrealizedProfit();
+                float comboBonusMoney = comboBonus * baseComboMultiplier * trade.GetUnrealizedProfit();
                 if (comboBonusMoney >= 1) // and we would get at least 1$ from bonus
                 {
                     Debug.Log($"trade.GetUnrealizedProfit: {trade.GetUnrealizedProfit()},  comboBonus: {comboBonus}, comboBonusMoney: {comboBonusMoney}");
-                    SpawnReceivedMoneyDamageNumbers(comboBonusMoney, anchor: new Vector2(-300f, 25f));   
+                    SpawnReceivedMoneyDamageNumbers(comboBonusMoney, anchor: new Vector2(-300f, 25f));
+                    
+                    float comboBonusTokens = comboBonusMoney * 0.005f;
+                    if (comboBonusTokens >= 0.01f)
+                    {
+                        PlayerCurrencies.Instance.AddCurrency(comboBonusTokens, currentCurrency);
+                        SpawnReceivedTokensDamageNumbers(comboBonusTokens, icon: currencyStats.GetIconOfCurrency(currentCurrency));
+                    }
                 }
                 else
                 {
@@ -895,8 +904,14 @@ public class LevelManager : MonoBehaviour
         RectTransform gameCanvas = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
         DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, position, anchor, amount);
     }
+
+    public void SpawnReceivedTokensDamageNumbers(float amount, RectTransform position = null, Vector2 anchor = new Vector2(), Sprite icon = null)
+    {
+        SpawnTextDamageNumbers("",  damageNumberPrefab: iconDamageNumbersTokensPrefab, spawnIcon: true, number: amount, icon: icon);
+        Debug.Log($"Spawning received TOKENS prefab");
+    }
     
-    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null, DamageNumber damageNumberPrefab = null, Color? color = null, bool spawnAtLatestCandle = false, bool scatterTextOnSpawn = false, bool spawnComboText = false, float number = 0)
+    public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null, DamageNumber damageNumberPrefab = null, Color? color = null, bool spawnAtLatestCandle = false, bool scatterTextOnSpawn = false, bool spawnComboText = false, bool spawnIcon = false, float number = 0, Sprite icon = null)
     {
         if (position == null) position = cashText.rectTransform;
         if (spawnAtLatestCandle) position = currentCandle;
@@ -924,14 +939,31 @@ public class LevelManager : MonoBehaviour
             }
             newDamageNumber.lifetime = PlayerStats.Instance.maxComboDuration;
         }
+        else if (spawnIcon)
+        {
+            anchor = new Vector2(-300f, -25f);
+            newDamageNumber = damageNumberPrefab.SpawnGUI(canvasParent, position, anchor, number);
+            newDamageNumber.lifetime = PlayerStats.Instance.maxComboDuration;
+            Image dmgNumIcon = newDamageNumber.GetComponentInChildren<Image>();
+            if (dmgNumIcon != null)
+            {
+                dmgNumIcon.sprite = icon;   
+            }
+            else
+            {
+                Debug.Log($"No Image component on dmg numbers object");
+            }
+        }
         else
         {
             newDamageNumber = damageNumberPrefab.SpawnGUI(canvasParent, position, anchor, text);
+            Debug.Log($"Spawned basic damageNumberPrefab");
         }
         if (color.HasValue)
         {
             newDamageNumber.SetColor(color.Value);
         }
+        Debug.Log($"Spawned dmgNumbersProf with prefab: {damageNumberPrefab.ToString()}");
     }
 
     public void SpawnComboTextDamageNumbers(string text = "", Color? color = null, DamageNumber dmgNumberPrefab = null, float number = 0)

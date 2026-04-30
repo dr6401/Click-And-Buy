@@ -63,6 +63,7 @@ MonoBehaviour:
   price: 0
   upgradeOfferTarget: 500
   leverage: 1
+  currentCurrency: 0
   amountToWin: 1000000
   minPrice: 10
   maxPrice: 20
@@ -88,13 +89,15 @@ MonoBehaviour:
   textDamageNumbersScatterPrefab: {fileID: 8690564695306702212, guid: fe3ca7e15a0aa324b83c9285834bd7ed, type: 3}
   textDamageNumbersComboPrefab: {fileID: 8690564695306702212, guid: 01be585720800d94f95af9ba1ea2e38d, type: 3}
   textDamageNumbersComboBreakerPrefab: {fileID: 8690564695306702212, guid: 30dd7737dfe4c5a4690b93a8ffa949de, type: 3}
+  iconDamageNumbersTokensPrefab: {fileID: 2909909947781137645, guid: e4708ef77f311094ab7e2478c7f562c2, type: 3}
   hasLevelEnded: 0
   isInputBlocked: 0
   victoryCanvas: {fileID: 0}
   loseCanvas: {fileID: 0}
   priceText: {fileID: 0}
   cashText: {fileID: 0}
-  targetText: {fileID: 0}
+  currentTokensText: {fileID: 0}
+  currentTokensImage: {fileID: 0}
   openProfitLossText: {fileID: 0}
   cashOutText: {fileID: 0}
   cashOutButton: {fileID: 0}
@@ -158,3 +161,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b22f162fd2d65438283c2452849cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCurrencies
+  forexTokens: 0
+  fivexTokens: 0
+  amazoomTokens: 0
+  toyYodaTokens: 0
+  tesluckTokens: 0
+  moonCoinTokens: 0
+  poopCoinTokens: 0
+  timeCoinTokens: 0
+  infinityCoinTokens: 0
+  godCoinTokens: 0
+  currencyRuntimeData: []

@@ -52,8 +52,8 @@ MonoBehaviour:
   - Welcome to\n <size=200%>Click and Buy</size>
   - Issue a "Buy" trade when price is low and you think it will go up.
   - Issue a "Sell" trade when price is high and you think it will go down.
-  - Active trades are displayed in the panel below.\n\nClick "Close Trade" (right
-    most button in active trades) to lock in profits and return your initial investment.
+  - Click "Close Trade" (right most button in active trades) to lock in profits and
+    return your initial investment.\n\nActive trades are displayed in the panel below.
   - If a trade performs badly and loses more than your initial investment, your cash
     reserves will cover the loss.\n\nIf a loss is big enough and there's no more
     cash on hand, the losing trade will auto-close and you will lose all invested
