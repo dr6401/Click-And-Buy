@@ -54,6 +54,10 @@ public class CurrencyRuntimeEntry
     public CurrencyRuntimeEntry(PlayerCurrencies.Currency currency)
     {
         this.currency = currency;
+        
+        CurrencyStats currencyStats = Resources.Load<CurrencyStats>("Currency/CurrencyStats");
+        this.unlockAmount = currencyStats.GetUnlockPrice(currency);
+        
         this.currentAmount = 0;
         this.isUnlocked = false;
     }

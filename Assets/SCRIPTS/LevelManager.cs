@@ -61,7 +61,7 @@ public class LevelManager : MonoBehaviour
     private float marginCallTimer;
     private float marginCallInterval = 0.001f;
     
-    private CurrencyStats currencyStats;
+    public CurrencyStats currencyStats;
     
     // Combo System
     private float comboTimer;
@@ -346,6 +346,12 @@ public class LevelManager : MonoBehaviour
                 price = priceEvent.targetPrice;
                 activeEvent.active = false;
                 Debug.Log($"Event: {priceEvent.name} finished at price: {price} (priceEvent.targetPrice was: {priceEvent.targetPrice})!");
+            }
+
+            if (Mathf.Abs(price - priceEvent.targetPrice) <= priceEvent.targetPrice * 0.05f) // If price is 5% around the target, stop the event
+            {
+                activeEvent.active = false;
+                Debug.Log($"Event: {priceEvent.name} finished at price: {price} because the price was close enough to target ({priceEvent.targetPrice})");
             }
         }
         else

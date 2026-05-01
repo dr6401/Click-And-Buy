@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CurrencyItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public PlayerCurrencies.Currency currency;
     [SerializeField] private float unlockCost;
@@ -15,6 +15,9 @@ public class CurrencyItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     
     [SerializeField] private TMP_Text unlockCostText;
     [SerializeField] private Image icon;
+    [SerializeField] private Image lockedOverlay;
+
+    private Button button; 
     
     [SerializeField] public CurrencyItemTooltip tooltip;
     //[SerializeField] private MMF_Player hoverFeedback;
@@ -30,7 +33,9 @@ public class CurrencyItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         if (PlayerCurrencies.Instance != null)
         {
             isUnlocked = PlayerCurrencies.Instance.IsCurrencyUnlocked(currency);   
+            unlockCost = PlayerCurrencies.Instance.GetCurrencyUnlockAmount(currency);
         }
+        button = GetComponent<Button>();
     }
 
     // Update is called once per frame
@@ -38,11 +43,11 @@ public class CurrencyItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
     {
         if (!isUnlocked)
         {
-            // Make Unclickable/Locked
+            lockedOverlay.gameObject.SetActive(true);
         }
         else
         {
-            // Make Clickable/Unlocked
+            lockedOverlay.gameObject.SetActive(false);
         }
     }
     
@@ -54,11 +59,11 @@ public class CurrencyItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
         //hoverFeedback?.PlayFeedbacks();
     }
     
-    public void OnPointerClick(PointerEventData eventData)
+    /*public void OnPointerClick(PointerEventData eventData)
     {
         SwitchDisplayToThisCurrency();
         //SoundManager.Instance?.PlayClickedButtonSFX();
-    }
+    }*/
 
     public void OnPointerExit(PointerEventData data)
     {
@@ -67,6 +72,26 @@ public class CurrencyItem : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     public void SwitchDisplayToThisCurrency()
     {
+        if (!isUnlocked)
+        {
+            TryToUnlockCurrency();
+        }
         CommodityDisplay.Instance?.ShowDisplay(currency);
+    }
+
+    public void TryToUnlockCurrency()
+    {
+        PlayerCurrencies.Currency currencyToUnlockWith = currency - 1;
+        if (PlayerCurrencies.Instance.GetTokensAmount(currencyToUnlockWith) >= unlockCost)
+        {
+            PlayerCurrencies.Instance.AddCurrency(-unlockCost, currencyToUnlockWith);
+            PlayerCurrencies.Instance.UnlockCurrency(currency);
+            isUnlocked = true;
+            SwitchDisplayToThisCurrency();
+        }
+        else
+        {
+            GameEvents.onNotEnoughTokens?.Invoke();
+        }
     }
 }

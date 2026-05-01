@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCurrencies : MonoBehaviour
@@ -50,10 +51,20 @@ public class PlayerCurrencies : MonoBehaviour
 
     public void InitializeCurrencyRuntimeData()
     {
-        foreach (Currency cur in System.Enum.GetValues(typeof(Currency)))
+        Debug.Log($"Initializing Currency RuntimeData");
+        foreach (Currency cur in Enum.GetValues(typeof(Currency)))
         {
-            currencyRuntimeData.Add(
-                new CurrencyRuntimeEntry(cur));
+            CurrencyRuntimeEntry entry = new CurrencyRuntimeEntry(cur);
+            /*foreach (CurrencyEntry curEntry in LevelManager.Instance.currencyStats.currencyEntries)
+            {
+                if (entry.currency == curEntry.currency)
+                {
+                    entry.unlockAmount = curEntry.unlockAmount;
+                    break;
+                }
+            }*/
+            currencyRuntimeData.Add(entry);
+            Debug.Log($"Added Currency Entry: {cur} with unlock amount: {entry.unlockAmount}");
         }
     }
 
@@ -63,6 +74,18 @@ public class PlayerCurrencies : MonoBehaviour
         return GetCurrencyRuntimeEntry(currency).currentAmount;
     }
 
+    public float GetCurrencyUnlockAmount(Currency currency)
+    {
+        foreach (var curRuntimeEntry in currencyRuntimeData)
+        {
+            if (curRuntimeEntry.currency == currency)
+            {
+                return curRuntimeEntry.unlockAmount;
+            }
+        }
+        return 100;
+    }
+
     public void LockAllCurrencies()
     {
         foreach (CurrencyRuntimeEntry currency in currencyRuntimeData)
@@ -70,6 +93,18 @@ public class PlayerCurrencies : MonoBehaviour
             currency.isUnlocked = false;
         }
         currencyRuntimeData[0].isUnlocked = true; // Unlock base currency
+    }
+
+    public void UnlockCurrency(Currency currency)
+    {
+        foreach (var curRuntimeEntry in currencyRuntimeData)
+        {
+            if (curRuntimeEntry.currency == currency)
+            {
+                curRuntimeEntry.isUnlocked = true;
+                return;
+            }
+        }
     }
 
     public bool IsCurrencyUnlocked(Currency currency)

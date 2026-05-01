@@ -69,9 +69,12 @@ MonoBehaviour:
   maxPrice: 20
   maxPriceIncreaseInterval: 10
   maxPriceIncreaseAmount: 1
+  baseComboMultiplier: 0.01
   comboBonus: 0
-  currentCashOutTier: 0
-  currentCashOutPrice: 300
+  currencyStats: {fileID: 11400000, guid: f391657887d2ee4438730caf0f23e186, type: 2}
+  currentBasicCashOutTier: 0
+  currentDivineCashOutTier: 4
+  currentBasicCashOutPrice: 300
   currentRespinPrice: 50
   stopGeneratingPrice: 0
   activeTrades: []
@@ -97,9 +100,9 @@ MonoBehaviour:
   priceText: {fileID: 0}
   cashText: {fileID: 0}
   currentTokensText: {fileID: 0}
-  currentTokensImage: {fileID: 0}
   openProfitLossText: {fileID: 0}
-  cashOutText: {fileID: 0}
+  basicCashOutText: {fileID: 0}
+  divineCashOutText: {fileID: 0}
   cashOutButton: {fileID: 0}
   multiplierText: {fileID: 0}
   streakBonusText: {fileID: 0}
@@ -161,14 +164,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b22f162fd2d65438283c2452849cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCurrencies
-  forexTokens: 0
-  fivexTokens: 0
-  amazoomTokens: 0
-  toyYodaTokens: 0
-  tesluckTokens: 0
-  moonCoinTokens: 0
-  poopCoinTokens: 0
-  timeCoinTokens: 0
-  infinityCoinTokens: 0
-  godCoinTokens: 0
   currencyRuntimeData: []
