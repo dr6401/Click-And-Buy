@@ -6,6 +6,8 @@ public class ActivePriceEvent
     
     public float startPrice;
     public float elapsed;
+
+    public bool isTargetHigherThanCurrentPrice;
     
     public bool active;
 }

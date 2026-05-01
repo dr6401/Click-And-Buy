@@ -348,10 +348,11 @@ public class LevelManager : MonoBehaviour
                 Debug.Log($"Event: {priceEvent.name} finished at price: {price} (priceEvent.targetPrice was: {priceEvent.targetPrice})!");
             }
 
-            if (Mathf.Abs(price - priceEvent.targetPrice) <= priceEvent.targetPrice * 0.05f) // If price is 5% around the target, stop the event
+            if (activeEvent.isTargetHigherThanCurrentPrice && price > activeEvent.data.targetPrice ||
+                !activeEvent.isTargetHigherThanCurrentPrice && price < activeEvent.data.targetPrice)
             {
                 activeEvent.active = false;
-                Debug.Log($"Event: {priceEvent.name} finished at price: {price} because the price was close enough to target ({priceEvent.targetPrice})");
+                Debug.Log($"Event: {priceEvent.name} finished at price: {price} because the price was over the target ({priceEvent.targetPrice})");
             }
         }
         else
@@ -877,6 +878,8 @@ public class LevelManager : MonoBehaviour
 
         activeEvent.startPrice = price;
         activeEvent.elapsed = 0;
+
+        activeEvent.isTargetHigherThanCurrentPrice = price < priceMoveEvent.targetPrice;
 
         activeEvent.active = true;
     }
