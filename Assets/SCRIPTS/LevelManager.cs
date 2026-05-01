@@ -56,6 +56,11 @@ public class LevelManager : MonoBehaviour
 
     private float passiveIncomeTimer;
 
+    private float trend;
+    private float maxTrendStrength = 0.2f;
+    private float generateNewTrendTimer;
+    private float trendInterval = 5f;
+    
     private float generatePriceTimer;
     private float genetartePriceInterval = 0.1f;
     private float marginCallTimer;
@@ -193,6 +198,7 @@ public class LevelManager : MonoBehaviour
         generatePriceTimer += Time.deltaTime;
         marginCallTimer += Time.deltaTime;
         passiveIncomeTimer += Time.deltaTime;
+        generateNewTrendTimer += Time.deltaTime;
         comboTimer += Time.unscaledDeltaTime;
         if (Time.timeScale > 0) maxPriceIncreaseTimer += Time.unscaledDeltaTime; // If game isn't paused/powerups picking: increase this slowly, independently of time scale
         
@@ -227,10 +233,17 @@ public class LevelManager : MonoBehaviour
                 SpawnReceivedMoneyDamageNumbers(PlayerStats.Instance.passiveIncome);
             }
         }
-
+        
         if (comboTimer > PlayerStats.Instance.maxComboDuration)
         {
             comboAmount = 0;
+        }
+
+        if (generateNewTrendTimer >= trendInterval)
+        {
+            trend = Random.Range(-maxTrendStrength, maxTrendStrength);
+            generateNewTrendTimer = 0;
+            //Debug.Log($"New TREND: {trend}");
         }
 
         comboBonus = Mathf.Max(0, (comboAmount - 1) * 5f); // "-1" because we start actually comboing at 2x combo
@@ -357,7 +370,9 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            price += Random.Range(-5f, 5f);    
+            float move = trend + Random.Range(-5f * (1 + PlayerStats.Instance.volatility * 0.01f), 5f * (1 + PlayerStats.Instance.volatility * 0.01f));
+            //Debug.Log($"Move: {move}");
+            price += move;
         }
         
         price = Mathf.Round(price / decimals) * decimals;

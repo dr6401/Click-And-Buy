@@ -38,6 +38,7 @@ public class CurrencyItemTooltip : MonoBehaviour
         if (!PlayerCurrencies.Instance.IsCurrencyUnlocked(previousCurrency))
         {
             unlockCost.text = $"LOCKED";
+            description.text = $"LOCKED";
             unlockCurrencyImage?.gameObject.SetActive(false);
         }
         else if (!PlayerCurrencies.Instance.IsCurrencyUnlocked(currency))
@@ -45,9 +46,11 @@ public class CurrencyItemTooltip : MonoBehaviour
             unlockCost.text = $"{NumberFormatter.FormatNumber(currencyStats.GetUnlockPrice(currency))}";
             unlockCurrencyImage.sprite = currencyStats.GetIconOfCurrency(previousCurrency);
             unlockCurrencyImage?.gameObject.SetActive(true);
+            description.text = LevelManager.Instance.currencyStats.GetDescriptionOfCurrency(currency);
         }
         else
         {
+            description.text = LevelManager.Instance.currencyStats.GetDescriptionOfCurrency(currency);
             unlockCurrencyImage?.gameObject.SetActive(false);
             unlockCost.text = $"UNLOCKED";
         }

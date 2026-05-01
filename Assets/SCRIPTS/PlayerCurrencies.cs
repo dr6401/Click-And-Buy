@@ -36,10 +36,6 @@ public class PlayerCurrencies : MonoBehaviour
 
         InitializeCurrencyRuntimeData();
         LockAllCurrencies();
-        foreach (var currency in currencyRuntimeData)
-        {
-            Debug.Log($"Currency: {currency.currency}, unlock Status:  {currency.isUnlocked}");
-        }
     }
     
     public void AddCurrency(float amount, Currency currency)
@@ -64,7 +60,7 @@ public class PlayerCurrencies : MonoBehaviour
                 }
             }*/
             currencyRuntimeData.Add(entry);
-            Debug.Log($"Added Currency Entry: {cur} with unlock amount: {entry.unlockAmount}");
+            //Debug.Log($"Added Currency Entry: {cur} with unlock amount: {entry.unlockAmount}");
         }
     }
 

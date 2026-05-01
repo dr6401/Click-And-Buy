@@ -32,6 +32,19 @@ public class CurrencyStats : ScriptableObject
         Debug.LogWarning($"No ICON for currency: {currency}");
         return 0;
     }
+
+    public string GetDescriptionOfCurrency(PlayerCurrencies.Currency currency)
+    {
+        foreach (var currencyIconEntry in currencyEntries)
+        {
+            if (currencyIconEntry.currency == currency)
+            {
+                return currencyIconEntry.description;
+            }
+        }
+        Debug.LogWarning($"No ICON for currency: {currency}");
+        return "";
+    }
 }
 
 
@@ -40,6 +53,7 @@ public class CurrencyEntry
 {
     public PlayerCurrencies.Currency currency;
     public float unlockAmount;
+    public string description;
     public Sprite icon;
 }
 
