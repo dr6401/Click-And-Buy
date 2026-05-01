@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Xml.Schema;
 using DamageNumbersPro;
 using TMPro;
 using Unity.VisualScripting;
@@ -539,10 +540,21 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(line.gameObject);
         }
-        float minLine = Mathf.Floor(chartMinVisible / gridStep) * gridStep;
-        float maxLine = Mathf.Ceil(chartMaxVisible / gridStep) * gridStep;
 
-        for (float priceLine = minLine; priceLine <= maxLine; priceLine += gridStep)
+        float range = chartMaxVisible - chartMinVisible;
+        float estimatedLines = range / gridStep;
+
+        float stepToUse = gridStep;
+
+        if (estimatedLines > 15)
+        {
+            stepToUse = GetNiceGridStep(range, 15); 
+        }
+        
+        float minLine = Mathf.Floor(chartMinVisible / stepToUse) * stepToUse;
+        float maxLine = Mathf.Ceil(chartMaxVisible / stepToUse) * stepToUse;
+
+        for (float priceLine = minLine; priceLine <= maxLine; priceLine += stepToUse)
         {
             if (priceLine <= 0) continue;
             float y = PriceToY(priceLine);
@@ -562,6 +574,22 @@ public class LevelManager : MonoBehaviour
         {
             text.text = $"{NumberFormatter.FormatDecimalNumber(priceLine)}$";
         }
+    }
+
+    private float GetNiceGridStep(float range, int targetLines)
+    {
+        float roughStep = range / targetLines;
+        float magnitude = Mathf.Pow(10, Mathf.Floor(Mathf.Log10(roughStep)));
+        float normalized = roughStep / magnitude;
+
+        float niceNormalized;
+
+        if (normalized < 1.5f) niceNormalized = 1f;
+        else if (normalized < 3f) niceNormalized = 2f;
+        else if (normalized < 7f) niceNormalized = 5f;
+        else niceNormalized = 10f;
+
+        return niceNormalized * magnitude;
     }
     
     public void Buy()
