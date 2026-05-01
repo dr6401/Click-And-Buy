@@ -630,12 +630,9 @@ public class LevelManager : MonoBehaviour
                     Debug.Log($"trade.GetUnrealizedProfit: {trade.GetUnrealizedProfit()},  comboBonus: {comboBonus}, comboBonusMoney: {comboBonusMoney}");
                     SpawnReceivedMoneyDamageNumbers(comboBonusMoney, anchor: new Vector2(-300f, 25f));
                     
-                    float comboBonusTokens = comboBonusMoney * 0.005f;
-                    if (comboBonusTokens >= 0.01f)
-                    {
-                        PlayerCurrencies.Instance.AddCurrency(comboBonusTokens, currentCurrency);
-                        SpawnReceivedTokensDamageNumbers(comboBonusTokens, icon: currencyStats.GetIconOfCurrency(currentCurrency));
-                    }
+                    float comboBonusTokens = Mathf.Min(0.01f, comboBonusMoney * 0.1f);
+                    PlayerCurrencies.Instance.AddCurrency(comboBonusTokens, currentCurrency);
+                    SpawnReceivedTokensDamageNumbers(comboBonusTokens, icon: currencyStats.GetIconOfCurrency(currentCurrency));
                 }
                 else
                 {
