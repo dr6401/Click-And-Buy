@@ -34,11 +34,17 @@ public class CurrencyItemTooltip : MonoBehaviour
 
     private void Update()
     {
-        if (!PlayerCurrencies.Instance.IsCurrencyUnlocked(currency))
+        PlayerCurrencies.Currency previousCurrency = (PlayerCurrencies.Currency)Mathf.Max((int)(currency - 1), 0);
+        if (!PlayerCurrencies.Instance.IsCurrencyUnlocked(previousCurrency))
+        {
+            unlockCost.text = $"LOCKED";
+            unlockCurrencyImage?.gameObject.SetActive(false);
+        }
+        else if (!PlayerCurrencies.Instance.IsCurrencyUnlocked(currency))
         {
             unlockCost.text = $"{NumberFormatter.FormatNumber(currencyStats.GetUnlockPrice(currency))}";
-            PlayerCurrencies.Currency previousCurrency = (PlayerCurrencies.Currency)Mathf.Max((int)(currency - 1), 0); 
             unlockCurrencyImage.sprite = currencyStats.GetIconOfCurrency(previousCurrency);
+            unlockCurrencyImage?.gameObject.SetActive(true);
         }
         else
         {

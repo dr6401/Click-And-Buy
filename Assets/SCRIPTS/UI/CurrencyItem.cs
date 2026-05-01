@@ -17,7 +17,6 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private Image icon;
     [SerializeField] private Image lockedOverlay;
 
-    private Button button; 
     
     [SerializeField] public CurrencyItemTooltip tooltip;
     //[SerializeField] private MMF_Player hoverFeedback;
@@ -35,7 +34,6 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             isUnlocked = PlayerCurrencies.Instance.IsCurrencyUnlocked(currency);   
             unlockCost = PlayerCurrencies.Instance.GetCurrencyUnlockAmount(currency);
         }
-        button = GetComponent<Button>();
     }
 
     // Update is called once per frame
@@ -58,13 +56,6 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         tooltip.gameObject.SetActive(true);
         //hoverFeedback?.PlayFeedbacks();
     }
-    
-    /*public void OnPointerClick(PointerEventData eventData)
-    {
-        SwitchDisplayToThisCurrency();
-        //SoundManager.Instance?.PlayClickedButtonSFX();
-    }*/
-
     public void OnPointerExit(PointerEventData data)
     {
         tooltip.gameObject.SetActive(false);
