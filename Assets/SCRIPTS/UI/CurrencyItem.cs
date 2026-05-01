@@ -19,7 +19,9 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     
     [SerializeField] public CurrencyItemTooltip tooltip;
-    //[SerializeField] private MMF_Player hoverFeedback;
+    [SerializeField] private MMF_Player unlockCurrencyFeedback;
+    [SerializeField] private MMF_Player shakeIfUnlockableFeedback;
+    private bool isPlayingShakeIfUnlockableFeedback = false;
 
     private void Awake()
     {
@@ -42,6 +44,16 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (!isUnlocked)
         {
             lockedOverlay.gameObject.SetActive(true);
+            if (IsUnlockable() && !isPlayingShakeIfUnlockableFeedback)
+            {
+                shakeIfUnlockableFeedback?.PlayFeedbacks();
+                isPlayingShakeIfUnlockableFeedback = true;
+            }
+            else if (!IsUnlockable() && isPlayingShakeIfUnlockableFeedback)
+            {
+                shakeIfUnlockableFeedback?.StopFeedbacks();
+                isPlayingShakeIfUnlockableFeedback = false;
+            }
         }
         else
         {
@@ -72,17 +84,31 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void TryToUnlockCurrency()
     {
-        PlayerCurrencies.Currency currencyToUnlockWith = currency - 1;
-        if (PlayerCurrencies.Instance.GetTokensAmount(currencyToUnlockWith) >= unlockCost)
+        if (IsUnlockable())
         {
+            PlayerCurrencies.Currency currencyToUnlockWith = currency - 1;
             PlayerCurrencies.Instance.AddCurrency(-unlockCost, currencyToUnlockWith);
             PlayerCurrencies.Instance.UnlockCurrency(currency);
+            
             isUnlocked = true;
             SwitchDisplayToThisCurrency();
+            
+            unlockCurrencyFeedback?.PlayFeedbacks();
+            shakeIfUnlockableFeedback?.StopFeedbacks();
+            isPlayingShakeIfUnlockableFeedback = false;
+            SoundManager.Instance.PlayCurrencyUnlockedSFX();
+
         }
         else
         {
             GameEvents.onNotEnoughTokens?.Invoke();
         }
+    }
+
+    private bool IsUnlockable()
+    {
+        PlayerCurrencies.Currency currencyToUnlockWith = currency - 1;
+        return (PlayerCurrencies.Instance.GetTokensAmount(currencyToUnlockWith) >= unlockCost &&
+                PlayerCurrencies.Instance.IsCurrencyUnlocked(currencyToUnlockWith));
     }
 }

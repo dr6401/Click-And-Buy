@@ -30,6 +30,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip defeatSFX;
     
     [SerializeField] private AudioClip wheelSpinSFX;
+    
+    [SerializeField] private AudioClip currencyUnlockedSFX;
     [Header("DEBUG")]
     [SerializeField] private bool dontPlayMusic = true;
     
@@ -117,6 +119,12 @@ public class SoundManager : MonoBehaviour
         sfxAudioSource.pitch = 1f;
         sfxAudioSource.PlayOneShot(wheelSpinSFX);
     }
+
+    public void PlayCurrencyUnlockedSFX()
+    {
+        sfxAudioSource.PlayOneShot(currencyUnlockedSFX);
+    }
+    
     private void OnEnable()
     {
         GameEvents.onMoneySpent += PlayMoneySpentSFX;
