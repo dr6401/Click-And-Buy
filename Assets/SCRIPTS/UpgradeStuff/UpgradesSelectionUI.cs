@@ -13,6 +13,7 @@ public class UpgradesSelectionUI : MonoBehaviour
     public Transform buttonParent;
     public GameObject augmentButtonPrefab;
     public List<Augment> commonAugments, rareAugments, epicAugments, legendaryAugments;
+    public List<Augment> forexAugments, fivexAugments, amazoomAugments, toyYodaAugments, tesluckAugments, moonCoinAugments, poopCoinAugments, timeCoinAugments, infinityCoinAugments, godCoinAugments;
     [SerializeField] private int numberOfChoices = 3;
     private int availableAugmentsAtStart;
     [SerializeField] private CanvasGroup canvasGroup;
@@ -59,6 +60,17 @@ public class UpgradesSelectionUI : MonoBehaviour
         rareAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/2-Rare"));
         epicAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/3-Epic"));
         legendaryAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/4-Legendary"));
+        
+        forexAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/5-Forex"));
+        fivexAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/6-Fivex"));
+        amazoomAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/7-Amazoom"));
+        toyYodaAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/8-ToyYoda"));
+        tesluckAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/9-Tesluck"));
+        moonCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/10-MoonCoin"));
+        poopCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/11-PoopCoin"));
+        timeCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/12-TimeCoin"));
+        infinityCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/13-InfinityCoin"));
+        godCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/14-GodCoin"));
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -134,6 +146,17 @@ public class UpgradesSelectionUI : MonoBehaviour
             AugmentTier.Rare => rareAugments,
             AugmentTier.Epic => epicAugments,
             AugmentTier.Legendary => legendaryAugments,
+            
+            AugmentTier.Forex => forexAugments,
+            AugmentTier.Fivex => fivexAugments,
+            AugmentTier.Amazoom => amazoomAugments,
+            AugmentTier.ToyYoda => toyYodaAugments,
+            AugmentTier.Tesluck => tesluckAugments,
+            AugmentTier.MoonCoin => moonCoinAugments,
+            AugmentTier.PoopCoin => poopCoinAugments,
+            AugmentTier.TimeCoin => timeCoinAugments,
+            AugmentTier.InfinityCoin => infinityCoinAugments,
+            AugmentTier.GodCoin => godCoinAugments,
             _ => commonAugments,
         };
     }
@@ -233,7 +256,7 @@ public class UpgradesSelectionUI : MonoBehaviour
             Debug.Log($"Respinning!");
             LevelManager.Instance.currentRespinPrice *= 2;
             RemoveUpgradeCardsFromUpgradePanel();
-            TriggerAugmentSelection(LevelManager.Instance.currentCashOutTier);   
+            TriggerAugmentSelection(LevelManager.Instance.currentBasicCashOutTier);   
         }
     }
 }

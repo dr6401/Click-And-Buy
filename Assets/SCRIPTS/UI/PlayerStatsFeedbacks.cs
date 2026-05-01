@@ -5,19 +5,27 @@ using UnityEngine;
 public class PlayerStatsFeedbacks : MonoBehaviour
 {
     [SerializeField] private MMF_Player notEnoughMoneyFeedback;
+    [SerializeField] private MMF_Player notEnoughTokensFeedback;
 
     private void PlayNotEnoughMoneyFeedback()
     {
         notEnoughMoneyFeedback?.PlayFeedbacks();
     }
+    
+    private void PlayNotEnoughTokensFeedback()
+    {
+        notEnoughTokensFeedback?.PlayFeedbacks();
+    }
 
     private void OnEnable()
     {
         GameEvents.onNotEnoughMoney += PlayNotEnoughMoneyFeedback;
+        GameEvents.onNotEnoughTokens += PlayNotEnoughTokensFeedback;
     }
     
     private void OnDisable()
     {
         GameEvents.onNotEnoughMoney -= PlayNotEnoughMoneyFeedback;
+        GameEvents.onNotEnoughTokens -= PlayNotEnoughTokensFeedback;
     }
 }

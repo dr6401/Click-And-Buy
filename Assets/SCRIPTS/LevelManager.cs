@@ -68,8 +68,9 @@ public class LevelManager : MonoBehaviour
     private int comboAmount = 0;
     
     [Header("Upgrade System")]
-    public AugmentTier currentCashOutTier = AugmentTier.Common;
-    public float currentCashOutPrice = 300;
+    public AugmentTier currentBasicCashOutTier = AugmentTier.Common;
+    public AugmentTier currentDivineCashOutTier = AugmentTier.Forex;
+    public float currentBasicCashOutPrice = 300;
     
     public float currentRespinPrice = 50;
 
@@ -131,9 +132,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text priceText;
     [SerializeField] private TMP_Text cashText;
     [SerializeField] private TMP_Text currentTokensText;
-    [SerializeField] private Image currentTokensImage;
     [SerializeField] private TMP_Text openProfitLossText;
-    [SerializeField] private TMP_Text cashOutText;
+    [SerializeField] private TMP_Text basicCashOutText;
+    [SerializeField] private TMP_Text divineCashOutText;
     [SerializeField] private Button cashOutButton;
     [SerializeField] private TMP_Text multiplierText;
     [SerializeField] private TMP_Text streakBonusText;
@@ -174,7 +175,7 @@ public class LevelManager : MonoBehaviour
         previousPrice = price;
         chartMinVisible = 10;
         chartMaxVisible = 200;
-        currentCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier);
+        currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
         recentPrices.Add(price);
         //GenerateNewPrice();
         PlayPriceMoveEvent(tutorialPump);
@@ -257,10 +258,10 @@ public class LevelManager : MonoBehaviour
         priceText.text = $"Price: {NumberFormatter.FormatDecimalNumber(price)}$";
         cashText.text = $"Cash: " + NumberFormatter.FormatDecimalNumber(effectiveCash) + "$";
         currentTokensText.text = $"Tokens: {NumberFormatter.FormatDecimalNumber(PlayerCurrencies.Instance.GetTokensAmount(currentCurrency))}";
-        currentTokensImage.sprite = currencyStats.GetIconOfCurrency(currentCurrency);
         openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfitAndLoss)}$";
-        cashOutText.text = $"{currentCashOutTier}: {NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier))}$";
-        cashOutText.color = GetColorForCurrentTier();
+        basicCashOutText.text = $"{NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier))}$";
+        basicCashOutText.color = GetColorForCurrentTier();
+        divineCashOutText.text = $"{NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency))}";
         multiplierText.text = $"Multiplier: {NumberFormatter.FormatDecimalNumber(leverage)}X";
         streakBonusText.text = $"Combo Bonus: +{NumberFormatter.FormatDecimalNumber(comboBonus)}%";
         profitMultText.text = "Profit Mult: "+ NumberFormatter.FormatNumber((PlayerStats.Instance.moneyGainMultiplier - 1) * 100f) + "%";
@@ -281,7 +282,6 @@ public class LevelManager : MonoBehaviour
         }
         else openProfitLossText.color = GameConstants.lightGreyColor;
 
-        ToggleCashOutButtonEnabled();
         DrawGridLines();
         
         if (!hasLevelEnded)
@@ -629,14 +629,17 @@ public class LevelManager : MonoBehaviour
                 {
                     Debug.Log($"trade.GetUnrealizedProfit: {trade.GetUnrealizedProfit()},  comboBonus: {comboBonus}, comboBonusMoney: {comboBonusMoney}");
                     SpawnReceivedMoneyDamageNumbers(comboBonusMoney, anchor: new Vector2(-300f, 25f));
-                    
-                    float comboBonusTokens = Mathf.Min(0.01f, comboBonusMoney * 0.1f);
-                    PlayerCurrencies.Instance.AddCurrency(comboBonusTokens, currentCurrency);
-                    SpawnReceivedTokensDamageNumbers(comboBonusTokens, icon: currencyStats.GetIconOfCurrency(currentCurrency));
                 }
                 else
                 {
                     Debug.Log($"Combo Amount: {comboAmount},  comboBonus: {comboBonus}, comboBonusMoney: {comboBonusMoney}");
+                }
+
+                if (comboBonus > 0)
+                {
+                    float comboBonusTokens = Mathf.Max(0.01f, comboBonusMoney * 0.1f);
+                    PlayerCurrencies.Instance.AddCurrency(comboBonusTokens, currentCurrency);
+                    SpawnReceivedTokensDamageNumbers(comboBonusTokens, icon: currencyStats.GetIconOfCurrency(currentCurrency));
                 }
             }
         }
@@ -717,10 +720,10 @@ public class LevelManager : MonoBehaviour
         equity = cash + openProfitAmount + investedAmount;
     }
 
-    public void CashOut()
+    public void BasicCashOut()
     {
         if (PauseManager.Instance.ShouldInputBeBlocked()) return;
-        if (effectiveCash < currentCashOutPrice)
+        if (effectiveCash < currentBasicCashOutPrice)
         {
             GameEvents.onNotEnoughMoney?.Invoke();
             return;
@@ -732,16 +735,31 @@ public class LevelManager : MonoBehaviour
             return;
         }
         float currentTierCashOutPrice =
-            UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier);
+            UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
         cash -= currentTierCashOutPrice;
         cash = Mathf.Max(0, cash);
-        currentRespinPrice = UpgradesSelectionUI.Instance.baseAugmentRespinPrices[currentCashOutTier];
-        GameEvents.OnCashOut?.Invoke(currentCashOutTier);
+        currentRespinPrice = UpgradesSelectionUI.Instance.baseAugmentRespinPrices[currentBasicCashOutTier];
+        GameEvents.OnCashOut?.Invoke(currentBasicCashOutTier);
     }
-
-    private void ToggleCashOutButtonEnabled()
+    
+    public void DivineCashOut()
     {
-        //cashOutButton.interactable = cash > currentCashOutPrice;
+        if (PauseManager.Instance.ShouldInputBeBlocked()) return;
+        if (PlayerCurrencies.Instance.GetTokensAmount(currentCurrency) < UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency))
+        {
+            GameEvents.onNotEnoughTokens?.Invoke();
+            return;
+        }
+
+        if (PowerUpInventoryManager.Instance.AreAllSlotsFull())
+        {
+            SpawnTextDamageNumbers("Offering inventory full!", position: cashOutButton.gameObject.GetComponent<RectTransform>(), color: Color.white);
+            return;
+        }
+        PlayerCurrencies.Instance.AddCurrency(-UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency), currentCurrency);
+        currentRespinPrice = UpgradesSelectionUI.Instance.baseAugmentRespinPrices[currentBasicCashOutTier];
+        GameEvents.OnCashOut?.Invoke(currentDivineCashOutTier);
+        Debug.Log($"Spent {UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency)} {currentCurrency} tokens");
     }
     
     public void WinGame()
@@ -806,16 +824,16 @@ public class LevelManager : MonoBehaviour
 
     public void IncreaseCashOutTier()
     {
-        currentCashOutTier++;
-        currentCashOutTier = (AugmentTier) Mathf.Min((int) currentCashOutTier, Enum.GetValues(typeof(AugmentTier)).Length - 1);
-        currentCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier);
+        currentBasicCashOutTier++;
+        currentBasicCashOutTier = (AugmentTier) Mathf.Min((int) currentBasicCashOutTier, Enum.GetValues(typeof(AugmentTier)).Length - 1);
+        currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
     }
     
     public void DecreaseCashOutTier()
     {
-        currentCashOutTier--;
-        currentCashOutTier = (AugmentTier) Mathf.Max((int) currentCashOutTier, 0);
-        currentCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentCashOutTier);
+        currentBasicCashOutTier--;
+        currentBasicCashOutTier = (AugmentTier) Mathf.Max((int) currentBasicCashOutTier, 0);
+        currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
     }
 
     public void ChangeOrderQuantity(bool increase)
@@ -983,7 +1001,7 @@ public class LevelManager : MonoBehaviour
 
     private Color GetColorForCurrentTier()
     {
-        switch (currentCashOutTier)
+        switch (currentBasicCashOutTier)
         {
             case AugmentTier.Common:
                 return GameConstants.commonTierColor;

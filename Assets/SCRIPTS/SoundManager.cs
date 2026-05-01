@@ -121,6 +121,7 @@ public class SoundManager : MonoBehaviour
     {
         GameEvents.onMoneySpent += PlayMoneySpentSFX;
         GameEvents.onNotEnoughMoney += PlayNotEnoughMoneySFX;
+        GameEvents.onNotEnoughTokens += PlayNotEnoughMoneySFX;
         GameEvents.onMoneyEarned += PlayMoneyEarnedSFX;
         GameEvents.onMoneyLost += PlayMoneyLostSFX;
         GameEvents.onVictory += PlayVictorySFX;
@@ -131,6 +132,7 @@ public class SoundManager : MonoBehaviour
     {
         GameEvents.onMoneySpent -= PlayMoneySpentSFX;
         GameEvents.onNotEnoughMoney -= PlayNotEnoughMoneySFX;
+        GameEvents.onNotEnoughTokens -= PlayNotEnoughMoneySFX;
         GameEvents.onMoneyEarned -= PlayMoneyEarnedSFX;
         GameEvents.onMoneyLost -= PlayMoneyLostSFX;
         GameEvents.onVictory -= PlayVictorySFX;

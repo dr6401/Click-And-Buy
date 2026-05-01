@@ -5,7 +5,17 @@ public enum AugmentTier
     Common,
     Rare,
     Epic,
-    Legendary
+    Legendary,
+    Forex,
+    Fivex,
+    Amazoom,
+    ToyYoda,
+    Tesluck,
+    MoonCoin,
+    PoopCoin,
+    TimeCoin,
+    InfinityCoin,
+    GodCoin
 };
 public enum AugmentCategory
 {

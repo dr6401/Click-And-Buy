@@ -43,7 +43,9 @@ public class PlayerCurrencies : MonoBehaviour
     
     public void AddCurrency(float amount, Currency currency)
     {
+        Debug.Log($"Adding amount: {amount} to current amount: {GetTokensAmount(currency)}");
         GetCurrencyRuntimeEntry(currency).currentAmount += amount;
+        GetCurrencyRuntimeEntry(currency).currentAmount = Mathf.Max(0, GetCurrencyRuntimeEntry(currency).currentAmount);
     }
 
     public void InitializeCurrencyRuntimeData()
@@ -57,7 +59,7 @@ public class PlayerCurrencies : MonoBehaviour
 
     public float GetTokensAmount(Currency currency)
     {
-        Debug.Log($"Current {currency} tokens: {GetCurrencyRuntimeEntry(currency).currentAmount}");
+        //Debug.Log($"Current {currency} tokens: {GetCurrencyRuntimeEntry(currency).currentAmount}");
         return GetCurrencyRuntimeEntry(currency).currentAmount;
     }
 
