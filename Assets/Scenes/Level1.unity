@@ -821,9 +821,37 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.ctime1
+      value: 65407
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.b
+      value: 0.79630226
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.g
+      value: 0.8553459
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.r
+      value: 0.2501482
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.b
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.g
+      value: 0.85882354
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.r
+      value: 0.2509804
+      objectReference: {fileID: 0}
     - target: {fileID: 7387346294254044697, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_Name
-      value: CurrencyItem (1)
+      value: Fivex
       objectReference: {fileID: 0}
     - target: {fileID: 8436618829587524069, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2003,9 +2031,33 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.b
+      value: 0.27450982
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.g
+      value: 0.4156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.r
+      value: 0.7372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.b
+      value: 0.18431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.g
+      value: 0.3019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.r
+      value: 0.64705884
+      objectReference: {fileID: 0}
     - target: {fileID: 7387346294254044697, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_Name
-      value: CurrencyItem (6)
+      value: PoopCoin
       objectReference: {fileID: 0}
     - target: {fileID: 8436618829587524069, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6693,9 +6745,33 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.b
+      value: 0.68235296
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.g
+      value: 0.94117653
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.r
+      value: 0.9960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.b
+      value: 0.68235296
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.g
+      value: 0.94117653
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.r
+      value: 0.9960785
+      objectReference: {fileID: 0}
     - target: {fileID: 7387346294254044697, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_Name
-      value: CurrencyItem (5)
+      value: MoonCoin
       objectReference: {fileID: 0}
     - target: {fileID: 8436618829587524069, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
@@ -8919,9 +8995,33 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.b
+      value: 0.32941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.g
+      value: 0.29803923
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.r
+      value: 0.9725491
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.b
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.g
+      value: 0.3019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7387346294254044697, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_Name
-      value: CurrencyItem (7)
+      value: TimeCoin
       objectReference: {fileID: 0}
     - target: {fileID: 8436618829587524069, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
@@ -10386,9 +10486,33 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.b
+      value: 0.44203153
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.g
+      value: 0.914246
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.r
+      value: 0.9433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.b
+      value: 0.48129022
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.g
+      value: 0.85677725
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.r
+      value: 0.9748427
+      objectReference: {fileID: 0}
     - target: {fileID: 7387346294254044697, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_Name
-      value: CurrencyItem (9)
+      value: GodCoin
       objectReference: {fileID: 0}
     - target: {fileID: 8436618829587524069, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
@@ -11499,8 +11623,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 344860834}
   m_HandleRect: {fileID: 344860833}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.22261737
+  m_Value: 0.99878395
+  m_Size: 0.22261736
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -12142,6 +12266,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.b
+      value: 0.27625477
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.g
+      value: 0.77948606
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.r
+      value: 0.9056604
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.b
+      value: 0.2784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.g
+      value: 0.78039217
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.r
+      value: 0.90588236
+      objectReference: {fileID: 0}
     - target: {fileID: 6906481398947401283, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_ChildScaleHeight
       value: 0
@@ -12156,7 +12304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7387346294254044697, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_Name
-      value: CurrencyItem (2)
+      value: Amazoom
       objectReference: {fileID: 0}
     - target: {fileID: 8436618829587524069, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
@@ -13443,9 +13591,33 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.b
+      value: 0.98823535
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.g
+      value: 0.9568628
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.r
+      value: 0.83921576
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.b
+      value: 0.98823535
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.g
+      value: 0.9607844
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.r
+      value: 0.86666673
+      objectReference: {fileID: 0}
     - target: {fileID: 7387346294254044697, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_Name
-      value: CurrencyItem (4)
+      value: Tesluck
       objectReference: {fileID: 0}
     - target: {fileID: 8436618829587524069, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
@@ -16839,7 +17011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7387346294254044697, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_Name
-      value: CurrencyItem
+      value: Forex
       objectReference: {fileID: 0}
     - target: {fileID: 8436618829587524069, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
@@ -17011,9 +17183,33 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.b
+      value: 0.4039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.g
+      value: 0.6039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.r
+      value: 0.50980395
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.b
+      value: 0.40000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.g
+      value: 0.6039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.r
+      value: 0.5058824
+      objectReference: {fileID: 0}
     - target: {fileID: 7387346294254044697, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_Name
-      value: CurrencyItem (3)
+      value: ToyYoda
       objectReference: {fileID: 0}
     - target: {fileID: 8436618829587524069, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
@@ -19600,9 +19796,33 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.b
+      value: 0.21568629
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.g
+      value: 0.7803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key0.r
+      value: 0.93725497
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.b
+      value: 0.67058825
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.g
+      value: 0.8588236
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186490071489256343, guid: 16a97125371174241916f465de854945, type: 3}
+      propertyPath: managedReferences[5212824243664060487].ColorOverTime.key1.r
+      value: 0.96470594
+      objectReference: {fileID: 0}
     - target: {fileID: 7387346294254044697, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_Name
-      value: CurrencyItem (8)
+      value: InfinityCoin
       objectReference: {fileID: 0}
     - target: {fileID: 8436618829587524069, guid: 16a97125371174241916f465de854945, type: 3}
       propertyPath: m_AnchorMax.y
@@ -22052,7 +22272,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000082195475}
+  m_AnchoredPosition: {x: 0, y: 1.47}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2033577182
