@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Augment", menuName = "Augments/MoneyGainMultiplier")]
-public class MoneyGainMultiplier : Augment
+[CreateAssetMenu(fileName = "PermaAugment", menuName = "PermaAugments/ProfitMultiplier")]
+public class ProfitMultiplier : Augment
 {
     public float multiplier;
     public override void Apply()

@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
     public float openProfitAndLoss;
     public float unrealizedProfit;
     public float unrealizedLoss;
+    public float faith;
     [Header("-----------------PRICE----------------")]
     public float price;
     [Header("-----------------PRICE----------------")]
