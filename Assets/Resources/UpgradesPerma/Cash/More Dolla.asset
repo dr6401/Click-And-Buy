@@ -21,5 +21,6 @@ MonoBehaviour:
   autoApply: 1
   removeFromPoolAfterPicking: 0
   baseCost: 5
-  currencySymbol: '%'
+  leftText: 'CURRENT BONUS: '
+  rightText: '%'
   multiplier: 0.05

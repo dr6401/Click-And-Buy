@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 7998094021699997339}
   - component: {fileID: 5297374955660516716}
   - component: {fileID: 276014672128057686}
+  - component: {fileID: 6499279138854101403}
   - component: {fileID: 3270563391935140270}
   m_Layer: 5
   m_Name: PrestigeBtn
@@ -260,9 +261,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: Buy
+      - m_Target: {fileID: 6499279138854101403}
+        m_TargetAssemblyTypeName: SwitchDisplayToPanel, Assembly-CSharp
+        m_MethodName: OpenPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -273,6 +274,19 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   hoverFeedback: {fileID: 0}
+--- !u!114 &6499279138854101403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242736816756687373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a41c6e1067d1b10469edbdc483794b3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwitchDisplayToPanel
+  panelToDisplay: {fileID: 0}
 --- !u!114 &3270563391935140270
 MonoBehaviour:
   m_ObjectHideFlags: 0

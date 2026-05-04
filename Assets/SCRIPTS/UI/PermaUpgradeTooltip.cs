@@ -16,7 +16,7 @@ public class PermaUpgradeTooltip : MonoBehaviour
         name.text = powerUp.name;
         name.color = powerUp.color;
         description.text = powerUp.description;
-        currentStats.text = "CURRENT: " + NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeValue()) + powerUp.currencySymbol;
+        currentStats.text = powerUp.leftText + NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeValue()) + powerUp.rightText;
     }
 
     private void OnEnable()

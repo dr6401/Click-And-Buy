@@ -4,7 +4,8 @@ public class PermaUpgrade : Augment
 {
     [Header("Perma Upgrade Settings")]
     public float baseCost;
-    public string currencySymbol;
+    public string leftText;
+    public string rightText;
     public override void Apply()
     {
         
