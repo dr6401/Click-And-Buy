@@ -10,13 +10,13 @@ public class PermaUpgradeTooltip : MonoBehaviour
 
     [SerializeField] private MMF_Player openTooltipFeedback;
 
-    public void Setup(UsablePowerUp powerUp)
+    public void Setup(PermaUpgrade powerUp)
     {
-        Augment data = powerUp.data;
-        name.text = data.name;
-        name.color = powerUp.data.color;
-        description.text = data.description;
-        currentStats.text = NumberFormatter.FormatNumber(powerUp.charges) + " left";
+        if (powerUp == null) return;
+        name.text = powerUp.name;
+        name.color = powerUp.color;
+        description.text = powerUp.description;
+        currentStats.text = "CURRENT: " + NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeValue()) + powerUp.currencySymbol;
     }
 
     private void OnEnable()

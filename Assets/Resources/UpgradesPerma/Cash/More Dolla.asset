@@ -20,4 +20,6 @@ MonoBehaviour:
   color: {r: 1, g: 0.9877418, b: 0, a: 1}
   autoApply: 1
   removeFromPoolAfterPicking: 0
+  baseCost: 5
+  currencySymbol: '%'
   multiplier: 0.05

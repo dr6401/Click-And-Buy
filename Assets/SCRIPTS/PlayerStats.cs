@@ -6,7 +6,7 @@ public class PlayerStats : MonoBehaviour
     
     public int level = 1;
 
-    public float moneyGainMultiplier = 1f;
+    public float profitMultiplier = 1f;
     public float maxLeverage = 1;
 
     public int maxAliveTrades = 5;

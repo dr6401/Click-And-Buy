@@ -46,7 +46,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
             profitReal = (entryPrice - LevelManager.Instance.price) * quantity;
         }
         profitReal *= multiplier;
-        if (profitReal > 0) profitReal *= PlayerStats.Instance.moneyGainMultiplier;
+        if (profitReal > 0) profitReal *= PlayerStats.Instance.profitMultiplier;
         profitRealText.text = NumberFormatter.FormatDecimalNumber(profitReal) + "$";
         
         
