@@ -38,7 +38,7 @@ public class CurrencyItemTooltip : MonoBehaviour
         if (!PlayerCurrencies.Instance.IsCurrencyUnlocked(previousCurrency))
         {
             unlockCost.text = $"LOCKED";
-            description.text = $"LOCKED";
+            description.text = $"?";
             unlockCurrencyImage?.gameObject.SetActive(false);
         }
         else if (!PlayerCurrencies.Instance.IsCurrencyUnlocked(currency))
