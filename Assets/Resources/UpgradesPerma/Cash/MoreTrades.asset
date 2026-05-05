@@ -13,11 +13,22 @@ MonoBehaviour:
   m_Name: MoreTrades
   m_EditorClassIdentifier: Assembly-CSharp::MaxTradesIncrease
   augmentName: More Trades
-  description: Increase number of trades by 5
+  description: Increase <color=#0006FF>max number</color> of <color=#0006FF>active
+    trades</color> by <color=#0006FF>5<color>
   icon: {fileID: 21300000, guid: 51b20fcc05516044189e8c70b990c4f6, type: 3}
   tier: 0
   category: 6
-  color: {r: 0, g: 0.021701097, b: 1, a: 1}
+  color: {r: 0.3843597, g: 0.39869744, b: 0.99371064, a: 1}
   autoApply: 1
   removeFromPoolAfterPicking: 0
+  costProgression:
+  - 15
+  - 35
+  - 70
+  - 135
+  - 245
+  - 330
+  - 600
+  leftText: 'MAX ACTIVE TRADES: '
+  rightText: 
   maxTradesIncrease: 5

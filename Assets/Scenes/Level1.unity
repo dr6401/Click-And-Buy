@@ -259,7 +259,7 @@ PrefabInstance:
     - target: {fileID: 1811065302062388234, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: permaUpgrade
       value: 
-      objectReference: {fileID: 11400000, guid: 293c2085a43dfc84a91e8876f16b72bf, type: 2}
+      objectReference: {fileID: 11400000, guid: 3dac69a97d32fd844a47b2377d9248f4, type: 2}
     - target: {fileID: 2267061240717599318, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -306,11 +306,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3480319294293960893, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_text
-      value: More Dolla
+      value: Order Up!
       objectReference: {fileID: 0}
     - target: {fileID: 4297478454233488621, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_Name
-      value: MoreDolla (3)
+      value: OrderUp
       objectReference: {fileID: 0}
     - target: {fileID: 4308698537057303323, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4120,7 +4120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 570650420578049106, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -35.49974
+      value: -35.499756
       objectReference: {fileID: 0}
     - target: {fileID: 895713685371071831, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
       propertyPath: m_Color.b
@@ -4342,7 +4342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6508900365107996352, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -35.49974
+      value: -35.499756
       objectReference: {fileID: 0}
     - target: {fileID: 6522790277578236152, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -18519,6 +18519,18 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5681797546576290480, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681797546576290480, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5681797546576290480, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 6640843573042741408, guid: 752c3ca21d7057b438ad15ad31960276, type: 3}
       propertyPath: FeedbacksList.Array.size
       value: 0
@@ -19939,7 +19951,7 @@ PrefabInstance:
     - target: {fileID: 1811065302062388234, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: permaUpgrade
       value: 
-      objectReference: {fileID: 11400000, guid: 293c2085a43dfc84a91e8876f16b72bf, type: 2}
+      objectReference: {fileID: 11400000, guid: ad436b9c42c47a148bc060be1051561c, type: 2}
     - target: {fileID: 2267061240717599318, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -19986,11 +19998,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3480319294293960893, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_text
-      value: More Dolla
+      value: More Trades
       objectReference: {fileID: 0}
     - target: {fileID: 4297478454233488621, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_Name
-      value: MoreDolla (4)
+      value: MoreTrades
       objectReference: {fileID: 0}
     - target: {fileID: 4308698537057303323, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchoredPosition.y

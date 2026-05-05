@@ -7,7 +7,7 @@ public class LeverageIncrease : PermaUpgrade
     
     private void OnEnable()
     {
-        description = $"Increase <color=#{ColorUtility.ToHtmlStringRGB(color)}>Max Multiplier</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{leverageIncrease}</color>";
+        description = $"Increase max <color=#{ColorUtility.ToHtmlStringRGB(color)}>Multiplier</color>\nby <color=#{ColorUtility.ToHtmlStringRGB(color)}>{leverageIncrease}X</color>";
     }
     public override void Apply()
     {

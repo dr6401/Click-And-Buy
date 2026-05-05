@@ -41,7 +41,6 @@ public class LevelManager : MonoBehaviour
     private float previousPrice;
     private float decimals = 0.01f;
     private float currentOrderQuantity = 1f;
-    private float maxOrderQuantity = 10f;
 
     public PlayerCurrencies.Currency currentCurrency;
 
@@ -917,7 +916,7 @@ public class LevelManager : MonoBehaviour
             else step = 10f;
             currentOrderQuantity -= step;
         }
-        currentOrderQuantity = Mathf.Clamp(currentOrderQuantity, 0.1f, maxOrderQuantity);
+        currentOrderQuantity = Mathf.Clamp(currentOrderQuantity, 0.1f, PlayerStats.Instance.maxOrderQuantity);
     }
 
     public void PlayPriceMoveEvent(PriceMoveEvent priceMoveEvent)
