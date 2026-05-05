@@ -66,6 +66,7 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         //Debug.Log($"Tooltip Time!");
         if (PauseManager.Instance.ShouldInputBeBlocked()) return;
         tooltip.gameObject.SetActive(true);
+        tooltip.PlayShowCurrentFeedback();
         //hoverFeedback?.PlayFeedbacks();
     }
     public void OnPointerExit(PointerEventData data)
@@ -99,8 +100,9 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             SoundManager.Instance.PlayCurrencyUnlockedSFX();
 
         }
-        else
+        else if (IsPreviousCurrencyUnlocked())
         {
+            tooltip?.PlayNotEnoughTokensFeedback();
             GameEvents.onNotEnoughTokens?.Invoke();
         }
     }
@@ -108,7 +110,13 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private bool IsUnlockable()
     {
         PlayerCurrencies.Currency currencyToUnlockWith = currency - 1;
-        return (PlayerCurrencies.Instance.GetTokensAmount(currencyToUnlockWith) >= unlockCost &&
-                PlayerCurrencies.Instance.IsCurrencyUnlocked(currencyToUnlockWith));
+        return PlayerCurrencies.Instance.GetTokensAmount(currencyToUnlockWith) >= unlockCost &&
+               IsPreviousCurrencyUnlocked();
+    }
+
+    private bool IsPreviousCurrencyUnlocked()
+    {
+        PlayerCurrencies.Currency currencyToUnlockWith = currency - 1;
+        return PlayerCurrencies.Instance.IsCurrencyUnlocked(currencyToUnlockWith);
     }
 }

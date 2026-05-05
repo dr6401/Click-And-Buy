@@ -14,6 +14,8 @@ public class CurrencyItemTooltip : MonoBehaviour
     [SerializeField] private Image unlockCurrencyImage;
 
     [SerializeField] private MMF_Player openTooltipFeedback;
+    [SerializeField] private MMF_Player notEnoughTokensFeedback;
+    [SerializeField] private MMF_Player showCurrentFeedback;
     
     private CurrencyStats currencyStats;
 
@@ -54,5 +56,15 @@ public class CurrencyItemTooltip : MonoBehaviour
             unlockCurrencyImage?.gameObject.SetActive(false);
             unlockCost.text = $"UNLOCKED";
         }
+    }
+    
+    public void PlayNotEnoughTokensFeedback()
+    {
+        notEnoughTokensFeedback?.PlayFeedbacks();
+    }
+
+    public void PlayShowCurrentFeedback()
+    {
+        showCurrentFeedback?.PlayFeedbacks();
     }
 }
