@@ -8,6 +8,7 @@ public class PermaUpgradesManager : MonoBehaviour
     public int riskyMovesLvl;
     public int maxTradesLvl;
     public int orderQuantityLvl;
+    public int soldAccountsProfitMultiplierLvl;
 
     public static PermaUpgradesManager Instance;
     

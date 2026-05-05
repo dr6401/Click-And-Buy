@@ -21,6 +21,8 @@ public class PlayerStats : MonoBehaviour
     
     public float lossReduction = 0f;
     public float divineLuck = 0f;
+
+    public float soldAccountsProfitMultiplier = 1f;
     
     private void Awake()
     {

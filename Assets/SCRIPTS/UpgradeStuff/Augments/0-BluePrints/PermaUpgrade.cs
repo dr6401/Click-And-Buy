@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class PermaUpgrade : Augment
 {
     [Header("Perma Upgrade Settings")]
+    public List<float> upgradeEffectProgression;
     public List<float> costProgression;
     public string leftText;
     public string rightText;
@@ -11,6 +12,10 @@ public abstract class PermaUpgrade : Augment
 
     public abstract int GetCurrentRuntimeLevel();
 
+    public float GetCurrentRuntimeEffectAmount()
+    {
+        return upgradeEffectProgression[Mathf.Min(costProgression.Count, GetCurrentRuntimeLevel())];
+    }
     public float GetCurrentRuntimeCost()
     {
         return costProgression[Mathf.Min(costProgression.Count, GetCurrentRuntimeLevel())];
