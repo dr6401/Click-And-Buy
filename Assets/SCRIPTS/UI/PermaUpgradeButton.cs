@@ -28,6 +28,7 @@ public class PermaUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerE
         else
         {
             GameEvents.OnNotEnoughFaith?.Invoke();
+            tooltip?.PlayNotEnoughFaithFeedback();
         }
     }
     public void OnPointerEnter(PointerEventData data)
@@ -35,6 +36,7 @@ public class PermaUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerE
         Debug.Log($"Tooltip Time!");
         if (PauseManager.Instance.ShouldInputBeBlocked()) return;
         tooltip.gameObject.SetActive(true);
+        tooltip?.PlayShowCurrentFeedback();
         //hoverFeedback?.PlayFeedbacks();
     }
     public void OnPointerExit(PointerEventData data)

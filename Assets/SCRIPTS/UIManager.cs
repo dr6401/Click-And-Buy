@@ -5,17 +5,6 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public List<GameObject> mainPanels;
-    
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void SwitchDisplayToPanel(GameObject panel)
     {

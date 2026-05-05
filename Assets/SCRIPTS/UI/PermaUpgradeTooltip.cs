@@ -9,6 +9,8 @@ public class PermaUpgradeTooltip : MonoBehaviour
     [SerializeField] private TMP_Text currentStats;
 
     [SerializeField] private MMF_Player openTooltipFeedback;
+    [SerializeField] private MMF_Player notEnoughFaithFeedback;
+    [SerializeField] private MMF_Player showCurrentFeedback;
 
     public void Setup(PermaUpgrade powerUp)
     {
@@ -17,6 +19,16 @@ public class PermaUpgradeTooltip : MonoBehaviour
         name.color = powerUp.color;
         description.text = powerUp.description;
         currentStats.text = powerUp.leftText + NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeValue()) + powerUp.rightText;
+    }
+
+    public void PlayNotEnoughFaithFeedback()
+    {
+        notEnoughFaithFeedback?.PlayFeedbacks();
+    }
+
+    public void PlayShowCurrentFeedback()
+    {
+        showCurrentFeedback?.PlayFeedbacks();
     }
 
     private void OnEnable()
