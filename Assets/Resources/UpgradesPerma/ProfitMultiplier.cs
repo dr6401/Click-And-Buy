@@ -3,16 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PermaAugment", menuName = "PermaAugments/ProfitMultiplier")]
 public class ProfitMultiplier : PermaUpgrade
 {
-    public float multiplier;
-    
-    private void OnEnable()
+    public override string GetDescription()
     {
-        description = $"Increase profit from <color=#{ColorUtility.ToHtmlStringRGB(GameConstants.greenColor)}>Winning trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{multiplier}%</color>";
+        return $"Increase profit from <color=#{ColorUtility.ToHtmlStringRGB(GameConstants.greenColor)}>Winning trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{GetCurrentRuntimeEffectAmount()}%</color>";
     }
     public override void Apply()
     {
         if (PlayerStats.Instance == null) return;
-        PlayerStats.Instance.profitMultiplier += multiplier * 0.01f;
+        PlayerStats.Instance.profitMultiplier += GetCurrentRuntimeEffectAmount() * 0.01f;
         PermaUpgradesManager.Instance.profitMultLvl++;
     }
 
@@ -28,6 +26,6 @@ public class ProfitMultiplier : PermaUpgrade
 
     public override bool IsUpgradeMaxedOut()
     {
-        return PermaUpgradesManager.Instance.profitMultLvl >= costProgression.Count;
+        return PermaUpgradesManager.Instance.profitMultLvl >= upgradeProgression.Count;
     }
 }

@@ -28,6 +28,11 @@ public class Dividends : PermaUpgrade
 
     public override bool IsUpgradeMaxedOut()
     {
-        return PermaUpgradesManager.Instance.soldAccountsProfitMultiplierLvl >= costProgression.Count;
+        return PermaUpgradesManager.Instance.soldAccountsProfitMultiplierLvl >= upgradeProgression.Count;
+    }
+
+    public override string GetDescription()
+    {
+        return $"Increase <color=#{ColorUtility.ToHtmlStringRGB(GameConstants.greenColor)}>passive income</color> from <color=#{ColorUtility.ToHtmlStringRGB(color)}>Sold accounts</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{multiplier}%</color>";
     }
 }

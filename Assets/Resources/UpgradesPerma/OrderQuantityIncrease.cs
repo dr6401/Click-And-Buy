@@ -28,6 +28,11 @@ public class OrderQuantityIncrease : PermaUpgrade
 
     public override bool IsUpgradeMaxedOut()
     {
-        return PermaUpgradesManager.Instance.orderQuantityLvl >= costProgression.Count;
+        return PermaUpgradesManager.Instance.orderQuantityLvl >= upgradeProgression.Count;
+    }
+
+    public override string GetDescription()
+    {
+        return $"Increase max <color=#{ColorUtility.ToHtmlStringRGB(color)}>Order quantity</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{amount}</color>";
     }
 }

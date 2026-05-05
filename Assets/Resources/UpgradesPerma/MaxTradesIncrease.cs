@@ -30,6 +30,12 @@ public class MaxTradesIncrease : PermaUpgrade
 
     public override bool IsUpgradeMaxedOut()
     {
-        return PermaUpgradesManager.Instance.maxTradesLvl >= costProgression.Count;
+        return PermaUpgradesManager.Instance.maxTradesLvl >= upgradeProgression.Count;
+    }
+
+    public override string GetDescription()
+    {
+        return
+            $"Increase max number of <color=#{ColorUtility.ToHtmlStringRGB(color)}>Active trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{maxTradesIncrease}</color>";
     }
 }

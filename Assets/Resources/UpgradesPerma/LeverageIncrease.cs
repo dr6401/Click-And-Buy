@@ -28,6 +28,11 @@ public class LeverageIncrease : PermaUpgrade
 
     public override bool IsUpgradeMaxedOut()
     {
-        return PermaUpgradesManager.Instance.riskyMovesLvl >= costProgression.Count;
+        return PermaUpgradesManager.Instance.riskyMovesLvl >= upgradeProgression.Count;
+    }
+
+    public override string GetDescription()
+    {
+        return $"Increase max <color=#{ColorUtility.ToHtmlStringRGB(color)}>Multiplier</color>\nby <color=#{ColorUtility.ToHtmlStringRGB(color)}>{leverageIncrease}X</color>";
     }
 }

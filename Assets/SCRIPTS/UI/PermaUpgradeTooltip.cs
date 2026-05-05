@@ -24,7 +24,7 @@ public class PermaUpgradeTooltip : MonoBehaviour
         if (powerUp == null) return;
         name.text = powerUp.augmentName;
         name.color = powerUp.color;
-        description.text = powerUp.description;
+        description.text = powerUp.GetDescription();
         if (!powerUp.IsUpgradeMaxedOut())
         {
             price.text = $"PRICE:<color=#FFF390> {NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeCost())}</color>";   

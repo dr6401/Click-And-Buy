@@ -30,6 +30,11 @@ public class LossReductionIncrease : PermaUpgrade
 
     public override bool IsUpgradeMaxedOut()
     {
-        return PermaUpgradesManager.Instance.lossShieldLvl >= costProgression.Count;
+        return PermaUpgradesManager.Instance.lossShieldLvl >= upgradeProgression.Count;
+    }
+
+    public override string GetDescription()
+    {
+        return $"Reduce losses from <color=#{ColorUtility.ToHtmlStringRGB(GameConstants.redColor)}>Losing trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{increaseAmount}%</color>";
     }
 }
