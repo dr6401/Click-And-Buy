@@ -19,10 +19,17 @@ public class PermaUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void UseUpgrade()
     {
-        if (LevelManager.Instance.faith >= permaUpgrade.baseCost)
+        if (permaUpgrade.IsUpgradeMaxedOut())
+        {
+            Debug.Log($"Upgrade: {permaUpgrade.name} is maxed out");
+            return;
+        }
+        Debug.Log($"Upgrade: {permaUpgrade.name} current lvl: {permaUpgrade.GetCurrentRuntimeLevel()}");
+        float cost = permaUpgrade.GetCurrentRuntimeCost();
+        if (LevelManager.Instance.faith >= cost)
         {
             permaUpgrade.Apply();
-            LevelManager.Instance.faith -= permaUpgrade.baseCost;
+            LevelManager.Instance.faith -= cost;
             tooltip.Setup(permaUpgrade);
         }
         else

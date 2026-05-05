@@ -1,3 +1,4 @@
+using System;
 using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class PermaUpgradeTooltip : MonoBehaviour
 {
     [SerializeField] private TMP_Text name;
     [SerializeField] private TMP_Text description;
+    [SerializeField] private TMP_Text price;
     [SerializeField] private TMP_Text currentStats;
 
     [SerializeField] private MMF_Player openTooltipFeedback;
@@ -18,6 +20,14 @@ public class PermaUpgradeTooltip : MonoBehaviour
         name.text = powerUp.name;
         name.color = powerUp.color;
         description.text = powerUp.description;
+        if (!powerUp.IsUpgradeMaxedOut())
+        {
+            price.text = $"PRICE: <color=#FFF390> {NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeCost())}</color>";   
+        }
+        else
+        {
+            price.text = $"PRICE: <color=#FFF390>MAX</color>";
+        }
         currentStats.text = powerUp.leftText + NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeValue()) + powerUp.rightText;
     }
 

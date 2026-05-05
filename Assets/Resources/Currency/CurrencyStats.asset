@@ -23,11 +23,11 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 5d2d36aca89920b4896da44395321ca3, type: 3}
   - currency: 2
     unlockAmount: 50
-    description: 
+    description: Longer trends
     icon: {fileID: 21300000, guid: 232fff5eef27837499bb53abca6a779f, type: 3}
   - currency: 3
     unlockAmount: 100
-    description: 
+    description: May the Force be with you
     icon: {fileID: 21300000, guid: 2e0428cca5b225e4b99334809ed0f54c, type: 3}
   - currency: 4
     unlockAmount: 250

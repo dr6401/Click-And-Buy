@@ -721,6 +721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PermaUpgradeTooltip
   name: {fileID: 1965871269032969259}
   description: {fileID: 1766566589140850367}
+  price: {fileID: 1736600890325720641}
   currentStats: {fileID: 7750832898321267009}
   openTooltipFeedback: {fileID: 3968860707482965480}
   notEnoughFaithFeedback: {fileID: 408646759951817851}
@@ -825,7 +826,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Price: <color=#FFC839>10 </color>'
+  m_text: 'Price: <color=#FFF390>10 </color>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
   m_sharedMaterial: {fileID: -4406428672775297824, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}

@@ -144,13 +144,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private TMP_Text divineCashOutText;
     [SerializeField] private Button cashOutButton;
     [SerializeField] private TMP_Text multiplierText;
-    [SerializeField] private TMP_Text streakBonusText;
-    [SerializeField] private TMP_Text profitMultText;
+    [SerializeField] private TMP_Text currentFaithText;
+    //[SerializeField] private TMP_Text profitMultText;
     [SerializeField] private TMP_Text freebieTradesText;
-    [SerializeField] private TMP_Text volatilityText;
-    [SerializeField] private TMP_Text passiveIncomeText;
-    [SerializeField] private TMP_Text divineLuckText;
-    [SerializeField] private TMP_Text lossShieldText;
+    //[SerializeField] private TMP_Text volatilityText;
+    //[SerializeField] private TMP_Text passiveIncomeText;
+    //[SerializeField] private TMP_Text divineLuckText;
+    //[SerializeField] private TMP_Text lossShieldText;
     [SerializeField] private TMP_Text quantityOrderText;
     [SerializeField] private Slider timeScaleSlider;
 
@@ -278,7 +278,7 @@ public class LevelManager : MonoBehaviour
         basicCashOutText.color = GetColorForCurrentTier();
         divineCashOutText.text = $"{NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency))}";
         multiplierText.text = $"Multiplier: {NumberFormatter.FormatDecimalNumber(leverage)}X";
-        //streakBonusText.text = $"Combo Bonus: +{NumberFormatter.FormatDecimalNumber(comboBonus)}%";
+        currentFaithText.text = $"Faith: {NumberFormatter.FormatDecimalNumber(faith)}";
         //profitMultText.text = "Profit Mult: "+ NumberFormatter.FormatNumber((PlayerStats.Instance.profitMultiplier - 1) * 100f) + "%";
         freebieTradesText.text = "Freebie trades: " + NumberFormatter.FormatNumber(numberOfFutureFreebieTrades);
         //volatilityText.text = $"Volatility: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.volatility)}%";

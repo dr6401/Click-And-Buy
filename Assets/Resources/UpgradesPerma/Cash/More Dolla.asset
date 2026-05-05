@@ -20,7 +20,12 @@ MonoBehaviour:
   color: {r: 1, g: 0.9877418, b: 0, a: 1}
   autoApply: 1
   removeFromPoolAfterPicking: 0
-  baseCost: 5
+  costProgression:
+  - 5
+  - 25
+  - 50
+  - 100
+  - 500
   leftText: 'CURRENT BONUS: '
   rightText: '%'
   multiplier: 0.05
