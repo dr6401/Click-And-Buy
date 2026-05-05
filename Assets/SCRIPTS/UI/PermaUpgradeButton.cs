@@ -13,7 +13,7 @@ public class PermaUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerE
     private void Start()
     {
         if (permaUpgrade == null) return;
-        upgradeText.text = permaUpgrade.name;
+        upgradeText.text = permaUpgrade.augmentName;
         tooltip.Setup(permaUpgrade);
     }
 
@@ -21,10 +21,10 @@ public class PermaUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         if (permaUpgrade.IsUpgradeMaxedOut())
         {
-            Debug.Log($"Upgrade: {permaUpgrade.name} is maxed out");
+            Debug.Log($"Upgrade: {permaUpgrade.augmentName} is maxed out");
             return;
         }
-        Debug.Log($"Upgrade: {permaUpgrade.name} current lvl: {permaUpgrade.GetCurrentRuntimeLevel()}");
+        //Debug.Log($"Upgrade: {permaUpgrade.augmentName} current lvl: {permaUpgrade.GetCurrentRuntimeLevel()}");
         float cost = permaUpgrade.GetCurrentRuntimeCost();
         if (LevelManager.Instance.faith >= cost)
         {
@@ -40,7 +40,7 @@ public class PermaUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerE
     }
     public void OnPointerEnter(PointerEventData data)
     {
-        Debug.Log($"Tooltip Time!");
+        //Debug.Log($"Tooltip Time!");
         if (PauseManager.Instance.ShouldInputBeBlocked()) return;
         tooltip.gameObject.SetActive(true);
         tooltip?.PlayShowCurrentFeedback();

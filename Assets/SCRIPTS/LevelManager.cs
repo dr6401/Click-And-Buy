@@ -807,7 +807,10 @@ public class LevelManager : MonoBehaviour
             SpawnTextDamageNumbers("Offering inventory full!", position: cashOutButton.gameObject.GetComponent<RectTransform>(), color: Color.white);
             return;
         }
-        PlayerCurrencies.Instance.AddCurrency(-UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency), currentCurrency);
+
+        float costOfCashOut = UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency);
+        PlayerCurrencies.Instance.AddCurrency(-costOfCashOut, currentCurrency);
+        faith += 0.1f * costOfCashOut;
         currentRespinPrice = UpgradesSelectionUI.Instance.baseAugmentRespinPrices[currentBasicCashOutTier];
         GameEvents.OnCashOut?.Invoke(currentDivineCashOutTier);
         GameEvents.OnDivineCashOut?.Invoke();

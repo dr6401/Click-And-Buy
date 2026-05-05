@@ -1,34 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PermaUpgrade : Augment
+public abstract class PermaUpgrade : Augment
 {
     [Header("Perma Upgrade Settings")]
     public List<float> costProgression;
     public string leftText;
     public string rightText;
-    public override void Apply()
-    {
-        
-    }
-    
-    public virtual int GetCurrentRuntimeLevel()
-    {
-        return 0;
-    }
-    
-    public virtual float GetCurrentRuntimeCost()
-    {
-        return 10;
-    }
+    public abstract override void Apply();
 
-    public virtual float GetCurrentRuntimeValue()
-    {
-        return 0;
-    }
+    public abstract int GetCurrentRuntimeLevel();
 
-    public virtual bool IsUpgradeMaxedOut()
+    public float GetCurrentRuntimeCost()
     {
-        return false;
+        return costProgression[Mathf.Min(costProgression.Count, GetCurrentRuntimeLevel())];
     }
+    public abstract float GetCurrentRuntimeValue();
+    public abstract bool IsUpgradeMaxedOut();
 }

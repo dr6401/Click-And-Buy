@@ -227,7 +227,7 @@ MonoBehaviour:
         Owner: {fileID: 1324758326495756940}
         DebugActive: 0
         Mode: 0
-        Duration: 3
+        Duration: 1
         StartsOff: 0
         EndsOff: 0
         RelativeValues: 0
@@ -354,7 +354,7 @@ MonoBehaviour:
         Owner: {fileID: 1324758326495756940}
         DebugActive: 0
         Mode: 0
-        Duration: 3
+        Duration: 1
         StartsOff: 0
         EndsOff: 0
         RelativeValues: 0

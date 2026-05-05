@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: More Dolla
   m_EditorClassIdentifier: Assembly-CSharp::MoneyGainMultiplier
   augmentName: More Dolla$
-  description: Increase profit from trades by 5%
+  description: Increase profit from <color=#77FF41>Winning</color> trades by 0,05%
   icon: {fileID: 21300000, guid: a2d73500483f0cb4e894a0fa2498af4a, type: 3}
   tier: 0
   category: 2
@@ -28,4 +28,4 @@ MonoBehaviour:
   - 500
   leftText: 'CURRENT BONUS: '
   rightText: '%'
-  multiplier: 0.05
+  multiplier: 5

@@ -17,18 +17,19 @@ public class PermaUpgradeTooltip : MonoBehaviour
     public void Setup(PermaUpgrade powerUp)
     {
         if (powerUp == null) return;
-        name.text = powerUp.name;
+        name.text = powerUp.augmentName;
         name.color = powerUp.color;
         description.text = powerUp.description;
         if (!powerUp.IsUpgradeMaxedOut())
         {
-            price.text = $"PRICE: <color=#FFF390> {NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeCost())}</color>";   
+            price.text = $"PRICE:<color=#FFF390> {NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeCost())}</color>";   
         }
         else
         {
-            price.text = $"PRICE: <color=#FFF390>MAX</color>";
+            price.text = $"PRICE:<color=#FFF390>MAX</color>";
         }
-        currentStats.text = powerUp.leftText + NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeValue()) + powerUp.rightText;
+
+        currentStats.text = $"{powerUp.leftText}<color=#{ColorUtility.ToHtmlStringRGB(powerUp.color)}>{NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeValue())}{powerUp.rightText}";
     }
 
     public void PlayNotEnoughFaithFeedback()
