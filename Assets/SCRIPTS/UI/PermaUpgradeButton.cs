@@ -31,6 +31,7 @@ public class PermaUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerE
             permaUpgrade.Apply();
             LevelManager.Instance.faith -= cost;
             tooltip.Setup(permaUpgrade);
+            GameEvents.OnPermaUpgradeUpgraded?.Invoke();
         }
         else
         {

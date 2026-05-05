@@ -25,6 +25,7 @@ public static class GameEvents
     public static Action OnPlayerDeath;
     public static Action OnUpgradesOffered;
     public static Action OnUpgradeChosen;
+    public static Action OnPermaUpgradeUpgraded;
 
     public static Action<HotbarItem> OnCurrentHotbarSlotChanged;
     public static Action<HotbarItem> OnHotbarItemTooltipShowed;

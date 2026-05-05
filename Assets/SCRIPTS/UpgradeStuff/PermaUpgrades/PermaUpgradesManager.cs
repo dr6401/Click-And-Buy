@@ -5,6 +5,7 @@ public class PermaUpgradesManager : MonoBehaviour
     [Header("Permanent Upgrades Current Levels")]
     public int profitMultLvl;
     public int lossShieldLvl;
+    public int riskyMovesLvl;
 
     public static PermaUpgradesManager Instance;
     

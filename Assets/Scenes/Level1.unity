@@ -1031,8 +1031,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4291151301
-  m_fontColor: {r: 0.77254903, g: 0.77254903, b: 0.77254903, a: 1}
+    rgba: 4294922718
+  m_fontColor: {r: 0.87058824, g: 0.31764707, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4120,7 +4120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 570650420578049106, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -35.499756
+      value: -35.49974
       objectReference: {fileID: 0}
     - target: {fileID: 895713685371071831, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
       propertyPath: m_Color.b
@@ -4342,7 +4342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6508900365107996352, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -35.499756
+      value: -35.49974
       objectReference: {fileID: 0}
     - target: {fileID: 6522790277578236152, guid: e2ac09d0ac58a3e40bf3f75cfd0c5a5b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -16174,7 +16174,7 @@ PrefabInstance:
     - target: {fileID: 1811065302062388234, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: permaUpgrade
       value: 
-      objectReference: {fileID: 11400000, guid: 293c2085a43dfc84a91e8876f16b72bf, type: 2}
+      objectReference: {fileID: 11400000, guid: 78c1f2bc02fa79041a6bdbb9e1b7bec6, type: 2}
     - target: {fileID: 2267061240717599318, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -16221,11 +16221,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3480319294293960893, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_text
-      value: More Dolla
+      value: Risky Moves
       objectReference: {fileID: 0}
     - target: {fileID: 4297478454233488621, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_Name
-      value: MoreDolla (2)
+      value: Risky Moves
       objectReference: {fileID: 0}
     - target: {fileID: 4308698537057303323, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -23344,7 +23344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3480319294293960893, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_text
-      value: More Dolla
+      value: Loser Shield
       objectReference: {fileID: 0}
     - target: {fileID: 4297478454233488621, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_Name

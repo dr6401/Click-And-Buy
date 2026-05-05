@@ -33,6 +33,7 @@ public class SoundManager : MonoBehaviour
     
     [SerializeField] private AudioClip currencyUnlockedSFX;
     [SerializeField] private AudioClip divineCashOutSFX;
+    [SerializeField] private AudioClip permaUpgradeSFX;
     [Header("DEBUG")]
     [SerializeField] private bool dontPlayMusic = true;
     
@@ -130,6 +131,11 @@ public class SoundManager : MonoBehaviour
     {
         sfxAudioSource.PlayOneShot(divineCashOutSFX);
     }
+
+    public void PlayPermaUpgradeSFX()
+    {
+        sfxAudioSource.PlayOneShot(permaUpgradeSFX);
+    }
     
     private void OnEnable()
     {
@@ -143,6 +149,7 @@ public class SoundManager : MonoBehaviour
         GameEvents.onDefeat += PLayDefeatSFX;
         GameEvents.OnUpgradesOffered += PlayWheelSpinSFX;
         GameEvents.OnDivineCashOut += PlayDivineCashOutSFX;
+        GameEvents.OnPermaUpgradeUpgraded += PlayPermaUpgradeSFX;
     }
     private void OnDisable()
     {
@@ -156,5 +163,6 @@ public class SoundManager : MonoBehaviour
         GameEvents.onDefeat -= PLayDefeatSFX;
         GameEvents.OnUpgradesOffered -= PlayWheelSpinSFX;
         GameEvents.OnDivineCashOut -= PlayDivineCashOutSFX;
+        GameEvents.OnPermaUpgradeUpgraded -= PlayPermaUpgradeSFX;
     }
 }

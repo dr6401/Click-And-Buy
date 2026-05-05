@@ -326,6 +326,11 @@ public class LevelManager : MonoBehaviour
             {
                 cash += 1000;
             }
+            
+            if (Keyboard.current.fKey.wasPressedThisFrame)
+            {
+                faith += 100;
+            }
 
             if (Keyboard.current.lKey.wasPressedThisFrame)
             {
