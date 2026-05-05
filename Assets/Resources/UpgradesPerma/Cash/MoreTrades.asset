@@ -21,14 +21,20 @@ MonoBehaviour:
   color: {r: 0.3843597, g: 0.39869744, b: 0.99371064, a: 1}
   autoApply: 1
   removeFromPoolAfterPicking: 0
-  costProgression:
-  - 15
-  - 35
-  - 70
-  - 135
-  - 245
-  - 330
-  - 600
+  upgradeProgression:
+  - upgradeEffectAmount: 4
+    upgradeCost: 5
+  - upgradeEffectAmount: 5
+    upgradeCost: 25
+  - upgradeEffectAmount: 5
+    upgradeCost: 50
+  - upgradeEffectAmount: 10
+    upgradeCost: 100
+  - upgradeEffectAmount: 15
+    upgradeCost: 500
+  - upgradeEffectAmount: 15
+    upgradeCost: 750
+  - upgradeEffectAmount: 25
+    upgradeCost: 1000
   leftText: 'MAX ACTIVE TRADES: '
   rightText: 
-  maxTradesIncrease: 5

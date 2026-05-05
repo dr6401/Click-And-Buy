@@ -4,17 +4,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PermaAugment", menuName = "PermaAugments/LossReductionIncrease")]
 public class LossReductionIncrease : PermaUpgrade
 {
-    public int increaseAmount;
-
     private void OnEnable()
     {
-        description = $"Reduce losses from <color=#{ColorUtility.ToHtmlStringRGB(GameConstants.redColor)}>Losing trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{increaseAmount}%</color>";
+        description = $"Reduce losses from <color=#{ColorUtility.ToHtmlStringRGB(GameConstants.redColor)}>Losing trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{GetCurrentRuntimeEffectAmount()}%</color>";
     }
 
     public override void Apply()
     {
         if (PlayerStats.Instance == null) return;
-        PlayerStats.Instance.lossReduction += increaseAmount * 0.01f;
+        PlayerStats.Instance.lossReduction += GetCurrentRuntimeEffectAmount() * 0.01f;
         PermaUpgradesManager.Instance.lossShieldLvl++;
     }
 
@@ -35,6 +33,6 @@ public class LossReductionIncrease : PermaUpgrade
 
     public override string GetDescription()
     {
-        return $"Reduce losses from <color=#{ColorUtility.ToHtmlStringRGB(GameConstants.redColor)}>Losing trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{increaseAmount}%</color>";
+        return $"Reduce losses from <color=#{ColorUtility.ToHtmlStringRGB(GameConstants.redColor)}>Losing trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{GetCurrentRuntimeEffectAmount()}%</color>";
     }
 }

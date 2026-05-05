@@ -13,20 +13,29 @@ MonoBehaviour:
   m_Name: OrderUp
   m_EditorClassIdentifier: Assembly-CSharp::OrderQuantityIncrease
   augmentName: Order Up!
-  description: Increase <color=#77FF41>Max Order Quantity</color> by <color=#000000>0</color>
+  description: Increase max <color=#4E96BA>Order quantity</color> by <color=#4E96BA>4</color>
   icon: {fileID: 0}
   tier: 0
   category: 0
   color: {r: 0.3051302, g: 0.5892449, b: 0.72955966, a: 1}
   autoApply: 1
   removeFromPoolAfterPicking: 0
-  costProgression:
-  - 5
-  - 20
-  - 40
-  - 100
-  - 200
-  - 500
+  upgradeProgression:
+  - upgradeEffectAmount: 1
+    upgradeCost: 5
+  - upgradeEffectAmount: 3
+    upgradeCost: 25
+  - upgradeEffectAmount: 5
+    upgradeCost: 50
+  - upgradeEffectAmount: 5
+    upgradeCost: 100
+  - upgradeEffectAmount: 10
+    upgradeCost: 500
+  - upgradeEffectAmount: 15
+    upgradeCost: 750
+  - upgradeEffectAmount: 20
+    upgradeCost: 1000
+  - upgradeEffectAmount: 40
+    upgradeCost: 5000
   leftText: 'CURRENT MAX: '
   rightText: 
-  amount: 4

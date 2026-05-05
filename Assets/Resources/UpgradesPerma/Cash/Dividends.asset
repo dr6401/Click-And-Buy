@@ -21,12 +21,26 @@ MonoBehaviour:
   color: {r: 0.51944757, g: 0.899371, b: 0.17817716, a: 1}
   autoApply: 1
   removeFromPoolAfterPicking: 0
-  costProgression:
-  - 1000
-  - 2500
-  - 10000
-  - 25000
-  - 100000
+  upgradeProgression:
+  - upgradeEffectAmount: 2
+    upgradeCost: 100
+  - upgradeEffectAmount: 3
+    upgradeCost: 200
+  - upgradeEffectAmount: 5
+    upgradeCost: 300
+  - upgradeEffectAmount: 10
+    upgradeCost: 1000
+  - upgradeEffectAmount: 15
+    upgradeCost: 2500
+  - upgradeEffectAmount: 25
+    upgradeCost: 5000
+  - upgradeEffectAmount: 50
+    upgradeCost: 10000
+  - upgradeEffectAmount: 100
+    upgradeCost: 25000
+  - upgradeEffectAmount: 190
+    upgradeCost: 50000
+  - upgradeEffectAmount: 600
+    upgradeCost: 100000
   leftText: 'CURRENT BONUS: '
   rightText: '%'
-  multiplier: 1

@@ -3,16 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PermaAugment", menuName = "PermaAugments/LeverageIncrease")]
 public class LeverageIncrease : PermaUpgrade
 {
-    public float leverageIncrease;
-    
-    private void OnEnable()
+    public override string GetDescription()
     {
-        description = $"Increase max <color=#{ColorUtility.ToHtmlStringRGB(color)}>Multiplier</color>\nby <color=#{ColorUtility.ToHtmlStringRGB(color)}>{leverageIncrease}X</color>";
+        return $"Increase max <color=#{ColorUtility.ToHtmlStringRGB(color)}>Multiplier</color>\nby <color=#{ColorUtility.ToHtmlStringRGB(color)}>{GetCurrentRuntimeEffectAmount()}X</color>";
     }
     public override void Apply()
     {
         if (PlayerStats.Instance == null) return;
-        PlayerStats.Instance.maxLeverage += leverageIncrease;
+        PlayerStats.Instance.maxLeverage += GetCurrentRuntimeEffectAmount();
         PermaUpgradesManager.Instance.riskyMovesLvl++;
     }
 
@@ -29,10 +27,5 @@ public class LeverageIncrease : PermaUpgrade
     public override bool IsUpgradeMaxedOut()
     {
         return PermaUpgradesManager.Instance.riskyMovesLvl >= upgradeProgression.Count;
-    }
-
-    public override string GetDescription()
-    {
-        return $"Increase max <color=#{ColorUtility.ToHtmlStringRGB(color)}>Multiplier</color>\nby <color=#{ColorUtility.ToHtmlStringRGB(color)}>{leverageIncrease}X</color>";
     }
 }

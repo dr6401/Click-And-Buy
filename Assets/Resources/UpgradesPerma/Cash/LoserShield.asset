@@ -13,19 +13,24 @@ MonoBehaviour:
   m_Name: LoserShield
   m_EditorClassIdentifier: Assembly-CSharp::LossReductionIncrease
   augmentName: Loser Shield
-  description: Reduce losses from <color=#FF414A>Losing</color> trades by 3%
+  description: Reduce losses from <color=#FF414A>Losing trades</color> by <color=#FF6C00>3%</color>
   icon: {fileID: 21300000, guid: 26ccb78545f56af4e86e2e5369fda5e0, type: 3}
   tier: 0
   category: 13
   color: {r: 1, g: 0.42352942, b: 0, a: 1}
   autoApply: 1
   removeFromPoolAfterPicking: 0
-  costProgression:
-  - 10
-  - 35
-  - 80
-  - 150
-  - 350
+  upgradeProgression:
+  - upgradeEffectAmount: 2
+    upgradeCost: 5
+  - upgradeEffectAmount: 3
+    upgradeCost: 25
+  - upgradeEffectAmount: 5
+    upgradeCost: 50
+  - upgradeEffectAmount: 5
+    upgradeCost: 100
+  - upgradeEffectAmount: 10
+    upgradeCost: 500
   leftText: 'CURRENT REDUCTION: '
   rightText: '%'
   increaseAmount: 3

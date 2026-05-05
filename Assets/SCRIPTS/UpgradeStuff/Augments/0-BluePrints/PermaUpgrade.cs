@@ -14,7 +14,11 @@ public abstract class PermaUpgrade : Augment
 
     public float GetCurrentRuntimeEffectAmount()
     {
-        return upgradeProgression[Mathf.Min(upgradeProgression.Count - 1, GetCurrentRuntimeLevel())].upgradeEffectAmount;
+        if (GetCurrentRuntimeLevel() >= upgradeProgression.Count)
+        {
+            return GetCurrentRuntimeValue();
+        } // else
+        return upgradeProgression[Mathf.Min(upgradeProgression.Count, GetCurrentRuntimeLevel())].upgradeEffectAmount;   
     }
     public float GetCurrentRuntimeCost()
     {

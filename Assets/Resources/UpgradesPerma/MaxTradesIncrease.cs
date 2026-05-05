@@ -4,17 +4,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PermaAugment", menuName = "PermaAugments/MaxTradesIncrease")]
 public class MaxTradesIncrease : PermaUpgrade
 {
-    public int maxTradesIncrease;
 
-    private void OnEnable()
+    public override string GetDescription()
     {
-        description = $"Increase max number of <color=#{ColorUtility.ToHtmlStringRGB(color)}>Active trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{maxTradesIncrease}</color>";
+        return
+            $"Increase max number of <color=#{ColorUtility.ToHtmlStringRGB(color)}>Active trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{GetCurrentRuntimeEffectAmount()}</color>";
     }
-
     public override void Apply()
     {
         if (PlayerStats.Instance == null) return;
-        PlayerStats.Instance.maxAliveTrades += maxTradesIncrease;
+        PlayerStats.Instance.maxAliveTrades += (int)GetCurrentRuntimeEffectAmount();
         PermaUpgradesManager.Instance.maxTradesLvl++;
     }
 
@@ -31,11 +30,5 @@ public class MaxTradesIncrease : PermaUpgrade
     public override bool IsUpgradeMaxedOut()
     {
         return PermaUpgradesManager.Instance.maxTradesLvl >= upgradeProgression.Count;
-    }
-
-    public override string GetDescription()
-    {
-        return
-            $"Increase max number of <color=#{ColorUtility.ToHtmlStringRGB(color)}>Active trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{maxTradesIncrease}</color>";
     }
 }
