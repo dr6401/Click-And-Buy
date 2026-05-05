@@ -32,6 +32,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip wheelSpinSFX;
     
     [SerializeField] private AudioClip currencyUnlockedSFX;
+    [SerializeField] private AudioClip divineCashOutSFX;
     [Header("DEBUG")]
     [SerializeField] private bool dontPlayMusic = true;
     
@@ -124,6 +125,11 @@ public class SoundManager : MonoBehaviour
     {
         sfxAudioSource.PlayOneShot(currencyUnlockedSFX);
     }
+
+    public void PlayDivineCashOutSFX()
+    {
+        sfxAudioSource.PlayOneShot(divineCashOutSFX);
+    }
     
     private void OnEnable()
     {
@@ -135,6 +141,7 @@ public class SoundManager : MonoBehaviour
         GameEvents.onVictory += PlayVictorySFX;
         GameEvents.onDefeat += PLayDefeatSFX;
         GameEvents.OnUpgradesOffered += PlayWheelSpinSFX;
+        GameEvents.OnDivineCashOut += PlayDivineCashOutSFX;
     }
     private void OnDisable()
     {
@@ -146,5 +153,6 @@ public class SoundManager : MonoBehaviour
         GameEvents.onVictory -= PlayVictorySFX;
         GameEvents.onDefeat -= PLayDefeatSFX;
         GameEvents.OnUpgradesOffered -= PlayWheelSpinSFX;
+        GameEvents.OnDivineCashOut -= PlayDivineCashOutSFX;
     }
 }

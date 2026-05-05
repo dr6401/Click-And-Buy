@@ -21,6 +21,7 @@ public static class GameEvents
     public static Action OnFTUEEnded;
     
     public static Action<AugmentTier> OnCashOut;
+    public static Action OnDivineCashOut;
     public static Action OnPlayerDeath;
     public static Action OnUpgradesOffered;
     public static Action OnUpgradeChosen;

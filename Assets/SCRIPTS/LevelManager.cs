@@ -810,6 +810,7 @@ public class LevelManager : MonoBehaviour
         PlayerCurrencies.Instance.AddCurrency(-UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency), currentCurrency);
         currentRespinPrice = UpgradesSelectionUI.Instance.baseAugmentRespinPrices[currentBasicCashOutTier];
         GameEvents.OnCashOut?.Invoke(currentDivineCashOutTier);
+        GameEvents.OnDivineCashOut?.Invoke();
         Debug.Log($"Spent {UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency)} {currentCurrency} tokens");
     }
     

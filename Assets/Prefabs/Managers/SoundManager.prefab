@@ -60,6 +60,7 @@ MonoBehaviour:
   defeatSFX: {fileID: 8300000, guid: a278f511fc3db27418d17a1e9344106a, type: 3}
   wheelSpinSFX: {fileID: 8300000, guid: cd89abec555a228449bbebcbeac89f09, type: 3}
   currencyUnlockedSFX: {fileID: 8300000, guid: 3ed71b2561131af49976b89fcc2b0dde, type: 3}
+  divineCashOutSFX: {fileID: 8300000, guid: bb513b28c6d71dc4aa13a3aeb28a16d3, type: 3}
   dontPlayMusic: 1
 --- !u!1 &3461053784700121483
 GameObject:
