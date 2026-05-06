@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 public abstract class PermaUpgrade : Augment
@@ -8,6 +9,7 @@ public abstract class PermaUpgrade : Augment
     //public List<float> costProgression;
     public string leftText;
     public string rightText;
+    public abstract string GetDescription();
     public abstract override void Apply();
 
     public abstract int GetCurrentRuntimeLevel();
@@ -26,7 +28,6 @@ public abstract class PermaUpgrade : Augment
     }
     public abstract float GetCurrentRuntimeValue();
     public abstract bool IsUpgradeMaxedOut();
-    public abstract string GetDescription();
 }
 
 [System.Serializable]

@@ -60,6 +60,7 @@ MonoBehaviour:
   openProfitAndLoss: 0
   unrealizedProfit: 0
   unrealizedLoss: 0
+  faith: 0
   price: 0
   upgradeOfferTarget: 500
   leverage: 1
@@ -105,13 +106,8 @@ MonoBehaviour:
   divineCashOutText: {fileID: 0}
   cashOutButton: {fileID: 0}
   multiplierText: {fileID: 0}
-  streakBonusText: {fileID: 0}
-  profitMultText: {fileID: 0}
+  currentFaithText: {fileID: 0}
   freebieTradesText: {fileID: 0}
-  volatilityText: {fileID: 0}
-  passiveIncomeText: {fileID: 0}
-  divineLuckText: {fileID: 0}
-  lossShieldText: {fileID: 0}
   quantityOrderText: {fileID: 0}
   timeScaleSlider: {fileID: 0}
   numberOfFutureFreebieTrades: 0
@@ -128,14 +124,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   level: 1
-  moneyGainMultiplier: 1
+  profitMultiplier: 1
+  lossReduction: 0
+  maxOrderQuantity: 1
   maxLeverage: 1
+  comboBonusMultiplier: 1
+  soldAccountsProfitMultiplier: 1
+  tokenIncomeMultiplier: 1
   maxAliveTrades: 5
+  volatility: 1
   maxComboDuration: 2
-  volatility: 0
   passiveIncome: 0
   passiveIncomeTriggerInterval: 1
-  lossReduction: 0
   divineLuck: 0
 --- !u!114 &3460782103999049356
 MonoBehaviour:

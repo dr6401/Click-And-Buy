@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fddb95e993b9b11469b704fa9c051d53, type: 3}
+  m_Name: Combomaniac
+  m_EditorClassIdentifier: Assembly-CSharp::Combomaniac
+  augmentName: Combomaniac
+  description: Increase Combo bonus by 5%
+  icon: {fileID: 0}
+  tier: 0
+  category: 0
+  color: {r: 1, g: 0.4320067, b: 0, a: 1}
+  autoApply: 1
+  removeFromPoolAfterPicking: 0
+  upgradeProgression:
+  - upgradeEffectAmount: 5
+    upgradeCost: 50
+  - upgradeEffectAmount: 10
+    upgradeCost: 150
+  - upgradeEffectAmount: 15
+    upgradeCost: 400
+  - upgradeEffectAmount: 30
+    upgradeCost: 750
+  - upgradeEffectAmount: 40
+    upgradeCost: 1500
+  - upgradeEffectAmount: 50
+    upgradeCost: 2000
+  - upgradeEffectAmount: 100
+    upgradeCost: 5000
+  - upgradeEffectAmount: 250
+    upgradeCost: 10000
+  - upgradeEffectAmount: 500
+    upgradeCost: 15000
+  leftText: 'CURRENT BONUS: '
+  rightText: '%'

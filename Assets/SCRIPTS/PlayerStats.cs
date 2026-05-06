@@ -6,23 +6,27 @@ public class PlayerStats : MonoBehaviour
     
     public int level = 1;
 
+    [Header("Cash")]
     public float profitMultiplier = 1f;
-    public float maxLeverage = 1;
-
-    public int maxAliveTrades = 5;
+    public float lossReduction = 0f;
     public int maxOrderQuantity = 1;
+    public float maxLeverage = 1;
+    public float comboBonusMultiplier = 1f;
+    public float soldAccountsProfitMultiplier = 1f;
 
-    public float maxComboDuration = 2f;
+    // Stocks Stuff
+    [Header("Stocks")]
+    public float tokenIncomeMultiplier = 1f;
+    public int maxAliveTrades = 5;
+    public float volatility = 1f;
     
-    public float volatility = 0f;
+    public float maxComboDuration = 2f;
     
     public float passiveIncome = 0;
     public float passiveIncomeTriggerInterval = 1f;
     
-    public float lossReduction = 0f;
     public float divineLuck = 0f;
-
-    public float soldAccountsProfitMultiplier = 1f;
+    
     
     private void Awake()
     {

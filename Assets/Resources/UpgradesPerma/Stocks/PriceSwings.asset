@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd0e07ea504fb2b42bc52cff185f300d, type: 3}
+  m_Name: PriceSwings
+  m_EditorClassIdentifier: Assembly-CSharp::HungryMarket
+  augmentName: Price Swings
+  description: Increase Volatility by 5%
+  icon: {fileID: 0}
+  tier: 0
+  category: 0
+  color: {r: 0.8509804, g: 0.1764706, b: 0, a: 1}
+  autoApply: 1
+  removeFromPoolAfterPicking: 0
+  upgradeProgression:
+  - upgradeEffectAmount: 10
+    upgradeCost: 10
+  - upgradeEffectAmount: 15
+    upgradeCost: 25
+  - upgradeEffectAmount: 25
+    upgradeCost: 50
+  - upgradeEffectAmount: 50
+    upgradeCost: 100
+  - upgradeEffectAmount: 100
+    upgradeCost: 500
+  - upgradeEffectAmount: 300
+    upgradeCost: 1000
+  leftText: 'CURRENT BONUS: '
+  rightText: '%'

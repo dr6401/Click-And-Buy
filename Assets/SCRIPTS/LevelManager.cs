@@ -376,7 +376,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            float move = trend + Random.Range(-5f * (1 + PlayerStats.Instance.volatility * 0.01f), 5f * (1 + PlayerStats.Instance.volatility * 0.01f));
+            float move = trend + Random.Range(-5f, 5f) * PlayerStats.Instance.volatility;
             //Debug.Log($"Move: {move}");
             price += move;
         }
