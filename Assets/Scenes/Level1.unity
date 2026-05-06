@@ -1677,7 +1677,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 152.876, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &84560646
 MonoBehaviour:
@@ -20160,8 +20160,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -6.693, y: -240.8}
-  m_SizeDelta: {x: 333.014, y: 110.441}
+  m_AnchoredPosition: {x: -6.693, y: -233.4}
+  m_SizeDelta: {x: 333.014, y: 60.39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1295396626
 MonoBehaviour:
@@ -20172,16 +20172,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1295396624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
   m_Padding:
-    m_Left: 0
+    m_Left: 18
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: -18.47
+  m_ChildAlignment: 3
+  m_Spacing: 9.6
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -33453,7 +33453,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 102.501, y: 0}
+  m_SizeDelta: {x: 64.676, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2130167918
 MonoBehaviour:
@@ -33475,7 +33475,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5.2
+  m_text: 1.2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
   m_sharedMaterial: {fileID: -4406428672775297824, guid: 5958582a78224944d8ebe2f6371ea65c, type: 2}
@@ -33509,7 +33509,7 @@ MonoBehaviour:
   m_fontSizeMin: 15
   m_fontSizeMax: 30
   m_fontStyle: 1
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
