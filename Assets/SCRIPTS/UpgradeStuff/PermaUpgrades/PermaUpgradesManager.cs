@@ -14,6 +14,9 @@ public class PermaUpgradesManager : MonoBehaviour
     public int tokenIncomeMultiplierLvl;
     public int maxTradesLvl;
     public int volatilityLvl;
+    public int openWinningTradesPerSecondMultiplierLvl;
+    public int chanceToIdentifyTrendsLvl;
+    public int passiveTokenIncomeMultiplierLvl;
     
 
     public static PermaUpgradesManager Instance;

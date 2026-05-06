@@ -19,6 +19,9 @@ public class PlayerStats : MonoBehaviour
     public float tokenIncomeMultiplier = 1f;
     public int maxAliveTrades = 5;
     public float volatility = 1f;
+    public float openWinningTradesPerSecondMultiplier = 0f;
+    public float chanceToIdentifyTrends = 0f;
+    public float passiveTokenIncomeMultiplier = 0f;
     
     public float maxComboDuration = 2f;
     
