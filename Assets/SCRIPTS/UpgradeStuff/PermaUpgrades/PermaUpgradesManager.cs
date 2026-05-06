@@ -15,8 +15,15 @@ public class PermaUpgradesManager : MonoBehaviour
     public int maxTradesLvl;
     public int volatilityLvl;
     public int openWinningTradesPerSecondMultiplierLvl;
-    public int chanceToIdentifyTrendsLvl;
+    public int prophetLvl;
     public int passiveTokenIncomeMultiplierLvl;
+    [Header("Divine")]
+    public int faithIncomeMultiplierLvl;
+    public int echoProfitsMultiplierLvl;
+    public int blessingOverflowLvl;
+    public int divineInterventionLvl;
+    public int visionaryLvl;
+    public int marketGodLvl;
     
 
     public static PermaUpgradesManager Instance;

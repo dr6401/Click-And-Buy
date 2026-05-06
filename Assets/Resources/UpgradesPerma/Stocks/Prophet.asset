@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef31a7299703dc24c885620baf490551, type: 3}
-  m_Name: Visionary
+  m_Name: Prophet
   m_EditorClassIdentifier: Assembly-CSharp::Visionary
-  augmentName: Visionary
+  augmentName: Prophet
   description: Increase chance to identify trends by 5%
   icon: {fileID: 0}
   tier: 0

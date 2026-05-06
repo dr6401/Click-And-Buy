@@ -23,11 +23,12 @@ public static class GameConstants
         public static Color redColor = new Color32(255, 65, 74, 255);
         
         public static Color tokenColor = new Color32(0, 253, 255, 255);
+        public static Color faithColor = new Color32(255, 4+243, 144, 255);
         
         public static Color commonTierColor = new Color32(46, 219, 19, 255);
         public static Color rareTierColor = new Color32(6, 182, 219, 255);
         public static Color epicTierColor = new Color32(163, 0, 255, 255);
-        public static Color legendaryTierColor = new Color32(255, 219, 0, 255);
+        public static Color divineBlessingColor = new Color32(255, 219, 0, 255);
         
         public static bool isPlaytestBuild = true; // TODO - SET THIS TO FALSE WHEN RELEASING LIVE VERSIONS
         public static bool isDevHacksEnabled = true; // TODO - SET THIS TO FALSE WHEN RELEASING LIVE/PLAYTEST VERSIONS

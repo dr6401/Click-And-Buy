@@ -5,7 +5,7 @@ public class ProfitMultiplier : PermaUpgrade
 {
     public override string GetDescription()
     {
-        return $"Increase profit from <color=#{ColorUtility.ToHtmlStringRGB(GameConstants.greenColor)}>Winning trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{GetCurrentRuntimeEffectAmount()}%</color>";
+        return $"Increase profit from <color=#{ColorUtility.ToHtmlStringRGB(GameConstants.greenColor)}>Winning trades</color> by <color=#{ColorUtility.ToHtmlStringRGB(color)}>{NumberFormatter.FormatNumber(GetCurrentRuntimeEffectAmount())}%</color>";
     }
     public override void Apply()
     {

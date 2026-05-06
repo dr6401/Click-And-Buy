@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1732e92f36e370045a7c2e725a3f3585, type: 3}
+  m_Name: DivineIntervention
+  m_EditorClassIdentifier: Assembly-CSharp::DivineIntervention
+  augmentName: Divine Intervention
+  description: After opening x trades, your worst losing trade turns profitable and
+    closes
+  icon: {fileID: 0}
+  tier: 0
+  category: 0
+  color: {r: 0.98039216, g: 0.6916872, b: 0.34117645, a: 1}
+  autoApply: 1
+  removeFromPoolAfterPicking: 0
+  upgradeProgression:
+  - upgradeEffectAmount: 10
+    upgradeCost: 75
+  - upgradeEffectAmount: 9
+    upgradeCost: 450
+  - upgradeEffectAmount: 8
+    upgradeCost: 1250
+  - upgradeEffectAmount: 7
+    upgradeCost: 2000
+  - upgradeEffectAmount: 6
+    upgradeCost: 3000
+  - upgradeEffectAmount: 5
+    upgradeCost: 5000
+  leftText: 'EVERY: '
+  rightText: ' TRADES'

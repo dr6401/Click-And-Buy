@@ -328,7 +328,7 @@ public class LevelManager : MonoBehaviour
             
             if (Keyboard.current.fKey.wasPressedThisFrame)
             {
-                faith += 100;
+                faith += 500;
             }
 
             if (Keyboard.current.lKey.wasPressedThisFrame)
@@ -1074,7 +1074,7 @@ public class LevelManager : MonoBehaviour
                 return GameConstants.epicTierColor;
                 break;
             case AugmentTier.Legendary:
-                return GameConstants.legendaryTierColor;
+                return GameConstants.divineBlessingColor;
                 break;
             default:
                 return GameConstants.whiteColor;

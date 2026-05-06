@@ -500,7 +500,7 @@ PrefabInstance:
     - target: {fileID: 1811065302062388234, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: permaUpgrade
       value: 
-      objectReference: {fileID: 11400000, guid: ad436b9c42c47a148bc060be1051561c, type: 2}
+      objectReference: {fileID: 11400000, guid: b0f0f971ce68a8f4bb7c0e05f3565a26, type: 2}
     - target: {fileID: 2267061240717599318, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -909,7 +909,7 @@ PrefabInstance:
     - target: {fileID: 1811065302062388234, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: permaUpgrade
       value: 
-      objectReference: {fileID: 11400000, guid: 78c1f2bc02fa79041a6bdbb9e1b7bec6, type: 2}
+      objectReference: {fileID: 11400000, guid: dd687e93eee7d5641882530f849ef3e0, type: 2}
     - target: {fileID: 2267061240717599318, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -956,11 +956,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3480319294293960893, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_text
-      value: Foresight
+      value: Visionary
       objectReference: {fileID: 0}
     - target: {fileID: 4297478454233488621, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_Name
-      value: Foresight
+      value: Visionary
       objectReference: {fileID: 0}
     - target: {fileID: 4308698537057303323, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6012,7 +6012,7 @@ PrefabInstance:
     - target: {fileID: 1811065302062388234, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: permaUpgrade
       value: 
-      objectReference: {fileID: 11400000, guid: 293c2085a43dfc84a91e8876f16b72bf, type: 2}
+      objectReference: {fileID: 11400000, guid: 0c51329221a412442acce0bcc682d39c, type: 2}
     - target: {fileID: 2267061240717599318, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -11002,11 +11002,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3480319294293960893, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_text
-      value: Visionary
+      value: Prophet
       objectReference: {fileID: 0}
     - target: {fileID: 4297478454233488621, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_Name
-      value: Visionary
+      value: Prophet
       objectReference: {fileID: 0}
     - target: {fileID: 4308698537057303323, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13509,7 +13509,7 @@ PrefabInstance:
     - target: {fileID: 1811065302062388234, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: permaUpgrade
       value: 
-      objectReference: {fileID: 11400000, guid: 8b93fb35a2841ea49ac47143e6954dab, type: 2}
+      objectReference: {fileID: 11400000, guid: 6542ac1da7e464148bb8e3cf14b08d41, type: 2}
     - target: {fileID: 2267061240717599318, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -18122,7 +18122,7 @@ PrefabInstance:
     - target: {fileID: 1811065302062388234, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: permaUpgrade
       value: 
-      objectReference: {fileID: 11400000, guid: c6e197fb3b732e046b087df44bcbfc4a, type: 2}
+      objectReference: {fileID: 11400000, guid: 245f99e6844e44c45b908144c16e791d, type: 2}
     - target: {fileID: 2267061240717599318, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -19306,7 +19306,7 @@ PrefabInstance:
     - target: {fileID: 1811065302062388234, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: permaUpgrade
       value: 
-      objectReference: {fileID: 11400000, guid: 3dac69a97d32fd844a47b2377d9248f4, type: 2}
+      objectReference: {fileID: 11400000, guid: e1350cd18a1ab37429a8653f22e023eb, type: 2}
     - target: {fileID: 2267061240717599318, guid: a209c95b7c7454147a4603b024c1aa17, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -29374,8 +29374,8 @@ RectTransform:
   - {fileID: 405980676}
   - {fileID: 41511845}
   - {fileID: 920417321}
-  - {fileID: 74971718}
   - {fileID: 1373615064}
+  - {fileID: 74971718}
   - {fileID: 1441144106}
   m_Father: {fileID: 1326725022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

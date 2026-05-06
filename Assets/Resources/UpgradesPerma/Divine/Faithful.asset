@@ -9,29 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a0d0c1e26896bb4890ae2a5df7467ee, type: 3}
-  m_Name: Tokenize
-  m_EditorClassIdentifier: Assembly-CSharp::Tokenize
-  augmentName: Tokenize
-  description: Increase token gain from all sources by 5%
+  m_Script: {fileID: 11500000, guid: cb15ab1b88fd6754d861f3861c2bfe4b, type: 3}
+  m_Name: Faithful
+  m_EditorClassIdentifier: Assembly-CSharp::Faithful
+  augmentName: Faithful
+  description: Increase Faith gain from all sources by 5%
   icon: {fileID: 0}
   tier: 0
   category: 0
-  color: {r: 0.451327, g: 0.83059675, b: 0.8805031, a: 1}
+  color: {r: 0.8867924, g: 0.8601034, b: 0.34300452, a: 1}
   autoApply: 1
   removeFromPoolAfterPicking: 0
   upgradeProgression:
   - upgradeEffectAmount: 10
-    upgradeCost: 20
-  - upgradeEffectAmount: 25
     upgradeCost: 50
-  - upgradeEffectAmount: 50
+  - upgradeEffectAmount: 25
     upgradeCost: 100
-  - upgradeEffectAmount: 100
+  - upgradeEffectAmount: 50
     upgradeCost: 250
-  - upgradeEffectAmount: 250
+  - upgradeEffectAmount: 100
     upgradeCost: 750
-  - upgradeEffectAmount: 565
-    upgradeCost: 1500
+  - upgradeEffectAmount: 315
+    upgradeCost: 2000
   leftText: 'CURRENT BONUS: '
   rightText: '%'

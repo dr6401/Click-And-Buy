@@ -13,8 +13,6 @@ public class PlayerStats : MonoBehaviour
     public float maxLeverage = 1;
     public float comboBonusMultiplier = 1f;
     public float soldAccountsProfitMultiplier = 1f;
-
-    // Stocks Stuff
     [Header("Stocks")]
     public float tokenIncomeMultiplier = 1f;
     public int maxAliveTrades = 5;
@@ -22,6 +20,14 @@ public class PlayerStats : MonoBehaviour
     public float openWinningTradesPerSecondMultiplier = 0f;
     public float chanceToIdentifyTrends = 0f;
     public float passiveTokenIncomeMultiplier = 0f;
+    [Header("Divine")]
+    public float faithIncomeMultiplier = 1f;
+    public float echoProfitMultiplier = 0f;
+    public float blessingOverflowFreebieNumber = 0;
+    public float divineInterventionNumber = 0;
+    public float foresightDuration = 0;
+    public float marketGodShitPercent = 0;
+    
     
     public float maxComboDuration = 2f;
     

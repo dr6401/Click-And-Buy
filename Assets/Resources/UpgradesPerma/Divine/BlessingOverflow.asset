@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35a61dad070eb0f449a4b23e8ab7ca4f, type: 3}
+  m_Name: BlessingOverflow
+  m_EditorClassIdentifier: Assembly-CSharp::BlessingOverflow
+  augmentName: Blessing Overflow
+  description: Every 10 Divine blessings, next one is FREE
+  icon: {fileID: 0}
+  tier: 0
+  category: 0
+  color: {r: 1, g: 0.87641394, b: 0, a: 1}
+  autoApply: 1
+  removeFromPoolAfterPicking: 0
+  upgradeProgression:
+  - upgradeEffectAmount: 10
+    upgradeCost: 50
+  - upgradeEffectAmount: 8
+    upgradeCost: 500
+  - upgradeEffectAmount: 7
+    upgradeCost: 1000
+  - upgradeEffectAmount: 6
+    upgradeCost: 2500
+  - upgradeEffectAmount: 5
+    upgradeCost: 5000
+  - upgradeEffectAmount: 3
+    upgradeCost: 10000
+  - upgradeEffectAmount: 2
+    upgradeCost: 15000
+  - upgradeEffectAmount: 1
+    upgradeCost: 25000
+  leftText: 'EVERY: '
+  rightText: ' BLESSINGS'

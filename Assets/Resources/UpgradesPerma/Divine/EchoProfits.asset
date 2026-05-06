@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eafec572d2913a342a2a3a2c98d58553, type: 3}
+  m_Name: EchoProfits
+  m_EditorClassIdentifier: Assembly-CSharp::EchoProfits
+  augmentName: Echo Profits
+  description: Each Winning trade earns 5% of its profit after closing
+  icon: {fileID: 0}
+  tier: 0
+  category: 0
+  color: {r: 1, g: 0.24842751, b: 0.52314013, a: 1}
+  autoApply: 1
+  removeFromPoolAfterPicking: 0
+  upgradeProgression:
+  - upgradeEffectAmount: 5
+    upgradeCost: 75
+  - upgradeEffectAmount: 10
+    upgradeCost: 250
+  - upgradeEffectAmount: 15
+    upgradeCost: 800
+  - upgradeEffectAmount: 20
+    upgradeCost: 1600
+  - upgradeEffectAmount: 50
+    upgradeCost: 4000
+  leftText: 'CURRENT PERCENT: '
+  rightText: '%'

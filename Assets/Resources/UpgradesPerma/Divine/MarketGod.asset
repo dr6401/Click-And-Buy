@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b405064c742d25640a28b8df17236999, type: 3}
+  m_Name: MarketGod
+  m_EditorClassIdentifier: Assembly-CSharp::MarketGod
+  augmentName: Market God
+  description: Opening positions shifts the market in your favor!
+  icon: {fileID: 0}
+  tier: 0
+  category: 0
+  color: {r: 1, g: 0.85882354, b: 0, a: 1}
+  autoApply: 1
+  removeFromPoolAfterPicking: 0
+  upgradeProgression:
+  - upgradeEffectAmount: 5
+    upgradeCost: 5000
+  - upgradeEffectAmount: 8
+    upgradeCost: 10000
+  - upgradeEffectAmount: 12
+    upgradeCost: 25000
+  - upgradeEffectAmount: 15
+    upgradeCost: 50000
+  - upgradeEffectAmount: 10
+    upgradeCost: 100000
+  - upgradeEffectAmount: 50
+    upgradeCost: 1000000
+  leftText: 'CURRENT INFLUENCE: '
+  rightText: '%'
