@@ -31,18 +31,16 @@ public class LevelManager : MonoBehaviour
     public float openProfitAndLoss;
     public float unrealizedProfit;
     public float unrealizedLoss;
-    public float faith;
     [Header("-----------------PRICE----------------")]
     public float price;
     [Header("-----------------PRICE----------------")]
-    public float upgradeOfferTarget = 300;
-    private float upgradeThresholdIncrease = 500;
     public float leverage = 1;
     private float previousPrice;
     private float decimals = 0.01f;
     private float currentOrderQuantity = 1f;
 
     public PlayerCurrencies.Currency currentCurrency;
+    public PlayerCurrencies.Currency topCurrency;
 
     public float amountToWin = 1000000f;
     public float minPrice = 10f;
@@ -64,8 +62,6 @@ public class LevelManager : MonoBehaviour
     
     private float generatePriceTimer;
     private float genetartePriceInterval = 0.1f;
-    private float marginCallTimer;
-    private float marginCallInterval = 0.001f;
     
     public CurrencyStats currencyStats;
     
@@ -91,9 +87,7 @@ public class LevelManager : MonoBehaviour
     private float xPos = 30;
     private float xStep = 50; // Distance between candles
     
-    private float candleSpawnTimer;
     public float candleSpawnInterval;
-    
 
     private RectTransform currentCandle;
     private float candleOpen;
@@ -197,7 +191,6 @@ public class LevelManager : MonoBehaviour
 
         candleTimer += Time.deltaTime;
         generatePriceTimer += Time.deltaTime;
-        marginCallTimer += Time.deltaTime;
         passiveIncomeTimer += Time.deltaTime;
         generateNewTrendTimer += Time.deltaTime;
         comboTimer += Time.unscaledDeltaTime;
@@ -277,7 +270,7 @@ public class LevelManager : MonoBehaviour
         basicCashOutText.color = GetColorForCurrentTier();
         divineCashOutText.text = $"{NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency))}";
         multiplierText.text = $"Multiplier: {NumberFormatter.FormatDecimalNumber(leverage)}X";
-        currentFaithText.text = $"Faith: {NumberFormatter.FormatDecimalNumber(faith)}";
+        currentFaithText.text = $"Faith: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.faith)}";
         //profitMultText.text = "Profit Mult: "+ NumberFormatter.FormatNumber((PlayerStats.Instance.profitMultiplier - 1) * 100f) + "%";
         freebieTradesText.text = "Freebie trades: " + NumberFormatter.FormatNumber(numberOfFutureFreebieTrades);
         //volatilityText.text = $"Volatility: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.volatility)}%";
@@ -306,9 +299,8 @@ public class LevelManager : MonoBehaviour
                 isInputBlocked = true;
                 WinGame();
             }
-            if (effectiveCash <= 0f && activeTrades.Count > 0)// && marginCallTimer >= marginCallInterval)
+            if (effectiveCash <= 0f && activeTrades.Count > 0)
             {
-                marginCallTimer = 0;
                 MarginCall(); // Deletes trade with biggest loss
                 if (effectiveCash <= 0 && activeTrades.Count <= 0 && equity <= 0)
                 {
@@ -328,7 +320,7 @@ public class LevelManager : MonoBehaviour
             
             if (Keyboard.current.fKey.wasPressedThisFrame)
             {
-                faith += 500;
+                PlayerStats.Instance.faith += 500;
             }
 
             if (Keyboard.current.lKey.wasPressedThisFrame)
@@ -439,6 +431,7 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateCurrentCandle()
     {
+        if (currentCandle == null) return;
         float height = PriceToY(price) - PriceToY(candleOpen);
 
         if (height >= 0)
@@ -814,7 +807,7 @@ public class LevelManager : MonoBehaviour
 
         float costOfCashOut = UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency);
         PlayerCurrencies.Instance.AddCurrency(-costOfCashOut, currentCurrency);
-        faith += 0.1f * costOfCashOut;
+        PlayerStats.Instance.faith += 0.1f * costOfCashOut;
         currentRespinPrice = UpgradesSelectionUI.Instance.baseAugmentRespinPrices[currentBasicCashOutTier];
         GameEvents.OnCashOut?.Invoke(currentDivineCashOutTier);
         GameEvents.OnDivineCashOut?.Invoke();
@@ -1079,6 +1072,65 @@ public class LevelManager : MonoBehaviour
             default:
                 return GameConstants.whiteColor;
         }
+    }
+
+    public void ResetLvlManagerValuesAtFundSell()
+    {
+        currentCandle = null;
+        CloseAndClearAllCandles();
+        CloseAndClearAllTrades();
+        //tradeEntryIndicators.Clear();
+        recentPrices.Clear();
+        candleTimer = 0;
+        passiveIncomeTimer = 0;
+        generatePriceTimer = 0;
+        
+        cash = 200;
+        price = 50;
+        price = Mathf.Round(price / decimals) * decimals;
+        recentPrices.Add(price);
+        previousPrice = price;
+        leverage = 1;
+        currentOrderQuantity = 1;
+        
+        SpawnNewCandle();
+
+        currentBasicCashOutTier = AugmentTier.Common;
+        currentCurrency = PlayerCurrencies.Currency.forex;
+        topCurrency = PlayerCurrencies.Currency.forex;
+
+        currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
+
+
+        minPrice = 10;
+        maxPrice = 200;
+
+        comboBonus = 0;
+
+        xPos = 30;
+        lastNPrices = 50;
+        
+        chartMinVisible = 10;
+        chartMaxVisible = 200;
+    }
+
+    private void CloseAndClearAllTrades()
+    {
+        List<TradeEntryStatsDisplay> tempActiveTrades = new List<TradeEntryStatsDisplay>(activeTrades);
+        foreach (var trade in tempActiveTrades)
+        {
+            trade.Close();
+        }
+        activeTrades.Clear();
+    }
+
+    private void CloseAndClearAllCandles()
+    {
+        foreach (Transform candle in candleArea)
+        {
+            Destroy(candle.gameObject);
+        }
+        candles.Clear();
     }
 
     private void OnEnable()

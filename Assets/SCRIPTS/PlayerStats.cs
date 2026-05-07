@@ -5,6 +5,7 @@ public class PlayerStats : MonoBehaviour
     public static PlayerStats Instance;
     
     public int level = 1;
+    public float faith;
 
     [Header("Cash")]
     public float profitMultiplier = 1f;
@@ -44,8 +45,8 @@ public class PlayerStats : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
+        DontDestroyOnLoad(Instance);
     }
     
     

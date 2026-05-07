@@ -30,5 +30,8 @@ public static class GameEvents
     public static Action<HotbarItem> OnCurrentHotbarSlotChanged;
     public static Action<HotbarItem> OnHotbarItemTooltipShowed;
 
+    public static Action OnFundSold;
+    public static Action OnAllCurrenciesReset;
+
     public static Action<GameObject> OnMainPanelChanged;
 }

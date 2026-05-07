@@ -26,10 +26,10 @@ public class PermaUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerE
         }
         //Debug.Log($"Upgrade: {permaUpgrade.augmentName} current lvl: {permaUpgrade.GetCurrentRuntimeLevel()}");
         float cost = permaUpgrade.GetCurrentRuntimeCost();
-        if (LevelManager.Instance.faith >= cost)
+        if (PlayerStats.Instance.faith >= cost)
         {
             permaUpgrade.Apply();
-            LevelManager.Instance.faith -= cost;
+            PlayerStats.Instance.faith -= cost;
             tooltip.Setup(permaUpgrade);
             GameEvents.OnPermaUpgradeUpgraded?.Invoke();
         }

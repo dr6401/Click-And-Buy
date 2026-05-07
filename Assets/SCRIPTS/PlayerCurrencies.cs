@@ -120,4 +120,14 @@ public class PlayerCurrencies : MonoBehaviour
         Debug.LogWarning($"There is NO CURRENCY ENTRY for currency: {currency}");
         return null;
     }
+
+    public void ResetAllCurrencies()
+    {
+        foreach (CurrencyRuntimeEntry currency in currencyRuntimeData)
+        {
+            currency.currentAmount = 0;
+        }
+        LockAllCurrencies();
+        GameEvents.OnAllCurrenciesReset?.Invoke();
+    }
 }

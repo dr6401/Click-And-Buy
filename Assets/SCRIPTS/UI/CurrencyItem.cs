@@ -93,6 +93,7 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             
             isUnlocked = true;
             SwitchDisplayToThisCurrency();
+            LevelManager.Instance.topCurrency = currency;
             
             unlockCurrencyFeedback?.PlayFeedbacks();
             shakeIfUnlockableFeedback?.StopFeedbacks();
@@ -118,5 +119,20 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         PlayerCurrencies.Currency currencyToUnlockWith = currency - 1;
         return PlayerCurrencies.Instance.IsCurrencyUnlocked(currencyToUnlockWith);
+    }
+
+    private void RecheckIfCurrencyIsUnlocked()
+    {
+        isUnlocked = PlayerCurrencies.Instance.IsCurrencyUnlocked(currency);   
+        unlockCost = PlayerCurrencies.Instance.GetCurrencyUnlockAmount(currency);
+    }
+
+    private void OnEnable()
+    {
+        GameEvents.OnAllCurrenciesReset += RecheckIfCurrencyIsUnlocked;
+    }
+    private void OnDisable()
+    {
+        GameEvents.OnAllCurrenciesReset -= RecheckIfCurrencyIsUnlocked;
     }
 }
