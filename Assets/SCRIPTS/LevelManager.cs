@@ -40,7 +40,8 @@ public class LevelManager : MonoBehaviour
     private float currentOrderQuantity = 1f;
 
     public PlayerCurrencies.Currency currentCurrency;
-    public PlayerCurrencies.Currency topCurrency;
+
+    public ArchivedFund currentFund;
 
     public float amountToWin = 1000000f;
     public float minPrice = 10f;
@@ -310,6 +311,8 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
+
+        currentFund.valuation = CalculateCurrentFundValuation();
 
         if (GameConstants.isDevHacksEnabled) // Dev hacks
         {
@@ -1097,11 +1100,11 @@ public class LevelManager : MonoBehaviour
 
         currentBasicCashOutTier = AugmentTier.Common;
         currentCurrency = PlayerCurrencies.Currency.forex;
-        topCurrency = PlayerCurrencies.Currency.forex;
+        currentFund.highestUnlockedCurrency = PlayerCurrencies.Currency.forex;
 
         currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
 
-
+        ResetTimeScale();
         minPrice = 10;
         maxPrice = 200;
 
@@ -1112,6 +1115,9 @@ public class LevelManager : MonoBehaviour
         
         chartMinVisible = 10;
         chartMaxVisible = 200;
+
+        currentFund = new ArchivedFund();
+        currentFund.DebugFundStats();
     }
 
     private void CloseAndClearAllTrades()
@@ -1131,6 +1137,12 @@ public class LevelManager : MonoBehaviour
             Destroy(candle.gameObject);
         }
         candles.Clear();
+    }
+
+    private float CalculateCurrentFundValuation()
+    {
+        if (equity * PlayerStats.Instance.fundValuationMultiplier < 0.1f) return 0;
+        return equity * PlayerStats.Instance.fundValuationMultiplier;
     }
 
     private void OnEnable()

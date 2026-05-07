@@ -93,7 +93,7 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             
             isUnlocked = true;
             SwitchDisplayToThisCurrency();
-            LevelManager.Instance.topCurrency = currency;
+            LevelManager.Instance.currentFund.highestUnlockedCurrency = currency;
             
             unlockCurrencyFeedback?.PlayFeedbacks();
             shakeIfUnlockableFeedback?.StopFeedbacks();

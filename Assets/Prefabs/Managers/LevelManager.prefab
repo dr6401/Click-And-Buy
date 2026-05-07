@@ -60,11 +60,15 @@ MonoBehaviour:
   openProfitAndLoss: 0
   unrealizedProfit: 0
   unrealizedLoss: 0
-  faith: 0
   price: 0
-  upgradeOfferTarget: 500
   leverage: 1
   currentCurrency: 0
+  currentFund:
+    fundName: 
+    valuation: 0
+    passiveIncome: 0
+    highestUnlockedCurrency: 0
+    lifetimeProfit: 0
   amountToWin: 1000000
   minPrice: 10
   maxPrice: 20
@@ -124,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   level: 1
+  faith: 0
   profitMultiplier: 1
   lossReduction: 0
   maxOrderQuantity: 1
@@ -133,10 +138,20 @@ MonoBehaviour:
   tokenIncomeMultiplier: 1
   maxAliveTrades: 5
   volatility: 1
+  openWinningTradesPerSecondMultiplier: 0
+  chanceToIdentifyTrends: 0
+  passiveTokenIncomeMultiplier: 0
+  faithIncomeMultiplier: 1
+  echoProfitMultiplier: 0
+  blessingOverflowFreebieNumber: 0
+  divineInterventionNumber: 0
+  foresightDuration: 0
+  marketGodShitPercent: 0
   maxComboDuration: 2
   passiveIncome: 0
   passiveIncomeTriggerInterval: 1
   divineLuck: 0
+  fundValuationMultiplier: 0.0001
 --- !u!114 &3460782103999049356
 MonoBehaviour:
   m_ObjectHideFlags: 0

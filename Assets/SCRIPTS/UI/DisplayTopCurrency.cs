@@ -15,6 +15,6 @@ public class DisplayTopCurrencyIcon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        icon.sprite = currencyStats.GetIconOfCurrency(LevelManager.Instance.topCurrency);
+        icon.sprite = currencyStats.GetIconOfCurrency(LevelManager.Instance.currentFund.highestUnlockedCurrency);
     }
 }

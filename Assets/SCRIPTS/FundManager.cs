@@ -21,6 +21,9 @@ public class FundManager : MonoBehaviour
 
     public void SellFund()
     {
+        LevelManager.Instance.currentFund.DebugFundStats();
+        PlayerStats.Instance.faith += LevelManager.Instance.currentFund.valuation;
+        archivedFunds.Add(LevelManager.Instance.currentFund);
         LevelManager.Instance.ResetLvlManagerValuesAtFundSell();
         PlayerCurrencies.Instance.ResetAllCurrencies();
     }
@@ -29,7 +32,17 @@ public class FundManager : MonoBehaviour
 public class ArchivedFund
 {
     public string fundName;
+    public float valuation;
     public float passiveIncome;
     public PlayerCurrencies.Currency highestUnlockedCurrency;
     public float lifetimeProfit;
+
+    public void DebugFundStats()
+    {
+        Debug.Log($"Name: {fundName}" +
+                  $"Valuation: {valuation}" +
+                  $"PassiveIncome: {passiveIncome}" +
+                  $"HighestUnlockedCurrency: {highestUnlockedCurrency}" +
+                  $"LifetimeProfit: {lifetimeProfit}");
+    }
 }
