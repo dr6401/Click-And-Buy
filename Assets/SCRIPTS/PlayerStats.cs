@@ -28,7 +28,9 @@ public class PlayerStats : MonoBehaviour
     public float divineInterventionNumber = 0;
     public float foresightDuration = 0;
     public float marketGodShitPercent = 0;
-    [Header("Other Stuff")]
+    [Header("Fund Stuff")]
+    public float fundValuationMultiplier = 0.0001f;
+    public float moneyTransferMultiplier = 0.01f;
     
     public float maxComboDuration = 2f;
     
@@ -36,8 +38,6 @@ public class PlayerStats : MonoBehaviour
     public float passiveIncomeTriggerInterval = 1f;
     
     public float divineLuck = 0f;
-    public float fundValuationMultiplier = 0.0001f;
-    
     
     private void Awake()
     {

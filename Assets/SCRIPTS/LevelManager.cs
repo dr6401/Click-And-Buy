@@ -1087,8 +1087,8 @@ public class LevelManager : MonoBehaviour
         candleTimer = 0;
         passiveIncomeTimer = 0;
         generatePriceTimer = 0;
-        
-        cash = 200;
+
+        cash = 200 + CalculateMoneyTransferredFromPreviousFund();
         price = 50;
         price = Mathf.Round(price / decimals) * decimals;
         recentPrices.Add(price);
@@ -1143,6 +1143,12 @@ public class LevelManager : MonoBehaviour
     {
         if (equity * PlayerStats.Instance.fundValuationMultiplier < 0.1f) return 0;
         return equity * PlayerStats.Instance.fundValuationMultiplier;
+    }
+
+    private float CalculateMoneyTransferredFromPreviousFund()
+    {
+        if (equity * PlayerStats.Instance.moneyTransferMultiplier < 10) return 0;
+        return equity * PlayerStats.Instance.moneyTransferMultiplier;
     }
 
     private void OnEnable()

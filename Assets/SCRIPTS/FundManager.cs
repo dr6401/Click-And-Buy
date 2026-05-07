@@ -39,10 +39,10 @@ public class ArchivedFund
 
     public void DebugFundStats()
     {
-        Debug.Log($"Name: {fundName}" +
-                  $"Valuation: {valuation}" +
-                  $"PassiveIncome: {passiveIncome}" +
-                  $"HighestUnlockedCurrency: {highestUnlockedCurrency}" +
+        Debug.Log($"Name: {fundName}\n" +
+                  $"Valuation: {valuation}\n" +
+                  $"PassiveIncome: {passiveIncome}\n" +
+                  $"HighestUnlockedCurrency: {highestUnlockedCurrency}\n" +
                   $"LifetimeProfit: {lifetimeProfit}");
     }
 }
