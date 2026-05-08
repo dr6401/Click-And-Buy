@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class FundManager : MonoBehaviour
 {
+    public GameObject fundItemPrefab;
+    [SerializeField] Transform archivedFundsParent;
     
     public List<ArchivedFund> archivedFunds;
     
@@ -21,11 +23,21 @@ public class FundManager : MonoBehaviour
 
     public void SellFund()
     {
-        LevelManager.Instance.currentFund.DebugFundStats();
-        PlayerStats.Instance.faith += LevelManager.Instance.currentFund.valuation;
-        archivedFunds.Add(LevelManager.Instance.currentFund);
+        ArchivedFund fundInQuestion = LevelManager.Instance.currentFund;
+        fundInQuestion.fundName = "Mamaguevo Fund";
+        fundInQuestion.DebugFundStats();
+        AddFundToDisplay(fundInQuestion);
+        PlayerStats.Instance.faith += fundInQuestion.valuation;
+        archivedFunds.Add(fundInQuestion);
         LevelManager.Instance.ResetLvlManagerValuesAtFundSell();
         PlayerCurrencies.Instance.ResetAllCurrencies();
+    }
+
+    private void AddFundToDisplay(ArchivedFund fund)
+    {
+        GameObject newFundItem = Instantiate(fundItemPrefab, archivedFundsParent);
+        FundItem fundItemScript = newFundItem.GetComponent<FundItem>();
+        fundItemScript.Setup(fund);
     }
 }
 [System.Serializable]
