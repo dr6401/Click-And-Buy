@@ -30,7 +30,7 @@ public class PlayerStats : MonoBehaviour
     public float marketGodShitPercent = 0;
     [Header("Fund Stuff")]
     public float fundValuationMultiplier = 0.0001f;
-    public float moneyTransferMultiplier = 0.01f;
+    public float moneyTransferMultiplier = 0f;
     
     public float maxComboDuration = 2f;
     

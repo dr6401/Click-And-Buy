@@ -9,11 +9,11 @@ public class HoverToOpenTooltip : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerEnter(PointerEventData eventData)
     {
         openFeedbacksTooltip?.PlayFeedbacks();
-        tooltip.SetActive(true);
+        tooltip?.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        tooltip.SetActive(false);
+        tooltip?.SetActive(false);
     }
 }
