@@ -126,7 +126,7 @@ public class LevelManager : MonoBehaviour
         currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
         //GenerateNewPrice();
         PlayPriceMoveEvent(currentChart, tutorialPump);
-        currentChart.SpawnNewCandle();
+        //currentChart.SpawnNewCandle();
         badTradesSO = Resources.Load<BadTradeTextsSO>("BadTradesText/BadTradesTexts");
         currentCurrency = PlayerCurrencies.Currency.forex;
     }
@@ -805,6 +805,24 @@ public class LevelManager : MonoBehaviour
     {
         if (equity * PlayerStats.Instance.moneyTransferMultiplier < 10) return 0;
         return equity * PlayerStats.Instance.moneyTransferMultiplier;
+    }
+
+    public void SwitchChart(PlayerCurrencies.Currency currency)
+    {
+        foreach (ChartController chart in allCharts)
+        {
+            chart.priceChart.gameObject.SetActive(false);
+        }
+        foreach (ChartController chart in allCharts)
+        {
+            if (chart.chartCurrency == currency)
+            {
+                currentChart = chart;
+                currentCurrency = currency;
+                chart.priceChart.gameObject.SetActive(true);
+                return;
+            }
+        }
     }
 
     private void OnEnable()

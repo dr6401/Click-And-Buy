@@ -80,7 +80,10 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             TryToUnlockCurrency();
         }
-        CommodityDisplay.Instance?.ShowDisplay(currency);
+        else
+        {
+            LevelManager.Instance?.SwitchChart(currency);
+        }
     }
 
     public void TryToUnlockCurrency()
@@ -94,6 +97,7 @@ public class CurrencyItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             isUnlocked = true;
             SwitchDisplayToThisCurrency();
             LevelManager.Instance.currentFund.highestUnlockedCurrency = currency;
+            LevelManager.Instance.GetChartControllerOfCurrency(currency).hasChartBeenUnlocked = true;
             
             unlockCurrencyFeedback?.PlayFeedbacks();
             shakeIfUnlockableFeedback?.StopFeedbacks();

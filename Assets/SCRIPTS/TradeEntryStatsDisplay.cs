@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TradeEntryStatsDisplay : MonoBehaviour
 {
     public PlayerCurrencies.Currency currencyTraded;
+    private ChartController chartTradedOn;
     public TradeType tradeType;
     public float timeOfPurchase;
     public float quantity;
@@ -39,11 +40,11 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         
         if (tradeType == TradeType.Buy)
         {
-            profitReal = (LevelManager.Instance.currentChart.price - entryPrice) * quantity;
+            profitReal = (LevelManager.Instance.GetChartControllerOfCurrency(currencyTraded).price - entryPrice) * quantity;
         }
         else if (tradeType == TradeType.Sell)
         {
-            profitReal = (entryPrice - LevelManager.Instance.currentChart.price) * quantity;
+            profitReal = (entryPrice - LevelManager.Instance.GetChartControllerOfCurrency(currencyTraded).price) * quantity;
         }
         profitReal *= multiplier;
         if (profitReal > 0) profitReal *= PlayerStats.Instance.profitMultiplier;
@@ -81,6 +82,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
     public void Setup(TradeData data)
     {
         currencyTraded = data.tradedCurrency;
+        chartTradedOn = LevelManager.Instance.GetChartControllerOfCurrency(data.tradedCurrency);
         tradeType = data.tradeType;
         quantity = data.quantity;
         entryPrice = data.entryPrice;
@@ -113,11 +115,11 @@ public class TradeEntryStatsDisplay : MonoBehaviour
     {
         if (tradeType == TradeType.Buy)
         {
-            return LevelManager.Instance.currentChart.price >= entryPrice;
+            return LevelManager.Instance.GetChartControllerOfCurrency(currencyTraded).price >= entryPrice;
         }
         else if (tradeType == TradeType.Sell)
         {
-            return LevelManager.Instance.currentChart.price < entryPrice;
+            return LevelManager.Instance.GetChartControllerOfCurrency(currencyTraded).price < entryPrice;
         }
         return true;
     }
@@ -147,5 +149,10 @@ public class TradeEntryStatsDisplay : MonoBehaviour
             DamageNumber newDamageNumber = lossDamageNumbersPrefab.SpawnGUI(gameCanvas, closeTradeText.rectTransform, Vector2.zero, GetUnrealizedProfit());
             //Debug.Log($"Spawned Loss PopUp at {closeTradeText.rectTransform}");
         }
+    }
+
+    public void SwitchChartToTradedCurrency()
+    {
+        LevelManager.Instance.SwitchChart(currencyTraded);
     }
 }

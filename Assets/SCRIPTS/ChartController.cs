@@ -74,8 +74,9 @@ public class ChartController : MonoBehaviour
         price = minPrice * 0.75f + maxPrice * 0.25f;
         price = Mathf.Round(price / decimals) * decimals;
         recentPrices.Add(price);
-        chartMinVisible = minPrice;
-        chartMaxVisible = maxPrice;
+        chartMinVisible = Mathf.Min(maxPrice, price + 100);
+        chartMaxVisible = Mathf.Max(minPrice, price - 100);
+        SpawnNewCandle();
     }
 
     // Update is called once per frame
