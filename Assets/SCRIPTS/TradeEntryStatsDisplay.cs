@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class TradeEntryStatsDisplay : MonoBehaviour
 {
+    public PlayerCurrencies.Currency currencyTraded;
     public TradeType tradeType;
     public float timeOfPurchase;
     public float quantity;
@@ -38,11 +39,11 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         
         if (tradeType == TradeType.Buy)
         {
-            profitReal = (LevelManager.Instance.price - entryPrice) * quantity;
+            profitReal = (LevelManager.Instance.currentChart.price - entryPrice) * quantity;
         }
         else if (tradeType == TradeType.Sell)
         {
-            profitReal = (entryPrice - LevelManager.Instance.price) * quantity;
+            profitReal = (entryPrice - LevelManager.Instance.currentChart.price) * quantity;
         }
         profitReal *= multiplier;
         if (profitReal > 0) profitReal *= PlayerStats.Instance.profitMultiplier;
@@ -79,6 +80,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
 
     public void Setup(TradeData data)
     {
+        currencyTraded = data.tradedCurrency;
         tradeType = data.tradeType;
         quantity = data.quantity;
         entryPrice = data.entryPrice;
@@ -111,11 +113,11 @@ public class TradeEntryStatsDisplay : MonoBehaviour
     {
         if (tradeType == TradeType.Buy)
         {
-            return LevelManager.Instance.price >= entryPrice;
+            return LevelManager.Instance.currentChart.price >= entryPrice;
         }
         else if (tradeType == TradeType.Sell)
         {
-            return LevelManager.Instance.price < entryPrice;
+            return LevelManager.Instance.currentChart.price < entryPrice;
         }
         return true;
     }

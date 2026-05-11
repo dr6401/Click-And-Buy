@@ -9,7 +9,7 @@ public class ChangePrice : Augment
     public override void Apply()
     {
         if (LevelManager.Instance == null) return;
-        LevelManager.Instance.price += priceIncrease;
+        LevelManager.Instance.currentChart.price += priceIncrease;
         if (priceIncrease > 0)
         {
             sign = "+";

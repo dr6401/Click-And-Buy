@@ -7,7 +7,7 @@ public class EventSchedule : Augment
     public override void Apply()
     {
         if (LevelManager.Instance == null) return;
-        LevelManager.Instance.PlayPriceMoveEvent(priceMoveEvent);
+        LevelManager.Instance.PlayPriceMoveEvent(LevelManager.Instance.currentChart, priceMoveEvent);
         //LevelManager.Instance.price = Mathf.Min(LevelManager.Instance.price, LevelManager.Instance.maxPrice);
     }
 }

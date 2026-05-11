@@ -9,7 +9,7 @@ public class ChartController : MonoBehaviour
     
     public RectTransform priceChart;
     [SerializeField] private RectTransform candleArea;
-    [SerializeField] private RectTransform tradeIndicatorArea;
+    public RectTransform tradeIndicatorArea;
     [SerializeField] private GameObject candlePrefab;
     public GameObject tradeEntryIndicatorPrefab;
     
@@ -42,10 +42,10 @@ public class ChartController : MonoBehaviour
     public List<RectTransform> tradeEntryIndicators = new List<RectTransform>();
     
     [Header("Candle Spawn Settings")]
-    private float xPos = 30;
-    private float xStep = 50; // Distance between candles
+    public float xPos = 30;
+    public float xStep = 50; // Distance between candles
     
-    public float candleSpawnInterval;
+    public float candleSpawnInterval = 5f;
 
     public RectTransform currentCandle;
     private float candleOpen;
@@ -73,11 +73,9 @@ public class ChartController : MonoBehaviour
     {
         price = minPrice * 0.75f + maxPrice * 0.25f;
         price = Mathf.Round(price / decimals) * decimals;
-        chartMinVisible = 10;
-        chartMaxVisible = 200;
         recentPrices.Add(price);
-        //GenerateNewPrice();
-        SpawnNewCandle();
+        chartMinVisible = minPrice;
+        chartMaxVisible = maxPrice;
     }
 
     // Update is called once per frame
@@ -302,7 +300,7 @@ public class ChartController : MonoBehaviour
         tradeEntryIndicator.rectTransform.anchoredPosition = new Vector2(tradeEntryIndicator.rectTransform.anchoredPosition.x, openY);
     }
 
-    private float PriceToY(float p)
+    public float PriceToY(float p)
     {
         float normalizedPrice = (p - chartMinVisible) / (chartMaxVisible - chartMinVisible);
         return normalizedPrice * priceChart.rect.height;
