@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using System.Globalization;
 using DamageNumbersPro;
+using UnityEngine.UI;
 
 public class TradeEntryStatsDisplay : MonoBehaviour
 {
@@ -21,11 +22,11 @@ public class TradeEntryStatsDisplay : MonoBehaviour
     [SerializeField] private DamageNumber profitDamageNumbersPrefab;
     [SerializeField] private DamageNumber lossDamageNumbersPrefab;
     
+    [SerializeField] private Image stockIcon;
     [SerializeField] private TMP_Text tradeTypeText;
     [SerializeField] private TMP_Text multiplierText;
     [SerializeField] private TMP_Text quantityText;
     [SerializeField] private TMP_Text entryPriceText;
-    [SerializeField] private TMP_Text currentPriceText;
     [SerializeField] private TMP_Text profitPercentText;
     [SerializeField] private TMP_Text profitRealText;
     [SerializeField] private TMP_Text closeTradeText;
@@ -34,8 +35,6 @@ public class TradeEntryStatsDisplay : MonoBehaviour
     void Update()
     {
         if (LevelManager.Instance == null) return;
-        currentPriceText.text = NumberFormatter.FormatDecimalNumber(LevelManager.Instance.price) + "$";
-        
         
         if (tradeType == TradeType.Buy)
         {
@@ -84,6 +83,7 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         quantity = data.quantity;
         entryPrice = data.entryPrice;
         multiplier = data.leverage;
+        stockIcon.sprite = LevelManager.Instance.currencyStats.GetIconOfCurrency(data.tradedCurrency);
         
         tradeTypeText.text = data.tradeType.ToString();
         multiplierText.text = data.timeOfPurchase.ToString();

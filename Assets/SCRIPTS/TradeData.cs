@@ -9,14 +9,16 @@ public class TradeData
     public float entryPrice;
 
     public float leverage = 1f;
+    public PlayerCurrencies.Currency tradedCurrency;
 
-    public TradeData(TradeType tradeType, string timeOfPurchase, float quantity, float entryPrice, float leverage)
+    public TradeData(TradeType tradeType, string timeOfPurchase, float quantity, float entryPrice, float leverage, PlayerCurrencies.Currency tradedCurrency)
     {
         this.tradeType = tradeType;
         this.timeOfPurchase = timeOfPurchase;
         this.quantity = quantity;
         this.entryPrice = entryPrice;
         this.leverage = leverage;
+        this.tradedCurrency = tradedCurrency;
     }
 }
 

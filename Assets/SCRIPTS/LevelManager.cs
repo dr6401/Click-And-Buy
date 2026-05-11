@@ -24,6 +24,10 @@ public class LevelManager : MonoBehaviour
     
     [SerializeField] private RectTransform tradePanel;
     [SerializeField] private GameObject tradeEntryPrefab;
+
+    public ChartController currentChart;
+    public List<ChartController> allCharts = new List<ChartController>();
+    public List<ChartController> unlockedCharts = new List<ChartController>();
     
     public float cash = 1000f;
     public float effectiveCash;
@@ -35,7 +39,6 @@ public class LevelManager : MonoBehaviour
     public float price;
     [Header("-----------------PRICE----------------")]
     public float leverage = 1;
-    private float previousPrice;
     private float decimals = 0.01f;
     private float currentOrderQuantity = 1f;
 
@@ -173,7 +176,6 @@ public class LevelManager : MonoBehaviour
         equity = cash;
         price = 50;//(minPrice * 0.75f + maxPrice * 0.25f);
         price = Mathf.Round(price / decimals) * decimals;
-        previousPrice = price;
         chartMinVisible = 10;
         chartMaxVisible = 200;
         currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
@@ -189,6 +191,14 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         if (hasLevelEnded) return;
+
+        foreach (ChartController chart in allCharts)
+        {
+            if (chart.hasChartBeenUnlocked)
+            {
+                chart.Tick();
+            }
+        }
 
         candleTimer += Time.deltaTime;
         generatePriceTimer += Time.deltaTime;
@@ -335,8 +345,6 @@ public class LevelManager : MonoBehaviour
 
     private void GenerateNewPrice()
     {
-        previousPrice = price;
-        
         // Price Move Event
         if (activeEvent.active && activeEvent != null)
         {
@@ -639,7 +647,7 @@ public class LevelManager : MonoBehaviour
         }
         GameObject tradeEntry = Instantiate(tradeEntryPrefab, tradePanel);
         TradeEntryStatsDisplay stats = tradeEntry.GetComponent<TradeEntryStatsDisplay>();
-        TradeData data = new TradeData(tradeType, System.DateTime.Now.ToString("HH:mm:ss"), currentOrderQuantity, price, leverage);
+        TradeData data = new TradeData(tradeType, System.DateTime.Now.ToString("HH:mm:ss"), currentOrderQuantity, price, leverage, currentCurrency);
         
         GameObject tradeEntryIndicator = Instantiate(tradeEntryIndicatorPrefab, tradeIndicatorArea);
         RectTransform rectTransform = tradeEntryIndicator.GetComponent<RectTransform>();
@@ -706,9 +714,10 @@ public class LevelManager : MonoBehaviour
     {
         GameObject tradeEntry = Instantiate(tradeEntryPrefab, tradePanel);
         TradeEntryStatsDisplay stats = tradeEntry.GetComponent<TradeEntryStatsDisplay>();
-        TradeData data = new TradeData(trade.tradeType, System.DateTime.Now.ToString("HH:mm:ss"), trade.quantity, trade.entryPrice, trade.multiplier);
-        
-        GameObject tradeEntryIndicator = Instantiate(tradeEntryIndicatorPrefab, priceChart);
+        TradeData data = new TradeData(trade.tradeType, System.DateTime.Now.ToString("HH:mm:ss"), trade.quantity, trade.entryPrice, trade.multiplier, currentCurrency);
+
+        ChartController chartToAffect = GetChartControllerOfCurrency(data.tradedCurrency);
+        GameObject tradeEntryIndicator = Instantiate(chartToAffect.tradeEntryIndicatorPrefab, chartToAffect.priceChart);
         RectTransform rectTransform = tradeEntryIndicator.GetComponent<RectTransform>();
         CandleData tradeEntryIndicatorData = tradeEntryIndicator.GetComponent<CandleData>();
         tradeEntryIndicatorData.open = trade.entryPrice;
@@ -726,7 +735,7 @@ public class LevelManager : MonoBehaviour
         }
         
         stats.LinkTradeEntryIndicator(tradeEntryIndicator);
-        tradeEntryIndicators.Add(rectTransform);
+        chartToAffect.tradeEntryIndicators.Add(rectTransform);
         
         stats.Setup(data);
         activeTrades.Add(stats);
@@ -815,6 +824,19 @@ public class LevelManager : MonoBehaviour
         GameEvents.OnCashOut?.Invoke(currentDivineCashOutTier);
         GameEvents.OnDivineCashOut?.Invoke();
         Debug.Log($"Spent {UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency)} {currentCurrency} tokens");
+    }
+
+    public ChartController GetChartControllerOfCurrency(PlayerCurrencies.Currency currency)
+    {
+        foreach (ChartController chart in allCharts)
+        {
+            if (currency == chart.chartCurrency)
+            {
+                return chart;
+            }
+        }
+        Debug.LogError($"Couldn't find chart with currency {currency}. Returning current chart: {currentChart}");
+        return currentChart;
     }
     
     public void WinGame()
@@ -922,14 +944,14 @@ public class LevelManager : MonoBehaviour
             priceMoveEvent.targetPrice = Mathf.Max(minPrice, (1 + priceMoveEvent.targetPricePercentIncrease) * price);
         }
         Debug.Log($"{priceMoveEvent.name} event targetPrice: {priceMoveEvent.targetPrice}");
-        activeEvent.data = priceMoveEvent;
+        currentChart.activeEvent.data = priceMoveEvent;
 
-        activeEvent.startPrice = price;
-        activeEvent.elapsed = 0;
+        currentChart.activeEvent.startPrice = price;
+        currentChart.activeEvent.elapsed = 0;
 
-        activeEvent.isTargetHigherThanCurrentPrice = price < priceMoveEvent.targetPrice;
+        currentChart.activeEvent.isTargetHigherThanCurrentPrice = price < priceMoveEvent.targetPrice;
 
-        activeEvent.active = true;
+        currentChart.activeEvent.active = true;
     }
 
     private void HandleCombo()
@@ -986,7 +1008,7 @@ public class LevelManager : MonoBehaviour
     public void SpawnTextDamageNumbers(string text, RectTransform position = null, Vector2 anchor = new Vector2(), RectTransform canvasParent = null, DamageNumber damageNumberPrefab = null, Color? color = null, bool spawnAtLatestCandle = false, bool scatterTextOnSpawn = false, bool spawnComboText = false, bool spawnIcon = false, float number = 0, Sprite icon = null)
     {
         if (position == null) position = cashText.rectTransform;
-        if (spawnAtLatestCandle) position = currentCandle;
+        if (spawnAtLatestCandle) position = currentChart.currentCandle;
         if (canvasParent == null) canvasParent = GameObject.FindGameObjectWithTag("GameplayCanvas").GetComponent<RectTransform>();
         if (damageNumberPrefab == null) damageNumberPrefab = textDamageNumbersPrefab; 
         DamageNumber newDamageNumber;
@@ -1079,24 +1101,13 @@ public class LevelManager : MonoBehaviour
 
     public void ResetLvlManagerValuesAtFundSell()
     {
-        currentCandle = null;
-        CloseAndClearAllCandles();
+        CloseAndClearAllCandlesForAllCharts();
         CloseAndClearAllTrades();
-        //tradeEntryIndicators.Clear();
-        recentPrices.Clear();
-        candleTimer = 0;
+        
         passiveIncomeTimer = 0;
-        generatePriceTimer = 0;
-
-        cash = 200 + CalculateMoneyTransferredFromPreviousFund();
-        price = 50;
-        price = Mathf.Round(price / decimals) * decimals;
-        recentPrices.Add(price);
-        previousPrice = price;
+        
         leverage = 1;
         currentOrderQuantity = 1;
-        
-        SpawnNewCandle();
 
         currentBasicCashOutTier = AugmentTier.Common;
         currentCurrency = PlayerCurrencies.Currency.forex;
@@ -1105,19 +1116,14 @@ public class LevelManager : MonoBehaviour
         currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
 
         ResetTimeScale();
-        minPrice = 10;
-        maxPrice = 200;
-
-        comboBonus = 0;
-
-        xPos = 30;
-        lastNPrices = 50;
-        
-        chartMinVisible = 10;
-        chartMaxVisible = 200;
 
         currentFund = new ArchivedFund();
         currentFund.DebugFundStats();
+        
+        foreach (ChartController chart in allCharts)
+        {
+            chart.ResetChartValuesAtFundSell();
+        }
     }
 
     private void CloseAndClearAllTrades()
@@ -1130,13 +1136,12 @@ public class LevelManager : MonoBehaviour
         activeTrades.Clear();
     }
 
-    private void CloseAndClearAllCandles()
+    private void CloseAndClearAllCandlesForAllCharts()
     {
-        foreach (Transform candle in candleArea)
+        foreach (ChartController chart in allCharts)
         {
-            Destroy(candle.gameObject);
+            chart.CloseAndClearAllCandles();
         }
-        candles.Clear();
     }
 
     private float CalculateCurrentFundValuation()
