@@ -150,6 +150,7 @@ public class SoundManager : MonoBehaviour
         GameEvents.OnUpgradesOffered += PlayWheelSpinSFX;
         GameEvents.OnDivineCashOut += PlayDivineCashOutSFX;
         GameEvents.OnPermaUpgradeUpgraded += PlayPermaUpgradeSFX;
+        GameEvents.OnFundSold += PlayMoneyEarnedSFX;
     }
     private void OnDisable()
     {
@@ -164,5 +165,6 @@ public class SoundManager : MonoBehaviour
         GameEvents.OnUpgradesOffered -= PlayWheelSpinSFX;
         GameEvents.OnDivineCashOut -= PlayDivineCashOutSFX;
         GameEvents.OnPermaUpgradeUpgraded -= PlayPermaUpgradeSFX;
+        GameEvents.OnFundSold -= PlayMoneyEarnedSFX;
     }
 }

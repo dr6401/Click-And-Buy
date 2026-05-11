@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class ChartController : MonoBehaviour
 {
+    [Header("Chart Specifics")]
     public bool hasChartBeenUnlocked = false;
+    [SerializeField] private float startingPrice;
+    [SerializeField] private float chartVolatilityMultiplier = 1f;
+    [Header("--------------------------------------------------------------------------------------------------------------------------")]
     
     public RectTransform priceChart;
     [SerializeField] private RectTransform candleArea;
@@ -15,6 +19,7 @@ public class ChartController : MonoBehaviour
     
     [Header("-----------------PRICE----------------")]
     public float price;
+
     [Header("-----------------PRICE----------------")]
     private float decimals = 0.01f;
     
@@ -28,7 +33,7 @@ public class ChartController : MonoBehaviour
     public float maxPriceIncreaseAmount = 1f;
     
     private float trend;
-    private float maxTrendStrength = 0.2f;
+    public float maxTrendStrength = 0.2f;
     private float generateNewTrendTimer;
     private float trendInterval = 5f;
     
@@ -71,11 +76,11 @@ public class ChartController : MonoBehaviour
     
     void Start()
     {
-        price = minPrice * 0.75f + maxPrice * 0.25f;
+        price = startingPrice;
         price = Mathf.Round(price / decimals) * decimals;
         recentPrices.Add(price);
-        chartMinVisible = Mathf.Min(maxPrice, price + 100);
-        chartMaxVisible = Mathf.Max(minPrice, price - 100);
+        chartMinVisible = Mathf.Min(maxPrice, price + 50);
+        chartMaxVisible = Mathf.Max(minPrice, price - 50);
         SpawnNewCandle();
     }
 
@@ -152,7 +157,9 @@ public class ChartController : MonoBehaviour
             }
 
             if (activeEvent.isTargetHigherThanCurrentPrice && price > activeEvent.data.targetPrice ||
-                !activeEvent.isTargetHigherThanCurrentPrice && price < activeEvent.data.targetPrice)
+                activeEvent.isTargetHigherThanCurrentPrice && price >= maxPrice ||
+                !activeEvent.isTargetHigherThanCurrentPrice && price < activeEvent.data.targetPrice ||
+                !activeEvent.isTargetHigherThanCurrentPrice && price <= minPrice)
             {
                 activeEvent.active = false;
                 Debug.Log($"Event: {priceEvent.name} finished at price: {price} on Chart: {chartCurrency} because the price was over the target ({priceEvent.targetPrice})");
@@ -160,7 +167,7 @@ public class ChartController : MonoBehaviour
         }
         else
         {
-            float move = trend + Random.Range(-5f, 5f) * PlayerStats.Instance.volatility;
+            float move = trend + Random.Range(-5f, 5f) * chartVolatilityMultiplier * PlayerStats.Instance.volatility;
             //Debug.Log($"Move: {move}");
             price += move;
         }
@@ -389,17 +396,16 @@ public class ChartController : MonoBehaviour
         candleTimer = 0;
         generatePriceTimer = 0;
         
-        price = minPrice * 0.75f + maxPrice * 0.25f;
+        price = startingPrice;
         price = Mathf.Round(price / decimals) * decimals;
         recentPrices.Add(price);
         
         SpawnNewCandle();
 
         xPos = 30;
-        lastNPrices = 50;
         
-        chartMinVisible = minPrice;
-        chartMaxVisible = maxPrice;
+        chartMinVisible = Mathf.Min(maxPrice, price + 50);
+        chartMaxVisible = Mathf.Max(minPrice, price - 50);
     }
     
     public void CloseAndClearAllCandles()

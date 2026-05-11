@@ -795,6 +795,19 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public List<TradeEntryStatsDisplay> GetAllActiveTradesOfCurrentCurrency()
+    {
+        List<TradeEntryStatsDisplay> tempActiveTrades = new List<TradeEntryStatsDisplay>();
+        foreach (TradeEntryStatsDisplay trade in activeTrades)
+        {
+            if (trade.currencyTraded == currentCurrency)
+            {
+                tempActiveTrades.Add(trade);
+            }
+        }
+        return tempActiveTrades;
+    }
+
     private float CalculateCurrentFundValuation()
     {
         if (equity * PlayerStats.Instance.fundValuationMultiplier < 0.1f) return 0;

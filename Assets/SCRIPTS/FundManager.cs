@@ -18,7 +18,6 @@ public class FundManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(Instance);
     }
 
     public void SellFund()
@@ -31,6 +30,7 @@ public class FundManager : MonoBehaviour
         archivedFunds.Add(fundInQuestion);
         LevelManager.Instance.ResetLvlManagerValuesAtFundSell();
         PlayerCurrencies.Instance.ResetAllCurrencies();
+        GameEvents.OnFundSold?.Invoke();
     }
 
     private void AddFundToDisplay(ArchivedFund fund)

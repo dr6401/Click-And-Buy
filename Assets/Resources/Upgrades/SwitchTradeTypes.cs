@@ -7,7 +7,7 @@ public class SwitchTradeTypes : Augment
     public override void Apply()
     {
         if (LevelManager.Instance == null) return;
-        SwitchTrades(LevelManager.Instance.activeTrades);
+        SwitchTrades(LevelManager.Instance.GetAllActiveTradesOfCurrentCurrency());
     }
 
     private void SwitchTrades(List<TradeEntryStatsDisplay> aliveTrades)

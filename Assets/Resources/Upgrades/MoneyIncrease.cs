@@ -1,7 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Augment", menuName = "Augments/MoneyIncrease")]
-public class MoneyIncrease : Augment
+public class 
+    MoneyIncrease : Augment
 {
     public float moneyIncrease;
     public override void Apply()
