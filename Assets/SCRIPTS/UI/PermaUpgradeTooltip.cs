@@ -14,6 +14,8 @@ public class PermaUpgradeTooltip : MonoBehaviour
     [SerializeField] private HorizontalLayoutGroup priceLayoutGroup;
     [SerializeField] private GameObject wingLeftIcon;
     [SerializeField] private GameObject wingRightIcon;
+    
+    [SerializeField] private PermaUpgradeButton parentUpgradeButton;
 
     [SerializeField] private MMF_Player openTooltipFeedback;
     [SerializeField] private MMF_Player notEnoughFaithFeedback;
@@ -27,7 +29,7 @@ public class PermaUpgradeTooltip : MonoBehaviour
         description.text = powerUp.GetDescription();
         if (!powerUp.IsUpgradeMaxedOut())
         {
-            price.text = $"PRICE:<color=#FFF390> {NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeCost())}</color>";   
+            price.text = $"PRICE:<color=#FFF390> {NumberFormatter.FormatNumber(powerUp.GetCurrentRuntimeCost())}</color>";
         }
         else
         {

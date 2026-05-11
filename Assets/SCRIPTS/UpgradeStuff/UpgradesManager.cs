@@ -13,7 +13,7 @@ public class UpgradesManager : MonoBehaviour
     public static float legendaryCashOutPrice = 10000f;
     
     // Currencies
-    public static float forexCashOutPrice = 10f;
+    public static float forexCashOutPrice = 1f;
     public static float fivexCashOutPrice = 10f;
     public static float amazoomCashOutPrice = 10f;
     public static float toyYodaCashOutPrice = 10f;
@@ -86,6 +86,7 @@ public class UpgradesManager : MonoBehaviour
     {
         int index = (int)currency;
         AugmentTier tier = (AugmentTier)index + 4; // 4 = number of nonDivineCashOutTiers
+        //Debug.Log($"Returning price for currency: {tier}: {cashOutTierPrices.GetValueOrDefault(tier, 500)}");
         return cashOutTierPrices.GetValueOrDefault(tier, 500);
     }
     

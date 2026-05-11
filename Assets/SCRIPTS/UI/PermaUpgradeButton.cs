@@ -1,4 +1,5 @@
 using System;
+using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,12 +10,41 @@ public class PermaUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerE
     
     public PermaUpgrade permaUpgrade;
     public PermaUpgradeTooltip tooltip;
+    
+    public PermaUpgradeButton previousUpgrade;
+    public bool isPreviousUpgradeUnlocked = false;
+
+    public MMF_Player unlockPreviousFeedback;
 
     private void Start()
     {
         if (permaUpgrade == null) return;
-        upgradeText.text = permaUpgrade.augmentName;
+        if (!isPreviousUpgradeUnlocked)
+        {
+            upgradeText.text = "LOCKED";
+        }
+        else
+        {
+            upgradeText.text = permaUpgrade.augmentName;
+        }
         tooltip.Setup(permaUpgrade);
+    }
+
+    private void Update()
+    {
+        if (previousUpgrade == null) isPreviousUpgradeUnlocked = true;
+        else
+        {
+            isPreviousUpgradeUnlocked = !(previousUpgrade.permaUpgrade.GetCurrentRuntimeLevel() <= 0); 
+        }
+        if (!isPreviousUpgradeUnlocked)
+        {
+            upgradeText.text = "LOCKED";
+        }
+        else
+        {
+            upgradeText.text = permaUpgrade.augmentName;
+        }
     }
 
     public void UseUpgrade()
@@ -22,6 +52,13 @@ public class PermaUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerE
         if (permaUpgrade.IsUpgradeMaxedOut())
         {
             Debug.Log($"Upgrade: {permaUpgrade.augmentName} is maxed out");
+            return;
+        }
+
+        if (!isPreviousUpgradeUnlocked)
+        {
+            Debug.Log($"Previous upgrade ({previousUpgrade.permaUpgrade.augmentName}) not unlocked yet ({previousUpgrade.permaUpgrade.augmentName} currentRuntimeLevel: {previousUpgrade.permaUpgrade.GetCurrentRuntimeLevel()})!");
+            unlockPreviousFeedback?.PlayFeedbacks();
             return;
         }
         //Debug.Log($"Upgrade: {permaUpgrade.augmentName} current lvl: {permaUpgrade.GetCurrentRuntimeLevel()}");
@@ -42,7 +79,7 @@ public class PermaUpgradeButton : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerEnter(PointerEventData data)
     {
         //Debug.Log($"Tooltip Time!");
-        if (PauseManager.Instance.ShouldInputBeBlocked()) return;
+        if (PauseManager.Instance.ShouldInputBeBlocked() || !isPreviousUpgradeUnlocked) return;
         tooltip.gameObject.SetActive(true);
         tooltip?.PlayShowCurrentFeedback();
         //hoverFeedback?.PlayFeedbacks();
