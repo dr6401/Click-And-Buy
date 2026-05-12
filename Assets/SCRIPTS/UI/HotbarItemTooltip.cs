@@ -13,7 +13,7 @@ public class HotbarItemTooltip : MonoBehaviour
     public void Setup(UsablePowerUp powerUp)
     {
         Augment data = powerUp.data;
-        name.text = data.name;
+        name.text = data.augmentName;
         name.color = powerUp.data.color;
         description.text = data.description;
         chargesLeft.text = NumberFormatter.FormatNumber(powerUp.charges) + " left";

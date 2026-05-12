@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6709474183954161642}
   - component: {fileID: 3460782103999049356}
   - component: {fileID: 786343984294951573}
+  - component: {fileID: 5059185778383387137}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -53,13 +54,14 @@ MonoBehaviour:
   tradeEntryIndicatorPrefab: {fileID: 0}
   tradePanel: {fileID: 0}
   tradeEntryPrefab: {fileID: 3096791442433741255, guid: 87d7c3f364c266a4e98bac7b6b04540a, type: 3}
+  currentChart: {fileID: 0}
+  allCharts: []
   cash: 1000
   effectiveCash: 0
   equity: 0
   openProfitAndLoss: 0
   unrealizedProfit: 0
   unrealizedLoss: 0
-  price: 0
   leverage: 1
   currentCurrency: 0
   currentFund:
@@ -69,10 +71,6 @@ MonoBehaviour:
     highestUnlockedCurrency: 0
     lifetimeProfit: 0
   amountToWin: 1000000
-  minPrice: 10
-  maxPrice: 20
-  maxPriceIncreaseInterval: 10
-  maxPriceIncreaseAmount: 1
   baseComboMultiplier: 0.01
   comboBonus: 0
   currencyStats: {fileID: 11400000, guid: f391657887d2ee4438730caf0f23e186, type: 2}
@@ -80,14 +78,7 @@ MonoBehaviour:
   currentDivineCashOutTier: 4
   currentBasicCashOutPrice: 300
   currentRespinPrice: 50
-  stopGeneratingPrice: 0
   activeTrades: []
-  candleSpawnInterval: 0
-  gridLinePrefab: {fileID: 0}
-  gridLinesParent: {fileID: 0}
-  lastNPrices: 50
-  yChartPadding: 0.2
-  gridStep: 25
   tutorialPump: {fileID: 0}
   tutorialDump: {fileID: 0}
   profitDamageNumbersPrefab: {fileID: 2909909947781137645, guid: 6e62c820e7e3968468cd1e7860b139aa, type: 3}
@@ -142,3 +133,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCurrencies
   currencyRuntimeData: []
+--- !u!114 &5059185778383387137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790662015562793008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a653d54c5b0db45aa52109aac37001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoroutineManager

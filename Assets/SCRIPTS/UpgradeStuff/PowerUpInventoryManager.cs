@@ -99,7 +99,7 @@ public class PowerUpInventoryManager : MonoBehaviour
                 if (hotbarItem.usablePowerUp == null)
                 {
                     hotbarItem.Setup(powerUp);
-                    Debug.Log($"Setup at index {hotbarItems.IndexOf(hotbarItem)} with powerUp: {powerUp.data.name}");
+                    Debug.Log($"Setup at index {hotbarItems.IndexOf(hotbarItem)} with powerUp: {powerUp.data.augmentName}");
                     return;
                 }
                 /*if (hotbarItem.usablePowerUp.data == augment)

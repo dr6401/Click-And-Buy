@@ -42,6 +42,7 @@ public class UpgradeButton : MonoBehaviour
 
         augmentName.text = augment.augmentName;
         augmentDescription.text = augment.description;
+        augmentDescription.color = Color.white;
         iconImage.sprite = augment.icon;
         
         gradient.color = augment.color;

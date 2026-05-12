@@ -9,7 +9,7 @@ public static class GameConstants
 
         public static int campaignChickensToConsume = 750;
         public static int campaignPigsToConsume = 2500;
-        public static int campaignSheepToConsume = 4000        ;
+        public static int campaignSheepToConsume = 4000;
         public static int campaignCowsToConsume = 10000;
         public static int campaignChicksToConsume = 100000;
 

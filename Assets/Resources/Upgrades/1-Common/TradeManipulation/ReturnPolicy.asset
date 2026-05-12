@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ReturnPolicy
   m_EditorClassIdentifier: Assembly-CSharp::ReturnPolicy
   augmentName: Return Policy
-  description: Close your worst trade without taking the loss
+  description: Close <color=#FF414A>worst trade</color> without taking any losses
   icon: {fileID: 21300000, guid: 3c5ce5adac13b8a4c9cb15052a50e369, type: 3}
   tier: 0
   category: 15
