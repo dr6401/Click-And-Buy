@@ -17,6 +17,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 3c5ce5adac13b8a4c9cb15052a50e369, type: 3}
   tier: 0
   category: 15
-  color: {r: 1, g: 0.63153696, b: 0, a: 1}
+  color: {r: 1, g: 0.49803922, b: 0, a: 1}
   autoApply: 0
   removeFromPoolAfterPicking: 0

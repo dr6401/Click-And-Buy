@@ -45,6 +45,7 @@ public class LevelManager : MonoBehaviour
 
     public float baseComboMultiplier = 0.01f;
     public float comboBonus = 0f;
+    public int comboFeverIncrease = 0;
 
     private float passiveIncomeTimer;
     
@@ -331,6 +332,7 @@ public class LevelManager : MonoBehaviour
         {
             GameEvents.onMoneyEarned?.Invoke();
             comboAmount++;
+            comboAmount += comboFeverIncrease;
             if (comboAmount > 1) // If combo is at least 2
             {
                 float comboBonusMoney = comboBonus * baseComboMultiplier * trade.GetUnrealizedProfit();
@@ -347,8 +349,8 @@ public class LevelManager : MonoBehaviour
                 if (comboBonus > 0)
                 {
                     float comboBonusTokens = Mathf.Max(0.01f, comboBonusMoney * 0.1f);
-                    PlayerCurrencies.Instance.AddCurrency(comboBonusTokens, currentCurrency);
-                    SpawnReceivedTokensDamageNumbers(comboBonusTokens, icon: currencyStats.GetIconOfCurrency(currentCurrency));
+                    PlayerCurrencies.Instance.AddCurrency(comboBonusTokens, trade.currencyTraded);
+                    SpawnReceivedTokensDamageNumbers(comboBonusTokens, icon: currencyStats.GetIconOfCurrency(trade.currencyTraded));
                 }
             }
         }
@@ -616,7 +618,7 @@ public class LevelManager : MonoBehaviour
     {
         if (comboTimer > PlayerStats.Instance.maxComboDuration)
         {
-            comboAmount = 1;
+            comboAmount = 1 + comboFeverIncrease;
         }
         comboTimer = 0;
         if (comboAmount > 1)

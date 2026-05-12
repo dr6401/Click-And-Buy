@@ -41,7 +41,7 @@ public class UpgradeButton : MonoBehaviour
         upgradesSelectionUI = parentUI;
 
         augmentName.text = augment.augmentName;
-        augmentDescription.text = RichTextFormatter.RemoveRichText(augment.description);
+        augmentDescription.text = RichTextFormatter.RemoveRichText(RichTextFormatter.Format(augment.description));
         iconImage.sprite = augment.icon;
         
         gradient.color = augment.color;

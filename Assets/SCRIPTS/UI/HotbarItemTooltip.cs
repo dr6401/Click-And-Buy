@@ -15,7 +15,7 @@ public class HotbarItemTooltip : MonoBehaviour
         Augment data = powerUp.data;
         name.text = data.augmentName;
         name.color = powerUp.data.color;
-        description.text = data.description;
+        description.text = RichTextFormatter.Format(data.description);
         chargesLeft.text = NumberFormatter.FormatNumber(powerUp.charges) + " left";
     }
 

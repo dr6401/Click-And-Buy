@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TimedExit
   m_EditorClassIdentifier: Assembly-CSharp::TimedExit
   augmentName: Timed Exit
-  description: Close all <color=#77FF41>winning trades</color> instantly
+  description: Close all {green}winning trades{/green} instantly
   icon: {fileID: 21300000, guid: 8b28817bb4f5fd84e876a54fedf1defa, type: 3}
   tier: 0
   category: 0

@@ -6,20 +6,20 @@ public static class RichTextFormatter
 {
     private static Dictionary<string, string> Legend = new()
     {
-        { "{green}", $"{GameConstants.greenColor}" },
+        { "{green}", $"<color=#{ColorUtility.ToHtmlStringRGB(GameConstants.greenColor)}>" },
         { "{/green}", "</color>" },
 
-        { "{loss}", "<color=#FF414A>" },
-        { "{/loss}", "</color>" },
+        { "{red}", $"<color=#{ColorUtility.ToHtmlStringRGB(GameConstants.redColor)}>" },
+        { "{/red}", "</color>" },
 
-        { "{combo}", "<color=#FFD95E>" },
-        { "{/combo}", "</color>" },
-
-        { "{token}", "<color=#5EC8FF>" },
+        { "{token}", $"<color=#{ColorUtility.ToHtmlStringRGB(GameConstants.tokenColor)}>" },
         { "{/token}", "</color>" },
 
-        { "{divine}", "<color=#C77DFF>" },
-        { "{/divine}", "</color>" }
+        { "{divine}", $"<color=#{ColorUtility.ToHtmlStringRGB(GameConstants.divineBlessingColor)}>" },
+        { "{/divine}", "</color>" },
+        
+        { "{combo}", $"<color=#{ColorUtility.ToHtmlStringRGB(GameConstants.comboColor)}>" },
+        { "{/combo}", "</color>" }
     };
 
     public static string Format(string text)

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Recession
   m_EditorClassIdentifier: Assembly-CSharp::PriceMoveEvent
   eventName: Recession
-  targetPrice: 0
+  targetPrice: 46.115997
   targetPricePercentIncrease: -0.8
-  duration: 30
+  duration: 15
   animationCurve:
     serializedVersion: 2
     m_Curve:

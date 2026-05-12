@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: MarketBoom
   m_EditorClassIdentifier: Assembly-CSharp::PriceMoveEvent
   eventName: Market Boom
-  targetPrice: 0
+  targetPrice: 57.6
   targetPricePercentIncrease: 2
-  duration: 30
+  duration: 15
   animationCurve:
     serializedVersion: 2
     m_Curve:

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: MarketBoom
   m_EditorClassIdentifier: Assembly-CSharp::Event
   augmentName: Market Boom
-  description: Increase price by 200% over 30s.
+  description: Increase price by 200% over 15s.
   icon: {fileID: 21300000, guid: cb150c272a3bde047b8f698f68213d12, type: 3}
   tier: 2
   category: 7
   color: {r: 0.14633155, g: 1, b: 0, a: 1}
+  autoApply: 0
   removeFromPoolAfterPicking: 0
   priceMoveEvent: {fileID: 11400000, guid: b0c5d7ec75854974cbb10044a6ce6b10, type: 2}
