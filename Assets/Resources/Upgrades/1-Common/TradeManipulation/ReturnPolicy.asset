@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43fc60c363b3fc94ab593d5652234e39, type: 3}
+  m_Name: ReturnPolicy
+  m_EditorClassIdentifier: Assembly-CSharp::ReturnPolicy
+  augmentName: Return Policy
+  description: Close your worst trade without taking the loss
+  icon: {fileID: 21300000, guid: 3c5ce5adac13b8a4c9cb15052a50e369, type: 3}
+  tier: 0
+  category: 15
+  color: {r: 1, g: 0.63153696, b: 0, a: 1}
+  autoApply: 0
+  removeFromPoolAfterPicking: 0

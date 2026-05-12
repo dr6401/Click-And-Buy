@@ -151,6 +151,7 @@ public class SoundManager : MonoBehaviour
         GameEvents.OnDivineCashOut += PlayDivineCashOutSFX;
         GameEvents.OnPermaUpgradeUpgraded += PlayPermaUpgradeSFX;
         GameEvents.OnFundSold += PlayMoneyEarnedSFX;
+        GameEvents.onTradeClosedWithoutLosses += PlayMoneyEarnedSFX;
     }
     private void OnDisable()
     {
@@ -166,5 +167,6 @@ public class SoundManager : MonoBehaviour
         GameEvents.OnDivineCashOut -= PlayDivineCashOutSFX;
         GameEvents.OnPermaUpgradeUpgraded -= PlayPermaUpgradeSFX;
         GameEvents.OnFundSold -= PlayMoneyEarnedSFX;
+        GameEvents.onTradeClosedWithoutLosses -= PlayMoneyEarnedSFX;
     }
 }

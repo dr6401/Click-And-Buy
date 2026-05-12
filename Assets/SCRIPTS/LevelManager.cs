@@ -395,14 +395,7 @@ public class LevelManager : MonoBehaviour
 
     public void MarginCall()
     {
-        TradeEntryStatsDisplay worstTrade = activeTrades[0];
-        foreach (var trade in activeTrades)
-        {
-            if (trade.GetUnrealizedProfit() < worstTrade.GetUnrealizedProfit())
-            {
-                worstTrade = trade;
-            }
-        }
+        TradeEntryStatsDisplay worstTrade = GetWorstTrade();
         if (worstTrade.GetUnrealizedProfit() > 0) return;
         Debug.Log($"Current Cash: {cash}, current effectiveCash: {effectiveCash}, equity: {equity}");
         Debug.Log($"Gonna close trade in position {activeTrades.IndexOf(worstTrade)}");
@@ -411,6 +404,20 @@ public class LevelManager : MonoBehaviour
         worstTrade.Close();
         RecalculateBalances();
         Debug.Log($"Cash: {cash}, Equity: {equity}");
+    }
+
+    public TradeEntryStatsDisplay GetWorstTrade()
+    {
+        if (activeTrades.Count <= 0) return null;
+        TradeEntryStatsDisplay worstTrade = activeTrades[0];
+        foreach (var trade in activeTrades)
+        {
+            if (trade.GetUnrealizedProfit() < worstTrade.GetUnrealizedProfit())
+            {
+                worstTrade = trade;
+            }
+        }
+        return worstTrade;
     }
 
     private void RecalculateBalances()

@@ -106,6 +106,18 @@ public class TradeEntryStatsDisplay : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void CloseWithoutLosses()
+    {
+        if (LevelManager.Instance.isInputBlocked) return;
+        float realizedProfit = entryPrice * quantity;
+        LevelManager.Instance.cash = Mathf.Max(0, LevelManager.Instance.cash + realizedProfit);
+        profitReal = 0;
+        LevelManager.Instance.CloseTrade(this);
+        GameEvents.onTradeClosedWithoutLosses?.Invoke();
+        Destroy(tradeEntryIndicator);
+        Destroy(gameObject);
+    }
+
     public float GetUnrealizedProfit()
     {
         return profitReal;

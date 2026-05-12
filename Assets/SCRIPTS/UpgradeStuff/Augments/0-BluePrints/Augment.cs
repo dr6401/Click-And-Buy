@@ -33,7 +33,8 @@ public enum AugmentCategory
     DivineLuckIncrease,
     PassiveIncomeIncrease,
     LossReductionIncrease,
-    VolatilityIncrease
+    VolatilityIncrease,
+    ReturnPolicy
 };
 
 public abstract class Augment : ScriptableObject
