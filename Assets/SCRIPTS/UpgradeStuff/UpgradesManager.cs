@@ -26,10 +26,10 @@ public class UpgradesManager : MonoBehaviour
     
     public Dictionary<AugmentTier, float> originalCashOutTierPrices = new Dictionary<AugmentTier, float>()
     {
-        { AugmentTier.Common, commonCashOutPrice },
-        { AugmentTier.Rare, rareCashOutPrice },
-        { AugmentTier.Epic, epicCashOutPrice },
-        { AugmentTier.Legendary, legendaryCashOutPrice },
+        { AugmentTier.BasicFirst, commonCashOutPrice },
+        { AugmentTier.BasicSecond, rareCashOutPrice },
+        { AugmentTier.BasicThird, epicCashOutPrice },
+        { AugmentTier.BasicForth, legendaryCashOutPrice },
         { AugmentTier.Forex, forexCashOutPrice },
         { AugmentTier.Fivex, fivexCashOutPrice },
         { AugmentTier.Amazoom, amazoomCashOutPrice },
@@ -79,7 +79,7 @@ public class UpgradesManager : MonoBehaviour
     {
         Debug.Log($"Increased cashoutPrice of tier {tier} from {cashOutTierPrices[tier]} to {Mathf.RoundToInt(cashOutTierPrices[tier] * 1.1f)}");
         cashOutTierPrices[tier] *= 1.1f;
-        if (tier <= AugmentTier.Legendary)
+        if (tier <= AugmentTier.BasicForth)
         {
             cashOutTierPrices[tier] = Mathf.RoundToInt(cashOutTierPrices[tier]);
         }

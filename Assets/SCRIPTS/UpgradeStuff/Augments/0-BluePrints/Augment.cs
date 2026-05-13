@@ -2,10 +2,16 @@ using UnityEngine;
 
 public enum AugmentTier
 {
-    Common,
-    Rare,
-    Epic,
-    Legendary,
+    BasicFirst,
+    BasicSecond,
+    BasicThird,
+    BasicForth,
+    BasicFifth,
+    BasicSixth,
+    BasicSeventh,
+    BasicEighth,
+    BasicNinth,
+    BasicTenth,
     Forex,
     Fivex,
     Amazoom,
@@ -34,7 +40,8 @@ public enum AugmentCategory
     PassiveIncomeIncrease,
     LossReductionIncrease,
     VolatilityIncrease,
-    ReturnPolicy
+    ReturnPolicy,
+    LuckyStrike
 };
 
 public abstract class Augment : ScriptableObject

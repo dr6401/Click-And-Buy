@@ -57,7 +57,7 @@ public class LevelManager : MonoBehaviour
     private int comboAmount = 0;
     
     [Header("Upgrade System")]
-    public AugmentTier currentBasicCashOutTier = AugmentTier.Common;
+    public AugmentTier currentBasicCashOutTier = AugmentTier.BasicFirst;
     public AugmentTier currentDivineCashOutTier = AugmentTier.Forex;
     
     public float currentRespinPrice = 50;
@@ -740,16 +740,16 @@ public class LevelManager : MonoBehaviour
     {
         switch (currentBasicCashOutTier)
         {
-            case AugmentTier.Common:
+            case AugmentTier.BasicFirst:
                 return GameConstants.commonTierColor;
                 break;
-            case AugmentTier.Rare:
+            case AugmentTier.BasicSecond:
                 return GameConstants.rareTierColor;
                 break;
-            case AugmentTier.Epic:
+            case AugmentTier.BasicThird:
                 return GameConstants.epicTierColor;
                 break;
-            case AugmentTier.Legendary:
+            case AugmentTier.BasicForth:
                 return GameConstants.divineBlessingColor;
                 break;
             default:
@@ -766,7 +766,7 @@ public class LevelManager : MonoBehaviour
         leverage = 1;
         currentOrderQuantity = 1;
 
-        currentBasicCashOutTier = AugmentTier.Common;
+        currentBasicCashOutTier = AugmentTier.BasicFirst;
         currentDivineCashOutTier = AugmentTier.Forex;
         currentCurrency = PlayerCurrencies.Currency.forex;
         currentFund.highestUnlockedCurrency = PlayerCurrencies.Currency.forex;

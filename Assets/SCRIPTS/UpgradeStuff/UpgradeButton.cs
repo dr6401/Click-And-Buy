@@ -71,9 +71,14 @@ public class UpgradeButton : MonoBehaviour
         {
             PowerUpInventoryManager.Instance.AddPowerUp(augment);
         }
-        upgradesSelectionUI.CloseUI();
-        Debug.Log("Selected " + augment.augmentName + "!");
-        GameEvents.OnUpgradeChosen?.Invoke();
+
+        if (augment.category != AugmentCategory.LuckyStrike)
+        {
+            upgradesSelectionUI.CloseUI();
+            GameEvents.OnUpgradeChosen?.Invoke();
+        }
+        Debug.Log("UpgradeButton: Boutta close upgradeSelectionUI.CloseUI()");
+        Debug.Log("UpgradeButton: Selected " + augment.augmentName + "!");
         //GameEvents.OnHasSettingsUICoveredUpAugmentUI?.Invoke(false);
     }
     

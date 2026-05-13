@@ -50,7 +50,7 @@ public class PauseManager : MonoBehaviour
         Debug.Log($"Stopping Time, previous timeScale: {currentTimeScale}");
     }
 
-    public void StopTime(AugmentTier tier = AugmentTier.Common)
+    public void StopTime(AugmentTier tier = AugmentTier.BasicFirst)
     {
         currentTimeScale = Time.timeScale;
         Time.timeScale = 0f;

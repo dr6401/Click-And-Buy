@@ -27,18 +27,18 @@ public class UpgradesSelectionUI : MonoBehaviour
 
     public Dictionary<AugmentTier, List<Augment>> augmentTierAugmentPools => new Dictionary<AugmentTier, List<Augment>>()
     {
-        { AugmentTier.Common, commonAugments },
-        { AugmentTier.Rare, rareAugments },
-        { AugmentTier.Epic, epicAugments },
-        { AugmentTier.Legendary, legendaryAugments }
+        { AugmentTier.BasicFirst, commonAugments },
+        { AugmentTier.BasicSecond, rareAugments },
+        { AugmentTier.BasicThird, epicAugments },
+        { AugmentTier.BasicForth, legendaryAugments }
     };
 
     public Dictionary<AugmentTier, float> baseAugmentRespinPrices => new Dictionary<AugmentTier, float>()
     {
-        { AugmentTier.Common, 10 },
-        { AugmentTier.Rare, 50 },
-        { AugmentTier.Epic, 200 },
-        { AugmentTier.Legendary, 1000 }
+        { AugmentTier.BasicFirst, 10 },
+        { AugmentTier.BasicSecond, 50 },
+        { AugmentTier.BasicThird, 200 },
+        { AugmentTier.BasicForth, 1000 }
     };
 
     private bool hasSettingsCoveredUpAugmentUI;
@@ -99,7 +99,7 @@ public class UpgradesSelectionUI : MonoBehaviour
     
     public void TriggerAugmentSelection(AugmentTier tier)
     {
-        List<Augment> pool = testing_offerOnlyGoldAugments ? GetPoolByTier(AugmentTier.Rare) : GetPoolByTier(tier);// if we're testing, enable only silver augments
+        List<Augment> pool = testing_offerOnlyGoldAugments ? GetPoolByTier(AugmentTier.BasicSecond) : GetPoolByTier(tier);// if we're testing, enable only silver augments
         pool.RemoveAll(augment => runAugmentData.IsAugmentInChosenAugments(augment) && augment.removeFromPoolAfterPicking);
         Debug.Log(tier + " pool: " + string.Join(", ", pool.Select(a => a.augmentName)));
         List<Augment> choices = GetRandomAugments(pool, numberOfChoices);
@@ -117,9 +117,9 @@ public class UpgradesSelectionUI : MonoBehaviour
             int augmentChance = Random.Range(1, 100);
             AugmentTier augmentTier = augmentChance switch
             {
-                <= 50 => AugmentTier.Common,
-                <= 80 => AugmentTier.Rare,
-                _ => AugmentTier.Epic
+                <= 50 => AugmentTier.BasicFirst,
+                <= 80 => AugmentTier.BasicSecond,
+                _ => AugmentTier.BasicThird
             };
             Debug.Log("Tier: " + tier + " did not have any augments left. Retrying augments with tier: " + augmentTier);
             TriggerAugmentSelection(augmentTier);
@@ -133,6 +133,20 @@ public class UpgradesSelectionUI : MonoBehaviour
             var btnObjScript = btnObj.GetComponent<UpgradeButton>();
             btnObjScript.Setup(choice, this);
         }
+        
+        gameObject.SetActive(true);
+        GameEvents.OnUpgradesOffered?.Invoke();
+        canvasGroup.alpha = 1f;
+    }
+    
+    public void TriggerAugmentSelectionForOneAugment(Augment augment)
+    {
+        Debug.Log("Triggered augment selection for ONLY one augment: " + augment.augmentName);
+        
+        var btnObj = Instantiate(augmentButtonPrefab, buttonParent);
+        var btnObjScript = btnObj.GetComponent<UpgradeButton>();
+        btnObjScript.Setup(augment, this);
+        
         gameObject.SetActive(true);
         GameEvents.OnUpgradesOffered?.Invoke();
         canvasGroup.alpha = 1f;
@@ -142,10 +156,10 @@ public class UpgradesSelectionUI : MonoBehaviour
     {
         return tier switch
         {
-            AugmentTier.Common => commonAugments,
-            AugmentTier.Rare => rareAugments,
-            AugmentTier.Epic => epicAugments,
-            AugmentTier.Legendary => legendaryAugments,
+            AugmentTier.BasicFirst => commonAugments,
+            AugmentTier.BasicSecond => rareAugments,
+            AugmentTier.BasicThird => epicAugments,
+            AugmentTier.BasicForth => legendaryAugments,
             
             AugmentTier.Forex => forexAugments,
             AugmentTier.Fivex => fivexAugments,
@@ -234,7 +248,7 @@ public class UpgradesSelectionUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void RemoveUpgradeCardsFromUpgradePanel()
+    public void RemoveUpgradeCardsFromUpgradePanel()
     {
         foreach (Transform upgradeCard in buttonParent.gameObject.GetComponentsInChildren<Transform>(true))
         {
