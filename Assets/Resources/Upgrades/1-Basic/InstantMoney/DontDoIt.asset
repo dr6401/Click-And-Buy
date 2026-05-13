@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: DontDoIt
   m_EditorClassIdentifier: Assembly-CSharp::DontDoIt
   augmentName: Don't Do It
-  description: Gain between 50$ and 1K$
+  description: Gain between 50$ and 750$
   icon: {fileID: 21300000, guid: cb007d8413269894ab29a3577c54886a, type: 3}
   tier: 0
   category: 0
-  color: {r: 0.421463, g: 1, b: 0, a: 1}
+  color: {r: 1, g: 0, b: 0.6264024, a: 1}
   autoApply: 1
   removeFromPoolAfterPicking: 0
   min: 50

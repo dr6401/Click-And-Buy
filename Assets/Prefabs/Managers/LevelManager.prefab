@@ -56,6 +56,7 @@ MonoBehaviour:
   tradeEntryPrefab: {fileID: 3096791442433741255, guid: 87d7c3f364c266a4e98bac7b6b04540a, type: 3}
   currentChart: {fileID: 0}
   allCharts: []
+  startingCash: 200
   cash: 1000
   effectiveCash: 0
   equity: 0
@@ -73,10 +74,10 @@ MonoBehaviour:
   amountToWin: 1000000
   baseComboMultiplier: 0.01
   comboBonus: 0
+  comboFeverIncrease: 0
   currencyStats: {fileID: 11400000, guid: f391657887d2ee4438730caf0f23e186, type: 2}
   currentBasicCashOutTier: 0
-  currentDivineCashOutTier: 4
-  currentBasicCashOutPrice: 300
+  currentDivineCashOutTier: 10
   currentRespinPrice: 50
   activeTrades: []
   tutorialPump: {fileID: 0}

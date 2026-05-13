@@ -9,6 +9,7 @@ TagManager:
   - PlayerCash
   - HotbarRoot
   - InventoryRoot
+  - AugmentRespinButton
   layers:
   - Default
   - TransparentFX

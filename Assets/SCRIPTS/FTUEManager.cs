@@ -17,7 +17,7 @@ public class FTUEManager : MonoBehaviour
     
     private void Start()
     {
-        if (true)//(!SettingsManager.Instance.hasPlayerCompletedFTUE)
+        if (!SettingsManager.Instance.hasPlayerCompletedFTUE)
         {
             Debug.Log($"Player hasn't completed FTUE yet, starting FTUE");
             StartCoroutine(InitiateFTUE());
