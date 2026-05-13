@@ -77,6 +77,11 @@ public class UpgradeButton : MonoBehaviour
             upgradesSelectionUI.CloseUI();
             GameEvents.OnUpgradeChosen?.Invoke();
         }
+        else
+        {
+            GameObject respinBtn = GameObject.FindGameObjectWithTag("AugmentRespinButton");
+            respinBtn.SetActive(false);
+        }
         Debug.Log("UpgradeButton: Boutta close upgradeSelectionUI.CloseUI()");
         Debug.Log("UpgradeButton: Selected " + augment.augmentName + "!");
         //GameEvents.OnHasSettingsUICoveredUpAugmentUI?.Invoke(false);
