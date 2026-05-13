@@ -189,7 +189,7 @@ public class LevelManager : MonoBehaviour
         currentTokensText.text = $"Tokens: {NumberFormatter.FormatDecimalNumber(PlayerCurrencies.Instance.GetTokensAmount(currentCurrency))}";
         openProfitLossText.text = $"Open P/L: {NumberFormatter.FormatDecimalNumber(openProfitAndLoss)}$";
         basicCashOutText.text = $"{NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier))}$";
-        basicCashOutText.color = GetColorForCurrentTier();
+        basicCashOutText.color = GameConstants.basicCashOutColor;
         divineCashOutText.text = $"{NumberFormatter.FormatDecimalNumber(UpgradesManager.Instance.PriceOfDivineCashOutTier(currentCurrency))}";
         multiplierText.text = $"Multiplier: {NumberFormatter.FormatDecimalNumber(leverage)}X";
         currentFaithText.text = $"Faith: {NumberFormatter.FormatDecimalNumber(PlayerStats.Instance.faith)}";
@@ -238,6 +238,11 @@ public class LevelManager : MonoBehaviour
             if (Keyboard.current.mKey.wasPressedThisFrame)
             {
                 cash += 1000;
+            }
+            
+            if (Keyboard.current.tKey.wasPressedThisFrame)
+            {
+                PlayerCurrencies.Instance.AddCurrency(1000, currentCurrency);
             }
             
             if (Keyboard.current.fKey.wasPressedThisFrame)
@@ -367,7 +372,7 @@ public class LevelManager : MonoBehaviour
     {
         GameObject tradeEntry = Instantiate(tradeEntryPrefab, tradePanel);
         TradeEntryStatsDisplay stats = tradeEntry.GetComponent<TradeEntryStatsDisplay>();
-        TradeData data = new TradeData(trade.tradeType, System.DateTime.Now.ToString("HH:mm:ss"), trade.quantity, trade.entryPrice, trade.multiplier, currentCurrency);
+        TradeData data = new TradeData(trade.tradeType, System.DateTime.Now.ToString("HH:mm:ss"), trade.quantity, trade.entryPrice, trade.multiplier, trade.currencyTraded);
 
         ChartController chartToAffect = GetChartControllerOfCurrency(data.tradedCurrency);
         GameObject tradeEntryIndicator = Instantiate(chartToAffect.tradeEntryIndicatorPrefab, chartToAffect.priceChart);
@@ -741,7 +746,7 @@ public class LevelManager : MonoBehaviour
         switch (currentBasicCashOutTier)
         {
             case AugmentTier.BasicFirst:
-                return GameConstants.commonTierColor;
+                return GameConstants.basicCashOutColor;
                 break;
             case AugmentTier.BasicSecond:
                 return GameConstants.rareTierColor;
@@ -843,9 +848,13 @@ public class LevelManager : MonoBehaviour
                 currentChart = chart;
                 currentCurrency = currency;
                 chart.priceChart.gameObject.SetActive(true);
-                return;
+                break;
             }
         }
+        currentBasicCashOutTier = (AugmentTier) currency;
+        Debug.Log($"currentBasicCashOutTier: {currentBasicCashOutTier}");
+        currentDivineCashOutTier = (AugmentTier) currency + System.Enum.GetValues(typeof(AugmentTier)).Length / 2;
+        Debug.Log($"currentDivineCashOutTier: {currentDivineCashOutTier} = (AugmentTier) currency ({(AugmentTier) currency}) + System.Enum.GetValues(typeof(AugmentTier)).Length/2 ({System.Enum.GetValues(typeof(AugmentTier)).Length / 2})");
     }
 
     private void OnEnable()

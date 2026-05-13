@@ -7,10 +7,16 @@ public class UpgradesManager : MonoBehaviour
     private float goldAugmentChance = 0.3f;
     
     // Basic
-    public static float commonCashOutPrice = 100f;
-    public static float rareCashOutPrice = 750f;
-    public static float epicCashOutPrice = 2000f;
-    public static float legendaryCashOutPrice = 10000f;
+    public static float basicFirstCashoutPrice = 100f;
+    public static float basicSecondCashoutPrice = 500f;
+    public static float basicThirdCashoutPrice = 1000f;
+    public static float basicFourthCashoutPrice = 2500f;
+    public static float basicFifthCashoutPrice = 5000f;
+    public static float basicSixthCashoutPrice = 10000f;
+    public static float basicSeventhCashoutPrice = 25000f;
+    public static float basicEighthCashoutPrice = 50000f;
+    public static float basicNinthCashoutPrice = 100000f;
+    public static float basicTenthCashoutPrice = 250000f;
     
     // Currencies
     public static float forexCashOutPrice = 1f;
@@ -26,10 +32,16 @@ public class UpgradesManager : MonoBehaviour
     
     public Dictionary<AugmentTier, float> originalCashOutTierPrices = new Dictionary<AugmentTier, float>()
     {
-        { AugmentTier.BasicFirst, commonCashOutPrice },
-        { AugmentTier.BasicSecond, rareCashOutPrice },
-        { AugmentTier.BasicThird, epicCashOutPrice },
-        { AugmentTier.BasicForth, legendaryCashOutPrice },
+        { AugmentTier.BasicFirst, basicFirstCashoutPrice },
+        { AugmentTier.BasicSecond, basicSecondCashoutPrice },
+        { AugmentTier.BasicThird, basicThirdCashoutPrice },
+        { AugmentTier.BasicForth, basicFourthCashoutPrice },
+        { AugmentTier.BasicFifth, basicFifthCashoutPrice },
+        { AugmentTier.BasicSixth, basicSixthCashoutPrice },
+        { AugmentTier.BasicSeventh, basicSeventhCashoutPrice },
+        { AugmentTier.BasicEighth, basicEighthCashoutPrice },
+        { AugmentTier.BasicNinth, basicNinthCashoutPrice },
+        { AugmentTier.BasicTenth, basicTenthCashoutPrice },
         { AugmentTier.Forex, forexCashOutPrice },
         { AugmentTier.Fivex, fivexCashOutPrice },
         { AugmentTier.Amazoom, amazoomCashOutPrice },

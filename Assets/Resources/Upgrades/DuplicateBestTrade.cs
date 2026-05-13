@@ -11,6 +11,7 @@ public class DuplicateBestTrade : Augment
         TradeEntryStatsDisplay bestTrade = activeTrades[0];
         foreach (TradeEntryStatsDisplay tradeEntry in activeTrades)
         {
+            Debug.Log($"tempTrade unrealized profit: {tradeEntry.GetUnrealizedProfit()}, bestTrade unrealized profit: {bestTrade.GetUnrealizedProfit()}");
             if (tradeEntry.GetUnrealizedProfit() > bestTrade.GetUnrealizedProfit())
             {
                 bestTrade = tradeEntry;

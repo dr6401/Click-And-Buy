@@ -27,7 +27,7 @@ public static class GameConstants
         
         public static Color comboColor = new Color32(255, 167, 0, 255);
         
-        public static Color commonTierColor = new Color32(46, 219, 19, 255);
+        public static Color basicCashOutColor = new Color32(46, 219, 19, 255);
         public static Color rareTierColor = new Color32(6, 182, 219, 255);
         public static Color epicTierColor = new Color32(163, 0, 255, 255);
         public static Color divineBlessingColor = new Color32(255, 219, 0, 255);
