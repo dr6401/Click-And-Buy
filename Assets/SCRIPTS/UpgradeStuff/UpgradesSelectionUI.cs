@@ -56,21 +56,21 @@ public class UpgradesSelectionUI : MonoBehaviour
             Instance = this;
         }
 
-        commonAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/1-Common"));
-        rareAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/2-Rare"));
-        epicAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/3-Epic"));
-        legendaryAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/4-Legendary"));
+        commonAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/1-Basic"));
+        rareAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/2-Basic"));
+        epicAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/3-Basic"));
+        legendaryAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/4-Basic"));
         
-        forexAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/5-Forex"));
-        fivexAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/6-Fivex"));
-        amazoomAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/7-Amazoom"));
-        toyYodaAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/8-ToyYoda"));
-        tesluckAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/9-Tesluck"));
-        moonCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/10-MoonCoin"));
-        poopCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/11-PoopCoin"));
-        timeCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/12-TimeCoin"));
-        infinityCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/13-InfinityCoin"));
-        godCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/14-GodCoin"));
+        forexAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/Divine/1-Forex"));
+        fivexAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/Divine/2-Fivex"));
+        amazoomAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/Divine/3-Amazoom"));
+        toyYodaAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/Divine/4-ToyYoda"));
+        tesluckAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/Divine/5-Tesluck"));
+        moonCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/Divine/6-MoonCoin"));
+        poopCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/Divine/7-PoopCoin"));
+        timeCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/Divine/8-TimeCoin"));
+        infinityCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/Divine/9-InfinityCoin"));
+        godCoinAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/Divine/10-GodCoin"));
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

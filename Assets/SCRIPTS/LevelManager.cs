@@ -443,7 +443,9 @@ public class LevelManager : MonoBehaviour
     public void BasicCashOut()
     {
         if (PauseManager.Instance.ShouldInputBeBlocked()) return;
-        if (effectiveCash < currentBasicCashOutPrice)
+        float currentTierCashOutPrice =
+            UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
+        if (effectiveCash < currentTierCashOutPrice)
         {
             GameEvents.onNotEnoughMoney?.Invoke();
             return;
@@ -454,8 +456,6 @@ public class LevelManager : MonoBehaviour
             SpawnTextDamageNumbers("Offering inventory full!", position: cashOutButton.gameObject.GetComponent<RectTransform>(), color: Color.white);
             return;
         }
-        float currentTierCashOutPrice =
-            UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
         cash -= currentTierCashOutPrice;
         cash = Mathf.Max(0, cash);
         currentRespinPrice = UpgradesSelectionUI.Instance.baseAugmentRespinPrices[currentBasicCashOutTier];
@@ -772,7 +772,8 @@ public class LevelManager : MonoBehaviour
         currentBasicCashOutTier = AugmentTier.Common;
         currentCurrency = PlayerCurrencies.Currency.forex;
         currentFund.highestUnlockedCurrency = PlayerCurrencies.Currency.forex;
-
+        UpgradesManager.Instance.ResetTierPricesToOriginal();
+        
         currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
 
         ResetTimeScale();
