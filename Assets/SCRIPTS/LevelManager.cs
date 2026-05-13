@@ -27,7 +27,8 @@ public class LevelManager : MonoBehaviour
 
     public ChartController currentChart;
     public List<ChartController> allCharts = new List<ChartController>();
-    
+
+    public float startingCash = 200;
     public float cash = 1000f;
     public float effectiveCash;
     public float equity;
@@ -58,7 +59,6 @@ public class LevelManager : MonoBehaviour
     [Header("Upgrade System")]
     public AugmentTier currentBasicCashOutTier = AugmentTier.Common;
     public AugmentTier currentDivineCashOutTier = AugmentTier.Forex;
-    public float currentBasicCashOutPrice = 300;
     
     public float currentRespinPrice = 50;
 
@@ -123,8 +123,8 @@ public class LevelManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        cash = startingCash;
         equity = cash;
-        currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
         //GenerateNewPrice();
         PlayPriceMoveEvent(currentChart, tutorialPump);
         //currentChart.SpawnNewCandle();
@@ -563,14 +563,12 @@ public class LevelManager : MonoBehaviour
     {
         currentBasicCashOutTier++;
         currentBasicCashOutTier = (AugmentTier) Mathf.Min((int) currentBasicCashOutTier, Enum.GetValues(typeof(AugmentTier)).Length - 1);
-        currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
     }
     
     public void DecreaseCashOutTier()
     {
         currentBasicCashOutTier--;
         currentBasicCashOutTier = (AugmentTier) Mathf.Max((int) currentBasicCashOutTier, 0);
-        currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
     }
 
     public void ChangeOrderQuantity(bool increase)
@@ -761,20 +759,22 @@ public class LevelManager : MonoBehaviour
 
     public void ResetLvlManagerValuesAtFundSell()
     {
-        CloseAndClearAllCandlesForAllCharts();
-        CloseAndClearAllTrades();
-        
         passiveIncomeTimer = 0;
-        
+        float leftoverCash = cash;
+
+        cash = startingCash += leftoverCash * PlayerStats.Instance.moneyTransferMultiplier;
         leverage = 1;
         currentOrderQuantity = 1;
 
         currentBasicCashOutTier = AugmentTier.Common;
+        currentDivineCashOutTier = AugmentTier.Forex;
         currentCurrency = PlayerCurrencies.Currency.forex;
         currentFund.highestUnlockedCurrency = PlayerCurrencies.Currency.forex;
-        UpgradesManager.Instance.ResetTierPricesToOriginal();
         
-        currentBasicCashOutPrice = UpgradesManager.Instance.PriceOfCashOutTier(currentBasicCashOutTier);
+        CloseAndClearAllCandlesForAllCharts();
+        CloseAndClearAllTrades();
+        
+        UpgradesManager.Instance.ResetTierPricesToOriginal();
 
         ResetTimeScale();
 
@@ -787,7 +787,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void CloseAndClearAllTrades()
+    public void CloseAndClearAllTrades()
     {
         List<TradeEntryStatsDisplay> tempActiveTrades = new List<TradeEntryStatsDisplay>(activeTrades);
         foreach (var trade in tempActiveTrades)
@@ -797,7 +797,7 @@ public class LevelManager : MonoBehaviour
         activeTrades.Clear();
     }
 
-    private void CloseAndClearAllCandlesForAllCharts()
+    public void CloseAndClearAllCandlesForAllCharts()
     {
         foreach (ChartController chart in allCharts)
         {
@@ -824,7 +824,7 @@ public class LevelManager : MonoBehaviour
         return equity * PlayerStats.Instance.fundValuationMultiplier;
     }
 
-    private float CalculateMoneyTransferredFromPreviousFund()
+    public float CalculateMoneyTransferredFromPreviousFund()
     {
         if (equity * PlayerStats.Instance.moneyTransferMultiplier < 10) return 0;
         return equity * PlayerStats.Instance.moneyTransferMultiplier;

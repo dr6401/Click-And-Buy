@@ -10,5 +10,6 @@ public class
         if (LevelManager.Instance == null) return;
         LevelManager.Instance.cash += moneyIncrease;
         LevelManager.Instance.SpawnReceivedMoneyDamageNumbers(moneyIncrease);
+        GameEvents.onMoneyEarned?.Invoke();
     }
 }

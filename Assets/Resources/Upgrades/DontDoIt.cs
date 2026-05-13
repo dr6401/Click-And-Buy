@@ -13,6 +13,7 @@ public class DontDoIt : Augment
         int moneyIncrease = Mathf.CeilToInt(Random.Range(min, max));
         LevelManager.Instance.cash += moneyIncrease;
         LevelManager.Instance.SpawnReceivedMoneyDamageNumbers(moneyIncrease);
+        GameEvents.onMoneyEarned?.Invoke();
     }
 
     private void OnEnable()

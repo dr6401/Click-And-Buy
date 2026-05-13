@@ -24,27 +24,7 @@ public class UpgradesManager : MonoBehaviour
     public static float infinityCoinCashOutPrice = 10f;
     public static float godCoinCashOutPrice = 10f;
     
-    // Starting Stats
-    
-    public static float originalCommonCashOutPrice = 100f;
-    public static float originalRareCashOutPrice = 750f;
-    public static float originalEpicCashOutPrice = 2000f;
-    public static float originalLegendaryCashOutPrice = 10000f;
-    
-    // Currencies
-    public static float originalForexCashOutPrice = 1f;
-    public static float originalFivexCashOutPrice = 10f;
-    public static float originalAmazoomCashOutPrice = 10f;
-    public static float originalToyYodaCashOutPrice = 10f;
-    public static float originalTesluckCashOutPrice = 10f;
-    public static float originalMoonCoinCashOutPrice = 10f;
-    public static float originalPoopCoinCashOutPrice = 10f;
-    public static float originalTimeCoinCashOutPrice = 10f;
-    public static float originalInfinityCoinCashOutPrice = 10f;
-    public static float originalGodCoinCashOutPrice = 10f;
-    
-
-    public Dictionary<AugmentTier, float> cashOutTierPrices = new Dictionary<AugmentTier, float>()
+    public Dictionary<AugmentTier, float> originalCashOutTierPrices = new Dictionary<AugmentTier, float>()
     {
         { AugmentTier.Common, commonCashOutPrice },
         { AugmentTier.Rare, rareCashOutPrice },
@@ -61,6 +41,9 @@ public class UpgradesManager : MonoBehaviour
         { AugmentTier.InfinityCoin, infinityCoinCashOutPrice },
         { AugmentTier.GodCoin, godCoinCashOutPrice }
     };
+
+
+    public Dictionary<AugmentTier, float> cashOutTierPrices = new Dictionary<AugmentTier, float>();
     
     [Header("TESTING")] [SerializeField] private bool useTestingEqualAugmentOdds = false;
 
@@ -74,6 +57,11 @@ public class UpgradesManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        foreach (var entry in originalCashOutTierPrices)
+        {
+            cashOutTierPrices.Add(entry.Key, entry.Value);
+        }
     }
 
     // Basic
@@ -123,23 +111,12 @@ public class UpgradesManager : MonoBehaviour
 
     public void ResetTierPricesToOriginal()
     {
-        // Basic
-        commonCashOutPrice = originalCommonCashOutPrice;
-        rareCashOutPrice = originalRareCashOutPrice;
-        epicCashOutPrice = originalEpicCashOutPrice;
-        legendaryCashOutPrice = originalLegendaryCashOutPrice;
-
-        // Currencies
-        forexCashOutPrice = originalForexCashOutPrice;
-        fivexCashOutPrice = originalFivexCashOutPrice;
-        amazoomCashOutPrice = originalAmazoomCashOutPrice;
-        toyYodaCashOutPrice = originalToyYodaCashOutPrice;
-        tesluckCashOutPrice = originalTesluckCashOutPrice;
-        moonCoinCashOutPrice = originalMoonCoinCashOutPrice;
-        poopCoinCashOutPrice = originalPoopCoinCashOutPrice;
-        timeCoinCashOutPrice = originalTimeCoinCashOutPrice;
-        infinityCoinCashOutPrice = originalInfinityCoinCashOutPrice;
-        godCoinCashOutPrice = originalGodCoinCashOutPrice;
+        Debug.Log($"Resetting cashOutTier prices to original");
+        cashOutTierPrices.Clear();
+        foreach (var entry in originalCashOutTierPrices)
+        {
+            cashOutTierPrices.Add(entry.Key, entry.Value);
+        }
     }
 
     private void OnEnable()

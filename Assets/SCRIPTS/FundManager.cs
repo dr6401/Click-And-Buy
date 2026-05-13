@@ -22,6 +22,8 @@ public class FundManager : MonoBehaviour
 
     public void SellFund()
     {
+        float moneyTransfer = LevelManager.Instance.CalculateMoneyTransferredFromPreviousFund();
+        
         ArchivedFund fundInQuestion = LevelManager.Instance.currentFund;
         fundInQuestion.fundName = "Mamaguevo Fund";
         fundInQuestion.DebugFundStats();
@@ -31,6 +33,8 @@ public class FundManager : MonoBehaviour
         LevelManager.Instance.ResetLvlManagerValuesAtFundSell();
         PlayerCurrencies.Instance.ResetAllCurrencies();
         GameEvents.OnFundSold?.Invoke();
+
+        LevelManager.Instance.cash = moneyTransfer + LevelManager.Instance.startingCash;
     }
 
     private void AddFundToDisplay(ArchivedFund fund)
