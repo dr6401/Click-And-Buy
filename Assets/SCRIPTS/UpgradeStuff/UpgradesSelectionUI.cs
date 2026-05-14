@@ -12,7 +12,7 @@ public class UpgradesSelectionUI : MonoBehaviour
     
     public Transform buttonParent;
     public GameObject augmentButtonPrefab;
-    public List<Augment> commonAugments, rareAugments, epicAugments, legendaryAugments;
+    public List<Augment> basicFirstAugments, basicSecondAugments, basicThirdAugments, basicForthAugments, basicFifthAugments, basicSixthAugments, basicSeventhAugments, basicEighthAugments, basicNinthAugments, basicTenthAugments;
     public List<Augment> forexAugments, fivexAugments, amazoomAugments, toyYodaAugments, tesluckAugments, moonCoinAugments, poopCoinAugments, timeCoinAugments, infinityCoinAugments, godCoinAugments;
     [SerializeField] private int numberOfChoices = 3;
     private int availableAugmentsAtStart;
@@ -27,10 +27,27 @@ public class UpgradesSelectionUI : MonoBehaviour
 
     public Dictionary<AugmentTier, List<Augment>> augmentTierAugmentPools => new Dictionary<AugmentTier, List<Augment>>()
     {
-        { AugmentTier.BasicFirst, commonAugments },
-        { AugmentTier.BasicSecond, rareAugments },
-        { AugmentTier.BasicThird, epicAugments },
-        { AugmentTier.BasicForth, legendaryAugments }
+        { AugmentTier.BasicFirst, basicFirstAugments },
+        { AugmentTier.BasicSecond, basicSecondAugments },
+        { AugmentTier.BasicThird, basicThirdAugments },
+        { AugmentTier.BasicForth, basicForthAugments },
+        { AugmentTier.BasicFifth, basicFifthAugments },
+        { AugmentTier.BasicSixth, basicSixthAugments },
+        { AugmentTier.BasicSeventh, basicSeventhAugments },
+        { AugmentTier.BasicEighth, basicEighthAugments },
+        { AugmentTier.BasicNinth, basicNinthAugments },
+        { AugmentTier.BasicTenth, basicTenthAugments },
+
+        { AugmentTier.Forex, forexAugments },
+        { AugmentTier.Fivex, fivexAugments },
+        { AugmentTier.Amazoom, amazoomAugments },
+        { AugmentTier.ToyYoda, toyYodaAugments },
+        { AugmentTier.Tesluck, tesluckAugments },
+        { AugmentTier.MoonCoin, moonCoinAugments },
+        { AugmentTier.PoopCoin, poopCoinAugments },
+        { AugmentTier.TimeCoin, timeCoinAugments },
+        { AugmentTier.InfinityCoin, infinityCoinAugments },
+        { AugmentTier.GodCoin, godCoinAugments }
     };
 
     public Dictionary<AugmentTier, float> baseAugmentRespinPrices => new Dictionary<AugmentTier, float>()
@@ -38,7 +55,24 @@ public class UpgradesSelectionUI : MonoBehaviour
         { AugmentTier.BasicFirst, 10 },
         { AugmentTier.BasicSecond, 50 },
         { AugmentTier.BasicThird, 200 },
-        { AugmentTier.BasicForth, 1000 }
+        { AugmentTier.BasicForth, 1000 },
+        { AugmentTier.BasicFifth, 2500 },
+        { AugmentTier.BasicSixth, 5000 },
+        { AugmentTier.BasicSeventh, 10000 },
+        { AugmentTier.BasicEighth, 25000 },
+        { AugmentTier.BasicNinth, 50000 },
+        { AugmentTier.BasicTenth, 100000 },
+
+        { AugmentTier.Forex, 1 },
+        { AugmentTier.Fivex, 5 },
+        { AugmentTier.Amazoom, 10 },
+        { AugmentTier.ToyYoda, 15 },
+        { AugmentTier.Tesluck, 25 },
+        { AugmentTier.MoonCoin, 50 },
+        { AugmentTier.PoopCoin, 50 },
+        { AugmentTier.TimeCoin, 100 },
+        { AugmentTier.InfinityCoin, 250 },
+        { AugmentTier.GodCoin, 1000 }
     };
 
     private bool hasSettingsCoveredUpAugmentUI;
@@ -56,10 +90,16 @@ public class UpgradesSelectionUI : MonoBehaviour
             Instance = this;
         }
 
-        commonAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/1-Basic"));
-        rareAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/2-Basic"));
-        epicAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/3-Basic"));
-        legendaryAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/4-Basic"));
+        basicFirstAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/1-Basic"));
+        basicSecondAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/2-Basic"));
+        basicThirdAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/3-Basic"));
+        basicForthAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/4-Basic"));
+        basicFifthAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/5-Basic"));
+        basicSixthAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/6-Basic"));
+        basicSeventhAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/7-Basic"));
+        basicEighthAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/8-Basic"));
+        basicNinthAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/9-Basic"));
+        basicTenthAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/10-Basic"));
         
         forexAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/Divine/1-Forex"));
         fivexAugments = new List<Augment>(Resources.LoadAll<Augment>("Upgrades/Divine/2-Fivex"));
@@ -83,15 +123,15 @@ public class UpgradesSelectionUI : MonoBehaviour
         canvasGroup.alpha = 0f;
         gameObject.SetActive(false);
 
-        foreach (var silverAugment in commonAugments)
+        foreach (var silverAugment in basicFirstAugments)
         {
             availableAugmentsAtStart++;
         }
-        foreach (var goldAugment in rareAugments)
+        foreach (var goldAugment in basicSecondAugments)
         {
             availableAugmentsAtStart++;
         }
-        foreach (var prismaticAugment in epicAugments)
+        foreach (var prismaticAugment in basicThirdAugments)
         {
             availableAugmentsAtStart++;
         }
@@ -156,10 +196,10 @@ public class UpgradesSelectionUI : MonoBehaviour
     {
         return tier switch
         {
-            AugmentTier.BasicFirst => commonAugments,
-            AugmentTier.BasicSecond => rareAugments,
-            AugmentTier.BasicThird => epicAugments,
-            AugmentTier.BasicForth => legendaryAugments,
+            AugmentTier.BasicFirst => basicFirstAugments,
+            AugmentTier.BasicSecond => basicSecondAugments,
+            AugmentTier.BasicThird => basicThirdAugments,
+            AugmentTier.BasicForth => basicForthAugments,
             
             AugmentTier.Forex => forexAugments,
             AugmentTier.Fivex => fivexAugments,
@@ -171,7 +211,7 @@ public class UpgradesSelectionUI : MonoBehaviour
             AugmentTier.TimeCoin => timeCoinAugments,
             AugmentTier.InfinityCoin => infinityCoinAugments,
             AugmentTier.GodCoin => godCoinAugments,
-            _ => commonAugments,
+            _ => basicFirstAugments,
         };
     }
     
@@ -203,28 +243,28 @@ public class UpgradesSelectionUI : MonoBehaviour
     public void MarkAsRemovedFromPool(AugmentCategory category)
     {
         // Store all powerups of this type as chosen (so they get in the runAugmentData.ChosenAugments
-        foreach (Augment augment in commonAugments)
+        foreach (Augment augment in basicFirstAugments)
         {
             if (augment.category == category)
             {
                 StoreChosenAugment(augment);
             }
         }
-        foreach (Augment augment in rareAugments)
+        foreach (Augment augment in basicSecondAugments)
         {
             if (augment.category == category)
             {
                 StoreChosenAugment(augment);
             }
         }
-        foreach (Augment augment in epicAugments)
+        foreach (Augment augment in basicThirdAugments)
         {
             if (augment.category == category)
             {
                 StoreChosenAugment(augment);
             }
         }
-        foreach (Augment augment in legendaryAugments)
+        foreach (Augment augment in basicForthAugments)
         {
             if (augment.category == category)
             {

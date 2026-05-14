@@ -8,9 +8,18 @@ using Random = UnityEngine.Random;
 public class LuckyStrike : Augment
 {
     public AugmentTier currentTier;
+    public bool isDivineCashOut;
     public override void Apply()
     {
-        AugmentTier higherTier = (AugmentTier) Mathf.Min((int) currentTier + 1, (int)AugmentTier.BasicTenth);
+        AugmentTier higherTier;
+        if (!isDivineCashOut)
+        {
+            higherTier = (AugmentTier) Mathf.Min((int) currentTier + 1, (int)AugmentTier.BasicTenth);
+        }
+        else
+        {
+            higherTier = (AugmentTier) Mathf.Min((int) currentTier + 10, (int)AugmentTier.GodCoin);
+        }
         
         List<Augment> higherTierAugmentsPool = new List<Augment>();
         foreach (Augment aug in UpgradesSelectionUI.Instance.augmentTierAugmentPools[higherTier])

@@ -43,6 +43,10 @@ public class UpgradeButton : MonoBehaviour
         augmentName.text = augment.augmentName;
         augmentDescription.text = RichTextFormatter.RemoveRichText(RichTextFormatter.Format(augment.description));
         iconImage.sprite = augment.icon;
+        if (aug is LuckyStrike { isDivineCashOut: true })
+        {
+            iconImage.gameObject.transform.localScale *= 1.25f;
+        }
         
         gradient.color = augment.color;
         Color transparentColor = gradient.color;

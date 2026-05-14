@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a3a7c2f121c6344bd5341e2e3efb48, type: 3}
+  m_Name: MarketDump
+  m_EditorClassIdentifier: Assembly-CSharp::Event
+  augmentName: Market Dump
+  description: Decrease price by 90% over 15s.
+  icon: {fileID: 21300000, guid: e03b9fdd44fe36e41a0cb196aec64c23, type: 3}
+  tier: 2
+  category: 7
+  color: {r: 1, g: 0, b: 0.018989086, a: 1}
+  autoApply: 0
+  removeFromPoolAfterPicking: 0
+  priceMoveEvent: {fileID: 11400000, guid: 8cfd4b9ba96333647858bca6e243a920, type: 2}
