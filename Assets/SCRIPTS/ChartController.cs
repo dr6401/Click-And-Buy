@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ChartController : MonoBehaviour
 {
@@ -75,7 +77,7 @@ public class ChartController : MonoBehaviour
     
     [Header("Price Move Events")]
     public ActivePriceEvent activeEvent = new ActivePriceEvent();
-    
+
     void Start()
     {
         price = startingPrice;
@@ -83,7 +85,7 @@ public class ChartController : MonoBehaviour
         recentPrices.Add(price);
         chartMinVisible = Mathf.Min(maxPrice, price + 50);
         chartMaxVisible = Mathf.Max(minPrice, price - 50);
-        
+        //Debug.Log($"1st Price of chart {chartCurrency}: {price}");
         futurePrices = new List<FutureTick>();
         GenerateFuturePrices(amountOfFuturePrices);
         
@@ -119,7 +121,7 @@ public class ChartController : MonoBehaviour
             {
                 FutureTick tick = futurePrices[0];
                 futurePrices.RemoveAt(0);
-                //Debug.Log($"Price: {price} boutta become: {tick.price}");
+                //Debug.Log($"Price: {price} boutta become: {tick.price} at timestamp: {tick.timestamp}");
                 price = tick.price;
 
                 FutureTick latestTick = futurePrices.Count > 0 ? futurePrices.Last() : new FutureTick(price, 0f); // Fallback if futurePrices is empty
@@ -157,13 +159,20 @@ public class ChartController : MonoBehaviour
     {
         float newPrice = previousTick.price;
         // Price Move Event
-        /*if (activeEvent.active && activeEvent != null)
+        bool shouldApplyEvent =
+            activeEvent != null &&
+            activeEvent.data != null &&
+            previousTick.timestamp >= activeEvent.startTime &&
+            previousTick.timestamp <= activeEvent.startTime + activeEvent.data.duration &&
+            ShouldEventContinue(previousTick.price);
+            
+        if (shouldApplyEvent)
         {
             PriceMoveEvent priceEvent = activeEvent.data;
 
-            activeEvent.elapsed += genetartePriceInterval;
-
-            float t = Mathf.Clamp01(activeEvent.elapsed / priceEvent.duration);
+            float elapsed = previousTick.timestamp - activeEvent.startTime;
+            
+            float t = Mathf.Clamp01(elapsed / priceEvent.duration);
             float curveT = priceEvent.animationCurve.Evaluate(t);
 
             float desiredPrice = Mathf.Lerp(activeEvent.startPrice, priceEvent.targetPrice, curveT);
@@ -173,6 +182,8 @@ public class ChartController : MonoBehaviour
             
             float noise = Random.Range(-priceEvent.maxNoise,  priceEvent.maxNoise);
             newPrice += move + noise;
+            
+            Debug.Log($"elapsed = previousTick.timestamp - activeEvent.startTime ({NumberFormatter.FormatDecimalNumber(previousTick.timestamp - activeEvent.startTime, 1)}), t = {t} at price = {newPrice}");
 
             if (t >= 1) // If elapsedTime >= priceEvent.duration
             {
@@ -181,16 +192,15 @@ public class ChartController : MonoBehaviour
                 Debug.Log($"Event: {priceEvent.name} finished at price: {newPrice} on Chart: {chartCurrency} (priceEvent.targetPrice was: {priceEvent.targetPrice})!");
             }
 
-            if (activeEvent.isTargetHigherThanCurrentPrice && price > activeEvent.data.targetPrice ||
-                activeEvent.isTargetHigherThanCurrentPrice && price >= maxPrice ||
-                !activeEvent.isTargetHigherThanCurrentPrice && price < activeEvent.data.targetPrice ||
-                !activeEvent.isTargetHigherThanCurrentPrice && price <= minPrice)
+            if (activeEvent.isTargetHigherThanCurrentPrice && newPrice > activeEvent.data.targetPrice ||
+                activeEvent.isTargetHigherThanCurrentPrice && newPrice >= maxPrice ||
+                !activeEvent.isTargetHigherThanCurrentPrice && newPrice < activeEvent.data.targetPrice ||
+                !activeEvent.isTargetHigherThanCurrentPrice && newPrice <= minPrice)
             {
                 activeEvent.active = false;
-                Debug.Log($"Event: {priceEvent.name} finished at price: {price} on Chart: {chartCurrency} because the price was over the target ({priceEvent.targetPrice})");
+                Debug.Log($"Event: {priceEvent.name} finished at price: {newPrice} on Chart: {chartCurrency} because the price was over the target ({priceEvent.targetPrice})");
             }
-        }*/
-        if (false){} // Do nothing
+        }
         else
         {
             float move = trend + Random.Range(-5f, 5f) * chartVolatilityMultiplier * PlayerStats.Instance.volatility;
@@ -207,20 +217,56 @@ public class ChartController : MonoBehaviour
 
     private void GenerateFuturePrices(int steps)
     {
+        FutureTick lastTick = futurePrices.Count > 0 ? new FutureTick(price, futurePrices.First().timestamp) : new FutureTick(price, 0f); // Fallback if futurePrices is empty
+        //Debug.Log($"FirstTick.price: {lastTick.price} at timestamp: {lastTick.timestamp}");
         futurePrices.Clear();
-        FutureTick lastTick = new FutureTick(price, 0f);
         for (int i = 0; i < steps; i++)
+        {
+            FutureTick newTick = GenerateNewPriceTick(lastTick);
+            futurePrices.Add(newTick);
+            //Debug.Log($"New price: {newTick.price} at timestamp: {newTick.timestamp}");
+
+            lastTick = newTick;
+        }
+    }
+    
+    public void GenerateFuturePricesForEvent(PriceMoveEvent priceEvent)
+    {
+        float duration = priceEvent.duration;
+        int eventDurationInTicks = Mathf.RoundToInt(duration / genetartePriceInterval);
+        FutureTick lastTick = futurePrices.Count > 0 ? new FutureTick(price, futurePrices.First().timestamp) : new FutureTick(price, 0f); // Fallback if futurePrices is empty
+        futurePrices.Clear();
+        
+        for (int i = 0; i < eventDurationInTicks; i++) // Generate prices for event
         {
             FutureTick newTick = GenerateNewPriceTick(lastTick);
             futurePrices.Add(newTick);
 
             lastTick = newTick;
         }
+        activeEvent.active = false; // Turn event generation off
+
+        if (futurePrices.Count < amountOfFuturePrices) // Generate rest of prices normally
+        {
+            int remainingStepsToFillUpFuturePricesList = amountOfFuturePrices - futurePrices.Count;
+            for (int i = 0; i < remainingStepsToFillUpFuturePricesList; i++)
+            {
+                FutureTick newTick = GenerateNewPriceTick(lastTick);
+                futurePrices.Add(newTick);
+
+                lastTick = newTick;
+            }
+        }
     }
 
     public void ChangePrice(float amount)
     {
         price += amount;
+        price = Mathf.Clamp(price, minPrice, maxPrice);
+        if (activeEvent != null)
+        {
+            activeEvent.startPrice = price;
+        }
         GenerateFuturePrices(amountOfFuturePrices);
     }
     
@@ -462,6 +508,27 @@ public class ChartController : MonoBehaviour
         float futurePrice = futurePrices[indexOfPrediction].price;
         //Debug.Log($"Going to take {indexOfPrediction}th element in future prices ({futurePrices[indexOfPrediction]})");
         Debug.Log($"{chartCurrency} chart price after {seconds}s: {futurePrice}");
+    }
+    
+    public float GetTimestampOfCurrentFirstTick()
+    {
+        FutureTick lastTick = futurePrices.Count > 0 ? futurePrices.First() : new FutureTick(price, 0f); // Fallback if futurePrices is empty
+        return lastTick.timestamp;
+    }
+    public float GetTimestampOfCurrentLastTick()
+    {
+        FutureTick lastTick = futurePrices.Count > 0 ? futurePrices.Last() : new FutureTick(price, 0f); // Fallback if futurePrices is empty
+        return lastTick.timestamp;
+    }
+
+    private bool ShouldEventContinue(float simulatedPrice)
+    {
+        if (activeEvent == null) return false;
+        if (activeEvent.isTargetHigherThanCurrentPrice)
+        {
+            return simulatedPrice < activeEvent.data.targetPrice && simulatedPrice < maxPrice;
+        }
+        return simulatedPrice > activeEvent.data.targetPrice && simulatedPrice > minPrice;
     }
 }
 [System.Serializable]

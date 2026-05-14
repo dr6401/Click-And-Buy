@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -126,6 +127,7 @@ public class LevelManager : MonoBehaviour
         cash = startingCash;
         equity = cash;
         //GenerateNewPrice();
+        //StartCoroutine(PlayEventAfterABit());
         PlayPriceMoveEvent(currentChart, tutorialPump);
         //currentChart.SpawnNewCandle();
         badTradesSO = Resources.Load<BadTradeTextsSO>("BadTradesText/BadTradesTexts");
@@ -611,11 +613,12 @@ public class LevelManager : MonoBehaviour
         chart.activeEvent.data = priceMoveEvent;
 
         chart.activeEvent.startPrice = currentChart.price;
-        chart.activeEvent.elapsed = 0;
+        chart.activeEvent.startTime = chart.GetTimestampOfCurrentFirstTick();
 
         chart.activeEvent.isTargetHigherThanCurrentPrice = currentChart.price < priceMoveEvent.targetPrice;
 
         chart.activeEvent.active = true;
+        chart.GenerateFuturePricesForEvent(chart.activeEvent.data);
     }
 
     private void HandleCombo()
@@ -856,6 +859,12 @@ public class LevelManager : MonoBehaviour
         //Debug.Log($"currentBasicCashOutTier: {currentBasicCashOutTier}");
         currentDivineCashOutTier = (AugmentTier) currency + System.Enum.GetValues(typeof(AugmentTier)).Length / 2;
         //Debug.Log($"currentDivineCashOutTier: {currentDivineCashOutTier} = (AugmentTier) currency ({(AugmentTier) currency}) + System.Enum.GetValues(typeof(AugmentTier)).Length/2 ({System.Enum.GetValues(typeof(AugmentTier)).Length / 2})");
+    }
+
+    private IEnumerator PlayEventAfterABit()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+        PlayPriceMoveEvent(currentChart, tutorialPump);
     }
 
     private void OnEnable()
