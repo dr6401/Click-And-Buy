@@ -463,6 +463,7 @@ public class LevelManager : MonoBehaviour
         }
         cash -= currentTierCashOutPrice;
         cash = Mathf.Max(0, cash);
+        PlayerCurrencies.Instance.AddCurrency(0.1f, currentCurrency);
         currentRespinPrice = UpgradesSelectionUI.Instance.baseAugmentRespinPrices[currentBasicCashOutTier];
         GameEvents.OnCashOut?.Invoke(currentBasicCashOutTier);
     }

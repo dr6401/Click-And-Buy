@@ -21,7 +21,7 @@ public class ChartController : MonoBehaviour
     [Header("-----------------PRICE----------------")]
     public float price;
     [Header("-----------------PRICE----------------")]
-    private Queue<FutureTick> futurePrices;
+    private List<FutureTick> futurePrices;
     private int amountOfFuturePrices = 200;
     private float decimals = 0.01f;
     
@@ -84,7 +84,7 @@ public class ChartController : MonoBehaviour
         chartMinVisible = Mathf.Min(maxPrice, price + 50);
         chartMaxVisible = Mathf.Max(minPrice, price - 50);
         
-        futurePrices = new Queue<FutureTick>();
+        futurePrices = new List<FutureTick>();
         GenerateFuturePrices(amountOfFuturePrices);
         
         SpawnNewCandle();
@@ -117,13 +117,14 @@ public class ChartController : MonoBehaviour
             generatePriceTimer = 0;
             if (!stopGeneratingPrice)
             {
-                FutureTick tick = futurePrices.Dequeue();
+                FutureTick tick = futurePrices[0];
+                futurePrices.RemoveAt(0);
                 //Debug.Log($"Price: {price} boutta become: {tick.price}");
                 price = tick.price;
 
                 FutureTick latestTick = futurePrices.Count > 0 ? futurePrices.Last() : new FutureTick(price, 0f); // Fallback if futurePrices is empty
                 FutureTick newGeneratedTick = GenerateNewPriceTick(latestTick);
-                futurePrices.Enqueue(newGeneratedTick);
+                futurePrices.Add(newGeneratedTick);
                 
                 recentPrices.Add(price);
                 if (recentPrices.Count > lastNPrices)
@@ -211,7 +212,7 @@ public class ChartController : MonoBehaviour
         for (int i = 0; i < steps; i++)
         {
             FutureTick newTick = GenerateNewPriceTick(lastTick);
-            futurePrices.Enqueue(newTick);
+            futurePrices.Add(newTick);
 
             lastTick = newTick;
         }
@@ -453,6 +454,14 @@ public class ChartController : MonoBehaviour
             Destroy(candle.gameObject);
         }
         candles.Clear();
+    }
+
+    public void PredictPriceAfterSeconds(float seconds)
+    {
+        int indexOfPrediction = Mathf.RoundToInt(seconds / genetartePriceInterval);
+        float futurePrice = futurePrices[indexOfPrediction].price;
+        //Debug.Log($"Going to take {indexOfPrediction}th element in future prices ({futurePrices[indexOfPrediction]})");
+        Debug.Log($"{chartCurrency} chart price after {seconds}s: {futurePrice}");
     }
 }
 [System.Serializable]
