@@ -852,9 +852,9 @@ public class LevelManager : MonoBehaviour
             }
         }
         currentBasicCashOutTier = (AugmentTier) currency;
-        Debug.Log($"currentBasicCashOutTier: {currentBasicCashOutTier}");
+        //Debug.Log($"currentBasicCashOutTier: {currentBasicCashOutTier}");
         currentDivineCashOutTier = (AugmentTier) currency + System.Enum.GetValues(typeof(AugmentTier)).Length / 2;
-        Debug.Log($"currentDivineCashOutTier: {currentDivineCashOutTier} = (AugmentTier) currency ({(AugmentTier) currency}) + System.Enum.GetValues(typeof(AugmentTier)).Length/2 ({System.Enum.GetValues(typeof(AugmentTier)).Length / 2})");
+        //Debug.Log($"currentDivineCashOutTier: {currentDivineCashOutTier} = (AugmentTier) currency ({(AugmentTier) currency}) + System.Enum.GetValues(typeof(AugmentTier)).Length/2 ({System.Enum.GetValues(typeof(AugmentTier)).Length / 2})");
     }
 
     private void OnEnable()

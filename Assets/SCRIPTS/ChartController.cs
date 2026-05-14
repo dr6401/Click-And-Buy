@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,8 +20,9 @@ public class ChartController : MonoBehaviour
     
     [Header("-----------------PRICE----------------")]
     public float price;
-
     [Header("-----------------PRICE----------------")]
+    private Queue<FutureTick> futurePrices;
+    private int amountOfFuturePrices = 200;
     private float decimals = 0.01f;
     
     public PlayerCurrencies.Currency chartCurrency;
@@ -32,7 +34,7 @@ public class ChartController : MonoBehaviour
     public float maxPriceIncreaseInterval = 10f;
     public float maxPriceIncreaseAmount = 1f;
     
-    private float trend;
+    public float trend;
     public float maxTrendStrength = 0.2f;
     private float generateNewTrendTimer;
     private float trendInterval = 5f;
@@ -81,6 +83,10 @@ public class ChartController : MonoBehaviour
         recentPrices.Add(price);
         chartMinVisible = Mathf.Min(maxPrice, price + 50);
         chartMaxVisible = Mathf.Max(minPrice, price - 50);
+        
+        futurePrices = new Queue<FutureTick>();
+        GenerateFuturePrices(amountOfFuturePrices);
+        
         SpawnNewCandle();
     }
 
@@ -106,10 +112,27 @@ public class ChartController : MonoBehaviour
             FinalizeCandle();
         }
         
-        if (generatePriceTimer >= genetartePriceInterval)
+        if (generatePriceTimer >= genetartePriceInterval) // ----------------PRICE GENERATION----------------
         {
             generatePriceTimer = 0;
-            if (!stopGeneratingPrice) GenerateNewPrice();
+            if (!stopGeneratingPrice)
+            {
+                FutureTick tick = futurePrices.Dequeue();
+                //Debug.Log($"Price: {price} boutta become: {tick.price}");
+                price = tick.price;
+
+                FutureTick latestTick = futurePrices.Count > 0 ? futurePrices.Last() : new FutureTick(price, 0f); // Fallback if futurePrices is empty
+                FutureTick newGeneratedTick = GenerateNewPriceTick(latestTick);
+                futurePrices.Enqueue(newGeneratedTick);
+                
+                recentPrices.Add(price);
+                if (recentPrices.Count > lastNPrices)
+                {
+                    recentPrices.RemoveAt(0);
+                }
+                
+                UpdateChartRange();
+            }
         }
         candleHigh = Mathf.Max(candleHigh, price);
         candleLow = Mathf.Min(candleLow, price);
@@ -128,11 +151,12 @@ public class ChartController : MonoBehaviour
         }
         DrawGridLines();
     }
-    
-    private void GenerateNewPrice()
+
+    private FutureTick GenerateNewPriceTick(FutureTick previousTick)
     {
+        float newPrice = previousTick.price;
         // Price Move Event
-        if (activeEvent.active && activeEvent != null)
+        /*if (activeEvent.active && activeEvent != null)
         {
             PriceMoveEvent priceEvent = activeEvent.data;
 
@@ -143,17 +167,17 @@ public class ChartController : MonoBehaviour
 
             float desiredPrice = Mathf.Lerp(activeEvent.startPrice, priceEvent.targetPrice, curveT);
 
-            float move = desiredPrice - price;
+            float move = desiredPrice - previousTick.price;
             move = Mathf.Clamp(move, -priceEvent.maxStep, priceEvent.maxStep);
             
             float noise = Random.Range(-priceEvent.maxNoise,  priceEvent.maxNoise);
-            price += move + noise;
+            newPrice += move + noise;
 
             if (t >= 1) // If elapsedTime >= priceEvent.duration
             {
-                price = priceEvent.targetPrice;
+                newPrice = priceEvent.targetPrice;
                 activeEvent.active = false;
-                Debug.Log($"Event: {priceEvent.name} finished at price: {price} on Chart: {chartCurrency} (priceEvent.targetPrice was: {priceEvent.targetPrice})!");
+                Debug.Log($"Event: {priceEvent.name} finished at price: {newPrice} on Chart: {chartCurrency} (priceEvent.targetPrice was: {priceEvent.targetPrice})!");
             }
 
             if (activeEvent.isTargetHigherThanCurrentPrice && price > activeEvent.data.targetPrice ||
@@ -164,25 +188,39 @@ public class ChartController : MonoBehaviour
                 activeEvent.active = false;
                 Debug.Log($"Event: {priceEvent.name} finished at price: {price} on Chart: {chartCurrency} because the price was over the target ({priceEvent.targetPrice})");
             }
-        }
+        }*/
+        if (false){} // Do nothing
         else
         {
             float move = trend + Random.Range(-5f, 5f) * chartVolatilityMultiplier * PlayerStats.Instance.volatility;
             //Debug.Log($"Move: {move}");
-            price += move;
+            newPrice += move;
         }
         
-        price = Mathf.Round(price / decimals) * decimals;
-        price = Mathf.Clamp(price, minPrice, maxPrice);
+        newPrice = Mathf.Round(newPrice / decimals) * decimals;
+        newPrice = Mathf.Clamp(newPrice, minPrice, maxPrice);
         //Debug.Log($"New price: {price}");
         
-        recentPrices.Add(price);
-        if (recentPrices.Count > lastNPrices)
-        {
-            recentPrices.RemoveAt(0);
-        }
+        return new FutureTick(newPrice, previousTick.timestamp + genetartePriceInterval); // * Time.timeScale);
+    }
 
-        UpdateChartRange();
+    private void GenerateFuturePrices(int steps)
+    {
+        futurePrices.Clear();
+        FutureTick lastTick = new FutureTick(price, 0f);
+        for (int i = 0; i < steps; i++)
+        {
+            FutureTick newTick = GenerateNewPriceTick(lastTick);
+            futurePrices.Enqueue(newTick);
+
+            lastTick = newTick;
+        }
+    }
+
+    public void ChangePrice(float amount)
+    {
+        price += amount;
+        GenerateFuturePrices(amountOfFuturePrices);
     }
     
     public void SpawnNewCandle()
@@ -415,5 +453,17 @@ public class ChartController : MonoBehaviour
             Destroy(candle.gameObject);
         }
         candles.Clear();
+    }
+}
+[System.Serializable]
+public class FutureTick
+{
+    public float price;
+    public float timestamp;
+    
+    public FutureTick(float price, float timestamp)
+    {
+        this.price = price;
+        this.timestamp = timestamp;
     }
 }

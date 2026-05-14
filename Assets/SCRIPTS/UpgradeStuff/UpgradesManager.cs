@@ -104,7 +104,7 @@ public class UpgradesManager : MonoBehaviour
     public float PriceOfDivineCashOutTier(PlayerCurrencies.Currency currency)
     {
         int index = (int)currency;
-        AugmentTier tier = (AugmentTier)index + 4; // 4 = number of nonDivineCashOutTiers
+        AugmentTier tier = (AugmentTier)index + System.Enum.GetValues(typeof(AugmentTier)).Length / 2; // 4 = number of nonDivineCashOutTiers
         //Debug.Log($"Returning price for currency: {tier}: {cashOutTierPrices.GetValueOrDefault(tier, 500)}");
         return cashOutTierPrices.GetValueOrDefault(tier, 500);
     }
