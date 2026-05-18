@@ -35,4 +35,7 @@ public static class GameEvents
     public static Action OnAllCurrenciesReset;
 
     public static Action<GameObject> OnMainPanelChanged;
+    
+    // Powerups
+    public static Action OnSonarPulse;
 }

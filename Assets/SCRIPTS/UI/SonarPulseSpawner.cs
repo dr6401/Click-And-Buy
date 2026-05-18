@@ -16,6 +16,7 @@ public class SonarPulseSpawner : MonoBehaviour
         maxDurationOfSonarPulseLifetime = predictionData.secondsIntoFuturePredicted;
         isPredictedPriceHigherThanCurrentPrice = predictionData.isPredictedPriceHigherThanCurrentPrice;
         SpawnSonarPulses(amountSpawned, transform);
+        GameEvents.OnSonarPulse?.Invoke();
     }
 
     public void SpawnSonarPulses(int amount, Transform parent)
