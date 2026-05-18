@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6093305644845008543}
   - component: {fileID: 2690970314839785184}
   - component: {fileID: 1289089440835746541}
+  - component: {fileID: 3722613371896310889}
   m_Layer: 5
   m_Name: PredictionIndicator
   m_TagString: Untagged
@@ -54,7 +55,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211205120092844197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -94,6 +95,23 @@ MonoBehaviour:
   low: 0
   high: 0
   rectTransform: {fileID: 4635389754965065757}
+  secondsIntoFuturePredicted: 0
+--- !u!114 &3722613371896310889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211205120092844197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 829ae6c67cc1b5f4ea62fde0d2c5e21e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SonarPulseSpawner
+  sonarPulsePrefab: {fileID: 1211205120092844197, guid: 28b77a98970af6b44a798ed08fad7555, type: 3}
+  amountSpawned: 3
+  durationBetweenSpawns: 1
+  maxDurationOfSonarPulseLifetime: 0
 --- !u!1 &6402617035661133961
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6402617035661133961}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

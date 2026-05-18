@@ -528,8 +528,10 @@ public class ChartController : MonoBehaviour
         RectTransform rect  = indicator.GetComponent<RectTransform>();
         tradeEntryIndicators.Add(rect);
         recentPrices.Add(predictedPrice);
-        CandleData predictionIndicatorData = indicator.GetComponent<CandleData>();
+        PredictionData predictionIndicatorData = indicator.GetComponent<PredictionData>();
         predictionIndicatorData.open = predictedPrice;
+        predictionIndicatorData.secondsIntoFuturePredicted = secondsIntoFuture;
+        predictionIndicatorData.isPredictedPriceHigherThanCurrentPrice = predictedPrice > price;
 
         float ticksPerCandle = candleSpawnInterval / genetartePriceInterval;
         float indicatorCandleOffset = futureTickIndex / ticksPerCandle;
