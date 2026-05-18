@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChartController
   hasChartBeenUnlocked: 1
+  startingPrice: 0
+  chartVolatilityMultiplier: 1
   priceChart: {fileID: 8170415829413114261}
   candleArea: {fileID: 3611307237098603894}
   tradeIndicatorArea: {fileID: 10365493249132744}
@@ -61,6 +63,8 @@ MonoBehaviour:
   maxPrice: 200
   maxPriceIncreaseInterval: 10
   maxPriceIncreaseAmount: 1
+  trend: 0
+  maxTrendStrength: 0.2
   stopGeneratingPrice: 0
   tradeEntryIndicators: []
   xPos: 30
@@ -72,6 +76,7 @@ MonoBehaviour:
   lastNPrices: 50
   yChartPadding: 0.2
   gridStep: 25
+  predictionIndicatorPrefab: {fileID: 1211205120092844197, guid: 8256097314817ea40b1722928c27985e, type: 3}
 --- !u!1 &770888166839178100
 GameObject:
   m_ObjectHideFlags: 0

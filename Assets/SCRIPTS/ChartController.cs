@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -77,6 +78,9 @@ public class ChartController : MonoBehaviour
     
     [Header("Price Move Events")]
     public ActivePriceEvent activeEvent = new ActivePriceEvent();
+    
+    [Header("Power-up stuff")]
+    public GameObject predictionIndicatorPrefab;
 
     void Start()
     {
@@ -267,6 +271,8 @@ public class ChartController : MonoBehaviour
         {
             activeEvent.startPrice = price;
         }
+
+        RemoveAllPredictionIndicators();
         GenerateFuturePrices(amountOfFuturePrices);
     }
     
@@ -505,9 +511,63 @@ public class ChartController : MonoBehaviour
     public void PredictPriceAfterSeconds(float seconds)
     {
         int indexOfPrediction = Mathf.RoundToInt(seconds / genetartePriceInterval);
-        float futurePrice = futurePrices[indexOfPrediction].price;
+        indexOfPrediction = Mathf.Clamp(indexOfPrediction, 0, futurePrices.Count - 1);
+        
+        FutureTick futureTick = futurePrices[indexOfPrediction];
+        float futurePrice = futureTick.price;
+        
+        SpawnPredictionIndicator(indexOfPrediction, futurePrice, seconds);
+        
         //Debug.Log($"Going to take {indexOfPrediction}th element in future prices ({futurePrices[indexOfPrediction]})");
         Debug.Log($"{chartCurrency} chart price after {seconds}s: {futurePrice}");
+    }
+
+    private void SpawnPredictionIndicator(int futureTickIndex, float predictedPrice, float secondsIntoFuture)
+    {
+        GameObject indicator = Instantiate(predictionIndicatorPrefab, tradeIndicatorArea);
+        RectTransform rect  = indicator.GetComponent<RectTransform>();
+        tradeEntryIndicators.Add(rect);
+        recentPrices.Add(predictedPrice);
+        CandleData predictionIndicatorData = indicator.GetComponent<CandleData>();
+        predictionIndicatorData.open = predictedPrice;
+
+        float ticksPerCandle = candleSpawnInterval / genetartePriceInterval;
+        float indicatorCandleOffset = futureTickIndex / ticksPerCandle;
+
+        float futureX = xPos + indicatorCandleOffset * xStep;
+        float futureY = PriceToY(predictedPrice);
+        
+        rect.anchoredPosition = new Vector2(futureX, futureY);
+
+        StartCoroutine(DestroyPredictionIndicatorAfterAWhile(indicator, secondsIntoFuture));
+    }
+
+    private IEnumerator DestroyPredictionIndicatorAfterAWhile(GameObject predictionIndicator, float seconds)
+    {
+        if (predictionIndicator == null) yield break;
+        yield return new WaitForSeconds(seconds);
+        if (predictionIndicator == null) yield break;
+        RectTransform rect = predictionIndicator.GetComponent<RectTransform>();
+        tradeEntryIndicators.Remove(rect);
+        Destroy(predictionIndicator);
+    }
+
+    private void RemoveAllPredictionIndicators()
+    {
+        List<RectTransform> predictionIndicators = new List<RectTransform>();
+        foreach (var predictionIndicator in tradeEntryIndicators)
+        {
+            if (predictionIndicator.gameObject.GetComponent<PredictionData>())
+            {
+                predictionIndicators.Add(predictionIndicator);
+            }
+        }
+
+        foreach (var predictionIndicator in predictionIndicators)
+        {
+            tradeEntryIndicators.Remove(predictionIndicator);
+            Destroy(predictionIndicator.gameObject);
+        }
     }
     
     public float GetTimestampOfCurrentFirstTick()
